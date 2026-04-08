@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 60% 8%;
+    --foreground: 180 30% 95%;
+
+    --card: 210 55% 12%;
+    --card-foreground: 180 30% 95%;
+
+    --popover: 210 55% 12%;
+    --popover-foreground: 180 30% 95%;
+
+    --primary: 186 56% 40%;
+    --primary-foreground: 210 60% 8%;
+
+    --secondary: 200 40% 25%;
+    --secondary-foreground: 180 30% 95%;
+
+    --muted: 210 40% 16%;
+    --muted-foreground: 200 20% 60%;
+
+    --accent: 174 42% 55%;
+    --accent-foreground: 210 60% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 30% 20%;
+    --input: 210 30% 20%;
+    --ring: 186 56% 40%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 210 55% 10%;
+    --sidebar-foreground: 180 30% 95%;
+    --sidebar-primary: 186 56% 40%;
+    --sidebar-primary-foreground: 210 60% 8%;
+    --sidebar-accent: 210 40% 16%;
+    --sidebar-accent-foreground: 180 30% 95%;
+    --sidebar-border: 210 30% 20%;
+    --sidebar-ring: 186 56% 40%;
+
+    /* Custom tokens */
+    --ocean-deep: 210 60% 15%;
+    --ocean-mid: 200 40% 30%;
+    --ocean-light: 186 56% 40%;
+    --ocean-glow: 174 42% 55%;
+    --ocean-surface: 174 50% 72%;
+
+    --gradient-ocean: linear-gradient(135deg, hsl(210 60% 15%), hsl(200 40% 30%), hsl(186 56% 40%));
+    --gradient-glow: linear-gradient(135deg, hsl(186 56% 40%), hsl(174 42% 55%));
+
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  .parallax-container {
+    @apply relative overflow-hidden;
+  }
+
+  .section-padding {
+    @apply px-6 py-24 md:px-12 lg:px-24 lg:py-32;
+  }
+
+  .heading-xl {
+    font-family: var(--font-heading);
+    @apply text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none;
+  }
+
+  .heading-lg {
+    font-family: var(--font-heading);
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
+  }
+
+  .heading-md {
+    font-family: var(--font-heading);
+    @apply text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight;
+  }
+
+  .body-lg {
+    @apply text-lg md:text-xl leading-relaxed;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-glow);
+  }
+
+  .glow-line {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, hsl(var(--ocean-glow)), transparent);
+  }
+}
+
+/* Preloader */
+.preloader {
+  @apply fixed inset-0 z-50 flex items-center justify-center;
+  background: hsl(var(--background));
+}
+
+.preloader-exit {
+  animation: preloader-exit 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes preloader-exit {
+  0% { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes logo-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes logo-reveal {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progress-fill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Parallax */
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
