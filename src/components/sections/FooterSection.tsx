@@ -125,6 +125,8 @@ const CTASection = () => {
 
 /* ================= FOOTER ================= */
 
+/* ================= FOOTER ================= */
+
 const Footer = () => {
   const reduceMotion = useReducedMotion();
 
@@ -134,18 +136,39 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="relative bg-[#E9E6E1] px-8 py-20 text-[#3D4B2F] md:px-20"
+      className="relative overflow-hidden px-8 py-20 text-black font-semibold md:px-20"
     >
+      {/* 🎥 VIDEO BACKGROUND */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-80% object-cover"
+      >
+        <source src="https://cdn.pixabay.com/video/2020/01/15/31290-385265697_large.mp4" type="video/mp4" />
+      </video>
+
+      {/* 🔥 DARK OVERLAY (important for readability) */}
+      <div className="absolute inset-0 bg-[#020617]/0 backdrop-blur-[2px]" />
+
+      {/* ✨ OPTIONAL GLOW LAYER */}
       <motion.div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.25),rgba(255,255,255,0.05),rgba(255,255,255,0.2))] opacity-40 [background-size:200%_200%]"
-        animate={reduceMotion ? undefined : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02),rgba(255,255,255,0.06))]"
+        animate={
+          reduceMotion
+            ? undefined
+            : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }
+        }
         transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
       />
 
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-12 text-sm">
+      {/* ================= CONTENT ================= */}
+
+      <div className="relative z-10 grid grid-cols-2 md:grid-cols-5 gap-12 text-sm">
 
         <div>
-          <p className="text-xs tracking-widest opacity-60 mb-4">
+          <p className="text-xs tracking-widest opacity-70 mb-4">
             Precision-engineered façade solutions designed to bring architectural vision to life.
           </p>
         </div>
@@ -166,7 +189,7 @@ const Footer = () => {
               <motion.li
                 key={i}
                 whileHover={reduceMotion ? undefined : { x: 4 }}
-                className="cursor-pointer hover:opacity-70"
+                className="cursor-pointer hover:opacity-80"
               >
                 {item}
               </motion.li>
@@ -183,7 +206,7 @@ const Footer = () => {
               <motion.li
                 key={i}
                 whileHover={reduceMotion ? undefined : { x: 4 }}
-                className="cursor-pointer hover:opacity-70"
+                className="cursor-pointer hover:opacity-80"
               >
                 {item}
               </motion.li>
@@ -200,7 +223,7 @@ const Footer = () => {
               <motion.li
                 key={i}
                 whileHover={reduceMotion ? undefined : { x: 4 }}
-                className="cursor-pointer hover:opacity-70"
+                className="cursor-pointer hover:opacity-80"
               >
                 {item}
               </motion.li>
@@ -210,36 +233,32 @@ const Footer = () => {
 
         <div className="md:text-right">
           <p className="uppercase text-xs tracking-widest opacity-60 mb-4">
-            If you have any questions
+            Contact
           </p>
 
-          <p className="uppercase text-xs tracking-widest opacity-60 mb-6">
-            Feel free to contact us:
-          </p>
-
-          <h3 className="text-lg md:text-xl font-semibold tracking-wide">
+          <h3 className="text-lg md:text-xl font-semibold">
             info@alubondusa.com
           </h3>
 
-          <p className="mt-6 text-xs tracking-widest cursor-pointer hover:opacity-70">
+          <p className="mt-6 text-xs opacity-70">
             +1 (305) 000-0000
           </p>
         </div>
       </div>
 
       {/* LOGO */}
-      <div className="flex justify-center my-16">
+      <div className="relative z-10 flex justify-center my-16">
         <motion.div
           whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-          className="w-16 h-16 bg-[#141B3A] rounded-full flex items-center justify-center"
+          className="w-16 h-16 bg-[#141B3A]/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-xl"
         >
           <img src="/alubond-logo.png" className="w-10 h-10 object-contain" />
         </motion.div>
       </div>
 
       {/* BOTTOM */}
-      <div className="flex flex-col md:flex-row justify-between items-center text-xs opacity-70 gap-4">
-        <p>© 2026 Alubond U.S.A. All rights reserved.</p>
+      <div className="relative z-10 flex flex-col md:flex-row justify-between items-center text-xs opacity-90 gap-4">
+        <p>© 2026 Alubond U.S.A.</p>
         <div className="flex gap-6">
           <span className="cursor-pointer hover:opacity-100">Privacy Policy</span>
           <span className="cursor-pointer hover:opacity-100">Terms of Use</span>

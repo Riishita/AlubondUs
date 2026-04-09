@@ -14,7 +14,7 @@ export default function GlobeHero() {
   const sectionRef = useRef(null);
 
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
-  const [showPoints, setShowPoints] = useState(false); // ✅ NEW
+  const [showPoints, setShowPoints] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -28,14 +28,12 @@ export default function GlobeHero() {
 
   const textOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 1]);
   const textY = useTransform(scrollYProgress, [0, 0.3], [0, -850]);
-
-  // ✅ FIXED
   const textScale = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
-  const leftOpacity = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
-  const leftY = useTransform(scrollYProgress, [0.15, 0.4], [80, 0]);
+  const leftOpacity = useTransform(scrollYProgress, [0.05, 0.15], [0, 1]);
+  const leftY = useTransform(scrollYProgress, [0.05, 0.2], [80, 0]);
 
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   /* 📍 LOCATIONS */
   const locations = [
@@ -77,16 +75,18 @@ export default function GlobeHero() {
     controls.autoRotateSpeed = 0.3;
   }, []);
 
-  /* 🔥 SHOW POINTS WHEN LEFT CONTENT APPEARS */
+  /* 🔥 STOP ROTATION WHEN SELECTED */
+  useEffect(() => {
+    if (!globeRef.current) return;
+    const controls = globeRef.current.controls();
+    controls.autoRotate = !selectedPlace;
+  }, [selectedPlace]);
+
+  /* 🔥 SHOW POINTS */
   useEffect(() => {
     const unsubscribe = leftOpacity.on("change", (val) => {
-      if (val > 0.5) {
-        setShowPoints(true);
-      } else {
-        setShowPoints(false);
-      }
+      setShowPoints(val > 0.5);
     });
-
     return () => unsubscribe();
   }, [leftOpacity]);
 
@@ -100,7 +100,6 @@ export default function GlobeHero() {
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         backgroundColor="rgba(0,0,0,0)"
 
-        // ✅ CONDITIONAL MARKERS
         pointsData={showPoints ? locations : []}
         pointLat={(d: any) => d.lat}
         pointLng={(d: any) => d.lng}
@@ -108,29 +107,58 @@ export default function GlobeHero() {
         pointAltitude={0.02}
         pointRadius={0.5}
 
+        /* 🔥 RING EFFECT */
+        ringsData={selectedPlace ? [selectedPlace] : []}
+        ringLat={(d: any) => d.lat}
+        ringLng={(d: any) => d.lng}
+        ringColor={() => ["#3b82f6", "#60a5fa"]}
+        ringMaxRadius={5}
+        ringPropagationSpeed={2}
+        ringRepeatPeriod={1000}
+
+        /* 🌟 HTML MARKERS */
         htmlElementsData={showPoints ? locations : []}
         htmlLat={(d: any) => d.lat}
         htmlLng={(d: any) => d.lng}
         htmlElement={(d: any) => {
+          const isActive = selectedPlace?.name === d.name;
+
           const el = document.createElement("div");
+
           el.innerHTML = `
             <div style="
               display:flex;
               flex-direction:column;
               align-items:center;
-              transform: translate(-50%, -120%);
+              transform: translate(-50%, -120%) scale(${isActive ? 1.4 : 1});
+              transition: all 0.4s ease;
               color:white;
-              font-size:12px;
+              font-size:${isActive ? "14px" : "12px"};
+              filter:${isActive ? "drop-shadow(0 0 10px rgba(59,130,246,0.9))" : "none"};
             ">
-              <img src="${d.logo}" style="width:24px;height:24px;margin-bottom:4px;" />
-              <span>${d.name}</span>
+              <img 
+                src="${d.logo}" 
+                style="
+                  width:${isActive ? "34px" : "24px"};
+                  height:${isActive ? "34px" : "24px"};
+                  margin-bottom:4px;
+                  transform:${isActive ? "scale(1.2)" : "scale(1)"};
+                  transition: all 0.4s ease;
+                " 
+              />
+              <span style="
+                transform:${isActive ? "scale(1.2)" : "scale(1)"};
+                transition: all 0.4s ease;
+              ">
+                ${d.name}
+              </span>
             </div>
           `;
           return el;
         }}
       />
     ),
-    [showPoints] // ✅ important
+    [showPoints, selectedPlace]
   );
 
   return (
@@ -141,11 +169,7 @@ export default function GlobeHero() {
 
         {/* TEXT */}
         <motion.h1
-  style={{ 
-    opacity: textOpacity, 
-    scale: textScale,
-    y: textY 
-  }}
+          style={{ opacity: textOpacity, scale: textScale, y: textY }}
           className="absolute top-[10%] w-full text-center text-white font-light tracking-[-2px] text-[clamp(60px,12vw,180px)]"
         >
           Global Impact
@@ -170,20 +194,17 @@ export default function GlobeHero() {
           style={{ opacity: leftOpacity, y: leftY }}
           className="absolute left-[6%] top-[32%] -translate-y-1/2 max-w-xl text-white"
         >
-          <h2 className="text-4xl md:text-5xl font-light leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-6">
             Our Global Presence <br />
             <span>Powers Local Delivery</span>
           </h2>
 
           <div className="mb-6">
-            <p className="text-xs text-white/70 mb-2">● MANUFACTURING</p>
+            <p className="text-xs mb-2">● MANUFACTURING</p>
             <div className="flex flex-wrap gap-3">
               {["UAE", "India", "Europe"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => handleClick(item)}
-                  className="px-4 py-2 rounded-full border border-white/30 hover:bg-white/10"
-                >
+                <button key={item} onClick={() => handleClick(item)}
+                  className="px-4 py-2 rounded-full border border-white hover:bg-white/20">
                   {item}
                 </button>
               ))}
@@ -191,14 +212,11 @@ export default function GlobeHero() {
           </div>
 
           <div>
-            <p className="text-xs text-white/70 mb-2">● OFFICES</p>
+            <p className="text-xs mb-2">● OFFICES</p>
             <div className="flex flex-wrap gap-3">
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => handleClick(item)}
-                  className="px-4 py-2 rounded-full border border-white/30 hover:bg-white/10"
-                >
+                <button key={item} onClick={() => handleClick(item)}
+                  className="px-4 py-2 rounded-full border border-white hover:bg-white/20">
                   {item}
                 </button>
               ))}
@@ -252,6 +270,7 @@ export default function GlobeHero() {
     </motion.div>
   )}
 </AnimatePresence>
+
 
       </div>
     </section>
