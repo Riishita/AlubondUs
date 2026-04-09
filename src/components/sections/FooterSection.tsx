@@ -1,43 +1,82 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect } from "react";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useMemo, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
 /* ================= CTA SECTION ================= */
 
 const CTASection = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const reduceMotion = useReducedMotion();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const fadeIn = useTransform(scrollYProgress, [0.05, 0.35], [0.6, 1]);
+  const scaleIn = useTransform(scrollYProgress, [0, 0.4], [0.96, 1]);
 
-  useEffect(() => {
-    const move = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 16 }).map((_, i) => ({
+        id: i,
+        x: `${(i % 8) * 14 + 6}%`,
+        y: `${Math.floor(i / 8) * 42 + 18}%`,
+        delay: i * 0.2,
+      })),
+    []
+  );
 
   const glowX = useTransform(mouseX, (v) => v - 200);
   const glowY = useTransform(mouseY, (v) => v - 200);
+  const glowBg = useMotionTemplate`radial-gradient(420px circle at ${mouseX}px ${mouseY}px, rgba(106,196,255,0.18), transparent 65%)`;
 
   return (
-    <section className="relative text-white py-32 px-6 md:px-16 overflow-hidden">
+    <section
+      ref={sectionRef}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set(e.clientX - rect.left);
+        mouseY.set(e.clientY - rect.top);
+      }}
+      className="relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32"
+    >
 
       {/* 🌌 PREMIUM GRADIENT BACKGROUND */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,#4aa3b5_0%,#1e3a6d_40%,#020617_100%)]" />
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ background: glowBg }} />
 
       {/* ✨ CURSOR GLOW */}
       <motion.div
-        className="pointer-events-none absolute w-[400px] h-[400px] rounded-full bg-blue-400/20 blur-[120px]"
+        className="pointer-events-none absolute h-[320px] w-[320px] rounded-full bg-blue-400/20 blur-[100px] md:h-[400px] md:w-[400px] md:blur-[120px]"
         style={{ x: glowX, y: glowY }}
       />
 
-
+      {!reduceMotion &&
+        particles.map((particle) => (
+          <motion.span
+            key={particle.id}
+            className="absolute h-1 w-1 rounded-full bg-white/50"
+            style={{ left: particle.x, top: particle.y }}
+            animate={{ y: [0, -16, 0], opacity: [0.2, 0.8, 0.2] }}
+            transition={{ duration: 4.2, repeat: Infinity, delay: particle.delay, ease: "easeInOut" }}
+          />
+        ))}
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-5xl">
+      <motion.div
+        style={{ opacity: fadeIn, scale: reduceMotion ? 1 : scaleIn }}
+        className="relative z-10 max-w-5xl transform-gpu"
+      >
         <p className="text-xs tracking-[0.3em] text-white/50 mb-6">
           006 / Let's Build
         </p>
@@ -61,8 +100,8 @@ const CTASection = () => {
 
           {/* PRIMARY BUTTON */}
           <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             className="px-8 py-4 rounded-full bg-white text-[#1E2A5A] font-medium flex items-center gap-2 shadow-lg hover:shadow-blue-500/40 transition-all"
           >
             Request Technical Specs <ArrowRight size={16} />
@@ -70,13 +109,13 @@ const CTASection = () => {
 
           {/* SECONDARY */}
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.03 }}
             className="px-8 py-4 rounded-full border border-white/20 text-white/80 hover:bg-white/10 transition-all"
           >
             Downloads
           </motion.button>
         </div>
-      </div>
+      </motion.div>
 
       {/* BOTTOM LIGHT */}
       <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-blue-500/20 to-transparent" />
@@ -87,8 +126,21 @@ const CTASection = () => {
 /* ================= FOOTER ================= */
 
 const Footer = () => {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <footer className="bg-[#E9E6E1] text-[#3D4B2F] px-8 md:px-20 py-20">
+    <motion.footer
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="relative bg-[#E9E6E1] px-8 py-20 text-[#3D4B2F] md:px-20"
+    >
+      <motion.div
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.25),rgba(255,255,255,0.05),rgba(255,255,255,0.2))] opacity-40 [background-size:200%_200%]"
+        animate={reduceMotion ? undefined : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+      />
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-12 text-sm">
 
@@ -111,7 +163,11 @@ const Footer = () => {
               "Brochures",
               "Request a Sample",
             ].map((item, i) => (
-              <motion.li key={i} whileHover={{ x: 4 }} className="cursor-pointer hover:opacity-70">
+              <motion.li
+                key={i}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
+                className="cursor-pointer hover:opacity-70"
+              >
                 {item}
               </motion.li>
             ))}
@@ -124,7 +180,11 @@ const Footer = () => {
           </p>
           <ul className="space-y-2">
             {["Home", "Technology", "Projects", "Contact"].map((item, i) => (
-              <motion.li key={i} whileHover={{ x: 4 }} className="cursor-pointer hover:opacity-70">
+              <motion.li
+                key={i}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
+                className="cursor-pointer hover:opacity-70"
+              >
                 {item}
               </motion.li>
             ))}
@@ -137,7 +197,11 @@ const Footer = () => {
           </p>
           <ul className="space-y-2">
             {["LinkedIn", "Instagram", "Facebook", "YouTube"].map((item, i) => (
-              <motion.li key={i} whileHover={{ x: 4 }} className="cursor-pointer hover:opacity-70">
+              <motion.li
+                key={i}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
+                className="cursor-pointer hover:opacity-70"
+              >
                 {item}
               </motion.li>
             ))}
@@ -166,7 +230,7 @@ const Footer = () => {
       {/* LOGO */}
       <div className="flex justify-center my-16">
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          whileHover={reduceMotion ? undefined : { scale: 1.05 }}
           className="w-16 h-16 bg-[#141B3A] rounded-full flex items-center justify-center"
         >
           <img src="/alubond-logo.png" className="w-10 h-10 object-contain" />
@@ -181,7 +245,7 @@ const Footer = () => {
           <span className="cursor-pointer hover:opacity-100">Terms of Use</span>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

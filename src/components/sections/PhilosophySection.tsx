@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const ThirdSection = () => {
   const ref = useRef<HTMLDivElement | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -22,11 +23,13 @@ const ThirdSection = () => {
       className="relative min-h-screen bg-[#eae7e2] text-[#1f2937] pt-40 pb-32 overflow-hidden"
     >
       {/* ✨ FLOATING LIGHT EFFECT */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] bg-orange-400/10 blur-3xl rounded-full top-[-100px] left-[-100px]"
-        animate={{ x: [0, 80, 0], y: [0, 40, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
-      />
+      {!reduceMotion && (
+        <motion.div
+          className="absolute left-[-100px] top-[-100px] h-[500px] w-[500px] rounded-full bg-orange-400/10 blur-3xl"
+          animate={{ x: [0, 80, 0], y: [0, 40, 0] }}
+          transition={{ duration: 12, repeat: Infinity }}
+        />
+      )}
 
       {/* ✨ GRID */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.05]">
@@ -46,6 +49,7 @@ const ThirdSection = () => {
         <motion.p
           initial={{ opacity: 0, letterSpacing: "0.6em" }}
           whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8 }}
           className="text-xs text-black/40 uppercase mb-16"
         >
@@ -59,6 +63,7 @@ const ThirdSection = () => {
             <motion.h2
               initial="hidden"
               whileInView="show"
+              viewport={{ once: true, amount: 0.45 }}
               variants={{
                 hidden: {},
                 show: {
@@ -91,6 +96,7 @@ const ThirdSection = () => {
             style={{ y: yText }}
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.8 }}
             className="text-lg md:text-xl text-black/70 leading-relaxed"
           >
@@ -110,6 +116,7 @@ const ThirdSection = () => {
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 1 }}
           className="flex items-center gap-4 my-20 origin-left"
         >
@@ -127,6 +134,7 @@ const ThirdSection = () => {
           style={{ y: yText }}
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
           variants={{
             hidden: {},
             show: {

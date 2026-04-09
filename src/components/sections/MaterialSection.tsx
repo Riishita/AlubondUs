@@ -7,8 +7,8 @@ import {
   useTransform,
   useInView,
   AnimatePresence,
+  useReducedMotion,
 } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 /* ================= DATA CONFIG ================= */
 
@@ -70,16 +70,18 @@ const HeroSection = () => {
   });
 const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
 
   return (
     <section ref={ref} className="relative h-[100vh]">
       
       {/* Background */}
-      <motion.div className="absolute inset-0" style={{ y: imageY }}>
+      <motion.div className="absolute inset-0 transform-gpu" style={{ y: imageY, scale: imageScale }}>
         <img
           src={heroData.image}
+          alt="Color and finishes"
           className="w-full h-[110%] object-cover"
+          loading="lazy"
         />
 
         {/* 🔥 DYNAMIC OVERLAY */}
@@ -163,6 +165,7 @@ const MarqueeStrip = () => {
 const MaterialsSection = () => {
   const [active, setActive] = useState("Wood");
   const [hovered, setHovered] = useState<number | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -214,13 +217,13 @@ const MaterialsSection = () => {
       </motion.p>
 
       {/* ================= SWATCHES ================= */}
-      <div className="flex flex-wrap gap-5 mb-20">
+      <div className="mb-20 flex flex-wrap gap-4 md:gap-5 [perspective:1000px]">
         <AnimatePresence mode="popLayout">
           {filtered.map((mat, i) => (
             <motion.div
               key={mat.name}
               layout
-              className="relative group"
+              className="group relative transform-gpu"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
@@ -230,30 +233,36 @@ const MaterialsSection = () => {
             >
               {/* Card */}
               <motion.div
-                className="w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden shadow-md"
-                whileHover={{ scale: 1.15, rotate: 2 }}
+                className="h-20 w-20 overflow-hidden rounded-lg shadow-md md:h-24 md:w-24"
+                whileHover={
+                  reduceMotion
+                    ? { scale: 1.05 }
+                    : { scale: 1.13, rotateZ: 1.5, rotateX: 8, rotateY: -8 }
+                }
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <img
                   src={mat.image}
                   alt={mat.name}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </motion.div>
+              
 
               {/* Tooltip */}
               <AnimatePresence>
-                {hovered === i && (
-                  <motion.div
-                    className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-3 py-1.5 rounded-full whitespace-nowrap z-20"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                  >
-                    {mat.name}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+  {hovered === i && (
+    <motion.div
+      className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-3 py-1.5 rounded-full whitespace-nowrap z-20"
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+    >
+      {mat.name}
+    </motion.div>
+  )}
+</AnimatePresence>
             </motion.div>
           ))}
         </AnimatePresence>

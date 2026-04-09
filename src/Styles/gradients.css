@@ -1,74 +1,107 @@
-/* 🌊 AMATERASU EXACT STYLE GRADIENT */
+/* 🌊 AMATERASU PREMIUM MATCHED GRADIENT */
 
 .gradient-amaterasu {
-  position: relative;
-  overflow: hidden;
+position: relative;
+overflow: hidden;
 
-  background:
-    /* RIGHT LIGHT GLOW */
-    radial-gradient(
-      circle at 75% 40%,
-      rgba(120, 192, 255, 0.35),
-      rgba(0, 95, 220, 0.2) 30%,
-      transparent 55%
-    ),
+background:
+/* RIGHT FACE GLOW (MAIN LIGHT) */
+radial-gradient(
+circle at 72% 42%,
+rgba(120, 255, 220, 0.45) 0%,
+rgba(0, 180, 255, 0.35) 25%,
+rgba(0, 120, 255, 0.25) 45%,
+transparent 65%
+),
 
-    /* CENTER SOFT HAZE */
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(0, 200, 255, 0.15),
-      transparent 60%
-    ),
+/* CENTER ATMOSPHERIC HAZE */
+radial-gradient(
+  circle at 50% 50%,
+  rgba(0, 255, 200, 0.12),
+  rgba(0, 200, 255, 0.08) 40%,
+  transparent 70%
+),
 
-    /* MAIN BASE GRADIENT */
-    linear-gradient(
-      110deg,
-      #1a4d80 0%,
-      #11235c 30%,
-      #1f2c7f 55%,
-      #55bbbb 100%
-    );
+/* LEFT DARK DEPTH */
+radial-gradient(
+  circle at 20% 30%,
+  rgba(10, 25, 60, 0.9),
+  transparent 60%
+),
 
-  background-blend-mode: screen, screen, normal;
+/* MAIN BASE GRADIENT */
+linear-gradient(
+  115deg,
+  #071a3a 0%,
+  #0d2f6b 25%,
+  #134d7a 45%,
+  #1fa2a6 75%,
+  #6fe3d6 100%
+);
+
+
+background-blend-mode: screen, screen, multiply, normal;
 }
 
+/* 🌊 MOVEMENT (AURORA FLOW) */
 .gradient-amaterasu {
-  background-size: 140% 140%;
-  animation: auroraMove 18s ease-in-out infinite;
+background-size: 160% 160%;
+animation: auroraMove 20s ease-in-out infinite;
 }
 
 @keyframes auroraMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 60%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+0% {
+background-position: 0% 40%;
 }
+50% {
+background-position: 100% 60%;
+}
+100% {
+background-position: 0% 40%;
+}
+}
+
+/* ✨ LIGHT SWEEP (SUBTLE) */
 .gradient-amaterasu::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+content: "";
+position: absolute;
+inset: 0;
 
-  background: linear-gradient(
-    120deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.08),
-    transparent 80%
-  );
+background: linear-gradient(
+110deg,
+transparent 30%,
+rgba(255, 255, 255, 0.06),
+transparent 70%
+);
 
-  animation: lightSweep 8s linear infinite;
-  pointer-events: none;
+animation: lightSweep 10s linear infinite;
+pointer-events: none;
 }
 
 @keyframes lightSweep {
-  0% {
-    transform: translateX(-120%);
-  }
-  100% {
-    transform: translateX(120%);
-  }
+0% {
+transform: translateX(-120%);
+}
+100% {
+transform: translateX(120%);
+}
+}
+
+/* 🌫 OPTIONAL: CENTER VERTICAL LIGHT LINE */
+.gradient-amaterasu::before {
+content: "";
+position: absolute;
+top: 0;
+left: 50%;
+width: 1px;
+height: 100%;
+
+background: linear-gradient(
+to bottom,
+transparent,
+rgba(255,255,255,0.15),
+transparent
+);
+
+opacity: 0.4;
 }

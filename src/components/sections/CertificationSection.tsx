@@ -106,10 +106,10 @@ export default function FireHorizontalExperience() {
       duration: 15,
       ease: "linear",
     }}
-    className="flex gap-8 w-max"
+    className="flex w-max gap-6 md:gap-8"
   >
     {[...certs, ...certs].map((item, i) => (
-      <Card key={i} item={item} />
+      <Card key={`${item.title}-${i}`} item={item} />
     ))}
   </motion.div>
 </div>
@@ -120,12 +120,15 @@ export default function FireHorizontalExperience() {
 }
 
 /* ================= CARD ================= */
-function Card({ item }: any) {
+function Card({ item }: { item: (typeof certs)[number] }) {
   return (
     <motion.div
-      whileHover={{ scale: 1.05, y: -6 }}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.5 }}
+      whileHover={{ scale: 1.04, y: -6, rotateX: 2, rotateY: -2 }}
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      className="min-w-[280px] p-6 rounded-2xl border bg-white/90 backdrop-blur-md shadow-sm hover:shadow-xl transition-all duration-300"
+      className="min-w-[240px] transform-gpu rounded-2xl border bg-white/90 p-5 shadow-sm transition-all duration-300 [transform-style:preserve-3d] hover:shadow-xl md:min-w-[280px] md:p-6"
       style={{ borderColor: "#E5E5E5" }}
     >
       <h3 className="text-xl font-semibold tracking-tight text-[#1A1A1A]">

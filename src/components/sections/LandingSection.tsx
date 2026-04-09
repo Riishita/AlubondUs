@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import CursorGridTrail from "./CursorFollower";
 import Navbar from "./Navbar";
@@ -35,10 +35,23 @@ const LandingHero = () => {
     offset: ["start start", "end start"],
   });
 
-  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const videoScale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1.04, 1.01]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-34%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.75]);
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 24 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
 
   return (
     <section
@@ -66,15 +79,17 @@ const LandingHero = () => {
       {/* 🎥 VIDEO PARALLAX */}
       <motion.div
         className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
-        style={{ y: videoY }}
+        style={{ y: videoY, scale: reduceMotion ? 1 : videoScale }}
       >
         <div className="absolute inset-[-12%] h-[124%] w-[124%]">
           <video
             ref={videoRef}
-            className="h-full w-full object-cover object-center brightness-[0.9] contrast-[1.05]"
+            className="h-full w-full object-cover object-center brightness-[0.9] contrast-[1.05] transform-gpu"
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
+            loop
+            autoPlay
           >
             <source
               src="https://cdn.pixabay.com/video/2024/07/04/219337_large.mp4"
@@ -93,34 +108,60 @@ const LandingHero = () => {
 
       {/* CONTENT */}
       <motion.div
-        className="relative z-10 flex w-full h-full items-center justify-between px-8 md:px-16 lg:px-24"
+        className="relative z-10 flex h-full w-full items-center justify-between px-5 md:px-10 lg:px-24"
         style={{ y: contentY, opacity: contentOpacity }}
       >
         {/* LEFT */}
         <div className="max-w-3xl">
-          <p className="mb-6 text-xs tracking-[0.4em] text-white/50 uppercase">
+          <motion.p
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={titleVariants}
+            className="mb-6 text-[10px] uppercase tracking-[0.35em] text-white/50 sm:text-xs"
+          >
             Alubond U.S.A — Est. 1989
-          </p>
+          </motion.p>
 
-          <h1 className="text-5xl font-medium leading-tight text-white md:text-7xl lg:text-8xl">
+          <motion.h1
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={titleVariants}
+            className="text-4xl font-medium leading-tight text-white sm:text-5xl md:text-7xl lg:text-8xl"
+          >
             WORLD’S LARGEST
-          </h1>
+          </motion.h1>
 
-          <h2
-            className="mb-8 text-5xl font-medium md:text-7xl lg:text-8xl"
+          <motion.h2
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={titleVariants}
+            className="mb-8 text-4xl font-medium sm:text-5xl md:text-7xl lg:text-8xl"
             style={{ color: "#59c4ee" }}
           >
             ACP <br /> BRAND
-          </h2>
+          </motion.h2>
 
-          <p className="mb-10 max-w-md text-sm text-white/60">
+          <motion.p
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={titleVariants}
+            className="mb-8 max-w-md text-sm text-white/60 md:mb-10"
+          >
             High-performance composite panels engineered for safety,
             designed for the extraordinary.
-          </p>
+          </motion.p>
 
-          <button className="group flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-xs tracking-[0.3em] text-white uppercase backdrop-blur-md hover:bg-white/20">
+          <motion.button
+            whileHover={reduceMotion ? undefined : { scale: 1.03, y: -2 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+            className="group flex transform-gpu items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-[10px] uppercase tracking-[0.25em] text-white backdrop-blur-md hover:bg-white/20 md:px-8 md:py-4 md:text-xs"
+          >
             Discover Innovation ↓
-          </button>
+          </motion.button>
         </div>
 
         {/* RIGHT */}
