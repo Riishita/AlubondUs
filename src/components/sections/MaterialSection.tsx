@@ -51,12 +51,103 @@ const words = [
 ];
 
 const materials = [
-  { name: "Dark Slate", image: "/materials/swatch-marble.jpg", category: "Stone & Marbles" },
-  { name: "Brushed Silver", image: "/images/metal.jpg", category: "Metallic" },
-  { name: "Travertine Beige", image: "/images/marble.jpg", category: "Stone & Marbles" },
-  { name: "Copper Patina", image: "/images/patina.jpg", category: "Patina" },
-  { name: "Raw Concrete", image: "/images/concrete.jpg", category: "Concrete" },
-  { name: "Natural Oak", image: "/materials/wood1.jpeg", category: "Wood" },
+  { name: "WHITEAHORN", image: "/materials/Wood1.webp", category: "Wood" },
+  { name: "ORIENTAL CANE", image: "/materials/Wood2.webp", category: "Wood" },
+   { name: "NATURAL OAK", image: "/materials/Wood3.webp", category: "Wood" },
+  { name: "WALNUT", image: "/materials/Wood4.webp", category: "Wood" },
+  { name: "ROSEWOOD", image: "/materials/Wood5.webp", category: "Wood" },
+  { name: "ROYAL TEAK", image: "/materials/Wood6.webp", category: "Wood" },
+   { name: "TEAK", image: "/materials/Wood7.webp", category: "Wood" },
+  { name: "DARKTEAK", image: "/materials/Wood8.webp", category: "Wood" },
+  { name: "QUERCUS", image: "/materials/Wood9.webp", category: "Wood" },
+  { name: "WENGE", image: "/materials/Wood10.webp", category: "Wood" },
+   { name: "ROYAL WENGE ", image: "/materials/Wood11.webp", category: "Wood" },
+  { name: "MAHOGANY", image: "/materials/Wood12.webp", category: "Wood" },
+
+    { name: "CHAMPAGNE GOLD", image: "/materials/Metallic1.webp", category: "Metallic" },
+  { name: "BRIGHT CHAMPAGNE SILVER", image: "/materials/Metallic2.webp", category: "Metallic" },
+   { name: "METALLIC BLACK", image: "/materials/Metallic3.webp", category: "Metallic" },
+  { name: "METALLIC BRONZE", image: "/materials/Metallic4.webp", category: "Metallic" },
+  { name: "METALLIC GOLD", image: "/materials/Metallic5.webp", category: "Metallic" },
+  { name: "DESERT ROSE METALLIC", image: "/materials/Metallic6.webp", category: "Metallic" },
+   { name: "BRUSHED SILVER", image: "/materials/Metallic7.webp", category: "Metallic" },
+  { name: "BRIGHT SILVER", image: "/materials/Metallic8.webp", category: "Metallic" },
+  { name: "METALLIC BRASS", image: "/materials/Metallic9.webp", category: "Metallic" },
+  { name: "RAW GREY", image: "/materials/Metallic10.webp", category: "Metallic" },
+   { name: "GRAY METALLIC SILVER ", image: "/materials/Metallic11.webp", category: "Metallic" },
+  { name: "METALLIC JADE", image: "/materials/Metallic12.webp", category: "Metallic" },
+    { name: "SMOKE SILVER", image: "/materials/Metallic13.webp", category: "Metallic" },
+   { name: "ROYAL WENGE ", image: "/materials/Metallic14.webp", category: "Metallic" },
+  { name: "BLUE METALLIC", image: "/materials/Metallic15.webp", category: "Metallic" },
+
+  { name: "WHITE GRANITE ", image: "/materials/Stone1.webp", category: "Stone & Marbles" },
+  { name: "YELLOW GRANITE ", image: "/materials/Stone2.webp", category: "Stone & Marbles" },
+ { name: "ROSA PORRINHO", image: "/materials/Stone3.webp", category: "Stone & Marbles" },
+  { name: "ROSA GRANITE  ", image: "/materials/Stone4.webp", category: "Stone & Marbles" },
+  { name: "SERPEGIANTE  ", image: "/materials/Stone5.webp", category: "Stone & Marbles" },
+  { name: "GRANITE NERO ", image: "/materials/Stone6.webp", category: "Stone & Marbles" },
+ { name: "WHITE MARBLE ", image: "/materials/Stone7.webp", category: "Stone & Marbles" },
+  { name: "RAVERTINE  ", image: "/materials/Stone8.webp", category: "Stone & Marbles" },
+ { name: "YELLOW MARBLE ", image: "/materials/Stone9.webp", category: "Stone & Marbles" },
+  { name: "CAFEE MARNO  ", image: "/materials/Stone10.webp", category: "Stone & Marbles" },
+
+  { name: "AB-SS-003", image: "/materials/Patina1.webp", category: "Patina" },
+  { name: "AB-SS-004", image: "/materials/Patina2.webp", category: "Patina" },
+  { name: "AB-SS-005", image: "/materials/Patina3.webp", category: "Patina" },
+  { name: "AB-SS-006", image: "/materials/Patina4.webp", category: "Patina" },
+  { name: "AB-SS-007", image: "/materials/Patina5.webp", category: "Patina" },
+  { name: "AB-SS-008", image: "/materials/Patina6.webp", category: "Patina" },
+
+    { name: "AB-SS-003", image: "/materials/Concrete1.webp", category: "Concrete" },
+{ name: "AB-SS-004", image: "/materials/Concrete2.webp", category: "Concrete" },
+{ name: "AB-SS-005", image: "/materials/Concrete3.webp", category: "Concrete" },
+{ name: "AB-SS-006", image: "/materials/Concrete4.webp", category: "Concrete" },
+
+  { name: "AB-SS-003", image: "/materials/Texture1.webp", category: "Texture" },
+{ name: "AB-SS-004", image: "/materials/Texture2.webp", category: "Texture" },
+{ name: "AB-SS-005", image: "/materials/Texture3.webp", category: "Texture" },
+{ name: "AB-SS-006", image: "/materials/Texture4.webp", category: "Texture" },
+{ name: "AB-SS-007", image: "/materials/Texture5.webp", category: "Texture" },
+{ name: "AB-SS-008", image: "/materials/Texture6.webp", category: "Texture" },
+
+  { name: "AB-SS-003", image: "/materials/Brush1.webp", category: "Brush" },
+{ name: "AB-SS-004", image: "/materials/Brush2.webp", category: "Brush" },
+{ name: "AB-SS-005", image: "/materials/Brush3.webp", category: "Brush" },
+{ name: "AB-SS-006", image: "/materials/Brush4.webp", category: "Brush" },
+{ name: "AB-SS-007", image: "/materials/Brush5.webp", category: "Brush" },
+{ name: "AB-SS-008", image: "/materials/Brush6.webp", category: "Brush" },
+{ name: "AB-SS-009", image: "/materials/Brush7.webp", category: "Brush" },
+
+{ name: "BRONZE", image: "/materials/Anodised1.webp", category: "Anodised" },
+  { name: "BRUSH ", image: "/materials/Anodised2.webp", category: "Anodised" },
+  { name: "GOLD 20", image: "/materials/Anodised3.webp", category: "Anodised" },
+  { name: "BROWN", image: "/materials/Anodised4.webp", category: "Anodised" },
+  { name: "BLACK", image: "/materials/Anodised5.webp", category: "Anodised" },
+  { name: "TI-LOOK ", image: "/materials/Anodised6.webp", category: "Anodised" },
+
+  { name: "AB-SS-003", image: "/materials/Najdi1.webp", category: "Najdi" },
+  { name: "AB-SS-004", image: "/materials/Najdi2.webp", category: "Najdi" },
+  { name: "AB-SS-005", image: "/materials/Najdi3.webp", category: "Najdi" },
+  { name: "AB-SS-006", image: "/materials/Najdi4.webp", category: "Najdi" },
+  { name: "AB-SS-007", image: "/materials/Najdi5.webp", category: "Najdi" },
+  { name: "AB-SS-008", image: "/materials/Najdi6.webp", category: "Najdi" },
+  { name: "AB-SS-009", image: "/materials/Najdi7.webp", category: "Najdi" },
+  { name: "AB-SS-010", image: "/materials/Najdi8.webp", category: "Najdi" },
+  { name: "AB-SS-011", image: "/materials/Najdi9.webp", category: "Najdi" },
+
+  { name: "AB-SS-003", image: "/materials/Prismatic1.webp", category: "Prismatic" },
+  { name: "AB-SS-004 ", image: "/materials/Prismatic2.webp", category: "Prismatic" },
+  { name: "AB-SS-005 ", image: "/materials/Prismatic3.webp", category: "Prismatic" },
+  { name: "AB-SS-006", image: "/materials/Prismatic4.webp", category: "Prismatic" },
+  { name: "AB-SS-007", image: "/materials/Prismatic5.webp", category: "Prismatic" },
+  { name: "AB-SS-008 ", image: "/materials/Prismatic6.webp", category: "Prismatic" },
+
+
+  { name: "SPARKLING BLACK", image: "/materials/Sparkle1.webp", category: "Sparkle" },
+  { name: "SPARKLING WHITE", image: "/materials/Sparkle2.webp", category: "Sparkle" },
+  { name: "SPARKLING GOLD", image: "/materials/Sparkle3.webp", category: "Sparkle" },
+  { name: "SPARKLING GREY", image: "/materials/Sparkle4.webp", category: "Sparkle" },
+  
 ];
 
 /* ================= HERO ================= */
@@ -137,7 +228,7 @@ const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
 const MarqueeStrip = () => {
   return (
-    <div className="py-6 bg-[#1a5c80] text-white overflow-hidden">
+    <div className="py-6 bg-[#134d7a] text-white overflow-hidden">
       <motion.div
         className="flex gap-12 whitespace-nowrap"
         animate={{ x: ["0%", "-50%"] }}
@@ -170,10 +261,7 @@ const MaterialsSection = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const filtered =
-    active === "Wood"
-      ? materials
-      : materials.filter((m) => m.category === active);
+  const filtered = materials.filter((m) => m.category === active);
 
   return (
     <section ref={ref} className="py-24 px-8 md:px-16 bg-white">
@@ -221,7 +309,7 @@ const MaterialsSection = () => {
         <AnimatePresence mode="popLayout">
           {filtered.map((mat, i) => (
             <motion.div
-              key={mat.name}
+              key={mat.name + i}
               layout
               className="group relative transform-gpu"
               initial={{ opacity: 0, scale: 0.8 }}

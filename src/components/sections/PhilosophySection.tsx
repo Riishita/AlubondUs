@@ -162,10 +162,35 @@ const ThirdSection = () => {
             }}
             className="text-black/60 leading-relaxed"
           >
-            At Alubond, we believe every façade must do justice to the architect's vision while delivering precision,
-            consistency, and reliability. Our philosophy is rooted in quality without compromise, care in every detail,
-            and a deep understanding of what each project requires.
+            At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site. Our philosophy is rooted in quality without compromise, care in every detail, and a deep understanding of what each project requires — from architects and consultants to façade contractors and developers. Because great façades are not simply manufactured. They are understood, engineered, and brought to life with intent.
+
+
           </motion.p>
+
+          {/* 🔘 ABOUT BUTTON */}
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.4 }}
+  className="mt-10"
+>
+  <button className="group relative inline-flex items-center gap-3 px-8 py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300">
+    
+    {/* TEXT */}
+    <span className="relative z-10 text-sm tracking-wide text-[#1f2937] group-hover:text-white transition">
+      About Us
+    </span>
+
+    {/* ARROW */}
+    <span className="relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-white">
+      →
+    </span>
+
+    {/* HOVER BG */}
+    <span className="absolute inset-0 bg-[#1f2937] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 rounded-full" />
+  </button>
+</motion.div>
+
         </motion.div>
       </motion.div>
     </section>
