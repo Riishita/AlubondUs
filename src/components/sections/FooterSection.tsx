@@ -136,7 +136,7 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="relative overflow-hidden px-8 py-20 text-black font-semibold md:px-20"
+      className="relative overflow-hidden px-8 py-20 text-black font-semibold md:px-20 min-h-[60vh] md:min-h-[80vh]"
     >
       {/* 🎥 VIDEO BACKGROUND */}
       <video
@@ -144,7 +144,7 @@ const Footer = () => {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-80% object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="https://cdn.pixabay.com/video/2020/01/15/31290-385265697_large.mp4" type="video/mp4" />
       </video>
