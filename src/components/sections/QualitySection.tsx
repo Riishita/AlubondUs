@@ -64,6 +64,13 @@ export default function QualitySection() {
   const STEP_END = 0.9;
   const totalSteps = steps.length;
 
+  // ================= MASK REVEAL =================
+  const reveal = useTransform(
+    scrollYProgress,
+    [0, 0.20],
+    ["inset(50% 50% 90% 50%)", "inset(0% 0% 0% 0%)"]
+  );
+
   // ================= VIDEO =================
   const durationRef = useRef(0);
   const currentTime = useRef(0);
@@ -123,7 +130,6 @@ export default function QualitySection() {
   }, [reduceMotion]);
 
   // ================= ACTIVE STEP =================
-
   const activeIndex = useTransform(scrollYProgress, (v) => {
     const normalized = clamp(
       (v - STEP_START) / (STEP_END - STEP_START),
@@ -134,27 +140,34 @@ export default function QualitySection() {
   });
 
   // ================= CONTENT MOVE =================
-const contentY = useTransform(
-  scrollYProgress,
-  [0.15, 0.85, 1],
-  [0, -1100, -1150] // slow end movement
-);
+  const contentY = useTransform(
+    scrollYProgress,
+    [0.15, 0.85, 1],
+    [0, -1100, -1150]
+  );
 
-const holdOpacity = useTransform(
-  scrollYProgress,
-  [0.85, 1],
-  [1, 0.96]
-);
+  const holdOpacity = useTransform(
+    scrollYProgress,
+    [0.85, 1],
+    [1, 0.96]
+  );
+
   return (
     <section ref={ref} className="relative h-[650vh] w-full">
-
-      {/* 🎥 STICKY LAYER */}
-      <div className="sticky top-0 h-screen overflow-hidden">
+      
+      {/* 🎥 STICKY LAYER WITH MASK */}
+      <motion.div
+        style={{
+          clipPath: reveal,
+          WebkitClipPath: reveal,
+        }}
+        className="sticky top-0 h-screen overflow-hidden"
+      >
 
         {/* VIDEO */}
         <video
           ref={videoRef}
-          src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775807684/Wood_Sheets_Transform_Water_and_Fire_qo0dlt.mp4"
+          src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775855900/VN20260411_024656_gcr3a1.mp4"
           muted
           playsInline
           preload="auto"
@@ -163,7 +176,7 @@ const holdOpacity = useTransform(
 
         <div className="absolute inset-0 bg-black/60" />
 
-        {/* 🔥 CONTENT (moves together) */}
+        {/* 🔥 CONTENT */}
         <motion.div
           style={{ y: contentY }}
           className="relative z-10 px-6 md:px-16 pt-10 text-white"
@@ -214,7 +227,7 @@ const holdOpacity = useTransform(
 
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

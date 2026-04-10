@@ -232,12 +232,13 @@ export default function GlobeHero() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="absolute left-[6%] bottom-[3%] w-[30%] max-w-xl 
-      p-8 rounded-3xl 
-      bg-white/5 backdrop-blur-2xl 
-      border border-white/20 
-      shadow-[0_10px_60px_rgba(0,0,0,0.5)] 
-      text-white overflow-hidden"
+      className="absolute  bottom-[5%] w-[90%] 
+md:left-[6%] md:translate-x-0 md:bottom-[3%] md:w-[30%] md:max-w-xl
+p-5 md:p-8 rounded-3xl 
+bg-white/5 backdrop-blur-2xl 
+border border-white/20 
+shadow-[0_10px_60px_rgba(0,0,0,0.5)] 
+text-white overflow-hidden"
     >
       {/* subtle gradient glow */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />

@@ -23,21 +23,24 @@ export default function FireHorizontalExperience() {
     <section className="relative py-32 bg-[#F7F7F5] overflow-hidden">
 
 
-       {/* ✨ VERY LIGHT GRID */}
-<div className="absolute inset-0 pointer-events-none opacity-[0.06]">
+{/* ✨ VERY LIGHT GRID (responsive clean) */}
+<div className="absolute inset-0 pointer-events-none opacity-[0.04] md:opacity-[0.06]">
 
   {/* Vertical lines */}
-  <div className="grid grid-cols-6 h-full">
+  <div className="grid grid-cols-3 md:grid-cols-6 h-full">
     {Array.from({ length: 6 }).map((_, i) => (
-      <div key={i} className="border-r border-black" />
+      <div
+        key={i}
+        className={`border-r border-black ${
+          i >= 3 ? "hidden md:block" : ""
+        }`}
+      />
     ))}
   </div>
 
-  {/* 🔥 Horizontal line 1 (top half) */}
-  <div className="absolute top-1/3 left-0 w-full h-[1px] bg-black" />
-
-  {/* 🔥 Horizontal line 2 (bottom half) */}
-  <div className="absolute top-2/3 left-0 w-full h-[1px] bg-black" />
+  {/* 🔥 Horizontal lines (lighter on mobile) */}
+  <div className="absolute top-1/3 left-0 w-full h-[1px] bg-black opacity-50 md:opacity-100" />
+  <div className="absolute top-2/3 left-0 w-full h-[1px] bg-black opacity-50 md:opacity-100" />
 
 </div>
 

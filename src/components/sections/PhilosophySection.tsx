@@ -31,14 +31,19 @@ const ThirdSection = () => {
         />
       )}
 
-      {/* ✨ GRID */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.05]">
-        <div className="grid grid-cols-6 h-full">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="border-r border-black" />
-          ))}
-        </div>
-      </div>
+      {/* ✨ GRID (responsive clean grid) */}
+<div className="absolute inset-0 pointer-events-none opacity-[0.04] md:opacity-[0.05]">
+  <div className="grid grid-cols-3 md:grid-cols-6 h-full">
+    {Array.from({ length: 6 }).map((_, i) => (
+      <div
+        key={i}
+        className={`border-r border-black ${
+          i >= 3 ? "hidden md:block" : ""
+        }`}
+      />
+    ))}
+  </div>
+</div>
 
       {/* 📦 CONTENT */}
       <motion.div
@@ -122,10 +127,11 @@ const ThirdSection = () => {
         >
           <div className="flex-1 h-[1px] bg-black/10" />
           <motion.div
-            animate={{ rotate: [45, 225, 45] }}
-            transition={{ duration: 6, repeat: Infinity }}
-            className="w-2 h-2 bg-orange-500"
-          />
+  layoutId="reveal-square"
+  animate={{ rotate: [45, 225, 45] }}
+  transition={{ duration: 6, repeat: Infinity }}
+  className="w-2 h-2 bg-orange-500"
+/>
           <div className="flex-1 h-[1px] bg-black/10" />
         </motion.div>
 
