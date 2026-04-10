@@ -4,9 +4,7 @@ import Preloader from "@/components/Preloader";
 const LandingSection = lazy(() => import("@/components/sections/LandingSection"));
 const GlobeSection = lazy(() => import("@/components/sections/GlobeSection"));
 const PhilosophySection = lazy(() => import("@/components/sections/PhilosophySection"));
-const QualityWithSocialProofSection = lazy(
-  () => import("@/components/sections/QualityWithSocialProofSection")
-);
+const QualitySection = lazy(() => import("@/components/sections/QualitySection"));
 const CertificationSection = lazy(() => import("@/components/sections/CertificationSection"));
 const MaterialSection = lazy(() => import("@/components/sections/MaterialSection"));
 const ApplicationSection = lazy(() => import("@/components/sections/ApplicationSection"));
@@ -28,7 +26,7 @@ const Index = () => {
           <LandingSection />
           <GlobeSection />
           <PhilosophySection />
-          <QualityWithSocialProofSection />
+          <QualitySection />
           <CertificationSection />
           <MaterialSection />
           <ApplicationSection />
