@@ -23,28 +23,28 @@ desc: "PVDF and FEVE fluoropolymer coatings applied over chromate pre-treatment 
     title: "PRECISION-GRADE ALUMINIUM ALLOY",
 desc: "0.50mm aluminium alloy 3003-H24/5005-H34 top skin provides the structural face of the panel. Hot-bonded to the core using a proprietary lamination process that ensures zero delamination under thermal cycling and wind-load stress.",
     side: "left" as const,
-    top: "24%",
+    top: "25%",
   },
   {
     id: "03",
     title: "FIRE-RETARDANT MINERAL CORE",
 desc: "Engineered mineral-filled core achieving FR-A2 classification -the highest non-combustible rating for metal composite panels. Comprises over 90% inorganic mineral content with zero halogen compounds, ensuring minimal smoke generation and no flaming droplets under fire conditions.",
     side: "right" as const,
-    top: "42%",
+    top: "43%",
   },
   {
     id: "04",
     title: "STRUCTURAL BACKING LAYER",
 desc: "0.50mm aluminium alloy rear skin provides dimensional stability, rigidity, and resistance to panel warping under thermal expansion. Acts as a structural diaphragm that distributes wind-load forces evenly across the composite cross-section.",
     side: "left" as const,
-    top: "60%",
+    top: "61%",
   },
   {
     id: "05",
     title: "CORROSION-RESISTANT FOUNDATION",
 desc: "Multi-stage chromate conversion coating followed by epoxy resin primer and protective service coat. This tri-layer treatment provides the corrosion barrier essential for coastal, industrial, and high-humidity environments - protecting the panel substrate from inside out.",
     side: "right" as const,
-    top: "78%",
+    top: "79%",
   },
 ];
 
@@ -79,12 +79,32 @@ export default function QualitySection() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
+  const { scrollYProgress: entryProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "start start"],
+  });
 
-  const videoY = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1.03, 1.08]);
-  const cardsY = useTransform(scrollYProgress, [0, 0.45, 1], [0, -16, -42]);
-  const cardsScale = useTransform(scrollYProgress, [0, 1], [1, 1.01]);
-  const headerY = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  const shellY = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  const shellScale = useTransform(scrollYProgress, [0, 1], [1, 0.985]);
+  const entryScale = useTransform(entryProgress, [0, 1], [0.95, 1]);
+  const entryOpacity = useTransform(entryProgress, [0, 1], [0, 1]);
+  const combinedScale = useTransform(
+    [entryScale, shellScale],
+    ([enter, depth]) => Number(enter) * Number(depth)
+  );
+  const revealHalfSize = useTransform(entryProgress, [0, 1], [0.7, 80]);
+  const revealClipPath = useTransform(
+    revealHalfSize,
+    (s) =>
+      `inset(calc(50% - ${Math.max(0, s)}vmax) calc(50% - ${Math.max(
+        0,
+        s
+      )}vmax) calc(50% - ${Math.max(0, s)}vmax) calc(50% - ${Math.max(0, s)}vmax))`
+  );
+  const videoY = useTransform(scrollYProgress, [0, 1], [0, -32]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.09]);
+  const stepsY = useTransform(scrollYProgress, [0, 0.4, 1], [0, -16, -42]);
+  const headerY = useTransform(scrollYProgress, [0, 1], [0, -24]);
 
   const enablePlaybackFallback = useCallback(() => {
     if (playbackFallbackRef.current) return;
@@ -123,17 +143,13 @@ export default function QualitySection() {
     video.playsInline = true;
     video.pause();
     video.addEventListener("loadedmetadata", onReady);
-
     return () => video.removeEventListener("loadedmetadata", onReady);
   }, [scrollYProgress, enablePlaybackFallback]);
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    if (reduceMotion) return;
-    if (playbackFallbackRef.current) return;
-    if (!videoReadyRef.current) return;
+    if (reduceMotion || playbackFallbackRef.current || !videoReadyRef.current) return;
     const duration = durationRef.current;
     if (!(duration > 0)) return;
-
     const p = clamp(progress, 0, 1);
     const maxT = Math.max(0, duration - 0.04);
     targetTimeRef.current = clamp(p * duration, 0, maxT);
@@ -167,10 +183,10 @@ export default function QualitySection() {
       const maxT = Math.max(0, duration - 0.04);
       const target = clamp(targetTimeRef.current, 0, maxT);
       const alpha = 0.14;
-      const nextSmooth =
-        currentTimeRef.current + (target - currentTimeRef.current) * alpha;
       currentTimeRef.current =
-        Math.abs(target - currentTimeRef.current) < 0.01 ? target : nextSmooth;
+        Math.abs(target - currentTimeRef.current) < 0.01
+          ? target
+          : currentTimeRef.current + (target - currentTimeRef.current) * alpha;
 
       const next = clamp(currentTimeRef.current, 0, maxT);
       if (Math.abs(video.currentTime - next) > 0.009) {
@@ -193,14 +209,19 @@ export default function QualitySection() {
   const rm = Boolean(reduceMotion);
 
   return (
-    <section ref={containerRef} className="relative h-[430vh] w-full">
-      <div className="sticky top-0 h-[100svh] min-h-[100dvh] w-full overflow-hidden">
+    <section ref={containerRef} className="relative z-10 h-[420vh] w-full">
+      <motion.div
+        className="sticky top-0 h-[100svh] min-h-[100dvh] w-full overflow-hidden will-change-[transform,opacity,clip-path]"
+        style={{
+          y: rm ? 0 : shellY,
+          scale: rm ? 1 : combinedScale,
+          opacity: rm ? 1 : entryOpacity,
+          clipPath: rm ? "inset(0% 0% 0% 0% round 0px)" : revealClipPath,
+        }}
+      >
         <motion.div
           className="absolute inset-0 z-0 will-change-transform [transform:translateZ(0)]"
-          style={{
-            y: rm ? 0 : videoY,
-            scale: rm ? 1 : videoScale,
-          }}
+          style={{ y: rm ? 0 : videoY, scale: rm ? 1 : videoScale }}
         >
           <video
             ref={videoRef}
@@ -214,22 +235,13 @@ export default function QualitySection() {
           />
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/58 to-black/74" />
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_90%_70%_at_50%_40%,rgba(255,255,255,0.08),transparent_56%)]" />
+        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/48 via-black/58 to-black/72" />
+        <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_85%_68%_at_50%_42%,rgba(255,255,255,0.08),transparent_62%)]" />
 
-        <motion.div
-          className="relative z-10 h-full w-full px-5 py-8 md:px-12 lg:px-20"
-          style={{ y: rm ? 0 : cardsY, scale: rm ? 1 : cardsScale }}
-        >
-          <motion.div
-            className="mb-6 text-center md:mb-10"
-            style={{ y: rm ? 0 : headerY }}
-            transition={{ duration: 0.8, ease: EASE_PREMIUM }}
-          >
-            <p className="mb-3 text-xs uppercase tracking-[0.26em] text-orange-300/85 md:text-sm">
-              Quality Architecture
-            </p>
-            <h2 className="mx-auto max-w-3xl font-heading text-3xl text-white md:text-5xl">
+        <motion.div className="relative z-10 h-full w-full px-5 py-8 md:px-12 lg:px-20" style={{ y: rm ? 0 : stepsY }}>
+          <motion.div className="mb-7 text-center md:mb-11" style={{ y: rm ? 0 : headerY }}>
+            <p className="mb-3 text-xs uppercase tracking-[0.26em] text-orange-300/90 md:text-sm">Quality Architecture</p>
+            <h2 className="mx-auto max-w-3xl font-heading text-3xl text-black md:text-5xl">
               Engineered in 5 precision layers
             </h2>
           </motion.div>
@@ -248,7 +260,7 @@ export default function QualitySection() {
             ))}
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -298,10 +310,9 @@ function StepCard({
     const d = Math.abs(index - currentIndex);
     if (d === 0) return 0;
     if (d === 1) return 1.2;
-    return 2.2;
+    return 2.1;
   });
   const blurFilter = useTransform(blur, (b) => `blur(${reduceMotion ? 0 : b}px)`);
-
   const y = useTransform(localProgress, [0, 1], [26, 0]);
   const x = useTransform(localProgress, [0, 1], [step.side === "right" ? 12 : -12, 0]);
 
@@ -312,7 +323,7 @@ function StepCard({
 
   return (
     <motion.article
-      className={`absolute ${alignClass} w-[88%] max-w-[520px] rounded-2xl border border-white/20 bg-white/8 p-5 shadow-[0_20px_70px_-35px_rgba(0,0,0,0.75)] backdrop-blur-lg md:w-[44%] md:p-6`}
+      className={`absolute ${alignClass} w-[88%] max-w-[520px] rounded-2xl border border-white/20 bg-white/10 p-5 shadow-[0_20px_70px_-35px_rgba(0,0,0,0.75)] backdrop-blur-lg md:w-[44%] md:p-6`}
       style={{
         top: step.top,
         opacity: reduceMotion ? 1 : opacity,
@@ -325,7 +336,7 @@ function StepCard({
     >
       <p className="mb-2 text-xs tracking-[0.25em] text-orange-300/90 md:text-sm">{step.id}</p>
       <h3 className="mb-2 font-heading text-base text-white md:text-xl">{step.title}</h3>
-      <p className="text-xs leading-relaxed text-white/78 md:text-sm">{step.desc}</p>
+      <p className="text-xs leading-relaxed text-white/80 md:text-sm">{step.desc}</p>
     </motion.article>
   );
 }
