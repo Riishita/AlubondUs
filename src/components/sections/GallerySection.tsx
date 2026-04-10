@@ -5,8 +5,8 @@ import { useRef } from "react";
 
 const panels = [
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775677475/BurjKhalifa1_skpuon.mp4",
-    title: "The Address Downtown",
+     video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
+    title: "Burj Khalifa",
     location: "Dubai, UAE",
   },
   {
@@ -20,9 +20,9 @@ const panels = [
     location: "Abu Dhabi, UAE",
   },
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775678217/asdfg_hiiafm.mp4",
-    title: "Landmark Development",
-    location: "Croatia",
+    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775800113/Gallart_lmzj8y.mp4",
+    title: "Krestovsky Stadium",
+    location: "St. Petersburg, Russia",
   },
   {
     video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775675409/Burjkhalifa_wioycw.mp4",
@@ -30,7 +30,7 @@ const panels = [
     location: "Luxury",
   },
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775678217/asdfg_hiiafm.mp4",
+    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
     title: "Burj Khalifa",
     location: "Dubai, UAE",
   },

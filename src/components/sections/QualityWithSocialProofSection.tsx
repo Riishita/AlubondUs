@@ -231,8 +231,8 @@ export default function QualityWithSocialProofSection() {
         >
           <video
             ref={videoRef}
-            src="/Marble.mp4"
-            className="h-full w-full object-cover"
+            src="\Marble.mp4"
+            className="h-83% w-full object-cover"
             muted
             playsInline
             preload="auto"
@@ -252,18 +252,20 @@ export default function QualityWithSocialProofSection() {
             opacity: rm ? 1 : stepsShellOpacity,
           }}
         >
-          <div className="max-w-[min(100%,28rem)] space-y-3 md:space-y-5 lg:max-w-xl">
-            {steps.map((step, i) => (
-              <StepRow
-                key={step.id}
-                step={step}
-                index={i}
-                total={steps.length}
-                scrollYProgress={scrollYProgress}
-                reduceMotion={rm}
-              />
-            ))}
-          </div>
+          <div className="relative h-[80vh] w-full overflow-hidden">
+  <div className="absolute bottom-0 w-full flex flex-col gap-10">
+    {steps.map((step, i) => (
+      <StepRow
+        key={step.id}
+        step={step}
+        index={i}
+        total={steps.length}
+        scrollYProgress={scrollYProgress}
+        reduceMotion={rm}
+      />
+    ))}
+  </div>
+</div>
 
           <div className="hidden space-y-4 text-right md:block">
             {steps.map((item, i) => (
