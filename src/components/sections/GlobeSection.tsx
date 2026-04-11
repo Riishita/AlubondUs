@@ -8,10 +8,13 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+import { cn } from "@/lib/utils";
 
 export default function GlobeHero() {
   const globeRef = useRef<any>();
   const sectionRef = useRef(null);
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings();
 
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [showPoints, setShowPoints] = useState(false);
@@ -162,7 +165,11 @@ export default function GlobeHero() {
   );
 
   return (
-    <section ref={sectionRef} className="h-[180vh] relative bg-black">
+    <section
+      ref={sectionRef}
+      className={cn("relative h-[180vh] bg-black", cursorSectionClassName)}
+      {...cursorSectionProps}
+    >
       <div className="sticky top-0 h-screen overflow-hidden">
 
         <div className="gradient-amaterasu min-h-screen px-10 py-24" />

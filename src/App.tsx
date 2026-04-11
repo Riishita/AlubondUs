@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
 import { useEffect } from "react";
 import { useSmoothScroll } from "./hooks/useSmoothScroll";
 
@@ -29,10 +30,12 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <CustomCursorProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </CustomCursorProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

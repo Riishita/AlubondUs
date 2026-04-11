@@ -1,5 +1,7 @@
 "use client";
 
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+
 import { useEffect, useRef } from "react";
 import {
   motion,
@@ -7,44 +9,6 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-
-const steps = [
-  {
-    id: "01",
-    title: "HIGH-PERFORMANCE SURFACE FINISH",
-    desc: "PVDF and FEVE fluoropolymer coatings applied over chromate pre-treatment and epoxy resin primer. Delivers exceptional UV resistance, colour retention, and weatherability for 20+ years.",
-    details: "AAMA 2605 • GSB MASTER • QUALICOAT CLASS 3 • ASTM D2244 • ISO 2813",
-    right: "Specialisted Coating",
-  },
-  {
-    id: "02",
-    title: "PRECISION-GRADE ALUMINIUM ALLOY",
-    desc: "0.50mm aluminium alloy 3003-H24/5005-H34 top skin provides the structural face of the panel. Hot-bonded to the core using a proprietary lamination process that ensures zero delamination under thermal cycling and wind-load stress.",
-    details: "EN 485-2 • ASTM B209 • EN 573-3 • ISO 6361 • AAMA 2604",
-    right: "Top Metal Skin",
-  },
-  {
-    id: "03",
-    title: "FIRE-RETARDANT MINERAL CORE",
-    desc: "Engineered mineral-filled core achieving FR-A2 classification -the highest non-combustible rating for metal composite panels. Comprises over 90% inorganic mineral content with zero halogen compounds, ensuring minimal smoke generation and no flaming droplets under fire conditions.",
-    details: "EN 13501-1 • NFPA 285 • ASTM E84 • BS 8414 • DIN 4102-B1 • UL 1040",
-    right: "Fire Raared Core",
-  },
-  {
-    id: "04",
-    title: "STRUCTURAL BACKING LAYER",
-    desc: "0.50mm aluminium alloy rear skin provides dimensional stability, rigidity, and resistance to panel warping under thermal expansion. Acts as a structural diaphragm that distributes wind-load forces evenly across the composite cross-section.",
-    details: "EN 485-2 • ASTM B209 • ISO 7438 • ASTM D1781 • EN 14509",
-    right: "Bottom Metal Skin",
-  },
-  {
-    id: "05",
-    title: "CORROSION-RESISTANT FOUNDATION",
-    desc: "Multi-stage chromate conversion coating followed by epoxy resin primer and protective service coat. This tri-layer treatment provides the corrosion barrier essential for coastal, industrial, and high-humidity environments - protecting the panel substrate from inside out.",
-    details: "AAMA 2605 • ISO 2409 • ASTM D3359 • ASTM B117 • ISO 9227",
-    right: "Base Treatment",
-  },
-];
 
 function clamp(v: number, min: number, max: number) {
   return Math.min(max, Math.max(min, v));
@@ -55,6 +19,9 @@ export default function QualitySection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
 
+  const { cursorSectionProps, cursorSectionClassName } =
+  useCustomCursorBindings(false); // 👈 white cursor here
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
@@ -62,14 +29,6 @@ export default function QualitySection() {
 
   const STEP_START = 0.1;
   const STEP_END = 0.9;
-  const totalSteps = steps.length;
-
-  // ================= MASK REVEAL =================
-  const reveal = useTransform(
-    scrollYProgress,
-    [0, 0.20],
-    ["inset(50% 50% 90% 50%)", "inset(0% 0% 0% 0%)"]
-  );
 
   // ================= VIDEO =================
   const durationRef = useRef(0);
@@ -129,105 +88,92 @@ export default function QualitySection() {
     return () => cancelAnimationFrame(raf);
   }, [reduceMotion]);
 
-  // ================= ACTIVE STEP =================
-  const activeIndex = useTransform(scrollYProgress, (v) => {
-    const normalized = clamp(
-      (v - STEP_START) / (STEP_END - STEP_START),
-      0,
-      0.999
-    );
-    return Math.floor(normalized * totalSteps);
-  });
-
-  // ================= CONTENT MOVE =================
+  // Content moves up (negative Y) as you scroll; video layer above stays untransformed.
   const contentY = useTransform(
     scrollYProgress,
-    [0.15, 0.85, 1],
-    [0, -1100, -1150]
+    [0, 0.1, 0.82, 1],
+    [0, -120, -1180, -1820]
   );
-
-  const holdOpacity = useTransform(
-    scrollYProgress,
-    [0.85, 1],
-    [1, 0.96]
-  );
+  const rm = Boolean(reduceMotion);
 
   return (
-    <section ref={ref} className="relative h-[650vh] w-full">
-      
-      {/* 🎥 STICKY LAYER WITH MASK */}
-      <motion.div
-        style={{
-          clipPath: reveal,
-          WebkitClipPath: reveal,
-        }}
-        className="sticky top-0 h-screen overflow-hidden"
-      >
+    <section
+  ref={ref}
+  {...cursorSectionProps}
+  className={`relative z-10 h-[650vh] w-full ${cursorSectionClassName}`}
+>
+      <div className="sticky top-0 z-10 h-screen min-h-[100dvh] overflow-hidden [transform:translateZ(0)]">
+        <div className="absolute inset-0 z-0">
+          <video
+            ref={videoRef}
+            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775857399/VN20260411_031224_msqvzy.mp4"
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
 
-        {/* VIDEO */}
-        <video
-          ref={videoRef}
-          src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775857399/VN20260411_031224_msqvzy.mp4"
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-
-        <div className="absolute inset-0 bg-black/60" />
-
-        {/* 🔥 CONTENT */}
         <motion.div
-          style={{ y: contentY }}
-          className="relative z-10 px-6 md:px-16 pt-10 text-white"
+          style={{ y: rm ? 0 : contentY }}
+          className="relative z-10 h-full w-full px-6 text-white will-change-transform md:px-16"
         >
-
-          {/* HEADING */}
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] text-orange-300 mb-3">
-              QUALITY ARCHITECTURE
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold">
-              Engineered in 5 precision layers
+          {/* LEFT TEXT 1 */}
+          <div className="absolute left-[6%] top-[15%] max-w-md">
+            <h2 className="mb-4 text-3xl font-light md:text-5xl">
+              What happens when design meets limitless possibility?
             </h2>
           </div>
 
-          {/* STEPS */}
-          <div className="max-w-6xl mx-auto space-y-32">
+          {/* RIGHT TEXT */}
+          <div className="absolute right-[6%] top-[70%] max-w-md text-right">
+            <h2 className="mb-4 text-3xl font-light md:text-5xl">We build beyond borders</h2>
+            <p className="text-sm text-white/70">
+              Multi-layer architecture ensures fire resistance, weather protection, and unmatched reliability in
+              extreme environments.
+            </p>
+          </div>
 
-            {steps.map((step, i) => {
-              const opacity = useTransform(activeIndex, (v) =>
-                v === i ? 1 : v > i ? 0.4 : 0.2
-              );
+          {/* CARDS */}
+          <div className="absolute left-0 top-[130%] w-full px-6 md:px-16">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
+                <div className="mb-6 text-xl">✦</div>
+                <h2 className="mb-3 text-lg font-medium md:text-2xl">100+ Countries</h2>
+                <p className="text-sm">
+                  Delivering trusted façade solutions across diverse global markets with consistent quality and
+                  performance.
+                </p>
+              </div>
 
-              const scale = useTransform(activeIndex, (v) =>
-                v === i ? 1 : 0.95
-              );
+              <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
+                <div className="mb-6 text-xl">✦</div>
+                <h2 className="mb-3 text-lg font-medium md:text-2xl">50,000+ Projects Worldwide</h2>
+                <p className="text-sm">
+                  From iconic skylines to modern infrastructure, our panels power projects at every scale.
+                </p>
+              </div>
 
-              return (
-                <motion.div
-                  key={step.id}
-                  style={{ opacity, scale }}
-                  className={`flex ${
-                    i % 2 === 0
-                      ? "md:justify-start"
-                      : "md:justify-end"
-                  }`}
-                >
-                  <div className="w-full md:w-[45%] bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-xl">
-                    <p className="text-orange-300 text-xs mb-2">{step.id}</p>
-                    <h3 className="text-lg md:text-xl font-semibold mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-white/80 text-sm">{step.desc}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
+              <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
+                <div className="mb-6 text-xl">✦</div>
+                <h2 className="mb-3 text-lg font-medium md:text-2xl">35+ Industry Leadership</h2>
+                <p className="text-sm">
+                  Decades of innovation, engineering excellence, and leadership in advanced building materials.
+                </p>
+              </div>
+            </div>
+          </div>
 
+          {/* LEFT TEXT 2 */}
+          <div className="absolute left-[6%] top-[200%] max-w-md">
+            <h2 className="mb-4 text-3xl font-light md:text-5xl">Global reliability</h2>
+            <p className="text-sm text-white/70">
+              Trusted across continents, delivering consistent quality in every architectural application.
+            </p>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

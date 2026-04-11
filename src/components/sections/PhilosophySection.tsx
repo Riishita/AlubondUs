@@ -2,10 +2,13 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+import { cn } from "@/lib/utils";
 
 const ThirdSection = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const reduceMotion = useReducedMotion();
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(true);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -20,7 +23,11 @@ const ThirdSection = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen bg-[#eae7e2] text-[#1f2937] pt-40 pb-32 overflow-hidden"
+      className={cn(
+        "relative min-h-screen overflow-hidden bg-[#eae7e2] pb-32 pt-40 text-[#1f2937]",
+        cursorSectionClassName
+      )}
+      {...cursorSectionProps}
     >
       {/* ✨ FLOATING LIGHT EFFECT */}
       {!reduceMotion && (

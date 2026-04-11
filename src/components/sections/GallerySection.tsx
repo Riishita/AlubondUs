@@ -1,5 +1,6 @@
 "use client";
 
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useRef } from "react";
 
@@ -84,8 +85,14 @@ const itemVariants: Variants = {
 export default function GallerySection() {
   const reduceMotion = useReducedMotion();
 
+  const { cursorSectionProps, cursorSectionClassName } =
+  useCustomCursorBindings(false); // 👈 white cursor
+
   return (
-    <section className="relative overflow-hidden py-32 text-white">
+    <section
+  {...cursorSectionProps}
+  className={`relative overflow-hidden py-32 text-white ${cursorSectionClassName}`}
+>
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
 
       <div className="pointer-events-none absolute left-1/2 top-[-20%] h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-white/5 blur-[120px]" />

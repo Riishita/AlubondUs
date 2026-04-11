@@ -9,6 +9,8 @@ import {
   AnimatePresence,
   useReducedMotion,
 } from "framer-motion";
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+import { cn } from "@/lib/utils";
 
 /* ================= DATA CONFIG ================= */
 
@@ -388,9 +390,10 @@ const MaterialsSection = () => {
 /* ================= FINAL ================= */
 
 export default function SixthSection() {
-  return (
-    <div className="relative">
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(true);
 
+  return (
+    <div className={cn("relative", cursorSectionClassName)} {...cursorSectionProps}>
       {/* HERO (sticks) */}
       <HeroSection />
 

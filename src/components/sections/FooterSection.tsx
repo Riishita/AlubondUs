@@ -10,18 +10,27 @@ import {
 } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 
 /* ================= CTA SECTION ================= */
 
 const CTASection = () => {
+
   const sectionRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
+
+  // ✅ FIX: moved inside component
+  const { cursorSectionProps, cursorSectionClassName } =
+    useCustomCursorBindings(false);
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
+
   const fadeIn = useTransform(scrollYProgress, [0.05, 0.35], [0.6, 1]);
   const scaleIn = useTransform(scrollYProgress, [0, 0.4], [0.96, 1]);
 
@@ -38,24 +47,28 @@ const CTASection = () => {
 
   const glowX = useTransform(mouseX, (v) => v - 200);
   const glowY = useTransform(mouseY, (v) => v - 200);
+
   const glowBg = useMotionTemplate`radial-gradient(420px circle at ${mouseX}px ${mouseY}px, rgba(106,196,255,0.18), transparent 65%)`;
 
   return (
     <section
       ref={sectionRef}
+      {...cursorSectionProps}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         mouseX.set(e.clientX - rect.left);
         mouseY.set(e.clientY - rect.top);
       }}
-      className="relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32"
+      className={`relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32 ${cursorSectionClassName}`}
     >
 
-      {/* 🌌 PREMIUM GRADIENT BACKGROUND */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,#4aa3b5_0%,#1e3a6d_40%,#020617_100%)]" />
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ background: glowBg }} />
 
-      {/* ✨ CURSOR GLOW */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: glowBg }}
+      />
+
       <motion.div
         className="pointer-events-none absolute h-[320px] w-[320px] rounded-full bg-blue-400/20 blur-[100px] md:h-[400px] md:w-[400px] md:blur-[120px]"
         style={{ x: glowX, y: glowY }}
@@ -68,11 +81,15 @@ const CTASection = () => {
             className="absolute h-1 w-1 rounded-full bg-white/50"
             style={{ left: particle.x, top: particle.y }}
             animate={{ y: [0, -16, 0], opacity: [0.2, 0.8, 0.2] }}
-            transition={{ duration: 4.2, repeat: Infinity, delay: particle.delay, ease: "easeInOut" }}
+            transition={{
+              duration: 4.2,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: "easeInOut",
+            }}
           />
         ))}
 
-      {/* CONTENT */}
       <motion.div
         style={{ opacity: fadeIn, scale: reduceMotion ? 1 : scaleIn }}
         className="relative z-10 max-w-5xl transform-gpu"
@@ -95,10 +112,8 @@ const CTASection = () => {
           to your specification team.
         </p>
 
-        {/* BUTTONS */}
         <div className="flex gap-4 flex-wrap">
 
-          {/* PRIMARY BUTTON */}
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
@@ -107,17 +122,16 @@ const CTASection = () => {
             Request Technical Specs <ArrowRight size={16} />
           </motion.button>
 
-          {/* SECONDARY */}
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.03 }}
             className="px-8 py-4 rounded-full border border-white/20 text-white/80 hover:bg-white/10 transition-all"
           >
             Downloads
           </motion.button>
+
         </div>
       </motion.div>
 
-      {/* BOTTOM LIGHT */}
       <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-blue-500/20 to-transparent" />
     </section>
   );
@@ -125,19 +139,22 @@ const CTASection = () => {
 
 /* ================= FOOTER ================= */
 
-/* ================= FOOTER ================= */
-
 const Footer = () => {
   const reduceMotion = useReducedMotion();
 
+  const { cursorSectionProps, cursorSectionClassName } =
+    useCustomCursorBindings(false);
+
   return (
     <motion.footer
+      {...cursorSectionProps}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="relative overflow-hidden px-8 py-20 text-black font-semibold md:px-20 min-h-[60vh] md:min-h-[80vh]"
+      className={`relative overflow-hidden px-8 py-20 text-black md:px-20 ${cursorSectionClassName}`}
     >
+
       {/* 🎥 VIDEO BACKGROUND */}
       <video
         autoPlay
@@ -267,6 +284,7 @@ const Footer = () => {
     </motion.footer>
   );
 };
+
 
 /* ================= FINAL ================= */
 

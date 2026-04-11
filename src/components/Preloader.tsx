@@ -37,13 +37,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           transition={{ duration: 0.6 }}
         >
           {/* BACKGROUND */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 30% 30%, #ebeffe, #f3f5fb 70%)",
-            }}
-          />
+          <div className="alubond-bg absolute inset-0 -z-10" />
 
           {/* NOISE */}
           <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.png')]" />

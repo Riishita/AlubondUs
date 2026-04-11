@@ -105,3 +105,73 @@ transparent
 
 opacity: 0.4;
 }
+
+
+
+
+.alubond-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0a284f 0%, #2d8eab 40%, #203f65 100%);
+}
+
+/* MAIN TEAL GLOW (bottom-left) */
+.alubond-bg::before {
+  content: "";
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  bottom: -40%;
+  left: -40%;
+  background: radial-gradient(
+    circle at 30% 70%,
+    rgba(34, 17, 189, 0.697),
+    rgba(111, 186, 203, 0.762) 30%,
+    transparent 60%
+  );
+  filter: blur(120px);
+  animation: alubond-float1 28s ease-in-out infinite;
+}
+
+/* SUBTLE TOP LIGHT */
+.alubond-bg::after {
+  content: "";
+  position: absolute;
+  width: 160%;
+  height: 160%;
+  top: -30%;
+  right: -30%;
+  background: radial-gradient(
+    circle at 70% 20%,
+    rgba(255, 255, 255, 0.259),
+    transparent 60%
+  );
+  filter: blur(100px);
+  animation: alubond-float2 35s ease-in-out infinite;
+}
+
+/* ANIMATIONS (very subtle movement) */
+@keyframes alubond-float1 {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(6%, -4%) scale(1.08);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+}
+
+@keyframes alubond-float2 {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(-5%, 5%) scale(1.1);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+}

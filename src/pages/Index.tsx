@@ -5,7 +5,8 @@ const LandingSection = lazy(() => import("@/components/sections/LandingSection")
 const GlobeSection = lazy(() => import("@/components/sections/GlobeSection"));
 const PhilosophySection = lazy(() => import("@/components/sections/PhilosophySection"));
 const QualitySection = lazy(() => import("@/components/sections/QualitySection"));
-const SocialProofSection = lazy(() => import("@/components/sections/SocialProofSection"));
+const SheetDetail = lazy(() => import("@/components/sections/SheetDetail"));
+
 const CertificationSection = lazy(() => import("@/components/sections/CertificationSection"));
 const MaterialSection = lazy(() => import("@/components/sections/MaterialSection"));
 const ApplicationSection = lazy(() => import("@/components/sections/ApplicationSection"));
@@ -27,8 +28,12 @@ const Index = () => {
           <LandingSection />
           <GlobeSection />
           <PhilosophySection />
-          <QualitySection />
-          <SocialProofSection />
+          <div className="relative isolate">
+            <QualitySection />
+            <div className="relative z-20 -mt-[min(92vh,52rem)]">
+              <SheetDetail />
+            </div>
+          </div>
           <CertificationSection />
           <MaterialSection />
           <ApplicationSection />

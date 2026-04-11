@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import MarbleResilienceVideo from "@/components/sections/MarbleResilienceVideo";
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+import { cn } from "@/lib/utils";
 
 const certs = [
   { title: "EN 13501", desc: "European Fire Classification", tag: "CLASS A2-S1,D0" },
@@ -15,12 +17,16 @@ const certs = [
 
 export default function FireHorizontalExperience() {
   const [isHovered, setIsHovered] = useState(false);
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(true);
 
   const topRow = certs.slice(0, 3);
   const bottomRow = certs.slice(3, 6);
 
   return (
-    <section className="relative py-32 bg-[#F7F7F5] overflow-hidden">
+    <section
+      className={cn("relative overflow-hidden bg-[#F7F7F5] py-32", cursorSectionClassName)}
+      {...cursorSectionProps}
+    >
 
 
 {/* ✨ VERY LIGHT GRID (responsive clean) */}
