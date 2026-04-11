@@ -167,7 +167,7 @@ export default function QualitySection() {
         {/* VIDEO */}
         <video
           ref={videoRef}
-          src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775855900/VN20260411_024656_gcr3a1.mp4"
+          src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775857399/VN20260411_031224_msqvzy.mp4"
           muted
           playsInline
           preload="auto"
