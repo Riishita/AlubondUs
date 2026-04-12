@@ -21,26 +21,28 @@ function PanelModel({
     { y: -0.5, base: "#BFC5CC", active: "#707070" },
   ];
 
-  // 🔴 BEFORE SPLIT → SINGLE BLOCK
+  // Dynamic scaling for mobile responsiveness within the Canvas
+  const [scale, setScale] = useState(0.8);
+  useEffect(() => {
+    const handleResize = () => setScale(window.innerWidth < 768 ? 0.5 : 0.8);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   if (!split) {
     return (
-      <mesh>
+      <mesh scale={scale}>
         <boxGeometry args={[2.5, 1.2, 2.5]} />
-        <meshStandardMaterial
-          color="#E8EAED"
-          metalness={0.5}
-          roughness={0.3}
-        />
+        <meshStandardMaterial color="#E8EAED" metalness={0.5} roughness={0.3} />
       </mesh>
     );
   }
 
-  // 🟢 AFTER SPLIT → 5 LAYERS
   return (
-    <group scale={0.8}>
+    <group scale={scale}>
       {layers.map((layer, i) => {
         const isActive = i === activeLayer;
-
         return (
           <mesh key={i} position={[0, layer.y, 0]}>
             <boxGeometry args={[2.5, 0.1, 2.5]} />
@@ -67,7 +69,7 @@ const steps = [
     title: "HIGH-PERFORMANCE SURFACE FINISH",
     desc: "PVDF and FEVE fluoropolymer coatings applied over chromate pre-treatment and epoxy resin primer. Delivers exceptional UV resistance, colour retention, and weatherability for 20+ years.",
     details: "AAMA 2605 • GSB MASTER • QUALICOAT CLASS 3 • ASTM D2244 • ISO 2813",
-    right: "Specialisted Coating",
+    right: "Specialised Coating",
   },
   {
     id: "02",
@@ -81,7 +83,7 @@ const steps = [
     title: "FIRE-RETARDANT MINERAL CORE",
     desc: "Engineered mineral-filled core achieving FR-A2 classification -the highest non-combustible rating for metal composite panels. Comprises over 90% inorganic mineral content with zero halogen compounds, ensuring minimal smoke generation and no flaming droplets under fire conditions.",
     details: "EN 13501-1 • NFPA 285 • ASTM E84 • BS 8414 • DIN 4102-B1 • UL 1040",
-    right: "Fire Raared Core",
+    right: "Fire Rated Core",
   },
   {
     id: "04",
@@ -107,120 +109,114 @@ export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
   const { cursorSectionProps, cursorSectionClassName } =
-  useCustomCursorBindings(false); // 👈 white cursor
+    useCustomCursorBindings(false);
 
-  /* 🔥 INITIAL SPLIT */
   useEffect(() => {
     const timer = setTimeout(() => setSplit(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  /* 🔥 SCROLL CONTROL WITH LOCK */
- useEffect(() => {
-  let isScrolling = false;
+  useEffect(() => {
+    let isScrolling = false;
+    const isInView = () => {
+      if (!sectionRef.current) return false;
+      const rect = sectionRef.current.getBoundingClientRect();
+      return (
+        rect.top <= window.innerHeight * 0.2 &&
+        rect.bottom >= window.innerHeight * 0.8
+      );
+    };
 
-  const isInView = () => {
-    if (!sectionRef.current) return false;
-    const rect = sectionRef.current.getBoundingClientRect();
-    return (
-      rect.top <= window.innerHeight * 0.2 &&
-      rect.bottom >= window.innerHeight * 0.8
-    );
-  };
+    const handleScroll = (e: WheelEvent) => {
+      if (!isInView()) return;
+      if (isScrolling) return;
+      isScrolling = true;
 
-  const handleScroll = (e: WheelEvent) => {
-    if (!isInView()) return;
-
-    if (isScrolling) return;
-    isScrolling = true;
-
-    setIndex((prev) => {
-      // 🔽 SCROLL DOWN
-      if (e.deltaY > 0) {
-        if (prev < steps.length - 1) {
-          e.preventDefault(); // lock ONLY while stepping
-          return prev + 1;
+      setIndex((prev) => {
+        if (e.deltaY > 0) {
+          if (prev < steps.length - 1) {
+            e.preventDefault();
+            return prev + 1;
+          }
+          return prev;
+        } else {
+          if (prev > 0) {
+            e.preventDefault();
+            return prev - 1;
+          }
+          return prev;
         }
-        return prev; // ✅ release scroll after step 5
-      }
+      });
 
-      // 🔼 SCROLL UP
-      else {
-        if (prev > 0) {
-          e.preventDefault();
-          return prev - 1;
-        }
-        return prev;
-      }
-    });
+      setTimeout(() => (isScrolling = false), 600);
+    };
 
-    setTimeout(() => (isScrolling = false), 600);
-  };
-
-  window.addEventListener("wheel", handleScroll, { passive: false });
-  return () => window.removeEventListener("wheel", handleScroll);
-}, []);
+    window.addEventListener("wheel", handleScroll, { passive: false });
+    return () => window.removeEventListener("wheel", handleScroll);
+  }, []);
 
   return (
     <section
-  ref={sectionRef}
-  {...cursorSectionProps}
-  className={`w-full h-screen relative overflow-hidden text-white gradient-amaterasu px-10 py-24 ${cursorSectionClassName}`}
->
-      {/* 🔵 3D */}
+      ref={sectionRef}
+      {...cursorSectionProps}
+      className={`w-full h-screen relative overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24 ${cursorSectionClassName}`}
+    >
+      {/* 🔵 3D CANVAS - Pushed down slightly on mobile to make room for text */}
       <motion.div
-
         transition={{ duration: 0.8 }}
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute inset-0 z-0 pointer-events-none mt-20 md:mt-0"
       >
         <Canvas camera={{ position: [3, 3, 5], fov: 45 }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} intensity={1.2} />
-
           <group rotation={[0.3, 0.5, 0]}>
             <PanelModel activeLayer={index} split={split} />
           </group>
-
           <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.8} />
         </Canvas>
       </motion.div>
 
-      {/* LEFT TEXT */}
+      {/* LEFT TEXT - Top on mobile, Left on Desktop */}
       {!showNext && (
-        <div className="absolute top-24 left-16 max-w-md z-10">
+        <div className="absolute top-10 md:top-24 left-6 md:left-16 right-6 md:max-w-md z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -80 }}
+              exit={{ opacity: 0, y: -40 }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-orange-400 mb-2">
+              <p className="text-orange-400 mb-1 text-sm md:text-base">
                 {steps[index].id}
               </p>
-              <h2 className="text-4xl mb-3">{steps[index].title}</h2>
-              <p className="text-gray-400">{steps[index].desc}</p>
-              <p className="text-gray-400 text-xs mt-4">
-                 {steps[index].details}
+              <h2 className="text-2xl md:text-4xl font-bold mb-3">
+                {steps[index].title}
+              </h2>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                {steps[index].desc}
+              </p>
+              <p className="text-gray-400 text-[10px] md:text-xs mt-4 tracking-wider">
+                {steps[index].details}
               </p>
             </motion.div>
           </AnimatePresence>
         </div>
       )}
 
-      {/* RIGHT STEP LIST */}
+      {/* RIGHT STEP LIST - Bottom on mobile, Right on Desktop */}
       {!showNext && (
-        <div className="absolute bottom-24 right-16 text-right space-y-4 z-10">
+        <div className="absolute bottom-10 left-6 right-6 md:right-16 md:left-auto flex md:flex-col flex-wrap md:space-y-4 gap-3 md:gap-0 justify-center md:justify-end text-right z-10">
           {steps.map((item, i) => (
             <p
               key={item.id}
-              className={`cursor-pointer ${
-                i === index ? "text-orange-500" : "text-white/90"
+              className={`cursor-pointer text-xs md:text-base transition-colors duration-300 whitespace-nowrap ${
+                i === index ? "text-orange-500 font-bold" : "text-white/60"
               }`}
               onClick={() => setIndex(i)}
             >
-              {item.id}. {item.right}
+              <span className="hidden md:inline">{item.id}. </span>
+              {item.right}
             </p>
           ))}
         </div>

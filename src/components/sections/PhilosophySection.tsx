@@ -15,25 +15,25 @@ const ThirdSection = () => {
     offset: ["start end", "end start"],
   });
 
-  // ✨ Parallax effects
-  const yText = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 1, 1]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  // ✨ Parallax effects - Adjusted for smoother feel across screen heights
+  const yText = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.98, 1]);
 
   return (
     <section
       ref={ref}
       className={cn(
-        "relative min-h-screen overflow-hidden bg-gradient-to-b from-[#eae7e2] to-[#e6e2dc] pb-32 pt-40 text-[#1f2937] -mt-[1px]",
+        "relative min-h-screen overflow-hidden bg-gradient-to-b from-[#eae7e2] to-[#e6e2dc] pb-20 pt-24 md:pb-32 md:pt-40 text-[#1f2937] -mt-[1px]",
         cursorSectionClassName
       )}
       {...cursorSectionProps}
     >
-      {/* ✨ FLOATING LIGHT EFFECT */}
+      {/* ✨ FLOATING LIGHT EFFECT - Responsive sizing */}
       {!reduceMotion && (
         <motion.div
-          className="absolute left-[-100px] top-[-100px] h-[500px] w-[500px] rounded-full bg-orange-400/10 blur-3xl"
-          animate={{ x: [0, 80, 0], y: [0, 40, 0] }}
+          className="absolute left-[-10%] top-[-10%] h-[300px] w-[300px] md:h-[500px] md:w-[500px] rounded-full bg-orange-400/10 blur-3xl"
+          animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
           transition={{ duration: 12, repeat: Infinity }}
         />
       )}
@@ -45,11 +45,11 @@ const ThirdSection = () => {
         transition={{ duration: 1 }}
         className="absolute inset-0 pointer-events-none opacity-[0.06] md:opacity-[0.08] mix-blend-multiply"
       >
-        <div className="grid grid-cols-3 md:grid-cols-6 h-full">
+        <div className="grid grid-cols-3 md:grid-cols-6 h-full w-full">
           {Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
-              className={`border-r border-black/10 ${
+              className={`border-r border-black/10 h-full ${
                 i >= 3 ? "hidden md:block" : ""
               }`}
             />
@@ -60,21 +60,21 @@ const ThirdSection = () => {
       {/* 📦 CONTENT */}
       <motion.div
         style={{ scale, opacity }}
-        className="relative z-10 px-6 md:px-16 max-w-7xl mx-auto"
+        className="relative z-10 px-6 sm:px-10 md:px-16 lg:px-20 max-w-7xl mx-auto"
       >
         {/* 🔶 LABEL */}
         <motion.p
-          initial={{ opacity: 0, letterSpacing: "0.6em" }}
-          whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+          initial={{ opacity: 0, letterSpacing: "0.4em" }}
+          whileInView={{ opacity: 1, letterSpacing: "0.2em" }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8 }}
-          className="text-xs text-black/40 uppercase mb-16"
+          className="text-[10px] md:text-xs text-black/40 uppercase mb-10 md:mb-16 tracking-[0.3em]"
         >
           001 / Technology
         </motion.p>
 
         {/* 🧱 TOP GRID */}
-        <div className="grid md:grid-cols-2 gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-20 items-start">
           {/* LEFT */}
           <motion.div style={{ y: yText }}>
             <motion.h2
@@ -89,13 +89,13 @@ const ThirdSection = () => {
                   },
                 },
               }}
-              className="text-6xl md:text-8xl font-serif leading-[0.95]"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif leading-[0.95] tracking-tight"
             >
               {["ALUBOND", "PHILOSOPHY"].map((word, i) => (
                 <motion.span
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 80 },
+                    hidden: { opacity: 0, y: 40 },
                     show: { opacity: 1, y: 0 },
                   }}
                   className={`block ${
@@ -111,18 +111,18 @@ const ThirdSection = () => {
           {/* RIGHT */}
           <motion.div
             style={{ y: yText }}
-            initial={{ opacity: 0, x: 60 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.8 }}
-            className="text-lg md:text-xl text-black/70 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-black/70 leading-relaxed max-w-lg lg:pt-4"
           >
             Architecture should speak of its time and place, but yearn for timelessness.
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="mt-4 text-sm text-orange-500 tracking-widest"
+              className="mt-4 text-[10px] md:text-sm text-orange-500 tracking-widest font-medium"
             >
               — FRANK GEHRY
             </motion.div>
@@ -135,14 +135,14 @@ const ThirdSection = () => {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 1 }}
-          className="flex items-center gap-4 my-20 origin-left"
+          className="flex items-center gap-3 md:gap-4 my-12 md:my-20 origin-left"
         >
           <div className="flex-1 h-[1px] bg-black/10" />
           <motion.div
             layoutId="reveal-square"
             animate={{ rotate: [45, 225, 45] }}
             transition={{ duration: 6, repeat: Infinity }}
-            className="w-2 h-2 bg-orange-500"
+            className="w-1.5 h-1.5 md:w-2 md:h-2 bg-orange-500 flex-shrink-0"
           />
           <div className="flex-1 h-[1px] bg-black/10" />
         </motion.div>
@@ -165,33 +165,33 @@ const ThirdSection = () => {
         >
           <motion.p
             variants={{
-              hidden: { opacity: 0, y: 40 },
+              hidden: { opacity: 0, y: 20 },
               show: { opacity: 1, y: 0 },
             }}
-            className="text-lg italic text-black/70 mb-6"
+            className="text-base md:text-lg lg:text-xl italic text-black/70 mb-6"
           >
             A façade is not just the outer skin of a building — it is the expression of its character, ambition, and identity.
           </motion.p>
 
           <motion.p
             variants={{
-              hidden: { opacity: 0, y: 40 },
+              hidden: { opacity: 0, y: 20 },
               show: { opacity: 1, y: 0 },
             }}
-            className="text-black/60 leading-relaxed"
+            className="text-sm md:text-base text-black/60 leading-relaxed"
           >
             At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site...
           </motion.p>
 
           {/* 🔘 BUTTON */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-10"
+            className="mt-8 md:mt-12"
           >
-            <button className="group relative inline-flex items-center gap-3 px-8 py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300">
-              <span className="relative z-10 text-sm tracking-wide text-[#1f2937] group-hover:text-white transition">
+            <button className="group relative inline-flex items-center gap-3 px-6 md:px-8 py-2.5 md:py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300">
+              <span className="relative z-10 text-xs md:text-sm tracking-wide text-[#1f2937] group-hover:text-white transition">
                 About Us
               </span>
 

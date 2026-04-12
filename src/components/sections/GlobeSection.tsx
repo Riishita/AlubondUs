@@ -27,6 +27,7 @@ export default function GlobeHero() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+  
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -110,58 +111,66 @@ export default function GlobeHero() {
     return () => unsubscribe();
   }, [leftOpacity]);
 
+  useEffect(() => {
+  const unsubscribe = scrollYProgress.on("change", (v) => {
+    // when user scrolls away from focused state
+    if (v < 0.15 && selectedPlace) {
+      setSelectedPlace(null);
+    }
+  });
+
+  return () => unsubscribe();
+}, [scrollYProgress, selectedPlace]);
+
   /* 🌍 GLOBE */
-  const globe = useMemo(
-    () => (
-      <Globe
-        ref={globeRef}
-        width={isMobile ? 320 : 650}
-        height={isMobile ? 320 : 650}
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-        backgroundColor="rgba(0,0,0,0)"
-        htmlElementsData={showPoints ? locations : []}
-htmlLat={(d: any) => d.lat}
-htmlLng={(d: any) => d.lng}
-htmlElement={(d: any) => {
-  const el = document.createElement("div");
+  /* 🌍 GLOBE */
+const globe = useMemo(
+  () => (
+    <Globe
+      ref={globeRef}
+      width={isMobile ? 260 : 650}   // reduced for mobile
+      height={isMobile ? 260 : 650}
+      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+      backgroundColor="rgba(0,0,0,0)"
+      htmlElementsData={showPoints ? locations : []}
+      htmlLat={(d: any) => d.lat}
+      htmlLng={(d: any) => d.lng}
+      htmlElement={(d: any) => {
+        const el = document.createElement("div");
 
-  el.innerHTML = `
-    <div style="
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      transform: translate(-50%, -100%);
-      cursor:pointer;
-    ">
-      
-        <img src="/${d.logo}" style="width:30px;height:30px;" />
-        ${d.name}
-      </div>
-    </div>
-  `;
+        el.innerHTML = `
+          <div style="
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            transform: translate(-50%, -100%);
+            cursor:pointer;
+            font-size:${isMobile ? "10px" : "14px"};
+          ">
+            <img src="/${d.logo}" style="width:${isMobile ? "20px" : "30px"};height:${isMobile ? "20px" : "30px"};" />
+            ${d.name}
+          </div>
+        `;
 
-  el.onclick = () => handleClick(d.name);
-
-  return el;
-
-  
-}}
-        pointLat={(d: any) => d.lat}
-        pointLng={(d: any) => d.lng}
-        pointColor={() => "#c2d6f7"}
-        pointAltitude={0.02}
-        pointRadius={0.5}
-        ringsData={selectedPlace ? [selectedPlace] : []}
-        ringLat={(d: any) => d.lat}
-        ringLng={(d: any) => d.lng}
-        ringColor={() => ["#77a8f5", "#ffce9b"]}
-        ringMaxRadius={5}
-        ringPropagationSpeed={2}
-        ringRepeatPeriod={1000}
-      />
-    ),
-    [showPoints, selectedPlace, isMobile]
-  );
+        el.onclick = () => handleClick(d.name);
+        return el;
+      }}
+      pointLat={(d: any) => d.lat}
+      pointLng={(d: any) => d.lng}
+      pointColor={() => "#c2d6f7"}
+      pointAltitude={0.02}
+      pointRadius={0.5}
+      ringsData={selectedPlace ? [selectedPlace] : []}
+      ringLat={(d: any) => d.lat}
+      ringLng={(d: any) => d.lng}
+      ringColor={() => ["#77a8f5", "#ffce9b"]}
+      ringMaxRadius={5}
+      ringPropagationSpeed={2}
+      ringRepeatPeriod={1000}
+    />
+  ),
+  [showPoints, selectedPlace, isMobile]
+);
 
   return (
     <section
