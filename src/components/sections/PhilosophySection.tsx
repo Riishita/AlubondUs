@@ -24,7 +24,7 @@ const ThirdSection = () => {
     <section
       ref={ref}
       className={cn(
-        "relative min-h-screen overflow-hidden bg-[#eae7e2] pb-32 pt-40 text-[#1f2937]",
+        "relative min-h-screen overflow-hidden bg-gradient-to-b from-[#eae7e2] to-[#e6e2dc] pb-32 pt-40 text-[#1f2937] -mt-[1px]",
         cursorSectionClassName
       )}
       {...cursorSectionProps}
@@ -38,19 +38,24 @@ const ThirdSection = () => {
         />
       )}
 
-      {/* ✨ GRID (responsive clean grid) */}
-<div className="absolute inset-0 pointer-events-none opacity-[0.04] md:opacity-[0.05]">
-  <div className="grid grid-cols-3 md:grid-cols-6 h-full">
-    {Array.from({ length: 6 }).map((_, i) => (
-      <div
-        key={i}
-        className={`border-r border-black ${
-          i >= 3 ? "hidden md:block" : ""
-        }`}
-      />
-    ))}
-  </div>
-</div>
+      {/* ✨ GRID (MATCHES PANEL TRANSITION) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="absolute inset-0 pointer-events-none opacity-[0.06] md:opacity-[0.08] mix-blend-multiply"
+      >
+        <div className="grid grid-cols-3 md:grid-cols-6 h-full">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className={`border-r border-black/10 ${
+                i >= 3 ? "hidden md:block" : ""
+              }`}
+            />
+          ))}
+        </div>
+      </motion.div>
 
       {/* 📦 CONTENT */}
       <motion.div
@@ -134,11 +139,11 @@ const ThirdSection = () => {
         >
           <div className="flex-1 h-[1px] bg-black/10" />
           <motion.div
-  layoutId="reveal-square"
-  animate={{ rotate: [45, 225, 45] }}
-  transition={{ duration: 6, repeat: Infinity }}
-  className="w-2 h-2 bg-orange-500"
-/>
+            layoutId="reveal-square"
+            animate={{ rotate: [45, 225, 45] }}
+            transition={{ duration: 6, repeat: Infinity }}
+            className="w-2 h-2 bg-orange-500"
+          />
           <div className="flex-1 h-[1px] bg-black/10" />
         </motion.div>
 
@@ -175,35 +180,28 @@ const ThirdSection = () => {
             }}
             className="text-black/60 leading-relaxed"
           >
-            At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site. Our philosophy is rooted in quality without compromise, care in every detail, and a deep understanding of what each project requires — from architects and consultants to façade contractors and developers. Because great façades are not simply manufactured. They are understood, engineered, and brought to life with intent.
-
-
+            At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site...
           </motion.p>
 
-          {/* 🔘 ABOUT BUTTON */}
-<motion.div
-  initial={{ opacity: 0, y: 30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.4 }}
-  className="mt-10"
->
-  <button className="group relative inline-flex items-center gap-3 px-8 py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300">
-    
-    {/* TEXT */}
-    <span className="relative z-10 text-sm tracking-wide text-[#1f2937] group-hover:text-white transition">
-      About Us
-    </span>
+          {/* 🔘 BUTTON */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-10"
+          >
+            <button className="group relative inline-flex items-center gap-3 px-8 py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300">
+              <span className="relative z-10 text-sm tracking-wide text-[#1f2937] group-hover:text-white transition">
+                About Us
+              </span>
 
-    {/* ARROW */}
-    <span className="relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-white">
-      →
-    </span>
+              <span className="relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-white">
+                →
+              </span>
 
-    {/* HOVER BG */}
-    <span className="absolute inset-0 bg-[#1f2937] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 rounded-full" />
-  </button>
-</motion.div>
-
+              <span className="absolute inset-0 bg-[#1f2937] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 rounded-full" />
+            </button>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

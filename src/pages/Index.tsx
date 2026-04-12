@@ -13,6 +13,7 @@ const ApplicationSection = lazy(() => import("@/components/sections/ApplicationS
 const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
 const FooterSection = lazy(() => import("@/components/sections/FooterSection"));
 
+
 const Index = () => {
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +28,9 @@ const Index = () => {
         <Suspense fallback={null}>
           <LandingSection />
           <GlobeSection />
+       
           <PhilosophySection />
+          
           <div className="relative isolate">
             <QualitySection />
             <div className="relative z-20 -mt-[min(92vh,52rem)]">

@@ -152,11 +152,19 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative overflow-hidden px-8 py-20 text-black md:px-20 ${cursorSectionClassName}`}
+      className={`relative overflow-hidden px-8 py-20 text-white md:px-20 ${cursorSectionClassName}`}
     >
+{/* 
+      <div className="absolute inset-0">
+  <img
+    src="/footer.jpeg" // 👉 change path if needed
+    alt="Footer background"
+    className="w-full h-full object-cover"
+  />
+</div> */}
 
       {/* 🎥 VIDEO BACKGROUND */}
-      <video
+      {/* <video
         autoPlay
         muted
         loop
@@ -164,14 +172,14 @@ const Footer = () => {
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="https://cdn.pixabay.com/video/2020/01/15/31290-385265697_large.mp4" type="video/mp4" />
-      </video>
+      </video> */}
 
       {/* 🔥 DARK OVERLAY (important for readability) */}
       <div className="absolute inset-0 bg-[#020617]/0 backdrop-blur-[2px]" />
 
       {/* ✨ OPTIONAL GLOW LAYER */}
       <motion.div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02),rgba(255,255,255,0.06))]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgb(225, 225, 225),rgb(255, 255, 255),rgba(255,255,255,0.06))]"
         animate={
           reduceMotion
             ? undefined

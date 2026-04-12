@@ -321,23 +321,71 @@ const MaterialsSection = () => {
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-              {/* Card */}
-              <motion.div
-                className="h-20 w-20 overflow-hidden rounded-lg shadow-md md:h-24 md:w-24"
-                whileHover={
-                  reduceMotion
-                    ? { scale: 1.05 }
-                    : { scale: 1.13, rotateZ: 1.5, rotateX: 8, rotateY: -8 }
-                }
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <img
-                  src={mat.image}
-                  alt={mat.name}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </motion.div>
+              {/* 🔥 3D CARD */}
+<div
+  className="relative [perspective:1000px]"
+  onMouseMove={(e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateX = ((y - rect.height / 2) / rect.height) * -20;
+    const rotateY = ((x - rect.width / 2) / rect.width) * 20;
+
+    const card = e.currentTarget.firstElementChild as HTMLElement;
+
+    card.style.transform = `
+      perspective(900px)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale(1.12)
+    `;
+  }}
+  onMouseLeave={(e) => {
+    const card = e.currentTarget.firstElementChild as HTMLElement;
+
+    card.style.transform = `
+      perspective(900px)
+      rotateX(0deg)
+      rotateY(0deg)
+      scale(1)
+    `;
+  }}
+>
+  <div
+    className="relative h-20 w-20 md:h-24 md:w-24 rounded-xl shadow-xl transition-transform duration-200 ease-out"
+    style={{ transformStyle: "preserve-3d" }}
+  >
+    {/* IMAGE (depth) */}
+    <img
+      src={mat.image}
+      alt={mat.name}
+      className="w-full h-full object-cover rounded-xl"
+      loading="lazy"
+      style={{ transform: "translateZ(40px)" }}
+    />
+
+    {/* LIGHT REFLECTION */}
+    <div
+      className="absolute inset-0 rounded-xl pointer-events-none"
+      style={{
+        background:
+          "linear-gradient(120deg, rgba(255,255,255,0.35), transparent 40%)",
+        transform: "translateZ(50px)",
+        mixBlendMode: "overlay",
+      }}
+    />
+
+    {/* DEPTH SHADOW */}
+    <div
+      className="absolute inset-0 rounded-xl"
+      style={{
+        transform: "translateZ(-20px)",
+        boxShadow: "0 30px 60px rgba(0,0,0,0.25)",
+      }}
+    />
+  </div>
+</div>
               
 
               {/* Tooltip */}

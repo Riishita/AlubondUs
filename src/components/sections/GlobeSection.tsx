@@ -14,10 +14,19 @@ import { cn } from "@/lib/utils";
 export default function GlobeHero() {
   const globeRef = useRef<any>();
   const sectionRef = useRef(null);
-  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings();
+  const { cursorSectionProps, cursorSectionClassName } =
+    useCustomCursorBindings();
 
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [showPoints, setShowPoints] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -26,11 +35,23 @@ export default function GlobeHero() {
 
   /* 🌍 GLOBE ANIMATION */
   const globeScale = useTransform(scrollYProgress, [0, 1], [2.2, 1]);
-  const globeY = useTransform(scrollYProgress, [0, 1], ["70%", "-10%"]);
-  const globeX = useTransform(scrollYProgress, [0, 1], ["-50%", "5%"]);
 
-  const textOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 1]);
-  const textY = useTransform(scrollYProgress, [0, 0.3], [0, -850]);
+  const globeY = isMobile
+    ? useTransform(scrollYProgress, [0, 1], ["120%", "10%"])
+    : useTransform(scrollYProgress, [0, 1], ["70%", "-10%"]);
+
+  const globeX = useTransform(
+  scrollYProgress,
+  [0, 1],
+  isMobile ? ["-50%", "-50%"] : ["-50%", "5%"]
+);
+
+  const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
+  const textY = isMobile
+    ? useTransform(scrollYProgress, [0, 0.2], [0, -100])
+    : useTransform(scrollYProgress, [0, 0.3], [0, -850]);
+
   const textScale = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
   const leftOpacity = useTransform(scrollYProgress, [0.05, 0.15], [0, 1]);
@@ -42,15 +63,14 @@ export default function GlobeHero() {
   const locations = [
     { name: "India", lat: 20.5937, lng: 78.9629, logo: "alubond-logo.png", description: "Alubond India Plot No. 26, Sector 6 IMT Manesar, Gurugram Haryana 122052, India" },
     { name: "Europe", lat: 50.1109, lng: 8.6821, logo: "alubond-logo.png", description: "Alubond Europe Industrial Zone Europe" },
-    { name: "UAE", lat: 23.4241, lng: 53.8478, logo: "alubond-logo.png", description: "Alubond U.S.A Dubai Investment Park P.O. Box 29353, Dubai United Arab Emirates" },
-    { name: "USA", lat: 37.0902, lng: -95.7129, logo: "alubond-logo.png", description: "Alubond U.S.A Inc. 5 Columbus Circle, Suite 801 New York, NY 10019 United States" },
-    { name: "Canada", lat: 56.1304, lng: -106.3468, logo: "alubond-logo.png", description: "Alubond Canada Toronto, Ontario Canada" },
-    { name: "Turkey", lat: 38.9637, lng: 35.2433, logo: "alubond-logo.png", description: "Alubond Turkey Istanbul, Turkey" },
-    { name: "Vietnam", lat: 14.0583, lng: 108.2772, logo: "alubond-logo.png", description: "Alubond Vietnam Ho Chi Minh City Vietnam" },
-    { name: "Egypt", lat: 26.8206, lng: 30.8025, logo: "alubond-logo.png", description: "Alubond Egypt Cairo, Egypt" },
+    { name: "UAE", lat: 23.4241, lng: 53.8478, logo: "alubond-logo.png", description: "Alubond UAE Dubai Investment Park" },
+    { name: "USA", lat: 37.0902, lng: -95.7129, logo: "alubond-logo.png", description: "Alubond USA New York" },
+    { name: "Canada", lat: 56.1304, lng: -106.3468, logo: "alubond-logo.png", description: "Alubond Canada Toronto" },
+    { name: "Turkey", lat: 38.9637, lng: 35.2433, logo: "alubond-logo.png", description: "Alubond Turkey Istanbul" },
+    { name: "Vietnam", lat: 14.0583, lng: 108.2772, logo: "alubond-logo.png", description: "Alubond Vietnam Ho Chi Minh City" },
+    { name: "Egypt", lat: 26.8206, lng: 30.8025, logo: "alubond-logo.png", description: "Alubond Egypt Cairo" },
   ];
 
-  /* 🎯 HANDLE CLICK */
   const handleClick = (name: string) => {
     const place = locations.find((l) => l.name === name);
     if (!place) return;
@@ -70,7 +90,6 @@ export default function GlobeHero() {
   /* ⚙️ CONTROLS */
   useEffect(() => {
     if (!globeRef.current) return;
-
     const controls = globeRef.current.controls();
     controls.enableZoom = false;
     controls.enablePan = false;
@@ -78,14 +97,12 @@ export default function GlobeHero() {
     controls.autoRotateSpeed = 0.3;
   }, []);
 
-  /* 🔥 STOP ROTATION WHEN SELECTED */
   useEffect(() => {
     if (!globeRef.current) return;
     const controls = globeRef.current.controls();
     controls.autoRotate = !selectedPlace;
   }, [selectedPlace]);
 
-  /* 🔥 SHOW POINTS */
   useEffect(() => {
     const unsubscribe = leftOpacity.on("change", (val) => {
       setShowPoints(val > 0.5);
@@ -98,19 +115,16 @@ export default function GlobeHero() {
     () => (
       <Globe
         ref={globeRef}
-        width={650}
-        height={650}
+        width={isMobile ? 320 : 650}
+        height={isMobile ? 320 : 650}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         backgroundColor="rgba(0,0,0,0)"
-
         pointsData={showPoints ? locations : []}
         pointLat={(d: any) => d.lat}
         pointLng={(d: any) => d.lng}
         pointColor={() => "#3b82f6"}
         pointAltitude={0.02}
         pointRadius={0.5}
-
-        /* 🔥 RING EFFECT */
         ringsData={selectedPlace ? [selectedPlace] : []}
         ringLat={(d: any) => d.lat}
         ringLng={(d: any) => d.lng}
@@ -118,50 +132,9 @@ export default function GlobeHero() {
         ringMaxRadius={5}
         ringPropagationSpeed={2}
         ringRepeatPeriod={1000}
-
-        /* 🌟 HTML MARKERS */
-        htmlElementsData={showPoints ? locations : []}
-        htmlLat={(d: any) => d.lat}
-        htmlLng={(d: any) => d.lng}
-        htmlElement={(d: any) => {
-          const isActive = selectedPlace?.name === d.name;
-
-          const el = document.createElement("div");
-
-          el.innerHTML = `
-            <div style="
-              display:flex;
-              flex-direction:column;
-              align-items:center;
-              transform: translate(-50%, -120%) scale(${isActive ? 1.4 : 1});
-              transition: all 0.4s ease;
-              color:white;
-              font-size:${isActive ? "14px" : "12px"};
-              filter:${isActive ? "drop-shadow(0 0 10px rgba(59,130,246,0.9))" : "none"};
-            ">
-              <img 
-                src="${d.logo}" 
-                style="
-                  width:${isActive ? "34px" : "24px"};
-                  height:${isActive ? "34px" : "24px"};
-                  margin-bottom:4px;
-                  transform:${isActive ? "scale(1.2)" : "scale(1)"};
-                  transition: all 0.4s ease;
-                " 
-              />
-              <span style="
-                transform:${isActive ? "scale(1.2)" : "scale(1)"};
-                transition: all 0.4s ease;
-              ">
-                ${d.name}
-              </span>
-            </div>
-          `;
-          return el;
-        }}
       />
     ),
-    [showPoints, selectedPlace]
+    [showPoints, selectedPlace, isMobile]
   );
 
   return (
@@ -172,12 +145,12 @@ export default function GlobeHero() {
     >
       <div className="sticky top-0 h-screen overflow-hidden">
 
-        <div className="gradient-amaterasu min-h-screen px-10 py-24" />
+        <div className="gradient-amaterasu min-h-screen px-6 md:px-10 py-24" />
 
-        {/* TEXT */}
+        {/* HEADING */}
         <motion.h1
           style={{ opacity: textOpacity, scale: textScale, y: textY }}
-          className="absolute top-[10%] w-full text-center text-white font-light tracking-[-2px] text-[clamp(60px,12vw,180px)]"
+          className="absolute top-[12%] w-full text-center text-white font-light tracking-[-2px] text-[clamp(40px,10vw,180px)]"
         >
           Global Impact
         </motion.h1>
@@ -185,30 +158,38 @@ export default function GlobeHero() {
         {/* GLOBE */}
         <motion.div
           style={{ scale: globeScale, y: globeY, x: globeX }}
-          className="absolute left-1/2 bottom-0 -translate-x-1/2"
+          className={cn(
+            "absolute left-1/2 -translate-x-1/2",
+            isMobile ? "top-[10%]" : "bottom-0"
+          )}
         >
           <motion.div
             style={{ opacity: glowOpacity }}
-            className="absolute w-[800px] h-[800px] 
-            bg-[radial-gradient(circle,rgba(59,130,246,0.25),transparent_70%)] 
+            className="absolute w-[600px] md:w-[800px] h-[600px] md:h-[800px]
+            bg-[radial-gradient(circle,rgba(59,130,246,0.25),transparent_70%)]
             blur-[120px] rounded-full -z-10"
           />
           {globe}
         </motion.div>
 
-        {/* LEFT CONTENT */}
+        {/* CONTENT */}
         <motion.div
           style={{ opacity: leftOpacity, y: leftY }}
-          className="absolute left-[6%] top-[32%] -translate-y-1/2 max-w-xl text-white"
+          className={cn(
+            "absolute text-white max-w-xl",
+            isMobile
+  ? "top-[45%] left-1/7 -translate-x-1/5 text-center px-4 w-full"
+              : "left-[6%] top-[32%] -translate-y-1/7"
+          )}
         >
-          <h2 className="text-4xl md:text-5xl font-semibold mb-6">
+          <h2 className="text-3xl md:text-5xl font-semibold mb-6">
             Our Global Presence <br />
             <span>Powers Local Delivery</span>
           </h2>
 
-          <div className="mb-6">
+          <div className="mb-8">
             <p className="text-xs mb-2">● MANUFACTURING</p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center md:justify-start gap-3">
               {["UAE", "India", "Europe"].map((item) => (
                 <button key={item} onClick={() => handleClick(item)}
                   className="px-4 py-2 rounded-full border border-white hover:bg-white/20">
@@ -220,7 +201,7 @@ export default function GlobeHero() {
 
           <div>
             <p className="text-xs mb-2">● OFFICES</p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center md:justify-start gap-3">
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
                 <button key={item} onClick={() => handleClick(item)}
                   className="px-4 py-2 rounded-full border border-white hover:bg-white/20">
@@ -233,52 +214,39 @@ export default function GlobeHero() {
 
         {/* CARD */}
         <AnimatePresence>
-  {selectedPlace && (
-    <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="absolute  bottom-[5%] w-[90%] 
-md:left-[6%] md:translate-x-0 md:bottom-[3%] md:w-[30%] md:max-w-xl
-p-5 md:p-8 rounded-3xl 
-bg-white/5 backdrop-blur-2xl 
-border border-white/20 
-shadow-[0_10px_60px_rgba(0,0,0,0.5)] 
-text-white overflow-hidden"
-    >
-      {/* subtle gradient glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
+          {selectedPlace && (
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20 }}
+              className={cn(
+                "absolute w-[90%] p-5 md:p-8 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/20 text-white",
+                isMobile
+                  ? "bottom-[2%] left-1/5 -translate-x-1/6"
+                  : "bottom-[5%] md:left-[6%] md:w-[30%]"
+              )}
+            >
+              <button
+                onClick={() => setSelectedPlace(null)}
+                className="absolute top-4 right-4 text-white/40 hover:text-white"
+              >
+                ✕
+              </button>
 
-      {/* CLOSE */}
-      <button
-        onClick={() => setSelectedPlace(null)}
-        className="absolute top-4 right-4 text-white/40 hover:text-white transition"
-      >
-        ✕
-      </button>
+              <h2 className="text-2xl font-semibold mb-2">
+                {selectedPlace.name}
+              </h2>
 
-      {/* CONTENT */}
-      <h2 className="text-2xl font-semibold mb-2 tracking-tight">
-        {selectedPlace.name}
-      </h2>
+              <p className="text-white/60 mb-6 text-sm">
+                {selectedPlace.description}
+              </p>
 
-      <p className="text-white/60 mb-6 text-sm">
-        {selectedPlace.description}
-      </p>
-
-      {/* BUTTON */}
-      <button className="group relative px-6 py-2.5 rounded-full overflow-hidden">
-        <span className="absolute inset-0 rounded-full border border-orange-400/60 group-hover:border-orange-400 transition" />
-        <span className="absolute inset-0 bg-orange-400/10 opacity-0 group-hover:opacity-100 transition" />
-        <span className="relative text-orange-400 font-medium">
-          Contact
-        </span>
-      </button>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+              <button className="px-6 py-2 rounded-full border border-orange-400 text-orange-400">
+                Contact
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </section>
