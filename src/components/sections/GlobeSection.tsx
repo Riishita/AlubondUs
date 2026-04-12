@@ -119,16 +119,42 @@ export default function GlobeHero() {
         height={isMobile ? 320 : 650}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         backgroundColor="rgba(0,0,0,0)"
-        pointsData={showPoints ? locations : []}
+        htmlElementsData={showPoints ? locations : []}
+htmlLat={(d: any) => d.lat}
+htmlLng={(d: any) => d.lng}
+htmlElement={(d: any) => {
+  const el = document.createElement("div");
+
+  el.innerHTML = `
+    <div style="
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      transform: translate(-50%, -100%);
+      cursor:pointer;
+    ">
+      
+        <img src="/${d.logo}" style="width:30px;height:30px;" />
+        ${d.name}
+      </div>
+    </div>
+  `;
+
+  el.onclick = () => handleClick(d.name);
+
+  return el;
+
+  
+}}
         pointLat={(d: any) => d.lat}
         pointLng={(d: any) => d.lng}
-        pointColor={() => "#3b82f6"}
+        pointColor={() => "#c2d6f7"}
         pointAltitude={0.02}
         pointRadius={0.5}
         ringsData={selectedPlace ? [selectedPlace] : []}
         ringLat={(d: any) => d.lat}
         ringLng={(d: any) => d.lng}
-        ringColor={() => ["#3b82f6", "#60a5fa"]}
+        ringColor={() => ["#77a8f5", "#ffce9b"]}
         ringMaxRadius={5}
         ringPropagationSpeed={2}
         ringRepeatPeriod={1000}

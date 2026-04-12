@@ -4,6 +4,7 @@ import Preloader from "@/components/Preloader";
 const LandingSection = lazy(() => import("@/components/sections/LandingSection"));
 const GlobeSection = lazy(() => import("@/components/sections/GlobeSection"));
 const PhilosophySection = lazy(() => import("@/components/sections/PhilosophySection"));
+const HomeContent = lazy(() => import("@/components/sections/HomeContent"));
 const QualitySection = lazy(() => import("@/components/sections/QualitySection"));
 const SheetDetail = lazy(() => import("@/components/sections/SheetDetail"));
 
@@ -27,9 +28,9 @@ const Index = () => {
       <main className={`${loading ? "opacity-0" : "opacity-100"} transition-opacity duration-700`}>
         <Suspense fallback={null}>
           <LandingSection />
-          <GlobeSection />
-       
-          <PhilosophySection />
+          {/* <GlobeSection />
+          <PhilosophySection /> */}
+          <HomeContent />
           
           <div className="relative isolate">
             <QualitySection />
