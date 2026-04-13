@@ -249,39 +249,39 @@ const globe = useMemo(
 
         {/* CARD */}
         <AnimatePresence>
-          {selectedPlace && (
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20 }}
-              className={cn(
-                "absolute w-[90%] p-5 md:p-8 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/20 text-white",
-                isMobile
-                  ? "bottom-[2%] left-1/5 -translate-x-1/6"
-                  : "bottom-[5%] md:left-[6%] md:w-[30%]"
-              )}
-            >
-              <button
-                onClick={() => setSelectedPlace(null)}
-                className="absolute top-4 right-4 text-white/40 hover:text-white"
-              >
-                ✕
-              </button>
+  {selectedPlace && (
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 20, scale: 0.96 }}
+      // Use "inset-x-0" and "mx-auto" for mobile centering
+      className={cn(
+        "absolute z-50 p-6 md:p-8 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/20 text-white",
+        "bottom-6 inset-x-4 mx-auto w-auto max-w-[calc(100%-2rem)]", // Mobile: Centered with margins
+        "md:bottom-10 md:left-10 md:inset-x-auto md:mx-0 md:w-full md:max-w-md" // Desktop: Docked left
+      )}
+    >
+      <button
+        onClick={() => setSelectedPlace(null)}
+        className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/60 hover:bg-white/20 hover:text-white transition-colors"
+      >
+        ✕
+      </button>
 
-              <h2 className="text-2xl font-semibold mb-2">
-                {selectedPlace.name}
-              </h2>
+      <h2 className="text-2xl font-bold mb-2 pr-8">
+        {selectedPlace.name}
+      </h2>
 
-              <p className="text-white/60 mb-6 text-sm">
-                {selectedPlace.description}
-              </p>
+      <p className="text-white/70 mb-6 text-sm leading-relaxed">
+        {selectedPlace.description}
+      </p>
 
-              <button className="px-6 py-2 rounded-full border border-orange-400 text-orange-400">
-                Contact
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <button className="w-full md:w-auto px-8 py-3 rounded-full border border-orange-500 text-orange-500 font-medium hover:bg-orange-500 hover:text-white transition-all active:scale-95">
+        Contact
+      </button>
+    </motion.div>
+  )}
+</AnimatePresence>
 
       </div>
     </section>

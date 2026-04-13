@@ -34,31 +34,34 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          style={{ willChange: "opacity" }}
         >
           {/* BACKGROUND */}
           <div className="alubond-bg absolute inset-0 -z-10" />
 
           {/* NOISE */}
-          <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.png')]" />
+          <div className="absolute inset-0 opacity-[0.04] bg-[url('/noise.png')]" />
 
           {/* MAIN BOX */}
           <motion.div
             className="relative flex items-center justify-center"
             animate={{
-              scale: phase === "shrink" || phase === "logo" ? 0.5 : 1,
+              scale: phase === "shrink" || phase === "logo" ? 0.55 : 1,
             }}
             transition={{
               duration: 0.8,
-              ease: [0.16, 1, 0.3, 1],
+              ease: [0.22, 1, 0.36, 1],
             }}
             style={{
               width: 260,
               height: 260,
-              background: "rgba(20,27,58,0.9)",
-              backdropFilter: "blur(20px)",
+              background: "rgba(20,27,58,0.92)", // reduced blur usage
+              backdropFilter: "blur(8px)", // lighter blur (was 20px)
               borderRadius: "20px",
-              boxShadow: "0 40px 120px rgba(0,0,0,0.6)",
+              boxShadow: "0 30px 100px rgba(0,0,0,0.5)",
+              willChange: "transform",
+              transform: "translateZ(0)",
             }}
           >
             {/* SQUARES */}
@@ -72,27 +75,29 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                       width: sq.size,
                       height: sq.size,
                       backgroundColor: sq.color,
+                      willChange: "transform, opacity",
+                      transform: "translateZ(0)",
                     }}
-                    initial={{ scale: 0, rotate: 45, opacity: 0 }}
+                    initial={{ scale: 0.6, rotate: 45, opacity: 0 }}
                     animate={{
                       scale:
                         phase === "loading"
-                          ? [0, 1.1, 1]
+                          ? 1
                           : phase === "shrink"
-                          ? 0
+                          ? 0.3
                           : 0,
-                      rotate: phase === "loading" ? [45, 0] : 0,
+                      rotate: phase === "loading" ? 0 : 0,
                       opacity:
                         phase === "loading"
                           ? 1
                           : phase === "shrink"
-                          ? 0
+                          ? 0.2
                           : 0,
                     }}
                     transition={{
-                      duration: 0.6,
+                      duration: 0.7,
                       delay: i * 0.06,
-                      ease: [0.16, 1, 0.3, 1],
+                      ease: "linear",
                     }}
                   />
                 ))}
@@ -107,11 +112,15 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{
                 opacity: phase === "logo" ? 1 : 0,
-                scale: phase === "logo" ? 1 : 0.9,
+                scale: phase === "logo" ? 1 : 0.95,
               }}
               transition={{
                 duration: 0.6,
-                ease: "easeOut",
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              style={{
+                willChange: "transform, opacity",
+                transform: "translateZ(0)",
               }}
             />
           </motion.div>

@@ -46,7 +46,7 @@ export default function SmoothTransitionWrapper() {
 
   /* 🎯 MASK POSITION (Aligned with globe) */
   const maskImageValue = useTransform(maskSize, (s) => {
-    const centerY = isMobile ? "30%" : "70%";
+    const centerY = isMobile ? "45%" : "70%";
     return `radial-gradient(circle at 50% ${centerY}, black ${s}%, transparent ${
       s + 10
     }%)`;
