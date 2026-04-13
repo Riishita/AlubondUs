@@ -61,7 +61,7 @@ export default function QualitySection() {
       const video = videoRef.current;
       if (!video || reduceMotion) return;
       const diff = targetTime.current - currentTime.current;
-      currentTime.current += diff * 0.045;
+      currentTime.current += diff * 0.12;
       if (Math.abs(video.currentTime - currentTime.current) > 0.02) {
         try {
           video.currentTime = currentTime.current;
@@ -94,7 +94,7 @@ export default function QualitySection() {
         <div className="absolute inset-0 z-0">
           <video
             ref={videoRef}
-            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776065251/VN20260413_125627_ybxqpo.mp4"
+            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776115986/VN20260414_030243_atlcm1.mp4"
             muted
             playsInline
             preload="auto"

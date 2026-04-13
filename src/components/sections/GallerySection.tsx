@@ -6,25 +6,28 @@ import { useRef } from "react";
 
 const panels = [
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
-    title: "Burj Khalifa",
-    location: "Dubai, UAE",
+    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775800113/Gallart_lmzj8y.mp4",
+    title: "Krestovsky Stadium",
+    location: "St. Petersburg, Russia",
   },
+  
   {
     video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775677475/BurjKhalifa1_skpuon.mp4",
     title: "Red Sea Airport",
     location: "NEOM, Saudi Arabia",
   },
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775675409/Burjkhalifa_wioycw.mp4",
-    title: "Yas Marina Circuit",
-    location: "Abu Dhabi, UAE",
+    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
+    title: "Burj Khalifa",
+    location: "Dubai, UAE",
   },
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775800113/Gallart_lmzj8y.mp4",
-    title: "Krestovsky Stadium",
-    location: "St. Petersburg, Russia",
+    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1776113873/VN20260414_022640_tsen5n.mp4",
+    title: "Khalifa Stadium",
+    location: "Doha, Qatar",
   },
+  
+  
 ];
 
 const easePremium = [0.22, 1, 0.36, 1] as const;
