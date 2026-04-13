@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 const panels = [
   {
-     video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
+    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
     title: "Burj Khalifa",
     location: "Dubai, UAE",
   },
@@ -39,7 +39,6 @@ const panels = [
 
 const easePremium = [0.22, 1, 0.36, 1] as const;
 
-/** Groups header, masonry, CTA so they sequence in one scroll reveal. */
 const shellVariants: Variants = {
   hidden: {},
   show: {
@@ -78,29 +77,25 @@ const itemVariants: Variants = {
   },
 };
 
-/**
- * Masonry gallery: parent staggerChildren reveals header → grid → CTA;
- * grid nests a second stagger for each tile (fade + rise), plus hover depth.
- */
 export default function GallerySection() {
   const reduceMotion = useReducedMotion();
-
-  const { cursorSectionProps, cursorSectionClassName } =
-  useCustomCursorBindings(false); // 👈 white cursor
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
   return (
     <section
-  {...cursorSectionProps}
-  className={`relative overflow-hidden py-32 text-white ${cursorSectionClassName}`}
->
+      {...cursorSectionProps}
+      // Adjusted padding for mobile (py-20) vs desktop (py-32)
+      className={`relative overflow-hidden py-20 md:py-32 text-white ${cursorSectionClassName}`}
+    >
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
-
-      <div className="pointer-events-none absolute left-1/2 top-[-20%] h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-white/5 blur-[120px]" />
+      
+      {/* Responsive Glow - smaller on mobile */}
+      <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[400px] w-[400px] md:h-[800px] md:w-[800px] -translate-x-1/2 rounded-full bg-white/5 blur-[80px] md:blur-[120px]" />
 
       <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
-        <div className="grid h-full w-full grid-cols-12">
+        <div className="grid h-full w-full grid-cols-6 md:grid-cols-12">
           {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="border-r border-white/10" />
+            <div key={i} className="border-r border-white/10 last:border-r-0" />
           ))}
         </div>
       </div>
@@ -112,22 +107,24 @@ export default function GallerySection() {
         whileInView={reduceMotion ? undefined : "show"}
         viewport={{ once: true, amount: 0.07, margin: "-72px 0px" }}
       >
-        <motion.div className="mx-auto mb-24 max-w-5xl px-6 text-center" variants={reduceMotion ? undefined : blockVariants}>
-          <p className="mb-6 text-sm tracking-[0.3em] text-white/40">005 / GLOBAL PROJECTS</p>
+        <motion.div className="mx-auto mb-16 md:mb-24 max-w-5xl px-6 text-center" variants={reduceMotion ? undefined : blockVariants}>
+          <p className="mb-4 md:mb-6 text-[10px] md:text-sm tracking-[0.3em] text-white/40">005 / GLOBAL PROJECTS</p>
 
-          <h1 className="text-5xl font-bold leading-tight md:text-7xl">
-            TRUSTED BY <br />
+          {/* Fluid Typography for the Heading */}
+          <h1 className="text-3xl font-bold leading-tight sm:text-5xl md:text-7xl">
+            TRUSTED BY <br className="hidden sm:block" />
             ARCHITECTS WORLDWIDE
           </h1>
 
-          <p className="mt-8 text-lg leading-relaxed text-white/60">
+          <p className="mt-6 md:mt-8 text-base md:text-lg leading-relaxed text-white/60 max-w-2xl mx-auto">
             From iconic towers in the Gulf to cultural landmarks across Europe —
             Alubond panels define skylines on every continent.
           </p>
         </motion.div>
 
+        {/* Responsive Masonry Grid: 1 col mobile, 2 col tablet, 3 col desktop */}
         <motion.div
-          className="mx-auto max-w-7xl [perspective:1200px] columns-1 gap-6 space-y-6 px-6 md:columns-2 lg:columns-3"
+          className="mx-auto max-w-7xl [perspective:1200px] columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 space-y-4 md:space-y-6 px-4 md:px-8"
           variants={reduceMotion ? undefined : gridVariants}
         >
           {panels.map((panel, i) => (
@@ -135,15 +132,14 @@ export default function GallerySection() {
           ))}
         </motion.div>
 
-        <motion.div className="mt-20 flex justify-center" variants={reduceMotion ? undefined : blockVariants}>
+        <motion.div className="mt-12 md:mt-20 flex justify-center px-6" variants={reduceMotion ? undefined : blockVariants}>
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.04 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-            className="group relative overflow-hidden rounded-full border border-white/20 px-10 py-4"
+            className="group relative w-full sm:w-auto overflow-hidden rounded-full border border-white/20 px-10 py-4"
           >
             <span className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition duration-700 group-hover:translate-x-[100%] group-hover:opacity-100" />
-
-            <span className="relative z-10 text-sm uppercase tracking-[0.3em] text-white">View All Projects</span>
+            <span className="relative z-10 text-xs md:text-sm uppercase tracking-[0.3em] text-white">View All Projects</span>
           </motion.button>
         </motion.div>
       </motion.div>
@@ -163,7 +159,7 @@ function MasonryCard({
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleHoverStart = () => {
-    videoRef.current?.play();
+    videoRef.current?.play().catch(() => {}); // Catch play-interrupt errors
   };
 
   const handleHoverEnd = () => {
@@ -173,13 +169,14 @@ function MasonryCard({
     }
   };
 
+  // Responsive heights: slightly shorter on mobile for better thumb-scrolling
   const heights = [
-    "h-[260px]",
-    "h-[320px]",
-    "h-[380px]",
-    "h-[300px]",
-    "h-[420px]",
-    "h-[280px]",
+    "h-[240px] md:h-[260px]",
+    "h-[300px] md:h-[320px]",
+    "h-[340px] md:h-[380px]",
+    "h-[280px] md:h-[300px]",
+    "h-[380px] md:h-[420px]",
+    "h-[260px] md:h-[280px]",
   ];
 
   return (
@@ -192,13 +189,14 @@ function MasonryCard({
         reduced
           ? undefined
           : {
-              scale: 1.03,
-              rotateY: -3.5,
-              rotateX: 2.5,
+              scale: 1.02,
+              rotateY: -2.5,
+              rotateX: 1.5,
               transition: { duration: 0.4, ease: easePremium },
             }
       }
-      className={`relative mb-6 break-inside-avoid cursor-pointer overflow-hidden rounded-2xl group transform-gpu [transform-style:preserve-3d] ${heights[index % heights.length]}`}
+      // Fixed: mb-4 on mobile, mb-6 on desktop to match grid gap
+      className={`relative mb-4 md:mb-6 break-inside-avoid cursor-pointer overflow-hidden rounded-2xl group transform-gpu [transform-style:preserve-3d] ${heights[index % heights.length]}`}
     >
       <video
         ref={videoRef}
@@ -207,17 +205,15 @@ function MasonryCard({
         loop
         playsInline
         preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent transition duration-500 group-hover:via-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent transition duration-500 group-hover:via-black/20" />
 
-      <div className="absolute bottom-5 left-5">
-        <p className="text-[10px] uppercase tracking-[0.4em] text-white/60">{panel.location}</p>
-
-        <h3 className="mt-2 text-lg font-semibold">{panel.title}</h3>
-
-        <div className="mt-2 h-[2px] w-0 bg-white transition-all duration-500 group-hover:w-16" />
+      <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 right-4">
+        <p className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-white/60">{panel.location}</p>
+        <h3 className="mt-1 md:mt-2 text-base md:text-lg font-semibold leading-tight">{panel.title}</h3>
+        <div className="mt-2 h-[2px] w-0 bg-white transition-all duration-500 group-hover:w-12 md:group-hover:w-16" />
       </div>
 
       <div className="absolute inset-0 rounded-2xl border border-white/10 transition duration-500 group-hover:border-white/30" />
