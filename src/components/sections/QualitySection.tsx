@@ -94,13 +94,13 @@ export default function QualitySection() {
         <div className="absolute inset-0 z-0">
           <video
             ref={videoRef}
-            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775857399/VN20260411_031224_msqvzy.mp4"
+            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776065251/VN20260413_125627_ybxqpo.mp4"
             muted
             playsInline
             preload="auto"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
 
         {/* SCROLLING CONTENT LAYER */}
@@ -130,7 +130,7 @@ export default function QualitySection() {
           <div className="absolute left-0 top-[130vh] w-full px-6 md:px-16">
             <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
               <div className="bg-[#E9E5DE] p-6 text-[#203f65] transition-transform md:p-8">
-                <div className="mb-4 text-xl md:mb-6">✦</div>
+    
                 <h2 className="mb-2 text-lg font-medium md:mb-3 md:text-2xl">100+ Countries</h2>
                 <p className="text-xs leading-relaxed md:text-sm">
                   Delivering trusted façade solutions across diverse global markets with consistent quality and
@@ -139,7 +139,7 @@ export default function QualitySection() {
               </div>
 
               <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
-                <div className="mb-4 text-xl md:mb-6">✦</div>
+                
                 <h2 className="mb-2 text-lg font-medium md:mb-3 md:text-2xl">50,000+ Projects Worldwide</h2>
                 <p className="text-xs leading-relaxed md:text-sm">
                   From iconic skylines to modern infrastructure, our panels power projects at every scale.
@@ -147,7 +147,7 @@ export default function QualitySection() {
               </div>
 
               <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
-                <div className="mb-4 text-xl md:mb-6">✦</div>
+                
                 <h2 className="mb-2 text-lg font-medium md:mb-3 md:text-2xl">35+ Industry Leadership</h2>
                 <p className="text-xs leading-relaxed md:text-sm">
                   Decades of innovation, engineering excellence, and leadership in advanced building materials.
@@ -157,7 +157,7 @@ export default function QualitySection() {
           </div>
 
           {/* LEFT TEXT 2 */}
-          <div className="absolute left-[8%] top-[210vh] max-w-[85%] sm:max-w-md md:left-[6%]">
+          <div className="absolute left-[8%] top-[200vh] max-w-[85%] sm:max-w-md md:left-[6%]">
             <h2 className="mb-4 text-3xl font-light sm:text-4xl md:text-5xl">Global reliability</h2>
             <p className="text-sm text-white/70 md:text-base">
               Trusted across continents, delivering consistent quality in every architectural application.

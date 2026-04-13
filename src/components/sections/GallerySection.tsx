@@ -25,16 +25,6 @@ const panels = [
     title: "Krestovsky Stadium",
     location: "St. Petersburg, Russia",
   },
-  {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775675409/Burjkhalifa_wioycw.mp4",
-    title: "Wood Finish",
-    location: "Luxury",
-  },
-  {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
-    title: "Burj Khalifa",
-    location: "Dubai, UAE",
-  },
 ];
 
 const easePremium = [0.22, 1, 0.36, 1] as const;
@@ -84,12 +74,10 @@ export default function GallerySection() {
   return (
     <section
       {...cursorSectionProps}
-      // Adjusted padding for mobile (py-20) vs desktop (py-32)
       className={`relative overflow-hidden py-20 md:py-32 text-white ${cursorSectionClassName}`}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
       
-      {/* Responsive Glow - smaller on mobile */}
       <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[400px] w-[400px] md:h-[800px] md:w-[800px] -translate-x-1/2 rounded-full bg-white/5 blur-[80px] md:blur-[120px]" />
 
       <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
@@ -110,7 +98,6 @@ export default function GallerySection() {
         <motion.div className="mx-auto mb-16 md:mb-24 max-w-5xl px-6 text-center" variants={reduceMotion ? undefined : blockVariants}>
           <p className="mb-4 md:mb-6 text-[10px] md:text-sm tracking-[0.3em] text-white/40">005 / GLOBAL PROJECTS</p>
 
-          {/* Fluid Typography for the Heading */}
           <h1 className="text-3xl font-bold leading-tight sm:text-5xl md:text-7xl">
             TRUSTED BY <br className="hidden sm:block" />
             ARCHITECTS WORLDWIDE
@@ -122,9 +109,9 @@ export default function GallerySection() {
           </p>
         </motion.div>
 
-        {/* Responsive Masonry Grid: 1 col mobile, 2 col tablet, 3 col desktop */}
+        {/* Adjusted to columns-2 for better balance with 4 items on larger screens */}
         <motion.div
-          className="mx-auto max-w-7xl [perspective:1200px] columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 space-y-4 md:space-y-6 px-4 md:px-8"
+          className="mx-auto max-w-6xl [perspective:1200px] columns-1 sm:columns-2 gap-4 md:gap-6 space-y-4 md:space-y-6 px-4 md:px-8"
           variants={reduceMotion ? undefined : gridVariants}
         >
           {panels.map((panel, i) => (
@@ -159,7 +146,7 @@ function MasonryCard({
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleHoverStart = () => {
-    videoRef.current?.play().catch(() => {}); // Catch play-interrupt errors
+    videoRef.current?.play().catch(() => {});
   };
 
   const handleHoverEnd = () => {
@@ -169,14 +156,12 @@ function MasonryCard({
     }
   };
 
-  // Responsive heights: slightly shorter on mobile for better thumb-scrolling
+  // Adjusted heights for a 4-item set to ensure a pleasing masonry stagger
   const heights = [
-    "h-[240px] md:h-[260px]",
-    "h-[300px] md:h-[320px]",
-    "h-[340px] md:h-[380px]",
-    "h-[280px] md:h-[300px]",
-    "h-[380px] md:h-[420px]",
-    "h-[260px] md:h-[280px]",
+    "h-[280px] md:h-[320px]",
+    "h-[380px] md:h-[480px]",
+    "h-[380px] md:h-[480px]",
+    "h-[280px] md:h-[320px]",
   ];
 
   return (
@@ -195,7 +180,6 @@ function MasonryCard({
               transition: { duration: 0.4, ease: easePremium },
             }
       }
-      // Fixed: mb-4 on mobile, mb-6 on desktop to match grid gap
       className={`relative mb-4 md:mb-6 break-inside-avoid cursor-pointer overflow-hidden rounded-2xl group transform-gpu [transform-style:preserve-3d] ${heights[index % heights.length]}`}
     >
       <video
