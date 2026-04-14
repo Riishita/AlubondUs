@@ -15,11 +15,9 @@ import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorP
 /* ================= CTA SECTION ================= */
 
 const CTASection = () => {
-
   const sectionRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
 
-  // ✅ FIX: moved inside component
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
 
@@ -60,8 +58,12 @@ const CTASection = () => {
         mouseY.set(e.clientY - rect.top);
       }}
       className={`relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32 ${cursorSectionClassName}`}
+      style={{
+        // Subtle fade-out mask to blend into the footer
+        WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
+        maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
+      }}
     >
-
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,#4aa3b5_0%,#1e3a6d_40%,#020617_100%)]" />
 
       <motion.div
@@ -113,7 +115,6 @@ const CTASection = () => {
         </p>
 
         <div className="flex gap-4 flex-wrap">
-
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
@@ -128,12 +129,33 @@ const CTASection = () => {
           >
             Downloads
           </motion.button>
-
         </div>
       </motion.div>
 
       <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-blue-500/20 to-transparent" />
     </section>
+  );
+};
+
+/* ================= PREMIUM TRANSITION ================= */
+
+const SectionDivider = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const width = useTransform(scrollYProgress, [0, 0.5], ["0%", "100%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
+  return (
+    <div ref={containerRef} className="relative h-px w-full bg-white/10 overflow-visible">
+      <motion.div 
+        style={{ width, opacity }}
+        className="absolute inset-0 mx-auto h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_15px_rgba(96,165,250,0.5)]" 
+      />
+    </div>
   );
 };
 
@@ -150,36 +172,16 @@ const Footer = () => {
       {...cursorSectionProps}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative overflow-hidden px-8 py-20 text-white md:px-20 ${cursorSectionClassName}`}
+      className={`relative overflow-hidden px-8 py-20 text-white md:px-20 bg-[#020617] ${cursorSectionClassName}`}
     >
-{/* 
-      <div className="absolute inset-0">
-  <img
-    src="/footer.jpeg" // 👉 change path if needed
-    alt="Footer background"
-    className="w-full h-full object-cover"
-  />
-</div> */}
-
-      {/* 🎥 VIDEO BACKGROUND */}
-      {/* <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="https://cdn.pixabay.com/video/2020/01/15/31290-385265697_large.mp4" type="video/mp4" />
-      </video> */}
-
       {/* 🔥 DARK OVERLAY (important for readability) */}
       <div className="absolute inset-0 bg-[#020617]/0 backdrop-blur-[2px]" />
 
       {/* ✨ OPTIONAL GLOW LAYER */}
       <motion.div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgb(225, 225, 225),rgb(255, 255, 255),rgba(255,255,255,0.06))]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.02),rgba(255,255,255,0.05),rgba(255,255,255,0.01))]"
         animate={
           reduceMotion
             ? undefined
@@ -191,7 +193,6 @@ const Footer = () => {
       {/* ================= CONTENT ================= */}
 
       <div className="relative z-10 grid grid-cols-2 md:grid-cols-5 gap-12 text-sm">
-
         <div>
           <p className="text-xs tracking-widest opacity-70 mb-4">
             Precision-engineered façade solutions designed to bring architectural vision to life.
@@ -277,7 +278,7 @@ const Footer = () => {
           whileHover={reduceMotion ? undefined : { scale: 1.05 }}
           className="w-16 h-16 bg-[#141B3A]/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-xl"
         >
-          <img src="/alubond-logo.png" className="w-10 h-10 object-contain" />
+          <img src="/alubond-logo.png" className="w-10 h-10 object-contain" alt="Logo" />
         </motion.div>
       </div>
 
@@ -293,14 +294,14 @@ const Footer = () => {
   );
 };
 
-
 /* ================= FINAL ================= */
 
 export default function FinalSection() {
   return (
-    <>
+    <main className="bg-[#020617]">
       <CTASection />
+      <SectionDivider />
       <Footer />
-    </>
+    </main>
   );
 }
