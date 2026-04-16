@@ -94,7 +94,7 @@ export default function QualitySection() {
         <div className="absolute inset-0 z-0">
           <video
             ref={videoRef}
-            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776115986/VN20260414_030243_atlcm1.mp4"
+            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775857399/VN20260411_031224_msqvzy.mp4"
             muted
             playsInline
             preload="auto"

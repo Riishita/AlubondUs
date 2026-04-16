@@ -35,10 +35,11 @@ const Index = () => {
           <div className="relative isolate">
             <QualitySection />
             <div className="relative z-20 -mt-[min(92vh,52rem)]">
-              <SheetDetail />
+              <CertificationSection />
             </div>
           </div>
-          <CertificationSection />
+          <SheetDetail />
+          
           <MaterialSection />
           <ApplicationSection />
           <GallerySection />

@@ -95,7 +95,7 @@ export default function GlobeHero() {
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.3;
+    controls.autoRotateSpeed = 3;
   }, []);
 
   useEffect(() => {

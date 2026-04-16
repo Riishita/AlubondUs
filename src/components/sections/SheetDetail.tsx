@@ -172,7 +172,7 @@ export default function HeroSection() {
           <group rotation={[0.3, 0.5, 0]}>
             <PanelModel activeLayer={index} split={split} />
           </group>
-          <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.8} />
+          <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={4} />
         </Canvas>
       </motion.div>
 

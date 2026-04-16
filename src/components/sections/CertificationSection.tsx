@@ -132,7 +132,7 @@ export default function FireHorizontalExperience() {
           <video autoPlay muted loop playsInline className="w-full h-full object-cover">
             <source src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776065390/VN20260413_125908_z8mjdx.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-black/30" />
         </motion.div>
       </section>
     </div>

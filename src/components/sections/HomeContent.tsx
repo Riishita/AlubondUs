@@ -48,7 +48,7 @@ export default function SmoothTransitionWrapper() {
   const maskImageValue = useTransform(maskSize, (s) => {
     const centerY = isMobile ? "45%" : "70%";
     return `radial-gradient(circle at 50% ${centerY}, black ${s}%, transparent ${
-      s + 10
+      s + 2
     }%)`;
   });
 
