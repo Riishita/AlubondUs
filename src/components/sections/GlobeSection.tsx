@@ -1,6 +1,4 @@
-
-
-  "use client";
+"use client";
 
 import Globe from "react-globe.gl";
 import { useRef, useEffect, useMemo, useState } from "react";
@@ -161,7 +159,6 @@ const handleHover = (name: string) => {
 }, [scrollYProgress, selectedPlace]);
 
   /* 🌍 GLOBE */
-  /* 🌍 GLOBE */
 const globe = useMemo(
   () => (
     <Globe
@@ -186,7 +183,7 @@ const globe = useMemo(
             font-size:${isMobile ? "10px" : "14px"};
           ">
             <img src="/${d.logo}" style="width:${isMobile ? "20px" : "30px"};height:${isMobile ? "20px" : "30px"};" />
-            ${d.name}
+            <span style="color: white; text-shadow: 0px 0px 4px black;">${d.name}</span>
           </div>
         `;
 
@@ -246,14 +243,14 @@ const globe = useMemo(
         </motion.div>
 
 
-        {/* CONTENT */}
+        {/* CONTENT - FIXED FOR MOBILE POSITIONING */}
         <motion.div
           style={{ opacity: leftOpacity, y: leftY }}
           className={cn(
-            "absolute text-white max-w-xl",
+            "absolute text-white transition-all duration-500",
             isMobile
-  ? "top-[45%] left-1/7 -translate-x-1/5 text-center px-4 w-full"
-              : "left-[6%] top-[32%] -translate-y-1/7"
+              ? "top-[40%] left-0 w-full px-6 text-center" // Centered and contained on mobile
+              : "left-[6%] top-[32%] -translate-y-1/7 max-w-xl"
           )}
         >
           <h2 className="text-3xl md:text-5xl font-semibold mb-6">
@@ -262,7 +259,7 @@ const globe = useMemo(
           </h2>
 
           <div className="mb-8">
-            <p className="text-xs mb-2">● MANUFACTURING</p>
+            <p className="text-[10px] md:text-xs mb-2 opacity-60">● MANUFACTURING</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
               {["UAE", "India", "Europe"].map((item) => (
                 <button
@@ -270,7 +267,7 @@ const globe = useMemo(
   onClick={() => handleClick(item)}
   onMouseEnter={() => handleHover(item)}
   className={cn(
-    "px-4 py-2 rounded-full border transition-all duration-300",
+    "px-4 py-2 rounded-full border transition-all duration-300 text-sm md:text-base",
     selectedPlace?.name === item
       ? "bg-white text-black scale-105"
       : "border-white/40 hover:bg-white/20 hover:scale-105"
@@ -283,7 +280,7 @@ const globe = useMemo(
           </div>
 
           <div>
-            <p className="text-xs mb-2">● OFFICES</p>
+            <p className="text-[10px] md:text-xs mb-2 opacity-60">● OFFICES</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
                 <button
@@ -291,7 +288,7 @@ const globe = useMemo(
   onClick={() => handleClick(item)}
   onMouseEnter={() => handleHover(item)}
   className={cn(
-    "px-4 py-2 rounded-full border transition-all duration-300",
+    "px-4 py-2 rounded-full border transition-all duration-300 text-sm md:text-base",
     selectedPlace?.name === item
       ? "bg-white text-black scale-105"
       : "border-white/40 hover:bg-white/20 hover:scale-105"
@@ -308,43 +305,43 @@ const globe = useMemo(
         <AnimatePresence>
           {selectedPlace && (
             <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40, scale: 0.96, x: isMobile ? "-50%" : "0%" }}
+              animate={{ opacity: 1, y: 0, scale: 1, x: isMobile ? "-50%" : "0%" }}
+              exit={{ opacity: 0, y: 20, x: isMobile ? "-50%" : "0%" }}
               className={cn(
-  "absolute w-[90%] p-5 md:p-7 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/20 text-white",
-  isMobile
-    ? "bottom-4 left-1/4 -translate-x-1/5 w-[65%] max-w-sm"
-    : "bottom-[5%] md:left-[6%] md:w-[30%]"
-)}
+                "absolute z-50 p-6 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-white shadow-2xl",
+                isMobile
+                  ? "bottom-6 left-1/2 w-[92%] max-w-[420px]" 
+                  : "bottom-[5%] left-[6%] w-[380px]"
+              )}
             >
               <button
                 onClick={() => {
-  setSelectedPlace(null);
-  resetGlobeView();
-}}
-                className="absolute top-6 right-4 text-white/40 hover:text-white"
+                  setSelectedPlace(null);
+                  resetGlobeView();
+                }}
+                className="absolute top-6 right-4 text-white/40 hover:text-white p-2"
               >
                 ✕
               </button>
 
-              <h2 className="text-2xl font-semibold mb-1">
-  {selectedPlace.name}
-</h2>
+              <h2 className="text-2xl font-semibold mb-2 pr-6">
+                {selectedPlace.name}
+              </h2>
 
-<p className="text-white/70 mb-6 text-sm">
-  {selectedPlace.description}
-</p>
+              <p className="text-white/70 mb-6 text-sm leading-relaxed">
+                {selectedPlace.description}
+              </p>
 
-<div className="flex gap-3">
-  <button className="px-6 py-2 rounded-full border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-black transition">
-    Contact
-  </button>
+              <div className="grid grid-cols-2 gap-3">
+                <button className="px-4 py-2.5 rounded-full border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-black transition font-medium text-sm">
+                  Contact
+                </button>
 
-  <button className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition">
-    Visit Website
-  </button>
-</div>
+                <button className="px-4 py-2.5 rounded-full border border-white/30 hover:bg-white/10 transition text-sm">
+                  Website
+                </button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
