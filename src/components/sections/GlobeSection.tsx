@@ -1,4 +1,6 @@
-"use client";
+
+
+  "use client";
 
 import Globe from "react-globe.gl";
 import { useRef, useEffect, useMemo, useState } from "react";
@@ -62,15 +64,51 @@ export default function GlobeHero() {
 
   /* 📍 LOCATIONS */
   const locations = [
-    { name: "India", lat: 20.5937, lng: 78.9629, logo: "alubond-logo.png", description: "Alubond India Plot No. 26, Sector 6 IMT Manesar, Gurugram Haryana 122052, India" },
-    { name: "Europe", lat: 50.1109, lng: 8.6821, logo: "alubond-logo.png", description: "Alubond Europe Industrial Zone Europe" },
-    { name: "UAE", lat: 23.4241, lng: 53.8478, logo: "alubond-logo.png", description: "Alubond UAE Dubai Investment Park" },
-    { name: "USA", lat: 37.0902, lng: -95.7129, logo: "alubond-logo.png", description: "Alubond USA New York" },
+     { name: "India", lat: 20.5937, lng: 78.9629, logo: "alubond-logo.png", description: "Alubond India Plot No. 26, Sector 6 IMT Manesar, Gurugram Haryana 122052, India" },
+   { name: "Europe", lat: 50.1109, lng: 8.6821, logo: "alubond-logo.png", description: "Alubond Europe Industrial Zone Europe" },
+     { name: "UAE", lat: 23.4241, lng: 53.8478, logo: "alubond-logo.png", description: "Alubond UAE Dubai Investment Park" },
+  { name: "USA", lat: 37.0902, lng: -95.7129, logo: "alubond-logo.png", description: "Alubond USA New York" },
     { name: "Canada", lat: 56.1304, lng: -106.3468, logo: "alubond-logo.png", description: "Alubond Canada Toronto" },
-    { name: "Turkey", lat: 38.9637, lng: 35.2433, logo: "alubond-logo.png", description: "Alubond Turkey Istanbul" },
-    { name: "Vietnam", lat: 14.0583, lng: 108.2772, logo: "alubond-logo.png", description: "Alubond Vietnam Ho Chi Minh City" },
-    { name: "Egypt", lat: 26.8206, lng: 30.8025, logo: "alubond-logo.png", description: "Alubond Egypt Cairo" },
-  ];
+   { name: "Turkey", lat: 38.9637, lng: 35.2433, logo: "alubond-logo.png", description: "Alubond Turkey Istanbul" },
+   { name: "Vietnam", lat: 14.0583, lng: 108.2772, logo: "alubond-logo.png", description: "Alubond Vietnam Ho Chi Minh City" },
+   { name: "Egypt", lat: 26.8206, lng: 30.8025, logo: "alubond-logo.png", description: "Alubond Egypt Cairo" },
+   ];
+
+
+
+   const resetGlobeView = () => {
+  if (!globeRef.current) return;
+
+ globeRef.current.pointOfView(
+  {
+    lat: 25,
+    lng: 10,
+    altitude: 2.7
+  },
+  1400
+);
+};
+let hoverTimeout: any;
+
+const handleHover = (name: string) => {
+  if (selectedPlace) return;
+
+  clearTimeout(hoverTimeout);
+
+  hoverTimeout = setTimeout(() => {
+    const place = locations.find((l) => l.name === name);
+    if (!place || !globeRef.current) return;
+
+    globeRef.current.pointOfView(
+      {
+        lat: place.lat,
+        lng: place.lng,
+        altitude: 2.5,
+      },
+      800
+    );
+  }, 150); // smooth delay
+};
 
   const handleClick = (name: string) => {
     const place = locations.find((l) => l.name === name);
@@ -199,13 +237,14 @@ const globe = useMemo(
           )}
         >
           <motion.div
-            style={{ opacity: glowOpacity }}
-            className="absolute w-[600px] md:w-[800px] h-[600px] md:h-[800px]
-            bg-[radial-gradient(circle,rgba(59,130,246,0.25),transparent_70%)]
-            blur-[120px] rounded-full -z-10"
-          />
+  style={{ opacity: glowOpacity }}
+  className="absolute w-[700px] md:w-[900px] h-[700px] md:h-[900px]
+  bg-[radial-gradient(circle,rgba(59,130,246,0.35),transparent_70%)]
+  blur-[140px] rounded-full -z-10"
+/>
           {globe}
         </motion.div>
+
 
         {/* CONTENT */}
         <motion.div
@@ -226,10 +265,19 @@ const globe = useMemo(
             <p className="text-xs mb-2">● MANUFACTURING</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
               {["UAE", "India", "Europe"].map((item) => (
-                <button key={item} onClick={() => handleClick(item)}
-                  className="px-4 py-2 rounded-full border border-white hover:bg-white/20">
-                  {item}
-                </button>
+                <button
+  key={item}
+  onClick={() => handleClick(item)}
+  onMouseEnter={() => handleHover(item)}
+  className={cn(
+    "px-4 py-2 rounded-full border transition-all duration-300",
+    selectedPlace?.name === item
+      ? "bg-white text-black scale-105"
+      : "border-white/40 hover:bg-white/20 hover:scale-105"
+  )}
+>
+  {item}
+</button>
               ))}
             </div>
           </div>
@@ -238,10 +286,19 @@ const globe = useMemo(
             <p className="text-xs mb-2">● OFFICES</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
-                <button key={item} onClick={() => handleClick(item)}
-                  className="px-4 py-2 rounded-full border border-white hover:bg-white/20">
-                  {item}
-                </button>
+                <button
+  key={item}
+  onClick={() => handleClick(item)}
+  onMouseEnter={() => handleHover(item)}
+  className={cn(
+    "px-4 py-2 rounded-full border transition-all duration-300",
+    selectedPlace?.name === item
+      ? "bg-white text-black scale-105"
+      : "border-white/40 hover:bg-white/20 hover:scale-105"
+  )}
+>
+  {item}
+</button>
               ))}
             </div>
           </div>
@@ -255,30 +312,39 @@ const globe = useMemo(
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20 }}
               className={cn(
-  "absolute w-[90%] p-5 md:p-8 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/20 text-white",
+  "absolute w-[90%] p-5 md:p-7 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/20 text-white",
   isMobile
     ? "bottom-4 left-1/4 -translate-x-1/5 w-[65%] max-w-sm"
     : "bottom-[5%] md:left-[6%] md:w-[30%]"
 )}
             >
               <button
-                onClick={() => setSelectedPlace(null)}
-                className="absolute top-4 right-4 text-white/40 hover:text-white"
+                onClick={() => {
+  setSelectedPlace(null);
+  resetGlobeView();
+}}
+                className="absolute top-6 right-4 text-white/40 hover:text-white"
               >
                 ✕
               </button>
 
-              <h2 className="text-2xl font-semibold mb-2">
-                {selectedPlace.name}
-              </h2>
+              <h2 className="text-2xl font-semibold mb-1">
+  {selectedPlace.name}
+</h2>
 
-              <p className="text-white/60 mb-6 text-sm">
-                {selectedPlace.description}
-              </p>
+<p className="text-white/70 mb-6 text-sm">
+  {selectedPlace.description}
+</p>
 
-              <button className="px-6 py-2 rounded-full border border-orange-400 text-orange-400">
-                Contact
-              </button>
+<div className="flex gap-3">
+  <button className="px-6 py-2 rounded-full border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-black transition">
+    Contact
+  </button>
+
+  <button className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition">
+    Visit Website
+  </button>
+</div>
             </motion.div>
           )}
         </AnimatePresence>
