@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import GlobeHero from "./GlobeSection";
 import ThirdSection from "./PhilosophySection";
 
@@ -23,37 +23,53 @@ export default function SmoothTransitionWrapper() {
     offset: ["start start", "end end"],
   });
 
-  /* 🌍 GLOBE FADE (Delayed for mobile) */
+  /* ✨ SMOOTH SCROLL (KEY IMPROVEMENT) */
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 20,
+    damping: 5,
+  });
+
+  /* 🌍 GLOBE FADE (start later → no clash) */
   const globeOpacity = useTransform(
-    scrollYProgress,
-    isMobile ? [0.85, 1] : [0.75, 0.9],
-    [1, 0.4]
+    smoothProgress,
+    isMobile ? [0.88, 1] : [0.8, 0.95],
+    [1, 0.3]
   );
 
-  /* 🎬 MASK REVEAL (Delayed + smoother on mobile) */
+  /* 🎬 MASK REVEAL (delayed properly) */
   const maskSize = useTransform(
-    scrollYProgress,
-    isMobile ? [0.85, 1] : [0.75, 1],
-    [0, isMobile ? 180 : 150]
+    smoothProgress,
+    isMobile ? [0.4, 1] : [0.6, 1],
+    [0, isMobile ? 150 : 100]
   );
 
-  /* 🧠 Interaction Control */
+  /* 🧠 Interaction Control (more accurate threshold) */
   useEffect(() => {
-    return scrollYProgress.on("change", (v) => {
-      setIsRevealed(isMobile ? v > 0.9 : v > 0.75);
+    return smoothProgress.on("change", (v) => {
+      setIsRevealed(isMobile ? v > 0.92 : v > 0.85);
     });
-  }, [scrollYProgress, isMobile]);
+  }, [smoothProgress, isMobile]);
 
-  /* 🎯 MASK POSITION (Aligned with globe) */
+  /* 🎯 MASK POSITION (more natural expansion) */
   const maskImageValue = useTransform(maskSize, (s) => {
-    const centerY = isMobile ? "45%" : "70%";
+    const centerY = isMobile ? "55%" : "72%";
     return `radial-gradient(circle at 50% ${centerY}, black ${s}%, transparent ${
-      s + 2
+      s + 8
     }%)`;
   });
 
+  /* ✨ SUBTLE SCALE (adds premium feel) */
+  const philosophyScale = useTransform(
+    smoothProgress,
+    [0.15, 1],
+    [0.96, 1]
+  );
+
   return (
-    <div ref={containerRef} className="relative bg-gradient-to-b from-[#eae7e2] to-[#e6e2dc]">
+    <div
+      ref={containerRef}
+      className="relative bg-gradient-to-b from-[#eae7e2] to-[#e6e2dc]"
+    >
       {/* 🌍 GLOBE */}
       <motion.div
         style={{
@@ -73,10 +89,11 @@ export default function SmoothTransitionWrapper() {
           maskRepeat: "no-repeat",
           WebkitMaskRepeat: "no-repeat",
           pointerEvents: isRevealed ? "auto" : "none",
+          scale: philosophyScale, // ✨ added
         } as any}
         className={`
           relative z-10 
-          ${isMobile ? "-mt-[40vh]" : "-mt-[80vh]"}
+          ${isMobile ? "-mt-[35vh]" : "-mt-[70vh]"}  // ✨ smoother overlap
         `}
       >
         <ThirdSection />

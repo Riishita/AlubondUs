@@ -84,13 +84,13 @@ export default function PremiumGallery() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-[10px] md:text-xs tracking-[0.4em] text-white/40 mb-3 md:mb-4 uppercase font-medium">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/50">
               005 / Global Portfolio
             </p>
-            <h1 className="text-4xl sm:text-6xl md:text-8xl font-medium leading-[1.1] md:leading-[0.85] tracking-tighter">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-medium leading-[1.1] md:leading-[0.85] tracking-tighter">
               TRUSTED BY <br />
               <span className="text-white/70">ARCHITECTS.</span>
-            </h1>
+            </h2>
           </motion.div>
         </div>
 

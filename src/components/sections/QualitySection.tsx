@@ -45,34 +45,51 @@ export default function QualitySection() {
   }, []);
 
   useEffect(() => {
-    return scrollYProgress.on("change", (p) => {
-      if (reduceMotion) return;
-      const d = durationRef.current;
-      if (!d) return;
-      const normalized = clamp((p - STEP_START) / (STEP_END - STEP_START), 0, 1);
-      targetTime.current = normalized * d;
-    });
-  }, [scrollYProgress, reduceMotion]);
+  return scrollYProgress.on("change", (p) => {
+    if (reduceMotion) return;
 
-  useEffect(() => {
-    let raf: number;
-    const update = () => {
-      raf = requestAnimationFrame(update);
-      const video = videoRef.current;
-      if (!video || reduceMotion) return;
-      const diff = targetTime.current - currentTime.current;
-      currentTime.current += diff * 0.12;
-      if (Math.abs(video.currentTime - currentTime.current) > 0.02) {
-        try {
-          video.currentTime = currentTime.current;
-        } catch {
-          video.play().catch(() => {});
-        }
-      }
-    };
-    raf = requestAnimationFrame(update);
-    return () => cancelAnimationFrame(raf);
-  }, [reduceMotion]);
+    const d = durationRef.current;
+    if (!d) return;
+
+    const normalized = clamp(
+      (p - STEP_START) / (STEP_END - STEP_START),
+      0,
+      1
+    );
+
+    targetTime.current = normalized * d;
+  });
+}, [scrollYProgress, reduceMotion]);
+
+ useEffect(() => {
+  const video = videoRef.current;
+  if (!video || reduceMotion) return;
+
+  let rafId: number;
+
+  const update = () => {
+    const d = durationRef.current;
+    if (!d) {
+      rafId = requestAnimationFrame(update);
+      return;
+    }
+
+    const diff = targetTime.current - currentTime.current;
+
+    // ✨ smoother interpolation (less aggressive)
+    currentTime.current += diff * 0.08;
+
+    // ✅ update only when needed (BIG FIX)
+    if (Math.abs(video.currentTime - currentTime.current) > 0.04) {
+      video.currentTime = currentTime.current;
+    }
+
+    rafId = requestAnimationFrame(update);
+  };
+
+  rafId = requestAnimationFrame(update);
+  return () => cancelAnimationFrame(rafId);
+}, [reduceMotion]);
 
   // Content moves up; adjusted range for better mobile/desktop parity
   const contentY = useTransform(
@@ -91,17 +108,26 @@ export default function QualitySection() {
     >
       <div className="sticky top-0 z-10 h-screen w-full overflow-hidden [transform:translateZ(0)]">
         {/* VIDEO BACKGROUND */}
-        <div className="absolute inset-0 z-0">
-          <video
-            ref={videoRef}
-            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775857399/VN20260411_031224_msqvzy.mp4"
-            muted
-            playsInline
-            preload="auto"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
+        <div className="absolute inset-0 z-0 overflow-hidden">
+  <motion.video
+    ref={videoRef}
+    src="https://res.cloudinary.com/drgg4st9a/video/upload/v1775857399/VN20260411_031224_msqvzy.mp4"
+    muted
+    playsInline
+    preload="auto"
+    className="
+      absolute top-1/2 left-1/2 
+      min-w-full min-h-full 
+      w-auto h-auto 
+      -translate-x-1/2 -translate-y-1/2
+      object-cover
+      will-change-transform
+    "
+  />
+  
+  {/* Overlay for readability */}
+  <div className="absolute inset-0 bg-black/30" />
+</div>
 
         {/* SCROLLING CONTENT LAYER */}
         <motion.div
