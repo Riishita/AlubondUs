@@ -109,7 +109,7 @@ export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
   //added for mob to stop rotate + 188 Line
-  const [isMobile, setIsMobile] = useState(false);
+const [isMobile, setIsMobile] = useState(false);
 
 useEffect(() => {
   const check = () => setIsMobile(window.innerWidth < 768);
@@ -117,7 +117,6 @@ useEffect(() => {
   window.addEventListener("resize", check);
   return () => window.removeEventListener("resize", check);
 }, []);
-
 
 
   const { cursorSectionProps, cursorSectionClassName } =
@@ -188,7 +187,7 @@ useEffect(() => {
           <OrbitControls
   enableZoom={false}
   enablePan={false}
-  enableRotate={!isMobile}
+  enableRotate={!isMobile} // ✅ KEY FIX
   autoRotate
   autoRotateSpeed={4}
   enableDamping

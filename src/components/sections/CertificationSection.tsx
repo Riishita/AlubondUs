@@ -34,18 +34,17 @@ export default function FireHorizontalExperience() {
   });
 
   // Desktop: Shifts Right. Mobile: Stays full or scales down height
-  const videoWidth = useTransform(scrollYProgress, [0, 0.4], ["100%", "50%"]);
-  const videoX = useTransform(scrollYProgress, [0, 0.4], ["0%", "100%"]);
+  const videoWidth = useTransform(scrollYProgress, [0, 0.3], ["100%", "50%"]);
+  const videoX = useTransform(scrollYProgress, [0, 0.3], ["0%", "100%"]);
   
   // Mobile specific height transition to reveal content below it
   const videoHeightMobile = useTransform(scrollYProgress, [0, 0.3], ["100vh", "35vh"]);
 
   // Content appearance
-  const contentOpacity = useTransform(scrollYProgress, [0.35, 0.55], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.35, 0.55], [40, 0]);
-
+ const contentOpacity = useTransform(scrollYProgress, [0.12, 0.22], [0.2, 1]);
+const contentY = useTransform(scrollYProgress, [0.12, 0.22], [30, 0]);
   return (
-    <div ref={containerRef} className="relative h-[300vh] bg-[#F7F7F5]">
+    <div ref={containerRef} className="relative h-[200vh] bg-[#F7F7F5]">
       <section
         className={cn(
           "sticky top-0 h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden",
@@ -148,7 +147,7 @@ function Card({ item }: { item: (typeof certs)[number] }) {
       <p className="text-[10px] md:text-xs mt-1 text-[#6B6B6B] leading-tight">
         {item.desc}
       </p>
-      <p className="text-[10px] mt-3 font-bold text-orange-600 tracking-wider uppercase">
+      <p className="text-[10px] mt-3 font-bold text-orange-500 tracking-wider uppercase">
         {item.tag}
       </p>
     </div>
