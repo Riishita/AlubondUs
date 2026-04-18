@@ -108,6 +108,18 @@ export default function HeroSection() {
   const [showNext, setShowNext] = useState(false);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
+  //added for mob to stop rotate + 188 Line
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const check = () => setIsMobile(window.innerWidth < 768);
+  check();
+  window.addEventListener("resize", check);
+  return () => window.removeEventListener("resize", check);
+}, []);
+
+
+
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
 
@@ -161,6 +173,7 @@ export default function HeroSection() {
       {...cursorSectionProps}
       className={`w-full h-screen relative overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24 ${cursorSectionClassName}`}
     >
+      
       {/* 🔵 3D CANVAS - Pushed down slightly on mobile to make room for text */}
       <motion.div
         transition={{ duration: 0.8 }}
@@ -172,7 +185,15 @@ export default function HeroSection() {
           <group rotation={[0.3, 0.5, 0]}>
             <PanelModel activeLayer={index} split={split} />
           </group>
-          <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={4} />
+          <OrbitControls
+  enableZoom={false}
+  enablePan={false}
+  enableRotate={!isMobile}
+  autoRotate
+  autoRotateSpeed={4}
+  enableDamping
+  dampingFactor={0.05}
+/>
         </Canvas>
       </motion.div>
 

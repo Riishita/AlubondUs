@@ -126,13 +126,20 @@ const handleHover = (name: string) => {
 
   /* ⚙️ CONTROLS */
   useEffect(() => {
-    if (!globeRef.current) return;
-    const controls = globeRef.current.controls();
-    controls.enableZoom = false;
-    controls.enablePan = false;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 3;
-  }, []);
+  if (!globeRef.current) return;
+
+  const controls = globeRef.current.controls();
+
+  controls.enableZoom = false;
+  controls.enablePan = false;
+
+  // 🚫 Disable rotation only on mobile
+  controls.enableRotate = !isMobile;
+
+  // Keep auto-rotation working
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 3;
+}, [isMobile]);
 
   useEffect(() => {
     if (!globeRef.current) return;
