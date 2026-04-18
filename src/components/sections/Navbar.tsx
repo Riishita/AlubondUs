@@ -100,14 +100,14 @@ const Navbar = () => {
 
               {/* Bottom info */}
               <motion.div
-                className="absolute bottom-10 left-0 right-0 flex justify-center gap-12 text-[11px] uppercase tracking-[0.2em] text-white/40"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-              >
-                <span>info@alubondusa.com</span>
-                <span>+1 (305) 000-0000</span>
-              </motion.div>
+  className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md flex flex-col md:flex-row items-center justify-center gap-3 md:gap-12 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/50 text-center md:text-left"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.6 }}
+>
+  <span className="break-all">info@alubondusa.com</span>
+  <span className="whitespace-nowrap">+1 (305) 000-0000</span>
+</motion.div>
             </motion.div>
           </>
         )}

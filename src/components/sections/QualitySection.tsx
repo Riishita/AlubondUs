@@ -184,9 +184,9 @@ export default function QualitySection() {
 
           {/* LEFT TEXT 2 */}
           <div className="absolute left-[8%] top-[200vh] max-w-[85%] sm:max-w-md md:left-[6%]">
-            <h2 className="mb-4 text-3xl font-light sm:text-4xl md:text-5xl">Global reliability</h2>
+            <h2 className="mb-4 text-3xl font-light sm:text-4xl md:text-5xl">Uncompromised Durability</h2>
             <p className="text-sm text-white/70 md:text-base">
-              Trusted across continents, delivering consistent quality in every architectural application.
+              From impact to exposure, it holds its integrity—proving durability where it matters most.
             </p>
           </div>
         </motion.div>
