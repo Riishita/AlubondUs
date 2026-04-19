@@ -79,7 +79,7 @@ const LandingHero = () => {
             autoPlay
           >
             <source
-              src="https://cdn.pixabay.com/video/2024/07/04/219337_large.mp4"
+              src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776603056/Hero_ilgu85.mp4"
               type="video/mp4"
             />
           </video>

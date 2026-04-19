@@ -31,7 +31,7 @@ const Index = () => {
         {/* <Suspense fallback={<div className="min-h-screen" />}><GlobeSection /></Suspense>
         <Suspense fallback={<div className="min-h-screen" />}><PhilosophySection /></Suspense> */}
         <Suspense fallback={<div className="min-h-screen" />}><HomeContent /></Suspense>
-        
+
         <div className="relative isolate">
           <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
           <div className="relative z-20 -mt-[min(92vh,52rem)]">
@@ -39,7 +39,7 @@ const Index = () => {
           </div>
         </div>
         <Suspense fallback={<div className="min-h-screen bg-[#070b14]" />}><SheetDetail /></Suspense>
-        
+
         <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
         <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
         <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>

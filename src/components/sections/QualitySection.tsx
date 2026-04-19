@@ -126,7 +126,7 @@ export default function QualitySection() {
   />
   
   {/* Overlay for readability */}
-  <div className="absolute inset-0 bg-black/30" />
+  <div className="absolute inset-0 bg-black/10" />
 </div>
 
         {/* SCROLLING CONTENT LAYER */}
