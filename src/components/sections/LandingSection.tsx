@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
+import { VARIANTS } from "@/lib/transitions";
 
 import CursorGridTrail from "./CursorFollower";
 import Navbar from "./Navbar";
@@ -30,28 +32,13 @@ const LandingHero = () => {
   }, []);
 
   // 🔥 SCROLL ANIMATION
-  const { scrollYProgress } = useScroll({
-    target: heroSectionRef,
-    offset: ["start start", "end start"],
-  });
+  const { smoothProgress } = useSectionScroll(heroSectionRef, ["start start", "end start"]);
 
-  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const videoScale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1.04, 1.01]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-34%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.75]);
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: reduceMotion ? 0 : 24 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
+  const videoY = useTransform(smoothProgress, [0, 1], ["0%", "18%"]);
+  const videoScale = useTransform(smoothProgress, [0, 0.6, 1], [1, 1.04, 1.01]);
+  const contentY = useTransform(smoothProgress, [0, 1], ["0%", "-34%"]);
+  const contentOpacity = useTransform(smoothProgress, [0, 0.65], [1, 0]);
+  const overlayOpacity = useTransform(smoothProgress, [0, 1], [0.4, 0.75]);
 
   return (
     <section
@@ -79,7 +66,7 @@ const LandingHero = () => {
       {/* 🎥 VIDEO PARALLAX */}
       <motion.div
         className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
-        style={{ y: videoY, scale: reduceMotion ? 1 : videoScale }}
+        style={{ y: videoY, scale: reduceMotion ? 1 : videoScale, willChange: "transform" }}
       >
         <div className="absolute inset-[-12%] h-[124%] w-[124%]">
           <video
@@ -100,16 +87,16 @@ const LandingHero = () => {
 
         {/* OVERLAYS */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/30 via-[#0f172a]/60 to-[#0f172a]/40"
-          style={{ opacity: overlayOpacity }}
+          className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/30 via-[#0f172a]/60 to-[#0f172a]/40 group-hover:pointer-events-none"
+          style={{ opacity: overlayOpacity, willChange: "opacity" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/50 via-transparent to-[#0f172a]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/50 via-transparent to-[#0f172a]/20 pointer-events-none" />
       </motion.div>
 
       {/* CONTENT */}
       <motion.div
         className="relative z-10 flex h-full w-full items-center justify-between px-5 md:px-10 lg:px-24"
-        style={{ y: contentY, opacity: contentOpacity }}
+        style={{ y: contentY, opacity: contentOpacity, willChange: "transform, opacity" }}
       >
         {/* LEFT */}
         <div className="max-w-3xl">
@@ -117,7 +104,7 @@ const LandingHero = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={titleVariants}
+            variants={VARIANTS.fadeUpBlur}
             className="mb-6 text-[10px] uppercase tracking-[0.35em] text-white/50 sm:text-xs"
           >
             Alubond U.S.A — Est. 1989
@@ -127,7 +114,7 @@ const LandingHero = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={titleVariants}
+            variants={VARIANTS.fadeUpBlur}
             className="text-4xl font-medium leading-tight text-white sm:text-5xl md:text-7xl lg:text-8xl"
           >
             WORLD’S LARGEST
@@ -137,7 +124,7 @@ const LandingHero = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={titleVariants}
+            variants={VARIANTS.fadeUpBlur}
             className="mb-8 text-4xl font-medium sm:text-5xl md:text-7xl lg:text-8xl"
             style={{ color: "#59c4ee" }}
           >
@@ -148,7 +135,7 @@ const LandingHero = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={titleVariants}
+            variants={VARIANTS.fadeUpBlur}
             className="mb-8 max-w-md text-sm text-white/60 md:mb-10"
           >
             High-performance composite panels engineered for safety,

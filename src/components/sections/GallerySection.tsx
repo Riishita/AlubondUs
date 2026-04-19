@@ -8,6 +8,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 const panels = [
   {
@@ -56,10 +57,10 @@ export default function PremiumGallery() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const { smoothProgress: scrollYProgress } = useSectionScroll(
+    containerRef,
+    ["start start", "end end"]
+  );
 
   // Desktop horizontal move, Mobile stays at 0
   const x = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : xRange]);

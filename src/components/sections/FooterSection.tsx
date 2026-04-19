@@ -11,6 +11,7 @@ import {
 import { useMemo, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 /* ================= CTA SECTION ================= */
 
@@ -24,10 +25,10 @@ const CTASection = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+  const { smoothProgress: scrollYProgress } = useSectionScroll(
+    sectionRef,
+    ["start end", "end start"]
+  );
 
   const fadeIn = useTransform(scrollYProgress, [0.05, 0.35], [0.6, 1]);
   const scaleIn = useTransform(scrollYProgress, [0, 0.4], [0.96, 1]);
@@ -141,10 +142,10 @@ const CTASection = () => {
 
 const SectionDivider = () => {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
+  const { smoothProgress: scrollYProgress } = useSectionScroll(
+    containerRef,
+    ["start end", "end start"]
+  );
 
   const width = useTransform(scrollYProgress, [0, 0.5], ["0%", "100%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);

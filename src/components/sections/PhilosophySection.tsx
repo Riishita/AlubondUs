@@ -1,24 +1,22 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 const ThirdSection = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const reduceMotion = useReducedMotion();
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(true);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  const { smoothProgress } = useSectionScroll(ref, ["start end", "end start"]);
 
   // ✨ Parallax effects - Adjusted for smoother feel across screen heights
-  const yText = useTransform(scrollYProgress, [0, 1], [40, -40]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0.8]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.98, 1]);
+  const yText = useTransform(smoothProgress, [0, 1], [40, -40]);
+  const opacity = useTransform(smoothProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0.8]);
+  const scale = useTransform(smoothProgress, [0, 1], [0.98, 1]);
 
   return (
     <section

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useTransform } from "framer-motion";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 import GlobeHero from "./GlobeSection";
 import ThirdSection from "./PhilosophySection";
 
@@ -18,16 +19,10 @@ export default function SmoothTransitionWrapper() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  /* ✨ SMOOTH SCROLL (KEY IMPROVEMENT) */
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 20,
-    damping: 5,
-  });
+  const { smoothProgress } = useSectionScroll(
+    containerRef,
+    ["start start", "end end"]
+  );
 
   /* 🌍 GLOBE FADE (start later → no clash) */
   const globeOpacity = useTransform(
@@ -90,6 +85,7 @@ export default function SmoothTransitionWrapper() {
           WebkitMaskRepeat: "no-repeat",
           pointerEvents: isRevealed ? "auto" : "none",
           scale: philosophyScale, // ✨ added
+          willChange: "mask-image, -webkit-mask-image, transform",
         } as any}
         className={`
           relative z-10 

@@ -12,6 +12,7 @@ import {
   animate,
 } from "framer-motion";
 import { useMemo, useRef, useState, useEffect } from "react";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 const cards = [
   {
@@ -71,10 +72,10 @@ export default function ApplicationSection() {
     useCustomCursorBindings(false);
 
   // ✅ Scroll animation values
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+  const { smoothProgress: scrollYProgress } = useSectionScroll(
+    sectionRef,
+    ["start end", "end start"]
+  );
 
   const bgRadius = useTransform(scrollYProgress, [0.08, 0.42], ["0%", "140%"]);
   const fgRadius = useTransform(scrollYProgress, [0.14, 0.52], ["0%", "135%"]);

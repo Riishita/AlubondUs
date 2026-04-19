@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 /* ================= DATA CONFIG ================= */
 
@@ -157,10 +158,10 @@ const materials = [
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  const { smoothProgress: scrollYProgress } = useSectionScroll(
+    ref,
+    ["start start", "end start"]
+  );
 const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);

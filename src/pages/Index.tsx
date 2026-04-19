@@ -1,7 +1,8 @@
 import { lazy, Suspense, useCallback, useState } from "react";
 import Preloader from "@/components/Preloader";
 
-const LandingSection = lazy(() => import("@/components/sections/LandingSection"));
+import LandingSection from "@/components/sections/LandingSection";
+
 const GlobeSection = lazy(() => import("@/components/sections/GlobeSection"));
 const PhilosophySection = lazy(() => import("@/components/sections/PhilosophySection"));
 const HomeContent = lazy(() => import("@/components/sections/HomeContent"));
@@ -26,25 +27,23 @@ const Index = () => {
     <>
       {loading && <Preloader onComplete={handlePreloaderComplete} />}
       <main className={`${loading ? "opacity-0" : "opacity-100"} transition-opacity duration-700`}>
-        <Suspense fallback={null}>
-          <LandingSection />
-          {/* <GlobeSection />
-          <PhilosophySection /> */}
-          <HomeContent />
-          
-          <div className="relative isolate">
-            <QualitySection />
-            <div className="relative z-20 -mt-[min(92vh,52rem)]">
-              <CertificationSection />
-            </div>
+        <LandingSection />
+        {/* <Suspense fallback={<div className="min-h-screen" />}><GlobeSection /></Suspense>
+        <Suspense fallback={<div className="min-h-screen" />}><PhilosophySection /></Suspense> */}
+        <Suspense fallback={<div className="min-h-screen" />}><HomeContent /></Suspense>
+        
+        <div className="relative isolate">
+          <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
+          <div className="relative z-20 -mt-[min(92vh,52rem)]">
+            <Suspense fallback={<div className="min-h-screen" />}><CertificationSection /></Suspense>
           </div>
-          <SheetDetail />
-          
-          <MaterialSection />
-          <ApplicationSection />
-          <GallerySection />
-          <FooterSection />
-        </Suspense>
+        </div>
+        <Suspense fallback={<div className="min-h-screen bg-[#070b14]" />}><SheetDetail /></Suspense>
+        
+        <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
+        <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
+        <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
+        <Suspense fallback={<div className="min-h-[50vh]" />}><FooterSection /></Suspense>
       </main>
     </>
   );

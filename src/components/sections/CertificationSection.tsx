@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 const certs = [
   { title: "EN 13501", desc: "European Fire Classification", tag: "CLASS A2-S1,D0" },
@@ -28,10 +29,10 @@ export default function FireHorizontalExperience() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const { smoothProgress: scrollYProgress } = useSectionScroll(
+    containerRef,
+    ["start start", "end end"]
+  );
 
   // Desktop: Shifts Right. Mobile: Stays full or scales down height
   const videoWidth = useTransform(scrollYProgress, [0, 0.3], ["100%", "50%"]);

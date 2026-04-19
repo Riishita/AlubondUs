@@ -4,10 +4,10 @@ import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorP
 import { useEffect, useRef } from "react";
 import {
   motion,
-  useScroll,
   useTransform,
   useReducedMotion,
 } from "framer-motion";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 function clamp(v: number, min: number, max: number) {
   return Math.min(max, Math.max(min, v));
@@ -21,10 +21,10 @@ export default function QualitySection() {
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
+  const { smoothProgress } = useSectionScroll(
+    ref,
+    ["start start", "end end"]
+  );
 
   const STEP_START = 0.1;
   const STEP_END = 0.9;
@@ -45,7 +45,7 @@ export default function QualitySection() {
   }, []);
 
   useEffect(() => {
-  return scrollYProgress.on("change", (p) => {
+  return smoothProgress.on("change", (p) => {
     if (reduceMotion) return;
 
     const d = durationRef.current;
@@ -59,7 +59,7 @@ export default function QualitySection() {
 
     targetTime.current = normalized * d;
   });
-}, [scrollYProgress, reduceMotion]);
+}, [smoothProgress, reduceMotion]);
 
  useEffect(() => {
   const video = videoRef.current;
@@ -93,7 +93,7 @@ export default function QualitySection() {
 
   // Content moves up; adjusted range for better mobile/desktop parity
   const contentY = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0, 0.1, 0.82, 1],
     ["0%", "-10%", "-150%", "-220%"] // Switched to % for better cross-device scaling
   );

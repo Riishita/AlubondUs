@@ -7,13 +7,16 @@ import {
   useScroll,
   useTransform,
   AnimatePresence,
+  useInView,
 } from "framer-motion";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
 
 export default function GlobeHero() {
   const globeRef = useRef<any>();
   const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef);
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings();
 
@@ -29,10 +32,10 @@ export default function GlobeHero() {
   }, []);
   
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+  const { smoothProgress: scrollYProgress } = useSectionScroll(
+    sectionRef,
+    ["start start", "end end"]
+  );
 
   /* 🌍 GLOBE ANIMATION */
   const globeScale = useTransform(scrollYProgress, [0, 1], [2.2, 1]);
@@ -144,8 +147,8 @@ const handleHover = (name: string) => {
   useEffect(() => {
     if (!globeRef.current) return;
     const controls = globeRef.current.controls();
-    controls.autoRotate = !selectedPlace;
-  }, [selectedPlace]);
+    controls.autoRotate = !selectedPlace && isInView; // PAUSED IF OFFSCREEN
+  }, [selectedPlace, isInView]);
 
   useEffect(() => {
     const unsubscribe = leftOpacity.on("change", (val) => {
