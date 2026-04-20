@@ -64,90 +64,92 @@ export default function PremiumGallery() {
 
   const x = useTransform(smoothProgress, [0, 1], ["0vw", `-${totalMove}vw`]);
 
-  const buttonOpacity = useTransform(smoothProgress, [0.9, 0.98], [0.6, 1]);
+  // Button Animation Logic: Appear only at the very end (0.95 to 1)
+  const buttonOpacity = useTransform(smoothProgress, [0.9, 0.98], [0, 1]);
   const buttonScale = useTransform(smoothProgress, [0.9, 0.98], [0.8, 1]);
   const buttonY = useTransform(smoothProgress, [0.9, 0.98], [20, 0]);
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] bg-black">
-      {/* Background Video Implementation */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-90" // Adjust opacity for overlay feel
-        >
-          <source 
-            src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776693925/G_fgsbxs.mp4" 
-            type="video/mp4" 
-          />
-        </video>
+    <section ref={containerRef} className="relative h-[500vh] bg-cover bg-center bg-no-repeat"
+      style={{ 
+        // Replace the URL below with your actual image path
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('https://images.pexels.com/photos/29708309/pexels-photo-29708309.jpeg')`,
+        backgroundAttachment: isMobile ? "scroll" : "fixed", // Fixed background feels premium on desktop
+      }}>
+      <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center overflow-hidden">
         
-        {/* Dark Overlay for Readability */}
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        {/* Responsive Heading */}
+        <div className="absolute top-12 md:top-auto md:left-20 z-30 pointer-events-none w-full md:w-auto px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="space-y-1 md:space-y-2 text-center md:text-left"
+          >
+            <p className="text-white/40 uppercase text-[8px] md:text-[10px] tracking-[0.4em]">005 / Portfolio</p>
+            <h2 className="text-3xl md:text-5xl font-medium text-white leading-tight">
+              TRUSTED BY<br className="hidden md:block" />
+              <span className="italic font-light"> ARCHITECTS.</span>
+            </h2>
+          </motion.div>
+        </div>
 
-        <div className="relative z-20 h-full w-full flex flex-col md:flex-row items-center">
-          
-          {/* Responsive Heading */}
-          <div className="absolute top-12 md:top-auto md:left-20 z-30 pointer-events-none w-full md:w-auto px-10">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="space-y-1 md:space-y-2 text-center md:text-left"
-            >
-              <p className="text-white/40 uppercase text-[8px] md:text-[10px] tracking-[0.4em]">005 / Portfolio</p>
-              <h2 className="text-3xl md:text-5xl font-medium text-white leading-tight">
-                TRUSTED BY<br className="hidden md:block" />
-                <span className="italic font-light"> ARCHITECTS.</span>
-              </h2>
-            </motion.div>
-          </div>
-
-          {/* The "Focal" Dotted Frame */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[30vw] aspect-[4/5] z-20 pointer-events-none">
-            <div className="absolute inset-[-10px] md:inset-[-15px] border border-dashed border-white/20 rounded-lg">
-               <div className="absolute -top-1 -right-1 w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full shadow-[0_0_10px_white]" />
-            </div>
-          </div>
-
-          {/* The Scrolling Row */}
-          <div className="relative w-full h-full flex items-center">
-            <motion.div
-              style={{ x }}
-              className="flex items-center gap-[5vw] md:gap-[3vw] px-[15vw] md:px-[35vw]" 
-            >
-              {panels.map((panel, i) => (
-                <Card 
-                  key={i} 
-                  panel={panel} 
-                  index={i} 
-                  progress={smoothProgress} 
-                  total={panels.length}
-                  isMobile={isMobile}
-                />
-              ))}
-            </motion.div>
+        {/* The "Focal" Dotted Frame */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[30vw] aspect-[4/5] z-20 pointer-events-none">
+          <div className="absolute inset-[-10px] md:inset-[-15px] border border-dashed border-white/20 rounded-lg">
+             <div className="absolute -top-1 -right-1 w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full shadow-[0_0_10px_white]" />
           </div>
         </div>
 
-        {/* View All Button */}
-        <motion.div
-          style={{ opacity: buttonOpacity, scale: buttonScale, y: buttonY }}
-          className="absolute bottom-12 md:bottom-20 right-10 md:right-[35vw] z-40 translate-x-1/2"
-        >
-          <button className="group relative px-10 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white text-[10px] tracking-[0.3em] uppercase font-semibold rounded-full overflow-hidden transition-all duration-500 hover:bg-white hover:text-black shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine" />
-            <span className="relative flex items-center gap-2">
-              View All Projects
-              <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </button>
-        </motion.div>
+        {/* The Scrolling Row */}
+        <div className="relative w-full h-full flex items-center">
+          <motion.div
+            style={{ x }}
+            className="flex items-center gap-[1vw] md:gap-[3vw] px-[15vw] md:px-[35vw]" 
+          >
+            {panels.map((panel, i) => (
+              <Card 
+                key={i} 
+                panel={panel} 
+                index={i} 
+                progress={smoothProgress} 
+                total={panels.length}
+                isMobile={isMobile}
+              />
+            ))}
+          </motion.div>
+        </div>
       </div>
+<motion.div
+
+style={{ opacity: buttonOpacity, scale: buttonScale, y: buttonY }}
+
+className="absolute bottom-12 md:bottom-20 right-10 md:right-[35vw] z-40 translate-x-1/2"
+
+>
+
+<button className="group relative px-10 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white text-[10px] tracking-[0.3em] uppercase font-semibold rounded-full overflow-hidden transition-all duration-500 hover:bg-white hover:text-black shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+
+{/* Subtle shine effect on hover */}
+
+<span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine" />
+
+
+<span className="relative flex items-center gap-2">
+
+View All Projects
+
+<svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+
+</svg>
+
+</span>
+
+</button>
+
+</motion.div>
+
     </section>
   );
 }
