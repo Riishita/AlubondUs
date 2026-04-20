@@ -23,13 +23,18 @@ const LandingHero = () => {
   // 🎥 VIDEO CONTROL
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      videoRef.current?.play().catch(() => {});
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
+useEffect(() => {
+  if (videoRef.current) {
+    // Explicitly set muted to true to bypass mobile autoplay blocks
+    videoRef.current.defaultMuted = true;
+    videoRef.current.muted = true;
+    
+    // Play immediately or with minimal delay
+    videoRef.current.play().catch((error) => {
+      console.error("Autoplay failed:", error);
+    });
+  }
+}, []);
 
   // 🔥 SCROLL ANIMATION
   const { smoothProgress } = useSectionScroll(heroSectionRef, ["start start", "end start"]);
@@ -70,19 +75,19 @@ const LandingHero = () => {
       >
         <div className="absolute inset-[-12%] h-[124%] w-[124%]">
           <video
-            ref={videoRef}
-            className="h-full w-full object-cover object-center brightness-[0.9] contrast-[1.05] transform-gpu"
-            muted
-            playsInline
-            preload="metadata"
-            loop
-            autoPlay
-          >
-            <source
-              src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776603056/Hero_ilgu85.mp4"
-              type="video/mp4"
-            />
-          </video>
+  ref={videoRef}
+  className="h-full w-full object-cover object-center brightness-[0.9] contrast-[1.05] transform-gpu"
+  muted        // Critical
+  playsInline  // Critical for iOS (prevents full-screen takeover)
+  loop         // Keeps it running
+  autoPlay     // Attempt immediate start
+  preload="auto" 
+>
+  <source
+    src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776603056/Hero_ilgu85.mp4"
+    type="video/mp4"
+  />
+</video>
         </div>
 
         {/* OVERLAYS */}
