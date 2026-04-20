@@ -64,34 +64,28 @@ const LandingHero = () => {
       <Navbar />
 
       {/* 🎥 VIDEO PARALLAX */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
-        style={{ y: videoY, scale: reduceMotion ? 1 : videoScale, willChange: "transform" }}
-      >
-        <div className="absolute inset-[-12%] h-[124%] w-[124%]">
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover object-center brightness-[0.9] contrast-[1.05] transform-gpu"
-            muted
-            playsInline
-            preload="metadata"
-            loop
-            autoPlay
-          >
-            <source
-              src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776603056/Hero_ilgu85.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div>
-
-        {/* OVERLAYS */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/30 via-[#0f172a]/60 to-[#0f172a]/40 group-hover:pointer-events-none"
-          style={{ opacity: overlayOpacity, willChange: "opacity" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/50 via-transparent to-[#0f172a]/20 pointer-events-none" />
-      </motion.div>
+     <motion.div
+  className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+  style={{ y: videoY, scale: reduceMotion ? 1 : videoScale }}
+>
+  <div className="absolute inset-0 h-full w-full"> {/* Simplified container */}
+    <video
+      ref={videoRef}
+      className="h-full w-full object-cover brightness-[0.9] contrast-[1.05]"
+      muted
+      playsInline
+      preload="auto" // Changed from metadata to auto for mobile stability
+      loop
+      autoPlay
+      style={{ objectPosition: 'center' }} // Explicitly define position
+    >
+      <source
+        src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776603056/Hero_ilgu85.mp4"
+        type="video/mp4"
+      />
+    </video>
+  </div>
+</motion.div>
 
       {/* CONTENT */}
       <motion.div
