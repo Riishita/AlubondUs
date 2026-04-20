@@ -61,11 +61,18 @@ export default function QualitySection() {
   });
 }, [smoothProgress, reduceMotion]);
 
- useEffect(() => {
+useEffect(() => {
   const video = videoRef.current;
   if (!video || reduceMotion) return;
 
   let rafId: number;
+  let isSeeking = false; // Track if the video is currently seeking
+
+  const onSeeked = () => {
+    isSeeking = false;
+  };
+
+  video.addEventListener("seeked", onSeeked);
 
   const update = () => {
     const d = durationRef.current;
@@ -75,12 +82,15 @@ export default function QualitySection() {
     }
 
     const diff = targetTime.current - currentTime.current;
+    
+    // 1. Smoothly interpolate the logical time
+    currentTime.current += diff * 0.07; // Slightly slower for more "weight"
 
-    // ✨ smoother interpolation (less aggressive)
-    currentTime.current += diff * 0.08;
-
-    // ✅ update only when needed (BIG FIX)
-    if (Math.abs(video.currentTime - currentTime.current) > 0.04) {
+    // 2. Only update the video if:
+    //    - The difference is significant (> 0.05s)
+    //    - The video is NOT currently busy seeking
+    if (!isSeeking && Math.abs(video.currentTime - currentTime.current) > 0.05) {
+      isSeeking = true;
       video.currentTime = currentTime.current;
     }
 
@@ -88,7 +98,11 @@ export default function QualitySection() {
   };
 
   rafId = requestAnimationFrame(update);
-  return () => cancelAnimationFrame(rafId);
+  
+  return () => {
+    cancelAnimationFrame(rafId);
+    video.removeEventListener("seeked", onSeeked);
+  };
 }, [reduceMotion]);
 
   // Content moves up; adjusted range for better mobile/desktop parity
@@ -111,7 +125,7 @@ export default function QualitySection() {
         <div className="absolute inset-0 z-0 overflow-hidden">
   <motion.video
     ref={videoRef}
-    src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776641513/3D_yaijlh.mp4"
+    src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776646224/New_m1t5of.mp4"
     muted
     playsInline
     preload="auto"
