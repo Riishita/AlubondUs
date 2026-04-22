@@ -4,7 +4,6 @@ import Preloader from "@/components/Preloader";
 import LandingSection from "@/components/sections/LandingSection";
 
 const GlobeSection = lazy(() => import("@/components/sections/GlobeSection"));
-const PhilosophySection = lazy(() => import("@/components/sections/PhilosophySection"));
 const HomeContent = lazy(() => import("@/components/sections/HomeContent"));
 const QualitySection = lazy(() => import("@/components/sections/QualitySection"));
 const SheetDetail = lazy(() => import("@/components/sections/SheetDetail"));
