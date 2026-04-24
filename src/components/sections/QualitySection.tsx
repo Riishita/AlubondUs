@@ -125,7 +125,7 @@ useEffect(() => {
         <div className="absolute inset-0 z-0 overflow-hidden">
   <motion.video
     ref={videoRef}
-    src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776641513/3D_yaijlh.mp4"
+    src="https://res.cloudinary.com/drgg4st9a/video/upload/v1777041369/VN20260424_193642_q044oj.mp4"
     muted
     playsInline
     preload="auto"
