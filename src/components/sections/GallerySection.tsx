@@ -74,7 +74,7 @@ export default function PremiumGallery() {
       style={{ 
         // Replace the URL below with your actual image path
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('https://images.pexels.com/photos/29708309/pexels-photo-29708309.jpeg')`,
-        backgroundAttachment: isMobile ? "scroll" : "fixed", // Fixed background feels premium on desktop
+        backgroundAttachment: isMobile ? "fixed" : "fixed", 
       }}>
       <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center overflow-hidden">
         
