@@ -1,78 +1,91 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import FireHorizontalExperience from "./CertificationSection"; 
 import HeroSection from "./SheetDetail"; 
 
 export default function CinematicVerticalTear() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // --- TIMING CONFIG ---
-  // 0.0 -> 0.4: Video shifts to 50% width/position
-  // 0.5 -> 0.9: Everything (Content + Video) tears apart
+  // --- PHASE 1: VIDEO SHIFT (0.0 -> 0.4) ---
+  const videoWidth = useTransform(scrollYProgress, [0, 0.4], ["100%", isMobile ? "100%" : "50%"]);
+  const videoHeight = useTransform(scrollYProgress, [0, 0.4], ["100vh", isMobile ? "40vh" : "100vh"]);
+  const videoLeft = useTransform(scrollYProgress, [0, 0.4], ["0%", isMobile ? "0%" : "50%"]);
 
-  // Video Shift Logic
-  const videoWidth = useTransform(scrollYProgress, [0, 0.4], ["100%", "50%"]);
-  const videoX = useTransform(scrollYProgress, [0, 0.4], ["0%", "50%"]);
-
-  // Tear Logic (Applied to content AND the video during the split phase)
-  const leftSideX = useTransform(scrollYProgress, [0.5, 0.9], ["0%", "-100%"]);
-  const rightSideX = useTransform(scrollYProgress, [0.5, 0.9], ["0%", "100%"]);
+  // --- PHASE 2: THE TEAR (0.5 -> 0.9) ---
+  const topOrLeftTransform = useTransform(scrollYProgress, [0.5, 0.9], ["0%", "-100%"]);
+  const bottomOrRightTransform = useTransform(scrollYProgress, [0.5, 0.9], ["0%", "100%"]);
   
-  // Background reveal
-  const bgScale = useTransform(scrollYProgress, [0.5, 0.9], [0.99, 1]);
+  const bgScale = useTransform(scrollYProgress, [0.5, 0.9], [0.8, 1]);
 
   return (
     <div ref={containerRef} className="relative h-[600vh] bg-black">
-      {/* 1. THE REVEALED BACKGROUND */}
-      <motion.div 
-        style={{ scale: bgScale }}
-        className="sticky top-0 h-screen w-full z-0 overflow-hidden"
-      >
+      {/* BACKGROUND REVEAL */}
+      <motion.div style={{ scale: bgScale }} className="sticky top-0 h-screen w-full z-0 overflow-hidden">
         <HeroSection />
       </motion.div>
 
-      {/* 2. THE TEAR LAYER (CONTENT) */}
+      {/* TEAR LAYER */}
       <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           
-          {/* Left Content Half */}
+          {/* TOP PIECE (Contains Video) */}
           <motion.div
-            style={{ x: leftSideX, clipPath: "inset(0% 50% 0% 0%)" }}
+            style={{ 
+              x: isMobile ? 0 : topOrLeftTransform,
+              y: isMobile ? topOrLeftTransform : 0,
+              // Mobile: Only clips the top 40% (where the video sits)
+              clipPath: isMobile ? "inset(0% 0% 60% 0%)" : "inset(0% 50% 0% 0%)" 
+            }}
             className="absolute inset-0 w-full h-full bg-[#F7F7F5] pointer-events-auto"
           >
-             <FireHorizontalExperience scrollProgress={scrollYProgress} hideVideo={true} />
+             <FireHorizontalExperience scrollProgress={scrollYProgress} isMobile={isMobile} />
           </motion.div>
 
-          {/* Right Content Half */}
+          {/* BOTTOM PIECE (Contains Content) */}
           <motion.div
-            style={{ x: rightSideX, clipPath: "inset(0% 0% 0% 50%)" }}
+            style={{ 
+              x: isMobile ? 0 : bottomOrRightTransform,
+              y: isMobile ? bottomOrRightTransform : 0,
+              // Mobile: Clips the remaining 60% of the screen
+              clipPath: isMobile ? "inset(40% 0% 0% 0%)" : "inset(0% 0% 0% 50%)" 
+            }}
             className="absolute inset-0 w-full h-full bg-[#F7F7F5] pointer-events-auto"
           >
-             <FireHorizontalExperience scrollProgress={scrollYProgress} hideVideo={true} />
+             <FireHorizontalExperience scrollProgress={scrollYProgress} isMobile={isMobile} />
           </motion.div>
 
-          {/* 3. THE SINGLE VIDEO LAYER */}
-          {/* This sits on top and splits using the same X transforms as the content */}
+          {/* SINGLE VIDEO LAYER */}
           <motion.div
             style={{ 
               width: videoWidth, 
-              left: videoX,
-              // When the tear starts (0.5+), we shift the video with the right side
-              x: rightSideX 
+              height: videoHeight,
+              left: videoLeft,
+              top: 0,
+              // Video is strictly attached to the "Top" move-up animation on mobile
+              y: isMobile ? topOrLeftTransform : 0,
+              x: isMobile ? 0 : bottomOrRightTransform 
             }}
-            className="absolute top-0 h-screen z-20 overflow-hidden bg-black shadow-2xl pointer-events-none"
+            className="absolute z-20 overflow-hidden bg-black shadow-2xl pointer-events-none"
           >
             <video autoPlay muted loop playsInline className="w-full h-full object-cover">
               <source src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776065390/VN20260413_125908_z8mjdx.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-black/30" />
           </motion.div>
 
         </div>
