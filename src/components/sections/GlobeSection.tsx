@@ -74,10 +74,17 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
     { name: "Egypt", lat: 26.8206, lng: 30.8025, logo: "alubond-logo.png", description: "Alubond Egypt Cairo" },
   ];
 
-  const resetGlobeView = () => {
-    if (!globeRef.current) return;
-    globeRef.current.pointOfView({ lat: 25, lng: 10, altitude: 2.7 }, 1400);
-  };
+const resetGlobeView = () => {
+  if (!globeRef.current) return;
+
+  globeRef.current.pointOfView(
+    { lat: 25, lng: 10, altitude: 2.7 },
+    1400
+  );
+
+  // 🔥 CLOSE CARD
+  setSelectedPlace(null);
+};
 
   const handleHover = (name: string) => {
     if (selectedPlace) return; 
@@ -87,11 +94,29 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   };
 
   const handleClick = (name: string) => {
-    const place = locations.find((l) => l.name === name);
-    if (!place) return;
-    setSelectedPlace(place);
-    globeRef.current.pointOfView({ lat: place.lat, lng: place.lng, altitude: 1.8 }, 1200);
-  };
+  const place = locations.find((l) => l.name === name);
+  if (!place) return;
+
+  // 🔥 replace instead of stacking
+  setSelectedPlace(place);
+
+  globeRef.current.pointOfView(
+    { lat: place.lat, lng: place.lng, altitude: 1.8 },
+    1200
+  );
+};
+
+useEffect(() => {
+  const unsubscribe = scrollYProgress.on("change", (v) => {
+    // when user scrolls past zoom focus area → close card
+    if (v > 0.5 && selectedPlace) {
+      setSelectedPlace(null);
+      resetGlobeView();
+    }
+  });
+
+  return () => unsubscribe();
+}, [selectedPlace]);
 
   useEffect(() => {
     if (!globeRef.current) return;
