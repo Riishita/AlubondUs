@@ -73,7 +73,7 @@ export default function PremiumGallery() {
     <section ref={containerRef} className="relative h-[500vh] bg-cover bg-center bg-no-repeat"
       style={{ 
         // Replace the URL below with your actual image path
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('https://images.pexels.com/photos/29708309/pexels-photo-29708309.jpeg')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('https://i.pinimg.com/1200x/ae/ab/96/aeab96342b54b35ff919fecfce201cc4.jpg')`,
         backgroundAttachment: isMobile ? "fixed" : "fixed", 
       }}>
       <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center overflow-hidden">

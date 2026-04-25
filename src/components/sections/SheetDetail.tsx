@@ -1,8 +1,8 @@
 "use client";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { useEffect, useState, useRef } from "react";
+import { OrbitControls, useTexture } from "@react-three/drei"; // Added useTexture
+import { useEffect, useState, useRef, Suspense } from "react"; // Added Suspense
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ================= 3D MODEL ================= */
@@ -13,15 +13,17 @@ function PanelModel({
   activeLayer: number;
   split: boolean;
 }) {
+  // Load the texture - replace with your actual file name in /public
+  const texture = useTexture("/texture.png"); 
+
   const layers = [
-    { y: 0.5, base: "#2E5BFF", active: "#081f6e" },
+    { y: 0.5, base: "#ffffff", active: "#29272777" }, // Set to white to show texture clearly
     { y: 0.25, base: "#BFC5CC", active: "#aeaca5" },
     { y: 0, base: "#E8EAED", active: "#cb650b" },
     { y: -0.25, base: "#778899", active: "#AAB4BF" },
     { y: -0.5, base: "#BFC5CC", active: "#707070" },
   ];
 
-  // Dynamic scaling for mobile responsiveness within the Canvas
   const [scale, setScale] = useState(0.8);
   useEffect(() => {
     const handleResize = () => setScale(window.innerWidth < 768 ? 0.5 : 0.8);
@@ -43,10 +45,14 @@ function PanelModel({
     <group scale={scale}>
       {layers.map((layer, i) => {
         const isActive = i === activeLayer;
+        const isTopLayer = i === 0;
+
         return (
           <mesh key={i} position={[0, layer.y, 0]}>
             <boxGeometry args={[2.5, 0.1, 2.5]} />
             <meshStandardMaterial
+              // Apply texture only to the top layer
+              map={isTopLayer ? texture : null}
               color={isActive ? layer.active : layer.base}
               transparent
               opacity={isActive ? 1 : 0.6}
@@ -107,17 +113,14 @@ export default function HeroSection() {
   const [split, setSplit] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  //added for mob to stop rotate + 188 Line
-const [isMobile, setIsMobile] = useState(false);
-
-useEffect(() => {
-  const check = () => setIsMobile(window.innerWidth < 768);
-  check();
-  window.addEventListener("resize", check);
-  return () => window.removeEventListener("resize", check);
-}, []);
-
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
@@ -173,30 +176,32 @@ useEffect(() => {
       className={`w-full h-screen relative overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24 ${cursorSectionClassName}`}
     >
       
-      {/* 🔵 3D CANVAS - Pushed down slightly on mobile to make room for text */}
+      {/* 🔵 3D CANVAS */}
       <motion.div
         transition={{ duration: 0.8 }}
         className="absolute inset-0 z-0 pointer-events-none mt-20 md:mt-0"
       >
         <Canvas camera={{ position: [3, 3, 5], fov: 45 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[5, 5, 5]} intensity={1.2} />
-          <group rotation={[0.3, 0.5, 0]}>
-            <PanelModel activeLayer={index} split={split} />
-          </group>
-          <OrbitControls
-  enableZoom={false}
-  enablePan={false}
-  enableRotate={!isMobile} // ✅ KEY FIX
-  autoRotate
-  autoRotateSpeed={4}
-  enableDamping
-  dampingFactor={0.05}
-/>
+          <Suspense fallback={null}>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[5, 5, 5]} intensity={1.2} />
+            <group rotation={[0.3, 0.5, 0]}>
+              <PanelModel activeLayer={index} split={split} />
+            </group>
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              enableRotate={!isMobile}
+              autoRotate
+              autoRotateSpeed={4}
+              enableDamping
+              dampingFactor={0.05}
+            />
+          </Suspense>
         </Canvas>
       </motion.div>
 
-      {/* LEFT TEXT - Top on mobile, Left on Desktop */}
+      {/* LEFT TEXT */}
       {!showNext && (
         <div className="absolute top-10 md:top-24 left-6 md:left-16 right-6 md:max-w-md z-10">
           <AnimatePresence mode="wait">
@@ -224,7 +229,7 @@ useEffect(() => {
         </div>
       )}
 
-      {/* RIGHT STEP LIST - Bottom on mobile, Right on Desktop */}
+      {/* RIGHT STEP LIST */}
       {!showNext && (
         <div className="absolute bottom-10 left-6 right-6 md:right-16 md:left-auto flex md:flex-col flex-wrap md:space-y-4 gap-3 md:gap-0 justify-center md:justify-end text-right z-10">
           {steps.map((item, i) => (
