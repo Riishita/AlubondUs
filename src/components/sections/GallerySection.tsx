@@ -10,30 +10,26 @@ import {
 
 const panels = [
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775800113/Gallart_lmzj8y.mp4",
+    video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066850/VN20260506_165456_ujqlmd.mp4",
     title: "Krestovsky Stadium",
     location: "St. Petersburg, Russia",
   },
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1776397400/VN20260417_091134_sdc9ni.mp4",
+    video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066849/VN20260506_165518_q1j310.mp4",
     title: "The Address Downtown",
     location: "Dubai, UAE",
   },
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775799908/BurjKhalifa_loordq.mp4",
+    video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066850/VN20260506_165356_drniqf.mp4",
     title: "Burj Khalifa",
     location: "Dubai, UAE",
   },
   {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1776113873/VN20260414_022640_tsen5n.mp4",
+    video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065542/VN20260414_022640_ideoyr.mp4",
     title: "Khalifa Stadium",
     location: "Doha, Qatar",
   },
-  {
-    video: "https://res.cloudinary.com/drgg4st9a/video/upload/v1775800113/Gallart_lmzj8y.mp4",
-    title: "Global Projects",
-    location: "International",
-  },
+  
 ];
 
 export default function PremiumGallery() {

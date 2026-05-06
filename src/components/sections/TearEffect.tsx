@@ -83,7 +83,7 @@ export default function CinematicVerticalTear() {
             className="absolute z-20 overflow-hidden bg-black shadow-2xl pointer-events-none"
           >
             <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-              <source src="https://res.cloudinary.com/drgg4st9a/video/upload/v1776065390/VN20260413_125908_z8mjdx.mp4" type="video/mp4" />
+              <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065540/VN20260413_125908_bxq5dm.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-black/30" />
           </motion.div>
