@@ -39,17 +39,21 @@ useEffect(() => {
   // 🔥 SCROLL ANIMATION
   const { smoothProgress } = useSectionScroll(heroSectionRef, ["start start", "end start"]);
 
-  const videoY = useTransform(smoothProgress, [0, 1], ["0%", "18%"]);
-  const videoScale = useTransform(smoothProgress, [0, 0.6, 1], [1, 1.04, 1.01]);
-  const contentY = useTransform(smoothProgress, [0, 1], ["0%", "-34%"]);
-  const contentOpacity = useTransform(smoothProgress, [0, 0.65], [1, 0]);
-  const overlayOpacity = useTransform(smoothProgress, [0, 1], [0.4, 0.75]);
+  const videoScale = useTransform(smoothProgress, [0, 1], [1, 1.15]);
+  const contentY = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]);
+  const contentOpacity = useTransform(smoothProgress, [0, 0.6], [1, 0]);
+  const contentBlur = useTransform(smoothProgress, [0, 0.6], ["blur(0px)", "blur(20px)"]);
+  const overlayOpacity = useTransform(smoothProgress, [0, 1], [0.4, 0.85]);
 
   return (
-    <section
-      ref={heroSectionRef}
-      className="relative h-screen overflow-hidden"
-    >
+    <>
+      <CursorGridTrail
+        excludeTopPx={NAV_EXCLUDE_TOP_PX}
+        sectionRef={heroSectionRef}
+      />
+      <Navbar />
+      <div ref={heroSectionRef} className="relative h-[150vh] bg-black">
+        <section className="fixed top-0 left-0 h-screen w-full overflow-hidden z-0">
       {/* 🌊 BACKGROUND GRADIENT */}
       <div
         className="absolute inset-0 z-0"
@@ -62,16 +66,10 @@ useEffect(() => {
         }}
       />
 
-      <CursorGridTrail
-        excludeTopPx={NAV_EXCLUDE_TOP_PX}
-        sectionRef={heroSectionRef}
-      />
-      <Navbar />
-
       {/* 🎥 VIDEO PARALLAX */}
       <motion.div
         className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
-        style={{ y: videoY, scale: reduceMotion ? 1 : videoScale, willChange: "transform" }}
+        style={{ scale: reduceMotion ? 1 : videoScale, willChange: "transform" }}
       >
         <div className="absolute inset-[-12%] h-[124%] w-[124%]">
           <video
@@ -101,7 +99,7 @@ useEffect(() => {
       {/* CONTENT */}
       <motion.div
         className="relative z-10 flex h-full w-full items-center justify-between px-5 md:px-10 lg:px-24"
-        style={{ y: contentY, opacity: contentOpacity, willChange: "transform, opacity" }}
+        style={{ y: contentY, opacity: contentOpacity, filter: contentBlur, willChange: "transform, opacity, filter" }}
       >
         {/* LEFT */}
         <div className="max-w-3xl">
@@ -109,7 +107,7 @@ useEffect(() => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={VARIANTS.fadeUpBlur}
+     
             className="mb-6 text-[10px] uppercase tracking-[0.35em] text-white/50 sm:text-xs"
           >
             Alubond U.S.A — Est. 1989
@@ -119,8 +117,8 @@ useEffect(() => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={VARIANTS.fadeUpBlur}
-            className="text-4xl font-medium leading-tight text-white sm:text-5xl md:text-7xl lg:text-8xl"
+           
+            className="text-4xl font-medium leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
           >
             WORLD’S LARGEST
           </motion.h1>
@@ -129,8 +127,8 @@ useEffect(() => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={VARIANTS.fadeUpBlur}
-            className="mb-8 text-4xl font-medium sm:text-5xl md:text-7xl lg:text-8xl"
+            
+            className="mb-8 text-4xl font-medium sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
             style={{ color: "#59c4ee" }}
           >
             ACP <br /> BRAND
@@ -140,7 +138,7 @@ useEffect(() => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
-            variants={VARIANTS.fadeUpBlur}
+         
             className="mb-8 max-w-md text-sm text-white/60 md:mb-10"
           >
             High-performance composite panels engineered for safety,
@@ -172,8 +170,10 @@ useEffect(() => {
       </motion.div>
 
       {/* BOTTOM FADE */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f172a] to-transparent" />
-    </section>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f172a] to-transparent pointer-events-none z-10" />
+        </section>
+      </div>
+    </>
   );
 };
 

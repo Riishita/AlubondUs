@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; }
+  .landing-container { height: 200vh; position: relative; z-index: 20; background: transparent; }
+  .landing-sticky { position: sticky; top: 0; height: 100vh; background: blue; opacity: 1; transition: opacity 0.1s, transform 0.1s; }
+  .next-section { height: 100vh; background: red; position: relative; z-index: 10; margin-top: -100vh; }
+</style>
+</head>
+<body>
+  <div class="landing-container" id="lc">
+    <div class="landing-sticky" id="ls">
+      <h1>Landing</h1>
+    </div>
+  </div>
+  <div class="next-section">
+    <h1>Next Section</h1>
+  </div>
+  <script>
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const progress = Math.min(y / window.innerHeight, 1);
+      const ls = document.getElementById('ls');
+      ls.style.opacity = 1 - progress;
+      ls.style.transform = `scale(${1 + progress * 0.5})`;
+    });
+  </script>
+</body>
+</html>

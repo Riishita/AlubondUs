@@ -29,23 +29,24 @@ const Index = () => {
       {loading && <Preloader onComplete={handlePreloaderComplete} />}
       <main className={`${loading ? "opacity-0" : "opacity-100"} transition-opacity duration-700`}>
         <LandingSection />
-        {/* <Suspense fallback={<div className="min-h-screen" />}><GlobeSection /></Suspense>
-        <Suspense fallback={<div className="min-h-screen" />}><PhilosophySection /></Suspense> */}
-        <Suspense fallback={<div className="min-h-screen" />}><HomeContent /></Suspense>
+        <div className="relative z-10 bg-black w-full">
+          {/* <Suspense fallback={<div className="min-h-screen" />}><GlobeSection /></Suspense>
+          <Suspense fallback={<div className="min-h-screen" />}><PhilosophySection /></Suspense> */}
+          <Suspense fallback={<div className="min-h-screen" />}><HomeContent /></Suspense>
 
-        <div className="relative isolate">
-          <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense> 
-          {/* <div className="relative z-20 -mt-[min(92vh,52rem)]">
-            <Suspense fallback={<div className="min-h-screen" />}><CertificationSection /></Suspense>
-          </div>
-        
-        <Suspense fallback={<div className="min-h-screen bg-[#070b14]" />}><SheetDetail /></Suspense> */}
-<div className="relative z-20 -mt-[min(92vh,52rem)]">
-<Suspense fallback={<div className="min-h-screen" />}><Tearffect /></Suspense> </div></div>
-        <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
-        <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
-        <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
-        <Suspense fallback={<div className="min-h-[50vh]" />}><FooterSection /></Suspense>
+          <div className="relative isolate">
+            <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense> 
+            {/* <div className="relative z-20 -mt-[min(92vh,52rem)]">
+              <Suspense fallback={<div className="min-h-screen" />}><CertificationSection /></Suspense>
+            </div>
+          
+          <Suspense fallback={<div className="min-h-screen bg-[#070b14]" />}><SheetDetail /></Suspense> */}
+          <Suspense fallback={<div className="min-h-screen" />}><Tearffect /></Suspense></div>
+          <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
+          <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
+          <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
+          <Suspense fallback={<div className="min-h-[50vh]" />}><FooterSection /></Suspense>
+        </div>
       </main>
     </>
   );

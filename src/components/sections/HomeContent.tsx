@@ -56,7 +56,7 @@ export default function SmoothTransitionWrapper() {
   return (
     <div 
       ref={containerRef} 
-      className={cn("relative bg-black h-[350vh]", cursorSectionClassName)}
+      className={cn("relative z-10 bg-black h-[350vh]", cursorSectionClassName)}
       {...cursorSectionProps}
     >
       <div className="sticky top-0 h-screen z-0">
@@ -90,7 +90,7 @@ export default function SmoothTransitionWrapper() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-20 items-start mb-8 md:mb-16">
             <div>
-              <h2 className="text-4xl sm:text-5xl md:text-8xl font-serif leading-[0.95] tracking-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-heading leading-[0.95] tracking-tight">
                 ALUBOND <br />
                 <span className="text-orange-500">PHILOSOPHY</span>
               </h2>

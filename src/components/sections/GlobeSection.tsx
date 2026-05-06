@@ -27,8 +27,8 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
 
   useEffect(() => {
-    // Threshold set to 1024px to cover mobile and tablet
-    const check = () => setIsTabletOrMobile(window.innerWidth < 1024);
+    // Threshold set to 1280px to cover mobile and tablet
+    const check = () => setIsTabletOrMobile(window.innerWidth < 1280);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -179,8 +179,8 @@ useEffect(() => {
   ), [showPoints, selectedPlace, isTabletOrMobile]);
 
   return (
-    <section ref={sectionRef} className={cn("relative h-[180vh] bg-black", cursorSectionClassName)} {...cursorSectionProps}>
-      <div className="sticky top-0 h-screen overflow-hidden">
+    <section ref={sectionRef} className={cn("relative h-screen w-full bg-black overflow-hidden", cursorSectionClassName)} {...cursorSectionProps}>
+      <div className="relative w-full h-full">
         <div className="gradient-amaterasu min-h-screen px-6 md:px-10 py-24" />
         
         <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="absolute top-[12%] w-full text-center text-white font-light tracking-[-2px] text-[clamp(40px,10vw,180px)]">

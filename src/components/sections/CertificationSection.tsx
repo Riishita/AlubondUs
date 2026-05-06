@@ -49,7 +49,7 @@ export default function FireHorizontalExperience({
 
 </p>
 
-<h2 className="text-4xl md:text-7xl font-serif leading-[1.1] mb-6">
+<h2 className="text-4xl md:text-5xl lg:text-7xl font-heading leading-[1.1] mb-6">
 
 <span className="block text-[#2b2b2b]">Fire Standards & </span>
 

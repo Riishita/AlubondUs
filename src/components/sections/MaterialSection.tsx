@@ -211,7 +211,7 @@ const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
 
         <motion.h1
-  className="text-6xl md:text-8xl font-serif leading-[0.95] tracking-tight"
+  className="text-6xl md:text-8xl font-heading leading-[0.95] tracking-tight"
   style={{
     color: heroData.text.color,
     textShadow: "0 4px 20px rgba(0,0,0,0.8)", // 🔥 makes text pop

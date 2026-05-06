@@ -150,14 +150,14 @@ useEffect(() => {
         >
           {/* LEFT TEXT 1 */}
           <div className="absolute left-[8%] top-[20vh] max-w-[85%] sm:max-w-md md:left-[6%]">
-            <h2 className="text-3xl font-light leading-tight sm:text-4xl md:text-5xl">
+            <h2 className="font-heading text-3xl font-light leading-tight sm:text-4xl md:text-5xl">
               What happens when design meets limitless possibility?
             </h2>
           </div>
 
           {/* RIGHT TEXT */}
           <div className="absolute right-[8%] top-[75vh] max-w-[85%] text-right sm:max-w-md md:right-[6%] md:top-[70vh]">
-            <h2 className="mb-4 text-3xl font-light sm:text-4xl md:text-5xl">
+            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl">
               We build beyond borders
             </h2>
             <p className="text-sm text-white/70 md:text-base">
@@ -171,7 +171,7 @@ useEffect(() => {
             <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
               <div className="bg-[#E9E5DE] p-6 text-[#203f65] transition-transform md:p-8">
     
-                <h2 className="mb-2 text-lg font-medium md:mb-3 md:text-2xl">100+ Countries</h2>
+                <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">100+ Countries</h2>
                 <p className="text-xs leading-relaxed md:text-sm">
                   Delivering trusted façade solutions across diverse global markets with consistent quality and
                   performance.
@@ -180,7 +180,7 @@ useEffect(() => {
 
               <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
                 
-                <h2 className="mb-2 text-lg font-medium md:mb-3 md:text-2xl">50,000+ Projects Worldwide</h2>
+                <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">50,000+ Projects Worldwide</h2>
                 <p className="text-xs leading-relaxed md:text-sm">
                   From iconic skylines to modern infrastructure, our panels power projects at every scale.
                 </p>
@@ -188,7 +188,7 @@ useEffect(() => {
 
               <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
                 
-                <h2 className="mb-2 text-lg font-medium md:mb-3 md:text-2xl">35+ Industry Leadership</h2>
+                <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">35+ Industry Leadership</h2>
                 <p className="text-xs leading-relaxed md:text-sm">
                   Decades of innovation, engineering excellence, and leadership in advanced building materials.
                 </p>
@@ -198,7 +198,7 @@ useEffect(() => {
 
           {/* LEFT TEXT 2 */}
           <div className="absolute left-[8%] top-[200vh] max-w-[85%] sm:max-w-md md:left-[6%]">
-            <h2 className="mb-4 text-3xl font-light sm:text-4xl md:text-5xl">Uncompromised Durability</h2>
+            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl">Uncompromised Durability</h2>
             <p className="text-sm text-white/70 md:text-base">
               From impact to exposure, it holds its integrity—proving durability where it matters most.
             </p>

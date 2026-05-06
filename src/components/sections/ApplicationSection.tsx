@@ -139,7 +139,7 @@ export default function ApplicationSection() {
               </p>
 
               <div className="flex justify-between flex-wrap gap-6 mt-5">
-                <h2 className="text-4xl md:text-7xl font-serif">
+                <h2 className="text-4xl md:text-7xl font-heading">
                   WHERE ALUBOND <br /> PERFORMS
                 </h2>
 
