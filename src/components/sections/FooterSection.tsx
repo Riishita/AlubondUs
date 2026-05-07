@@ -5,13 +5,14 @@ import {
   useMotionTemplate,
   useMotionValue,
   useReducedMotion,
-  useScroll,
   useTransform,
 } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
+
+/* ================= CTA SECTION ================= */
 
 /* ================= CTA SECTION ================= */
 
@@ -58,9 +59,9 @@ const CTASection = () => {
         mouseX.set(e.clientX - rect.left);
         mouseY.set(e.clientY - rect.top);
       }}
-      className={`relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32 ${cursorSectionClassName}`}
+      /* Added flex, items-center, justify-center, and text-center */
+      className={`relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32 flex flex-col items-center justify-center text-center ${cursorSectionClassName}`}
       style={{
-        // Subtle fade-out mask to blend into the footer
         WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
         maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
       }}
@@ -95,7 +96,8 @@ const CTASection = () => {
 
       <motion.div
         style={{ opacity: fadeIn, scale: reduceMotion ? 1 : scaleIn }}
-        className="relative z-10 max-w-5xl transform-gpu"
+        /* justify-center added to the button container's parent flex */
+        className="relative z-10 max-w-5xl transform-gpu flex flex-col items-center"
       >
         <p className="text-xs tracking-[0.3em] text-white/50 mb-6">
           006 / Let's Build
@@ -115,7 +117,8 @@ const CTASection = () => {
           to your specification team.
         </p>
 
-        <div className="flex gap-4 flex-wrap">
+        {/* Added justify-center to keep buttons centered */}
+        <div className="flex gap-4 flex-wrap justify-center">
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
@@ -163,135 +166,88 @@ const SectionDivider = () => {
 /* ================= FOOTER ================= */
 
 const Footer = () => {
-  const reduceMotion = useReducedMotion();
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
-  const { cursorSectionProps, cursorSectionClassName } =
-    useCustomCursorBindings(false);
+  // Orange theme hover class
+  const hoverOrange = "hover:text-orange-500 transition-colors duration-300 cursor-pointer";
 
   return (
-    <motion.footer
+    <footer
       {...cursorSectionProps}
-      initial={{ opacity: 0, y: 36 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative overflow-hidden px-8 py-20 text-white md:px-20 bg-[#020617] ${cursorSectionClassName}`}
+      className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 py-16 md:py-24 ${cursorSectionClassName}`}
     >
-      {/* 🔥 DARK OVERLAY (important for readability) */}
-      <div className="absolute inset-0 bg-[#020617]/0 backdrop-blur-[2px]" />
-
-      {/* ✨ OPTIONAL GLOW LAYER */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.02),rgba(255,255,255,0.05),rgba(255,255,255,0.01))]"
-        animate={
-          reduceMotion
-            ? undefined
-            : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }
-        }
-        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* ================= CONTENT ================= */}
-
-      <div className="relative z-10 grid grid-cols-2 md:grid-cols-5 gap-12 text-sm">
-        <div>
-          <p className="text-xs tracking-widest opacity-70 mb-4">
-            Precision-engineered façade solutions designed to bring architectural vision to life.
-          </p>
+      <div className="max-w-7xl mx-auto">
+        {/* Top Text */}
+        <div className="mb-16 md:mb-24">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-white/90 leading-snug">
+            Precision-engineered façade solutions designed to <br className="hidden md:block" />
+            bring architectural vision to life.
+          </h2>
         </div>
 
-        <div>
-          <p className="uppercase text-xs tracking-widest opacity-60 mb-4">
-            Technical Resources
-          </p>
-          <ul className="space-y-2">
+        {/* Separator */}
+        <div className="w-full h-px bg-white/10 mb-16 md:mb-20" />
+
+        {/* Middle Grid - Responsive 2 Columns for Tablet/Mobile, 4 for Desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 text-[13px] md:text-[14px] text-white/70 font-light mb-20 md:mb-32">
+          
+          {/* Col 1: Contact */}
+          <div className="flex flex-col gap-6">
+            <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Contact</p>
+            <p className={hoverOrange}>info@alubondusa.com</p>
+            <p className={hoverOrange}>+1 (305) 000-0000</p>
+          </div>
+
+          {/* Col 2: Navigation */}
+          <div className="flex flex-col gap-4">
+            <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Explore</p>
+            {["Home", "Technology", "Projects", "Contact"].map((item) => (
+              <span key={item} className={hoverOrange}>{item}</span>
+            ))}
+          </div>
+
+          {/* Col 3: Technical Resources */}
+          <div className="flex flex-col gap-4">
+            <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Resources</p>
+            {["BIM Families", "Technical Datasheets", "Installation Guidelines", "Certifications", "Brochures", "Request a Sample"].map((item) => (
+              <span key={item} className={hoverOrange}>{item}</span>
+            ))}
+          </div>
+
+          {/* Col 4: Socials */}
+          <div className="flex flex-col gap-4 uppercase tracking-widest text-[11px] md:text-[12px]">
+             <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Social</p>
             {[
-              "BIM Families",
-              "Technical Datasheets",
-              "Installation Guidelines",
-              "Certifications & Reports",
-              "Brochures",
-              "Request a Sample",
-            ].map((item, i) => (
-              <motion.li
-                key={i}
-                whileHover={reduceMotion ? undefined : { x: 4 }}
-                className="cursor-pointer hover:opacity-80"
-              >
-                {item}
-              </motion.li>
+              { name: "LINKEDIN", url: "#" },
+              { name: "INSTAGRAM", url: "#" },
+              { name: "FACEBOOK", url: "#" },
+              { name: "YOUTUBE", url: "#" },
+            ].map((social) => (
+              <a key={social.name} href={social.url} className={`group flex items-center justify-between max-w-[140px] ${hoverOrange}`}>
+                <span>{social.name}</span>
+                <span className="transform transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↘</span>
+              </a>
             ))}
-          </ul>
+          </div>
         </div>
 
-        <div>
-          <p className="uppercase text-xs tracking-widest opacity-60 mb-4">
-            Quick Links
-          </p>
-          <ul className="space-y-2">
-            {["Home", "Technology", "Projects", "Contact"].map((item, i) => (
-              <motion.li
-                key={i}
-                whileHover={reduceMotion ? undefined : { x: 4 }}
-                className="cursor-pointer hover:opacity-80"
-              >
-                {item}
-              </motion.li>
+        {/* Separator */}
+        <div className="w-full h-px bg-white/10 mb-8" />
+
+        {/* Bottom Section: Copyright & Legal Links Horizontal */}
+        <div className="flex flex-col sm:flex-row justify-between items-center text-[11px] md:text-[13px] text-white/50 gap-6">
+          <p>Copyright: © 2026 Alubond U.S.A. All Rights Reserved.</p>
+          
+          <div className="flex gap-6 md:gap-10">
+            {["FAQ", "Terms", "Privacy"].map((link) => (
+              <span key={link} className={hoverOrange}>
+                {link}
+              </span>
             ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="uppercase text-xs tracking-widest opacity-60 mb-4">
-            Social
-          </p>
-          <ul className="space-y-2">
-            {["LinkedIn", "Instagram", "Facebook", "YouTube"].map((item, i) => (
-              <motion.li
-                key={i}
-                whileHover={reduceMotion ? undefined : { x: 4 }}
-                className="cursor-pointer hover:opacity-80"
-              >
-                {item}
-              </motion.li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="md:text-right">
-          <p className="uppercase text-xs tracking-widest opacity-60 mb-4">
-            Contact
-          </p>
-
-          <h3 className="text-lg md:text-xl font-semibold">
-            info@alubondusa.com
-          </h3>
-
-          <p className="mt-6 text-xs opacity-70">
-            +1 (305) 000-0000
-          </p>
+          </div>
         </div>
       </div>
-
-      {/* LOGO */}
-      <div className="relative z-10 flex justify-center my-16">
-        <motion.div
-          whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-          className="w-16 h-16 bg-[#141B3A]/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-xl"
-        >
-          <img src="/alubond-logo.png" className="w-10 h-10 object-contain" alt="Logo" />
-        </motion.div>
-      </div>
-
-      {/* BOTTOM */}
-      <div className="relative z-10 flex flex-col md:flex-row justify-between items-center text-xs opacity-90 gap-4">
-        <p>© 2026 Alubond U.S.A.</p>
-        <div className="flex gap-6">
-          <span className="cursor-pointer hover:opacity-100">Privacy Policy</span>
-          <span className="cursor-pointer hover:opacity-100">Terms of Use</span>
-        </div>
-      </div>
-    </motion.footer>
+    </footer>
   );
 };
 

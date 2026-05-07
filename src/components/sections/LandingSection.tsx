@@ -42,7 +42,6 @@ useEffect(() => {
   const videoScale = useTransform(smoothProgress, [0, 1], [1, 1.15]);
   const contentY = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]);
   const contentOpacity = useTransform(smoothProgress, [0, 0.6], [1, 0]);
-  const contentBlur = useTransform(smoothProgress, [0, 0.6], ["blur(0px)", "blur(20px)"]);
   const overlayOpacity = useTransform(smoothProgress, [0, 1], [0.4, 0.85]);
 
   return (
@@ -99,7 +98,7 @@ useEffect(() => {
       {/* CONTENT */}
       <motion.div
         className="relative z-10 flex h-full w-full items-center justify-between px-5 md:px-10 lg:px-24"
-        style={{ y: contentY, opacity: contentOpacity, filter: contentBlur, willChange: "transform, opacity, filter" }}
+        style={{ y: contentY, opacity: contentOpacity, willChange: "transform, opacity" }}
       >
         {/* LEFT */}
         <div className="max-w-3xl">
