@@ -32,8 +32,15 @@ export default function CinematicVerticalTear() {
   
   const bgScale = useTransform(scrollYProgress, [0.5, 0.9], [0.8, 1]);
 
+  // --- PARALLAX ENTRANCE ---
+  // This adds an extra "lift" as the section comes into view, creating a smoother overlap
+  const mainTranslateY = useTransform(scrollYProgress, [0, 0.2], ["20vh", "0vh"]);
+
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-black">
+    <div 
+      ref={containerRef} 
+      className="relative h-[600vh] bg-black"
+    >
       {/* BACKGROUND REVEAL */}
       <motion.div style={{ scale: bgScale }} className="sticky top-0 h-screen w-full z-0 overflow-hidden">
         <HeroSection />

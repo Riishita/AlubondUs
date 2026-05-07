@@ -36,12 +36,12 @@ const Index = () => {
 
           <div className="relative isolate">
             <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense> 
-            {/* <div className="relative z-20 -mt-[min(92vh,52rem)]">
-              <Suspense fallback={<div className="min-h-screen" />}><CertificationSection /></Suspense>
+            
+            {/* Parallax Overlay: TearEffect scrolls OVER QualitySection */}
+            <div className="relative z-20 -mt-[100vh]">
+              <Suspense fallback={<div className="min-h-screen" />}><Tearffect /></Suspense>
             </div>
-          
-          <Suspense fallback={<div className="min-h-screen bg-[#070b14]" />}><SheetDetail /></Suspense> */}
-          <Suspense fallback={<div className="min-h-screen" />}><Tearffect /></Suspense></div>
+          </div>
           <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
