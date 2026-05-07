@@ -40,6 +40,7 @@ export default function CinematicVerticalTear() {
       ref={containerRef} 
       className="relative h-[600vh] bg-black"
     >
+      <div id="certificatesection" className="absolute top-0 w-full h-[450vh] pointer-events-none" />
       {/* BACKGROUND REVEAL - Ensure it has a solid black background behind it */}
       <motion.div style={{ scale: bgScale }} className="sticky top-0 h-screen w-full z-0 overflow-hidden bg-black">
         <HeroSection />

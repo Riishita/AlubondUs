@@ -123,6 +123,7 @@ export default function SmoothTransitionWrapper() {
           </div>
         </div>
       </motion.div>
+      <div id="philosophy" className="absolute bottom-0 w-full h-[120vh] pointer-events-none" />
     </div>
   );
 }

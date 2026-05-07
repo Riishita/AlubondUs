@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { label: "About Us", href: "#about" },
@@ -12,6 +12,36 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeLogo, setActiveLogo] = useState("/Logo1.png");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const philosophy = document.getElementById("philosophy");
+      const certificate = document.getElementById("certificatesection");
+      const gallery = document.getElementById("gallerysection");
+
+      const sections = [philosophy, certificate, gallery];
+      let useLogo2 = false;
+      const navBottom = 100; // Approximate bottom threshold for the navbar
+
+      for (const sec of sections) {
+        if (sec) {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top <= navBottom && rect.bottom >= navBottom) {
+            useLogo2 = true;
+            break;
+          }
+        }
+      }
+
+      setActiveLogo(useLogo2 ? "/Logo2.png" : "/Logo1.png");
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -25,7 +55,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center">
           <img
-  src="/Logo1.png"
+  src={activeLogo}
   alt="Alubond U.S.A"
   className="h-20 md:h-22 object-contain brightness-110 contrast-110"
 />

@@ -8,17 +8,19 @@ import {
   useTransform,
 } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Linkedin, Instagram, Facebook, Youtube, Download } from "lucide-react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 
-/* ================= CTA SECTION ================= */
 
 /* ================= CTA SECTION ================= */
 
 const CTASection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
+
+  // 👇 ADD YOUR BACKGROUND IMAGE URL HERE 👇
+  const bgImageUrl = "https://i.pinimg.com/1200x/a3/54/dc/a354dcc1a1ffd5785ce71470ae5de78b.jpg";
 
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
@@ -31,7 +33,7 @@ const CTASection = () => {
     ["start end", "end start"]
   );
 
-  const fadeIn = useTransform(scrollYProgress, [0.05, 0.35], [0.6, 1]);
+  const fadeIn = useTransform(scrollYProgress, [0.02, 0.35], [1, 1]);
   const scaleIn = useTransform(scrollYProgress, [0, 0.4], [0.96, 1]);
 
   const particles = useMemo(
@@ -59,14 +61,26 @@ const CTASection = () => {
         mouseX.set(e.clientX - rect.left);
         mouseY.set(e.clientY - rect.top);
       }}
-      /* Added flex, items-center, justify-center, and text-center */
-      className={`gradient-amaterasu relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32 flex flex-col items-center justify-center text-center ${cursorSectionClassName}`}
+      className={`gradient-amaterasu relative overflow-hidden px-6 py-16 text-white md:px-16 min-h-[50vh] flex flex-col justify-center text-left ${cursorSectionClassName}`}
       style={{
         WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
         maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
       }}
     >
-
+      {/* Optional Background Image */}
+      {bgImageUrl && (
+        <>
+          <div 
+            className="absolute inset-0 z-0 opacity-70"
+            style={{
+            backgroundImage: `url(${bgImageUrl})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent mix-blend-multiply" />
+        </>
+      )}
 
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -74,7 +88,7 @@ const CTASection = () => {
       />
 
       <motion.div
-        className="pointer-events-none absolute h-[320px] w-[320px] rounded-full bg-blue-400/20 blur-[100px] md:h-[400px] md:w-[400px] md:blur-[120px]"
+        className="pointer-events-none absolute h-[320px] w-[320px] rounded-full bg-blue-400/20 blur-[100px] md:h-[200px] md:w-[400px] md:blur-[120px]"
         style={{ x: glowX, y: glowY }}
       />
 
@@ -96,10 +110,9 @@ const CTASection = () => {
 
       <motion.div
         style={{ opacity: fadeIn, scale: reduceMotion ? 1 : scaleIn }}
-        /* justify-center added to the button container's parent flex */
-        className="relative z-10 max-w-5xl transform-gpu flex flex-col items-center"
+        className="relative z-10 max-w-7xl mx-auto w-full transform-gpu flex flex-col items-start"
       >
-        <p className="text-xs tracking-[0.3em] text-white/50 mb-6">
+        <p className="text-[10px] md:text-xs tracking-[0.3em] text-white/60 mb-6 uppercase">
           006 / Let's Build
         </p>
 
@@ -107,36 +120,35 @@ const CTASection = () => {
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold leading-tight mb-6"
+          className="text-5xl md:text-[80px] font-medium leading-[1.1] mb-8 tracking-tight"
         >
           REQUEST <br /> TECHNICAL SPECS
         </motion.h2>
 
-        <p className="text-white/70 max-w-xl mb-10">
+        <p className="text-white/80 text-lg md:text-xl max-w-xl mb-12 leading-relaxed font-light">
           Get datasheets, fire test reports, and sample panels delivered
           to your specification team.
         </p>
 
-        {/* Added justify-center to keep buttons centered */}
-        <div className="flex gap-4 flex-wrap justify-center">
+        <div className="flex gap-4 flex-wrap">
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-            className="px-8 py-4 rounded-full bg-white text-[#1E2A5A] font-medium flex items-center gap-2 shadow-lg hover:shadow-blue-500/40 transition-all"
+            className="px-8 py-4 rounded-full bg-white text-[#1E2A5A] font-medium flex items-center gap-3 shadow-lg hover:shadow-blue-500/40 transition-all"
           >
-            Request Technical Specs <ArrowRight size={16} />
+            Request Technical Specs <ArrowRight size={18} />
           </motion.button>
 
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.03 }}
-            className="px-8 py-4 rounded-full border border-white/20 text-white/80 hover:bg-white/10 transition-all"
+            className="px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-all flex items-center gap-3"
           >
-            Downloads
+            <Download size={18} className="text-white/70" /> Downloads
           </motion.button>
         </div>
       </motion.div>
 
-      <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-blue-500/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-blue-500/20 to-transparent pointer-events-none" />
     </section>
   );
 };
@@ -168,79 +180,85 @@ const SectionDivider = () => {
 const Footer = () => {
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
-  // Orange theme hover class
-  const hoverOrange = "hover:text-orange-500 transition-colors duration-300 cursor-pointer";
+  const columnHeaderStyle = "text-white/40 uppercase tracking-[0.15em] text-[12px] mb-6 font-medium";
+  const linkStyle = "text-white/80 hover:text-white transition-colors duration-300 cursor-pointer flex items-center";
+
+  const socialIcons: Record<string, any> = {
+    LinkedIn: <Linkedin size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
+    Instagram: <Instagram size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
+    Facebook: <Facebook size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
+    YouTube: <Youtube size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
+  };
 
   return (
     <footer
       {...cursorSectionProps}
-      className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 py-16 md:py-24 ${cursorSectionClassName}`}
+      className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 py-16 md:py-24 min-h-[80vh] flex flex-col justify-center ${cursorSectionClassName}`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Top Text */}
-        <div className="mb-16 md:mb-24">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-white/90 leading-snug">
-            Precision-engineered façade solutions designed to <br className="hidden md:block" />
-            bring architectural vision to life.
-          </h2>
+        <div className="mb-10">
+          <h4 className="text-[28px] md:text-[32px] lg:text-[32px] font-light text-white/90 leading-[1.3] max-w-2xl">
+            Precision-engineered façade solutions designed to bring <span className="text-[#5b98aa]">architectural vision</span> to life.
+          </h4>
         </div>
 
         {/* Separator */}
-        <div className="w-full h-px bg-white/10 mb-16 md:mb-20" />
+        <div className="w-full h-px bg-white/10 mb-20" />
 
-        {/* Middle Grid - Responsive 2 Columns for Tablet/Mobile, 4 for Desktop */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 text-[13px] md:text-[14px] text-white/70 font-light mb-20 md:mb-32">
+        {/* Middle Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 text-[14px] md:text-[15px] font-light mb-16">
           
           {/* Col 1: Contact */}
-          <div className="flex flex-col gap-6">
-            <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Contact</p>
-            <p className={hoverOrange}>info@alubondusa.com</p>
-            <p className={hoverOrange}>+1 (305) 000-0000</p>
+          <div className="flex flex-col gap-5">
+            <p className={columnHeaderStyle}>CONTACT</p>
+            <p className={linkStyle}>info@alubondusa.com</p>
+            <p className={linkStyle}>+1 (305) 000-0000</p>
           </div>
 
           {/* Col 2: Navigation */}
-          <div className="flex flex-col gap-4">
-            <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Explore</p>
+          <div className="flex flex-col gap-5">
+            <p className={columnHeaderStyle}>EXPLORE</p>
             {["Home", "Technology", "Projects", "Contact"].map((item) => (
-              <span key={item} className={hoverOrange}>{item}</span>
+              <span key={item} className={linkStyle}>{item}</span>
             ))}
           </div>
 
           {/* Col 3: Technical Resources */}
-          <div className="flex flex-col gap-4">
-            <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Resources</p>
+          <div className="flex flex-col gap-5">
+            <p className={columnHeaderStyle}>RESOURCES</p>
             {["BIM Families", "Technical Datasheets", "Installation Guidelines", "Certifications", "Brochures", "Request a Sample"].map((item) => (
-              <span key={item} className={hoverOrange}>{item}</span>
+              <span key={item} className={linkStyle}>{item}</span>
             ))}
           </div>
 
           {/* Col 4: Socials */}
-          <div className="flex flex-col gap-4 uppercase tracking-widest text-[11px] md:text-[12px]">
-             <p className="text-white/40 uppercase tracking-tighter text-[10px] mb-2">Social</p>
+          <div className="flex flex-col gap-5">
+             <p className={columnHeaderStyle}>SOCIAL</p>
             {[
-              { name: "LINKEDIN", url: "#" },
-              { name: "INSTAGRAM", url: "#" },
-              { name: "FACEBOOK", url: "#" },
-              { name: "YOUTUBE", url: "#" },
+              { name: "LinkedIn", url: "#" },
+              { name: "Instagram", url: "#" },
+              { name: "Facebook", url: "#" },
+              { name: "YouTube", url: "#" },
             ].map((social) => (
-              <a key={social.name} href={social.url} className={`group flex items-center justify-between max-w-[140px] ${hoverOrange}`}>
-                <span>{social.name}</span>
-                <span className="transform transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↘</span>
+              <a key={social.name} href={social.url} className={`group flex items-center justify-between w-full max-w-[200px] ${linkStyle}`}>
+                <div className="flex items-center">
+                  {socialIcons[social.name]}
+                  <span>{social.name}</span>
+                </div>
+                <ArrowRight size={14} className="text-white/30 group-hover:text-white transition-colors" />
               </a>
             ))}
           </div>
         </div>
 
-        {/* Separator */}
-        <div className="w-full h-px bg-white/10 mb-8" />
-
         {/* Bottom Section: Copyright & Legal Links Horizontal */}
-        <div className="flex flex-col sm:flex-row justify-between items-center text-[11px] md:text-[13px] text-white/50 gap-6">
-          <p>Copyright: © 2026 Alubond U.S.A. All Rights Reserved.</p>
+        <div className="flex flex-col sm:flex-row justify-between items-center text-[13px] text-white/40 gap-6 mt-12">
+          <p>© 2026 Alubond U.S.A. All Rights Reserved.</p>
           
-          <div className="flex gap-6 md:gap-10">
+          <div className="flex gap-8">
             {["FAQ", "Terms", "Privacy"].map((link) => (
-              <span key={link} className={hoverOrange}>
+              <span key={link} className="hover:text-white transition-colors cursor-pointer">
                 {link}
               </span>
             ))}

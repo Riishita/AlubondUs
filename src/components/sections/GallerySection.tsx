@@ -66,6 +66,7 @@ export default function PremiumGallery() {
 
   return (
     <section 
+      id="gallerysection"
       ref={containerRef} 
       className="gradient-lumina relative h-[500vh]"
     >
