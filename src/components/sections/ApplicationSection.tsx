@@ -118,7 +118,7 @@ export default function ApplicationSection() {
           className="absolute inset-0 z-0"
           style={{ clipPath: bgClip }}
         >
-          <div className="h-full w-full bg-gradient-to-br from-[#0a1f44] via-[#134d7a] to-[#1fa2a6]" />
+          <div className="gradient-amaterasu h-full w-full" />
         </motion.div>
 
         {/* CONTENT */}

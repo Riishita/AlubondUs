@@ -267,7 +267,7 @@ const MaterialsSection = () => {
   const filtered = materials.filter((m) => m.category === active);
 
   return (
-    <section ref={ref} className="py-24 px-8 md:px-16 bg-white">
+    <section ref={ref} className="gradient-lumina py-24 px-8 md:px-16">
 
       {/* ================= FILTERS ================= */}
       <motion.div

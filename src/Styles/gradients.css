@@ -175,3 +175,44 @@ opacity: 0.4;
     transform: translate(0%, 0%) scale(1);
   }
 }
+
+
+/* ☁️ LUMINA — SOFT LIGHT MOVING GRADIENT */
+.gradient-lumina {
+  position: relative;
+  /* Using a combination of a base color and a large-scale radial overlay */
+  background-color: #ffffff;
+  background-image: 
+    /* This creates the specific blue "pool" on the left */
+    radial-gradient(
+      circle at 0% 50%, 
+      rgb(187, 221, 237) 0%, 
+      rgba(199, 235, 251, 0.6) 30%, 
+      rgba(255, 255, 255, 0) 70%
+    ),
+    /* This handles the diagonal sky-blue to white wash */
+    linear-gradient(
+      110deg, 
+      #bde6f9 0%, 
+      #dcf2fd 35%, 
+      #f2faff 70%, 
+      #ffffff 100%
+    );
+  
+  /* Ensure it covers the full height of your 500vh section */
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* The "Mist" Overlay - adds that airy, clinical depth seen in the screenshot */
+.gradient-lumina::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    transparent 100%
+  );
+  pointer-events: none;
+}

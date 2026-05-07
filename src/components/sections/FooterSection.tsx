@@ -60,13 +60,13 @@ const CTASection = () => {
         mouseY.set(e.clientY - rect.top);
       }}
       /* Added flex, items-center, justify-center, and text-center */
-      className={`relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32 flex flex-col items-center justify-center text-center ${cursorSectionClassName}`}
+      className={`gradient-amaterasu relative overflow-hidden px-6 py-24 text-white md:px-16 md:py-32 flex flex-col items-center justify-center text-center ${cursorSectionClassName}`}
       style={{
         WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
         maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
       }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,#4aa3b5_0%,#1e3a6d_40%,#020617_100%)]" />
+
 
       <motion.div
         className="absolute inset-0 pointer-events-none"
