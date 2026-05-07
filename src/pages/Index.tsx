@@ -35,8 +35,8 @@ const Index = () => {
           <Suspense fallback={<div className="min-h-screen" />}><HomeContent /></Suspense>
 
           <div className="relative isolate">
-            <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense> 
-            
+            <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
+
             {/* Parallax Overlay: TearEffect scrolls OVER QualitySection */}
             <div className="relative z-20 -mt-[100vh]">
               <Suspense fallback={<div className="min-h-screen" />}><Tearffect /></Suspense>
