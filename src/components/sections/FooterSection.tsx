@@ -207,7 +207,7 @@ const Footer = () => {
         <div className="w-full h-px bg-white/10 mb-20" />
 
         {/* Middle Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 text-[14px] md:text-[15px] font-light mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 text-[14px] md:text-[15px] font-light mb-16">
           
           {/* Col 1: Contact */}
           <div className="flex flex-col gap-5">

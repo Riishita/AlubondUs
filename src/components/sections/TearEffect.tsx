@@ -21,29 +21,31 @@ export default function CinematicVerticalTear() {
     offset: ["start start", "end end"],
   });
 
-  // --- PHASE 1: VIDEO SHIFT (0.0 -> 0.4) ---
+  // --- PHASE 1: VIDEO SHIFT (0.0 -> 0.25) ---
   // On desktop: shrinks to 50% width and shifts right
   // On mobile/tablet: shrinks to 40vh height at the top
-  const videoWidth = useTransform(scrollYProgress, [0, 0.4], ["100%", isMobile ? "100%" : "50%"]);
-  const videoHeight = useTransform(scrollYProgress, [0, 0.4], ["100vh", isMobile ? "40vh" : "100vh"]);
-  const videoLeft = useTransform(scrollYProgress, [0, 0.4], ["0%", isMobile ? "0%" : "50%"]);
-  const videoTop = useTransform(scrollYProgress, [0, 0.4], ["0%", "0%"]);
+  const videoWidth = useTransform(scrollYProgress, [0, 0.25], ["100%", isMobile ? "100%" : "50%"]);
+  const videoHeight = useTransform(scrollYProgress, [0, 0.25], ["100vh", isMobile ? "40vh" : "100vh"]);
+  const videoLeft = useTransform(scrollYProgress, [0, 0.25], ["0%", isMobile ? "0%" : "50%"]);
+  const videoTop = useTransform(scrollYProgress, [0, 0.25], ["0%", "0%"]);
 
-  // --- PHASE 2: THE TEAR (0.5 -> 0.9) ---
-  const topOrLeftTransform = useTransform(scrollYProgress, [0.5, 0.9], ["0%", "-100%"]);
-  const bottomOrRightTransform = useTransform(scrollYProgress, [0.5, 0.9], ["0%", "100%"]);
+  // --- PHASE 2: THE TEAR (0.3 -> 0.5) ---
+  const topOrLeftTransform = useTransform(scrollYProgress, [0.3, 0.5], ["0%", "-100%"]);
+  const bottomOrRightTransform = useTransform(scrollYProgress, [0.3, 0.5], ["0%", "100%"]);
   
-  const bgScale = useTransform(scrollYProgress, [0.5, 0.9], [0.85, 1]);
+  const bgScale = useTransform(scrollYProgress, [0.3, 0.5], [0.85, 1]);
+
+  const heroProgress = useTransform(scrollYProgress, [0.5, 1.0], [0, 1]);
 
   return (
     <div 
       ref={containerRef} 
-      className="relative h-[600vh] bg-black"
+      className="relative h-[1000vh] bg-black"
     >
-      <div id="certificatesection" className="absolute top-0 w-full h-[450vh] pointer-events-none" />
+      <div id="certificatesection" className="absolute top-0 w-full h-[500vh] pointer-events-none" />
       {/* BACKGROUND REVEAL - Ensure it has a solid black background behind it */}
       <motion.div style={{ scale: bgScale }} className="sticky top-0 h-screen w-full z-0 overflow-hidden bg-black">
-        <HeroSection />
+        <HeroSection progress={heroProgress} />
       </motion.div>
 
       {/* TEAR LAYER */}

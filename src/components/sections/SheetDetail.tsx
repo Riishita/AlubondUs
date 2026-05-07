@@ -3,7 +3,7 @@ import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorP
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei"; // Added useTexture
 import { useEffect, useState, useRef, Suspense } from "react"; // Added Suspense
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionValue } from "framer-motion";
 
 /* ================= 3D MODEL ================= */
 function PanelModel({
@@ -108,7 +108,7 @@ const steps = [
 ];
 
 /* ================= COMPONENT ================= */
-export default function HeroSection() {
+export default function HeroSection({ progress }: { progress?: MotionValue<number> }) {
   const [index, setIndex] = useState(0);
   const [split, setSplit] = useState(false);
   const [showNext, setShowNext] = useState(false);
@@ -131,43 +131,17 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
-    let isScrolling = false;
-    const isInView = () => {
-      if (!sectionRef.current) return false;
-      const rect = sectionRef.current.getBoundingClientRect();
-      return (
-        rect.top <= window.innerHeight * 0.2 &&
-        rect.bottom >= window.innerHeight * 0.8
-      );
-    };
+    if (!progress) return;
+    return progress.on("change", (v) => {
+      // Disable scroll effect on mobile so it only changes via button clicks
+      if (window.innerWidth < 768) return;
 
-    const handleScroll = (e: WheelEvent) => {
-      if (!isInView()) return;
-      if (isScrolling) return;
-      isScrolling = true;
-
-      setIndex((prev) => {
-        if (e.deltaY > 0) {
-          if (prev < steps.length - 1) {
-            e.preventDefault();
-            return prev + 1;
-          }
-          return prev;
-        } else {
-          if (prev > 0) {
-            e.preventDefault();
-            return prev - 1;
-          }
-          return prev;
-        }
-      });
-
-      setTimeout(() => (isScrolling = false), 600);
-    };
-
-    window.addEventListener("wheel", handleScroll, { passive: false });
-    return () => window.removeEventListener("wheel", handleScroll);
-  }, []);
+      let newIndex = Math.floor(v * 5);
+      if (newIndex >= 5) newIndex = 4;
+      if (newIndex < 0) newIndex = 0;
+      setIndex(newIndex);
+    });
+  }, [progress]);
 
   return (
     <section
