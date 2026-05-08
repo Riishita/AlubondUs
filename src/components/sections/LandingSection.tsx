@@ -97,7 +97,7 @@ useEffect(() => {
 
       {/* CONTENT */}
       <motion.div
-        className="relative z-10 flex h-full w-full items-center justify-between px-5 md:px-10 lg:px-24"
+        className="relative z-10 flex h-full w-full items-center justify-between px-5 pt-24 sm:pt-32 md:px-10 lg:px-24"
         style={{ y: contentY, opacity: contentOpacity, willChange: "transform, opacity" }}
       >
         {/* LEFT */}

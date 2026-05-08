@@ -42,11 +42,11 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   const scrollYProgress = externalProgress || localProgress;
 
   const globeScale = useTransform(scrollYProgress, [0, 0.4], [3, 1]);
-  
+
   const globeY = isTabletOrMobile
     ? useTransform(scrollYProgress, [0, 0.4], ["100%", "20%"])
-    : useTransform(scrollYProgress, [0, 0.4], ["70%", "-10%"]);
-    
+    : useTransform(scrollYProgress, [0, 0.4], ["40%", "-50%"]);
+
   const globeX = useTransform(
     scrollYProgress,
     [0, 0.4],
@@ -60,7 +60,9 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   const textScale = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const leftOpacity = useTransform(scrollYProgress, [0.2, 0.45], [0, 1]);
-  const leftY = useTransform(scrollYProgress, [0.2, 0.45], [10, 0]);
+  const leftY = isTabletOrMobile
+    ? useTransform(scrollYProgress, [0.2, 0.45], [10, 0])
+    : useTransform(scrollYProgress, [0.2, 0.45], ["-40%", "-50%"]);
   const glowOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   const locations = [
@@ -74,49 +76,49 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
     { name: "Egypt", lat: 26.8206, lng: 30.8025, logo: "alubond-logo.png", description: "Alubond Egypt Cairo" },
   ];
 
-const resetGlobeView = () => {
-  if (!globeRef.current) return;
+  const resetGlobeView = () => {
+    if (!globeRef.current) return;
 
-  globeRef.current.pointOfView(
-    { lat: 25, lng: 10, altitude: 2.7 },
-    1400
-  );
+    globeRef.current.pointOfView(
+      { lat: 25, lng: 10, altitude: 2.7 },
+      1400
+    );
 
-  // 🔥 CLOSE CARD
-  setSelectedPlace(null);
-};
+    // 🔥 CLOSE CARD
+    setSelectedPlace(null);
+  };
 
   const handleHover = (name: string) => {
-    if (selectedPlace) return; 
+    if (selectedPlace) return;
     const place = locations.find((l) => l.name === name);
     if (!place || !globeRef.current) return;
     globeRef.current.pointOfView({ lat: place.lat, lng: place.lng, altitude: 2.5 }, 1000);
   };
 
   const handleClick = (name: string) => {
-  const place = locations.find((l) => l.name === name);
-  if (!place) return;
+    const place = locations.find((l) => l.name === name);
+    if (!place) return;
 
-  // 🔥 replace instead of stacking
-  setSelectedPlace(place);
+    // 🔥 replace instead of stacking
+    setSelectedPlace(place);
 
-  globeRef.current.pointOfView(
-    { lat: place.lat, lng: place.lng, altitude: 1.8 },
-    1200
-  );
-};
+    globeRef.current.pointOfView(
+      { lat: place.lat, lng: place.lng, altitude: 1.8 },
+      1200
+    );
+  };
 
-useEffect(() => {
-  const unsubscribe = scrollYProgress.on("change", (v) => {
-    // when user scrolls past zoom focus area → close card
-    if (v > 0.5 && selectedPlace) {
-      setSelectedPlace(null);
-      resetGlobeView();
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      // when user scrolls past zoom focus area → close card
+      if (v > 0.5 && selectedPlace) {
+        setSelectedPlace(null);
+        resetGlobeView();
+      }
+    });
 
-  return () => unsubscribe();
-}, [selectedPlace]);
+    return () => unsubscribe();
+  }, [selectedPlace]);
 
   useEffect(() => {
     if (!globeRef.current) return;
@@ -182,28 +184,28 @@ useEffect(() => {
     <section ref={sectionRef} className={cn("relative h-screen w-full bg-black overflow-hidden", cursorSectionClassName)} {...cursorSectionProps}>
       <div className="relative w-full h-full">
         <div className="gradient-amaterasu min-h-screen px-6 md:px-10 py-24" />
-        
+
         <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="absolute top-[12%] w-full text-center text-white font-light tracking-[-2px] text-[clamp(40px,10vw,180px)]">
           Global Impact
         </motion.h1>
 
-        <motion.div style={{ scale: globeScale, y: globeY, x: globeX, willChange: "transform" }} className={cn("absolute left-1/2 -translate-x-1/2 transform-gpu", isTabletOrMobile ? "top-[10%]" : "bottom-0")}>
+        <motion.div style={{ scale: globeScale, y: globeY, x: globeX, willChange: "transform" }} className={cn("absolute left-1/2 -translate-x-1/2 transform-gpu", isTabletOrMobile ? "top-[10%]" : "top-1/2")}>
           <motion.div style={{ opacity: glowOpacity, willChange: "opacity" }} className="absolute w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-[radial-gradient(circle,rgba(59,130,246,0.35),transparent_70%)] blur-[140px] rounded-full -z-10" />
           {globe}
         </motion.div>
 
         {/* Centered text and buttons for Tablet/Mobile */}
-        <motion.div style={{ opacity: leftOpacity, y: leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[42%] left-0 w-full px-6 text-center" : "left-[6%] top-[32%] -translate-y-1/7 max-w-xl")}>
+        <motion.div style={{ opacity: leftOpacity, y: leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[42%] left-0 w-full px-6 text-center" : "left-[6%] top-1/2 -translate-y-1/2 max-w-xl")}>
           <h2 className="text-3xl md:text-5xl font-semibold mb-6">Our Global Presence <br /><span>Powers Local Delivery</span></h2>
-          
+
           <div className="mb-8">
             <p className="text-[10px] md:text-xs mb-2 opacity-60">● MANUFACTURING</p>
             <div className={cn("flex flex-wrap gap-3", isTabletOrMobile ? "justify-center" : "justify-start")}>
               {["UAE", "India", "Europe"].map((item) => (
-                <button 
-                  key={item} 
-                  onMouseEnter={() => handleHover(item)} 
-                  onClick={() => handleClick(item)} 
+                <button
+                  key={item}
+                  onMouseEnter={() => handleHover(item)}
+                  onClick={() => handleClick(item)}
                   className={cn("px-4 py-2 rounded-full border transition-all duration-300 text-sm md:text-base", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
                 >
                   {item}
@@ -216,10 +218,10 @@ useEffect(() => {
             <p className="text-[10px] md:text-xs mb-2 opacity-60">● OFFICES</p>
             <div className={cn("flex flex-wrap gap-3", isTabletOrMobile ? "justify-center" : "justify-start")}>
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
-                <button 
-                  key={item} 
-                  onMouseEnter={() => handleHover(item)} 
-                  onClick={() => handleClick(item)} 
+                <button
+                  key={item}
+                  onMouseEnter={() => handleHover(item)}
+                  onClick={() => handleClick(item)}
                   className={cn("px-4 py-2 rounded-full border transition-all duration-300 text-sm md:text-base", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
                 >
                   {item}
@@ -231,14 +233,14 @@ useEffect(() => {
 
         <AnimatePresence>
           {selectedPlace && (
-            <motion.div 
-              initial={{ opacity: 0, y: 40, scale: 0.96, x: isTabletOrMobile ? "-50%" : "0%" }} 
-              animate={{ opacity: 1, y: 0, scale: 1, x: isTabletOrMobile ? "-50%" : "0%" }} 
-              exit={{ opacity: 0, y: 20, x: isTabletOrMobile ? "-50%" : "0%" }} 
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.96, x: isTabletOrMobile ? "-50%" : "0%" }}
+              animate={{ opacity: 1, y: 0, scale: 1, x: isTabletOrMobile ? "-50%" : "0%" }}
+              exit={{ opacity: 0, y: 20, x: isTabletOrMobile ? "-50%" : "0%" }}
               className={cn(
-                "absolute z-50 p-6 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-white shadow-2xl transition-all duration-300", 
-                isTabletOrMobile 
-                  ? "bottom-8 left-1/2 w-[90%] max-w-[480px]" 
+                "absolute z-50 p-6 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-white shadow-2xl transition-all duration-300",
+                isTabletOrMobile
+                  ? "bottom-8 left-1/2 w-[90%] max-w-[480px]"
                   : "bottom-[5%] left-[6%] w-[380px]"
               )}
             >

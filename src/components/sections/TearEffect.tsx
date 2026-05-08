@@ -40,7 +40,7 @@ export default function CinematicVerticalTear() {
   return (
     <div 
       ref={containerRef} 
-      className="relative h-[1000vh] bg-black"
+      className="relative h-[250vh] lg:h-[1000vh] bg-black"
     >
       <div id="certificatesection" className="absolute top-0 w-full h-[500vh] pointer-events-none" />
       {/* BACKGROUND REVEAL - Ensure it has a solid black background behind it */}
