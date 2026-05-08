@@ -26,7 +26,7 @@ function PanelModel({
 
   const [scale, setScale] = useState(0.8);
   useEffect(() => {
-    const handleResize = () => setScale(window.innerWidth < 768 ? 0.5 : 0.8);
+    const handleResize = () => setScale(window.innerWidth < 1024 ? 0.5 : 0.8);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -116,7 +116,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => setIsMobile(window.innerWidth < 1024);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -133,9 +133,6 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
   useEffect(() => {
     if (!progress) return;
     return progress.on("change", (v) => {
-      // Disable scroll effect on mobile so it only changes via button clicks
-      if (window.innerWidth < 768) return;
-
       let newIndex = Math.floor(v * 5);
       if (newIndex >= 5) newIndex = 4;
       if (newIndex < 0) newIndex = 0;

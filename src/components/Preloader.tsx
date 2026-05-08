@@ -19,6 +19,17 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
     };
   }, [onComplete]);
 
+  useEffect(() => {
+    if (phase !== "done") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [phase]);
+
   const squares = [
     { size: 280, delay: 0, color: "hsl(232, 47%, 23%)" },
     { size: 210, delay: 0.1, color: "hsl(233, 39%, 33%)" },

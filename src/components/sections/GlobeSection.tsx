@@ -27,8 +27,8 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
 
   useEffect(() => {
-    // Threshold set to 1280px to cover mobile and tablet
-    const check = () => setIsTabletOrMobile(window.innerWidth < 1280);
+    // Threshold set to 1024px to cover mobile and tablet
+    const check = () => setIsTabletOrMobile(window.innerWidth < 1024);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
