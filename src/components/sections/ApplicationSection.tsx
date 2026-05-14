@@ -82,8 +82,8 @@ export default function ApplicationSection() {
   const contentOpacity = useTransform(scrollYProgress, [0.12, 0.32], [0.35, 1]);
   const contentScale = useTransform(scrollYProgress, [0.1, 0.45], [0.94, 1]);
 
-  const bgClip = useMotionTemplate`circle(${bgRadius} at 50% 45%)`;
-  const fgClip = useMotionTemplate`circle(${fgRadius} at 50% 50%)`;
+  const bgClip = useMotionTemplate`circle(${bgRadius} at 50% 100%)`;
+  const fgClip = useMotionTemplate`circle(${fgRadius} at 50% 100%)`;
 
   // ✅ NEW: motion value for smooth control
   const x = useMotionValue(0);
@@ -110,7 +110,7 @@ export default function ApplicationSection() {
     <section
       ref={sectionRef}
       {...cursorSectionProps}
-      className={`relative h-[220vh] ${cursorSectionClassName}`}
+      className={`relative h-[220vh] gradient-lumina ${cursorSectionClassName}`}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* BACKGROUND */}
