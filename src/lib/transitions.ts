@@ -90,5 +90,18 @@ export const VARIANTS = {
         ease: appleEase,
       },
     },
+  },
+  framerFadeUp: {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 20,
+        mass: 1,
+      },
+    },
   }
 };

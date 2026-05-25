@@ -166,20 +166,26 @@ export default function ApplicationSection() {
                 {duplicatedCards.map((card, i) => (
                   <motion.div
                     key={`${card.id}-${i}`}
-                    className="w-[260px] md:w-[320px] rounded-2xl overflow-hidden bg-white/10 backdrop-blur-md border border-white/10"
-                    whileHover={{ y: -6, scale: 1.02 }}
+                    className="group w-[260px] md:w-[320px] rounded-2xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-colors duration-500 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-grab active:cursor-grabbing"
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   >
-                    <img
-                      src={card.img}
-                      className="w-full h-[160px] md:h-[200px] object-cover"
-                    />
+                    <div className="w-full h-[160px] md:h-[200px] overflow-hidden relative">
+                      <motion.img
+                        src={card.img}
+                        className="w-full h-full object-cover origin-center"
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                    </div>
 
-                    <div className="p-4">
-                      <p className="text-xs text-gray-300">{card.id}</p>
-                      <h3 className="text-sm md:text-lg font-semibold mt-1">
+                    <div className="p-5 md:p-6 relative z-10 bg-gradient-to-b from-white/5 to-transparent">
+                      <p className="text-[10px] text-white/50 tracking-widest font-medium uppercase mb-1">{card.id}</p>
+                      <h3 className="text-base md:text-xl font-light uppercase tracking-tight text-white drop-shadow-sm mb-2">
                         {card.title}
                       </h3>
-                      <p className="text-xs md:text-sm text-gray-300 mt-2">
+                      <p className="text-xs md:text-sm text-white/70 leading-relaxed font-light">
                         {card.desc}
                       </p>
                     </div>

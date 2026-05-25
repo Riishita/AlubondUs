@@ -274,35 +274,35 @@ const MaterialsSection = () => {
         className="flex flex-wrap gap-3 mb-16"
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+        transition={{ type: "spring", stiffness: 50, damping: 20 }}
       >
         {categories.map((cat, i) => (
-  <motion.button
-    key={cat}
-    onClick={() => setActive(cat)}
-    className={`px-6 py-2 rounded-full text-sm font-medium border transition-all duration-300
-      ${
-        active === cat
-          ? "border-blue-500 text-orange-500 bg-white shadow-sm"
-          : "border-gray-300 text-gray-700 bg-white hover:border-gray-500"
-      }`}
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.97 }}
-    initial={{ opacity: 0, y: 20 }}
-    animate={isInView ? { opacity: 1, y: 0 } : {}}
-    transition={{ delay: i * 0.05 }}
-  >
-    {cat}
-  </motion.button>
-))}
+          <motion.button
+            key={cat}
+            onClick={() => setActive(cat)}
+            className={`px-6 py-2 rounded-full text-sm font-medium border transition-all duration-300
+              ${
+                active === cat
+                  ? "border-blue-500 text-orange-500 bg-white shadow-sm"
+                  : "border-gray-300 text-gray-700 bg-white hover:border-gray-500"
+              }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: i * 0.05, type: "spring", stiffness: 100, damping: 15 }}
+          >
+            {cat}
+          </motion.button>
+        ))}
       </motion.div>
 
       {/* ================= DESCRIPTION ================= */}
       <motion.p
         className="text-gray-500 text-base md:text-lg mb-12 max-w-xl"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.4 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.2, type: "spring", stiffness: 50, damping: 20 }}
       >
         Texture series — tactile surface interest for feature walls and cladding.
       </motion.p>
@@ -315,93 +315,93 @@ const MaterialsSection = () => {
               key={mat.name + i}
               layout
               className="group relative transform-gpu"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ delay: i * 0.06, type: "spring", stiffness: 200 }}
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: -20 }}
+              transition={{ delay: i * 0.04, type: "spring", stiffness: 150, damping: 15 }}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
               {/* 🔥 3D CARD */}
-<div
-  className="relative [perspective:1000px]"
-  onMouseMove={(e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+              <div
+                className="relative [perspective:1000px]"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
 
-    const rotateX = ((y - rect.height / 2) / rect.height) * -20;
-    const rotateY = ((x - rect.width / 2) / rect.width) * 20;
+                  const rotateX = ((y - rect.height / 2) / rect.height) * -20;
+                  const rotateY = ((x - rect.width / 2) / rect.width) * 20;
 
-    const card = e.currentTarget.firstElementChild as HTMLElement;
+                  const card = e.currentTarget.firstElementChild as HTMLElement;
 
-    card.style.transform = `
-      perspective(900px)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      scale(1.12)
-    `;
-  }}
-  onMouseLeave={(e) => {
-    const card = e.currentTarget.firstElementChild as HTMLElement;
+                  card.style.transform = `
+                    perspective(900px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    scale(1.12)
+                  `;
+                }}
+                onMouseLeave={(e) => {
+                  const card = e.currentTarget.firstElementChild as HTMLElement;
 
-    card.style.transform = `
-      perspective(900px)
-      rotateX(0deg)
-      rotateY(0deg)
-      scale(1)
-    `;
-  }}
->
-  <div
-    className="relative h-20 w-20 md:h-24 md:w-24 rounded-xl shadow-xl transition-transform duration-200 ease-out"
-    style={{ transformStyle: "preserve-3d" }}
-  >
-    {/* IMAGE (depth) */}
-    <img
-      src={mat.image}
-      alt={mat.name}
-      className="w-full h-full object-cover rounded-xl"
-      loading="lazy"
-      style={{ transform: "translateZ(40px)" }}
-    />
+                  card.style.transform = `
+                    perspective(900px)
+                    rotateX(0deg)
+                    rotateY(0deg)
+                    scale(1)
+                  `;
+                }}
+              >
+                <div
+                  className="relative h-20 w-20 md:h-24 md:w-24 rounded-xl shadow-xl transition-transform duration-300 ease-[0.32,0.72,0,1]"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  {/* IMAGE (depth) */}
+                  <img
+                    src={mat.image}
+                    alt={mat.name}
+                    className="w-full h-full object-cover rounded-xl"
+                    loading="lazy"
+                    style={{ transform: "translateZ(40px)" }}
+                  />
 
-    {/* LIGHT REFLECTION */}
-    <div
-      className="absolute inset-0 rounded-xl pointer-events-none"
-      style={{
-        background:
-          "linear-gradient(120deg, rgba(255,255,255,0.35), transparent 40%)",
-        transform: "translateZ(50px)",
-        mixBlendMode: "overlay",
-      }}
-    />
+                  {/* LIGHT REFLECTION */}
+                  <div
+                    className="absolute inset-0 rounded-xl pointer-events-none"
+                    style={{
+                      background:
+                        "linear-gradient(120deg, rgba(255,255,255,0.35), transparent 40%)",
+                      transform: "translateZ(50px)",
+                      mixBlendMode: "overlay",
+                    }}
+                  />
 
-    {/* DEPTH SHADOW */}
-    <div
-      className="absolute inset-0 rounded-xl"
-      style={{
-        transform: "translateZ(-20px)",
-        boxShadow: "0 30px 60px rgba(0,0,0,0.25)",
-      }}
-    />
-  </div>
-</div>
+                  {/* DEPTH SHADOW */}
+                  <div
+                    className="absolute inset-0 rounded-xl"
+                    style={{
+                      transform: "translateZ(-20px)",
+                      boxShadow: "0 30px 60px rgba(0,0,0,0.25)",
+                    }}
+                  />
+                </div>
+              </div>
               
-
               {/* Tooltip */}
               <AnimatePresence>
-  {hovered === i && (
-    <motion.div
-      className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-3 py-1.5 rounded-full whitespace-nowrap z-20"
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-    >
-      {mat.name}
-    </motion.div>
-  )}
-</AnimatePresence>
+                {hovered === i && (
+                  <motion.div
+                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur-md text-white text-[10px] tracking-wider uppercase px-4 py-2 rounded-full whitespace-nowrap z-20 shadow-xl"
+                    initial={{ opacity: 0, y: -8, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  >
+                    {mat.name}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -409,27 +409,27 @@ const MaterialsSection = () => {
 
       {/* ================= BOTTOM ================= */}
       <motion.div
-        className="flex flex-col md:flex-row items-start md:items-center justify-between pt-8 border-t border-gray-200"
-        initial={{ opacity: 0, y: 20 }}
+        className="flex flex-col md:flex-row items-start md:items-center justify-between pt-8 border-t border-gray-200/50"
+        initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.4, type: "spring", stiffness: 50, damping: 20 }}
       >
         <p className="text-gray-500 text-sm md:text-base max-w-md mb-6 md:mb-0">
           Over 200 colours, wood grains, stone finishes, and metallic effects available.
         </p>
 
-          <button className="group mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-300">
+          <button className="group mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-500 shadow-sm hover:shadow-md">
             
-            <span className="relative z-10 group-hover:text-white transition">
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300">
               Explore Color Studio
             </span>
 
-            <span className="relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-white">
+            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white">
               →
             </span>
 
             {/* hover bg */}
-            <span className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 rounded-full" />
+            <span className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-[0.32,0.72,0,1] rounded-full" />
           </button>
       </motion.div>
     </section>

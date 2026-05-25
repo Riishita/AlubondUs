@@ -111,6 +111,11 @@ useEffect(() => {
     [0, 0.1, 0.82, 1],
     ["0%", "-10%", "-150%", "-220%"] // Switched to % for better cross-device scaling
   );
+
+  // Individual Parallax Offsets for "Framer Feel"
+  const p1 = useTransform(smoothProgress, [0, 1], [0, -150]);
+  const p2 = useTransform(smoothProgress, [0, 1], [0, -300]);
+  const p3 = useTransform(smoothProgress, [0, 1], [0, -200]);
   
   const rm = Boolean(reduceMotion);
 
@@ -123,25 +128,24 @@ useEffect(() => {
       <div className="sticky top-0 z-10 h-screen w-full overflow-hidden [transform:translateZ(0)]">
         {/* VIDEO BACKGROUND */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-  <motion.video
-    ref={videoRef}
-    src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065525/VN20260424_193642_oykfnh.mp4"
-    muted
-    playsInline
-    preload="auto"
-    className="
-      absolute top-1/2 left-1/2 
-      min-w-full min-h-full 
-      w-auto h-auto 
-      -translate-x-1/2 -translate-y-1/2
-      object-cover
-      will-change-transform
-    "
-  />
-  
-  {/* Overlay for readability */}
-  <div className="absolute inset-0 bg-black/10" />
-</div>
+          <motion.video
+            ref={videoRef}
+            src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065525/VN20260424_193642_oykfnh.mp4"
+            muted
+            playsInline
+            preload="auto"
+            className="
+              absolute top-1/2 left-1/2 
+              min-w-full min-h-full 
+              w-auto h-auto 
+              -translate-x-1/2 -translate-y-1/2
+              object-cover
+              will-change-transform
+            "
+          />
+          {/* Overlay for readability */}
+          <div className="absolute inset-0 bg-black/10" />
+        </div>
 
         {/* SCROLLING CONTENT LAYER */}
         <motion.div
@@ -149,60 +153,78 @@ useEffect(() => {
           className="relative z-10 h-full w-full will-change-transform"
         >
           {/* LEFT TEXT 1 */}
-          <div className="absolute left-[8%] top-[20vh] max-w-[85%] sm:max-w-md md:left-[6%]">
-            <h2 className="font-heading text-3xl font-light leading-tight sm:text-4xl md:text-5xl">
+          <motion.div 
+            style={{ y: rm ? 0 : p1 }} 
+            className="absolute left-[8%] top-[20vh] max-w-[85%] sm:max-w-md md:left-[6%]"
+          >
+            <h2 className="font-heading text-3xl font-light leading-tight sm:text-4xl md:text-5xl text-white drop-shadow-lg">
               What happens when design meets limitless possibility?
             </h2>
-          </div>
+          </motion.div>
 
           {/* RIGHT TEXT */}
-          <div className="absolute right-[8%] top-[75vh] max-w-[85%] text-right sm:max-w-md md:right-[6%] md:top-[70vh]">
-            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl">
+          <motion.div 
+            style={{ y: rm ? 0 : p2 }}
+            className="absolute right-[8%] top-[75vh] max-w-[85%] text-right sm:max-w-md md:right-[6%] md:top-[70vh]"
+          >
+            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl text-white drop-shadow-lg">
               We build beyond borders
             </h2>
-            <p className="text-sm text-white/70 md:text-base">
+            <p className="text-sm text-white/90 md:text-base drop-shadow-md">
               Multi-layer architecture ensures fire resistance, weather protection, and unmatched reliability in
               extreme environments.
             </p>
-          </div>
+          </motion.div>
 
           {/* CARDS - Responsive Grid */}
           <div className="absolute left-0 top-[130vh] w-full px-6 md:px-16">
             <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
-              <div className="bg-[#E9E5DE] p-6 text-[#203f65] transition-transform md:p-8">
-    
+              <motion.div 
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white transition-transform md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+              >
                 <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">100+ Countries</h2>
-                <p className="text-xs leading-relaxed md:text-sm">
+                <p className="text-xs leading-relaxed md:text-sm text-white/80">
                   Delivering trusted façade solutions across diverse global markets with consistent quality and
                   performance.
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
-                
+              <motion.div 
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+              >
                 <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">50,000+ Projects Worldwide</h2>
-                <p className="text-xs leading-relaxed md:text-sm">
+                <p className="text-xs leading-relaxed md:text-sm text-white/80">
                   From iconic skylines to modern infrastructure, our panels power projects at every scale.
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="bg-[#E9E5DE] p-6 text-[#203f65] md:p-8">
-                
+              <motion.div 
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+              >
                 <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">35+ Industry Leadership</h2>
-                <p className="text-xs leading-relaxed md:text-sm">
+                <p className="text-xs leading-relaxed md:text-sm text-white/80">
                   Decades of innovation, engineering excellence, and leadership in advanced building materials.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* LEFT TEXT 2 */}
-          <div className="absolute left-[8%] top-[200vh] max-w-[85%] sm:max-w-md md:left-[6%]">
-            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl">Uncompromised Durability</h2>
-            <p className="text-sm text-white/70 md:text-base">
+          <motion.div 
+            style={{ y: rm ? 0 : p3 }}
+            className="absolute left-[8%] top-[200vh] max-w-[85%] sm:max-w-md md:left-[6%]"
+          >
+            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl text-white drop-shadow-lg">Uncompromised Durability</h2>
+            <p className="text-sm text-white/90 md:text-base drop-shadow-md">
               From impact to exposure, it holds its integrity—proving durability where it matters most.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

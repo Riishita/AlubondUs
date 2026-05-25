@@ -26,8 +26,8 @@ export default function SmoothTransitionWrapper() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    damping: 30,
-    stiffness: 100,
+    damping: 20,
+    stiffness: 50,
   });
 
   const stripStart = 0.70;
@@ -46,6 +46,7 @@ export default function SmoothTransitionWrapper() {
 
   const philosophyOpacity = useTransform(smoothProgress, [0.94, 0.99], [0, 1]);
   const philosophyY = useTransform(smoothProgress, [0.94, 1], [40, 0]);
+  const philosophyParallaxY = useTransform(smoothProgress, [0.94, 1], [0, -30]); // Additional inner parallax
 
   useEffect(() => {
     return smoothProgress.on("change", (v) => {
@@ -83,7 +84,7 @@ export default function SmoothTransitionWrapper() {
         }}
         className="sticky top-0 h-screen z-20 flex items-center justify-center px-6 py-12 md:p-20 text-[#1f2937]"
       >
-        <div className="max-w-6xl w-full flex flex-col justify-center">
+        <motion.div style={{ y: philosophyParallaxY }} className="max-w-6xl w-full flex flex-col justify-center">
           <p className="text-[9px] md:text-xs uppercase tracking-[0.4em] text-black/40 mb-6 md:mb-16">
             001 / Philosophy
           </p>
@@ -111,17 +112,17 @@ export default function SmoothTransitionWrapper() {
               At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site.
             </p>
             
-            <button className="mt-8 md:mt-12 group relative inline-flex items-center gap-3 px-6 md:px-8 py-2.5 md:py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300">
+            <button className="mt-8 md:mt-12 group relative inline-flex items-center gap-3 px-6 md:px-8 py-2.5 md:py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]">
               <span className="relative z-10 text-[10px] md:text-sm tracking-wide text-[#1f2937] group-hover:text-white transition">
                 Explore Our Story
               </span>
               <span className="relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-white">
                 →
               </span>
-              <span className="absolute inset-0 bg-[#1f2937] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 rounded-full" />
+              <span className="absolute inset-0 bg-[#1f2937] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-[0.32,0.72,0,1] rounded-full" />
             </button>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
       <div id="philosophy" className="absolute bottom-0 w-full h-[120vh] pointer-events-none" />
     </div>
