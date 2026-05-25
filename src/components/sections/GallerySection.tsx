@@ -29,7 +29,6 @@ const panels = [
     title: "Khalifa Stadium",
     location: "Doha, Qatar",
   },
-  
 ];
 
 export default function PremiumGallery() {
@@ -43,13 +42,8 @@ export default function PremiumGallery() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Dimensions for small and large tracks
-  const cardWidthLg = isMobile ? 70 : 30; // vw
-  const cardWidthSm = isMobile ? 35 : 15; // vw
-  const gapSm = isMobile ? 4 : 2; // vw
-
+  const cardWidthLg = isMobile ? 85 : 45; // vw
   const totalMoveLg = (panels.length - 1) * cardWidthLg;
-  const totalMoveSm = (panels.length - 1) * (cardWidthSm + gapSm);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -57,13 +51,12 @@ export default function PremiumGallery() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 25,
+    stiffness: 50,
+    damping: 20,
     restDelta: 0.001
   });
 
   const xLg = useTransform(smoothProgress, [0, 1], ["0vw", `-${totalMoveLg}vw`]);
-  const xSm = useTransform(smoothProgress, [0, 1], ["0vw", `-${totalMoveSm}vw`]);
 
   const buttonOpacity = useTransform(smoothProgress, [0.9, 0.98], [0, 1]);
   const buttonScale = useTransform(smoothProgress, [0.9, 0.98], [0.8, 1]);
@@ -73,91 +66,69 @@ export default function PremiumGallery() {
     <section 
       id="gallerysection"
       ref={containerRef} 
-      className="gradient-lumina relative h-[500vh]"
+      className="bg-neutral-950 relative h-[400vh]"
     >
-      
-      {/* Optional: Overlay to add that slight "grain" texture often seen in high-end UI */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }}></div>
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }}></div>
 
-      <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
         
-        {/* Updated Heading Colors to match the dark blue/black text in the image */}
-        <div className="absolute top-12 md:top-auto md:left-20 z-30 pointer-events-none w-full md:w-auto px-10">
+        {/* Floating Heading */}
+        <div className="absolute top-12 md:top-16 md:left-16 z-30 pointer-events-none w-full md:w-auto px-6 md:px-0">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-1 md:space-y-2 text-center md:text-left"
           >
-            <p className="text-blue-900/40 uppercase text-[8px] md:text-[10px] tracking-[0.4em]">005 / Portfolio</p>
-            <h2 className="text-3xl md:text-5xl font-medium text-blue-950 leading-tight">
+            <p className="text-white/40 uppercase text-[9px] md:text-[11px] tracking-[0.4em] font-medium">005 / Portfolio</p>
+            <h2 className="text-3xl md:text-5xl font-medium text-white leading-tight">
               TRUSTED BY<br className="hidden md:block" />
-              <span className="italic font-light"> ARCHITECTS.</span>
+              <span className="italic font-light text-white/70"> ARCHITECTS.</span>
             </h2>
           </motion.div>
         </div>
 
-        {/* SMALL TRACK (Background) */}
-        <div className="absolute top-0 left-0 w-full h-full flex items-center overflow-hidden pointer-events-none">
-          <motion.div
-            style={{ x: xSm, gap: `${gapSm}vw` }}
-            className="flex items-center h-full w-max"
+        {/* Dynamic Connected Track */}
+        <div className="w-full h-full flex items-center justify-center pointer-events-none">
+          <div 
+            className="relative z-20 pointer-events-none overflow-visible rounded-xl shadow-2xl"
+            style={{ width: `${cardWidthLg}vw`, height: isMobile ? '70vh' : '80vh' }}
           >
-            {/* Spacer to center the first item initially */}
-            <div style={{ width: `${50 - cardWidthSm / 2}vw`, flexShrink: 0 }} />
+            {/* Soft glowing backdrop */}
+            <div className="absolute inset-0 bg-white/5 blur-3xl rounded-full" />
             
-            {panels.map((panel, i) => (
-              <SmallCard 
-                key={i} 
-                panel={panel} 
-                cardWidth={cardWidthSm}
-                index={i}
-                progress={smoothProgress}
-                total={panels.length}
-              />
-            ))}
-          </motion.div>
-        </div>
-
-        {/* LARGE TRACK (Foreground Frame) */}
-        <div 
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
-          style={{ width: `${cardWidthLg}vw`, aspectRatio: '4/5' }}
-        >
-          {/* Dotted border wrapper (blue dot removed) */}
-          <div className="absolute inset-[-10px] md:inset-[-15px] border border-dashed border-blue-900/20 rounded-lg pointer-events-none" />
-          
-          {/* Masking container for the large videos */}
-          <div className="absolute inset-0 overflow-hidden rounded-sm pointer-events-auto shadow-2xl bg-neutral-900">
-            <motion.div
-              style={{ x: xLg }}
-              className="flex items-center h-full w-max"
-            >
-              {panels.map((panel, i) => (
-                <LargeCard 
-                  key={i} 
-                  panel={panel} 
-                  index={i} 
-                  progress={smoothProgress} 
-                  total={panels.length}
-                  cardWidth={cardWidthLg}
-                />
-              ))}
-            </motion.div>
+            {/* The main masking container */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl md:rounded-[2rem] pointer-events-auto bg-neutral-900 border border-white/10 ring-1 ring-white/5">
+              <motion.div
+                style={{ x: xLg }}
+                className="flex items-center h-full w-max"
+              >
+                {panels.map((panel, i) => (
+                  <LargeCard 
+                    key={i} 
+                    panel={panel} 
+                    index={i} 
+                    progress={smoothProgress} 
+                    total={panels.length}
+                    cardWidth={cardWidthLg}
+                  />
+                ))}
+              </motion.div>
+            </div>
           </div>
         </div>
-
       </div>
 
       <motion.div
         style={{ opacity: buttonOpacity, scale: buttonScale, y: buttonY }}
-        className="absolute bottom-12 md:bottom-20 right-10 md:right-[35vw] z-40 translate-x-1/2"
+        className="absolute bottom-12 md:bottom-20 left-1/2 z-40 -translate-x-1/2"
       >
-        <button className="group relative px-10 py-4 bg-white/40 backdrop-blur-md border border-blue-900/10 text-blue-950 text-[10px] tracking-[0.3em] uppercase font-semibold rounded-full overflow-hidden transition-all duration-500 hover:bg-blue-950 hover:text-white shadow-[0_0_20px_rgba(0,0,0,0.05)]">
+        <button className="group relative px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 text-white text-[10px] tracking-[0.3em] uppercase font-medium rounded-full overflow-hidden transition-all duration-500 hover:bg-white hover:text-black shadow-[0_0_30px_rgba(255,255,255,0.1)]">
           <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shine" />
-          <span className="relative flex items-center gap-2">
+          <span className="relative flex items-center gap-3">
             View All Projects
-            <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </span>
         </button>
@@ -166,55 +137,50 @@ export default function PremiumGallery() {
   );
 }
 
-function SmallCard({ panel, cardWidth, index, progress, total }: any) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const centerStep = index / (total - 1);
-
-  useEffect(() => {
-    const unsubscribe = progress.on("change", (v: number) => {
-      // Play if it's somewhat near the center
-      if (Math.abs(v - centerStep) < 0.25) {
-        videoRef.current?.play().catch(() => {});
-      } else {
-        videoRef.current?.pause();
-      }
-    });
-    return () => unsubscribe();
-  }, [progress, centerStep]);
-
-  return (
-    <div
-      className="relative flex-shrink-0 aspect-[4/5] overflow-hidden"
-      style={{ width: `${cardWidth}vw`, opacity: 0.5 }}
-    >
-      <video
-        ref={videoRef}
-        src={panel.video}
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-    </div>
-  );
-}
-
 function LargeCard({ panel, index, progress, total, cardWidth }: any) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const centerStep = index / (total - 1);
   
+  // Create a stunning parallax effect within each contiguous card
+  const parallaxX = useTransform(
+    progress,
+    [centerStep - 0.5, centerStep, centerStep + 0.5],
+    ["25%", "0%", "-25%"]
+  );
+
+  // Fade text in only when perfectly centered
   const textOpacity = useTransform(progress, 
-    [centerStep - 0.05, centerStep, centerStep + 0.05], 
+    [centerStep - 0.1, centerStep, centerStep + 0.1], 
     [0, 1, 0]
+  );
+  
+  const textY = useTransform(progress, 
+    [centerStep - 0.1, centerStep, centerStep + 0.1], 
+    [20, 0, -20]
+  );
+
+  // Video scale down slightly when not in focus
+  const videoScale = useTransform(progress,
+    [centerStep - 0.2, centerStep, centerStep + 0.2],
+    [1.1, 1, 1.1]
+  );
+
+  const overlayOpacity = useTransform(progress,
+    [centerStep - 0.2, centerStep, centerStep + 0.2],
+    [0.6, 0, 0.6]
   );
 
   useEffect(() => {
     const unsubscribe = progress.on("change", (v: number) => {
-      // Play only if it is the actively centered card
-      if (Math.abs(v - centerStep) < 0.15) {
-        videoRef.current?.play().catch(() => {});
+      // Play instantly when it enters the focus zone
+      if (Math.abs(v - centerStep) < 0.2) {
+        if (videoRef.current?.paused) {
+          videoRef.current?.play().catch(() => {});
+        }
       } else {
-        videoRef.current?.pause();
+        if (!videoRef.current?.paused) {
+          videoRef.current?.pause();
+        }
       }
     });
     return () => unsubscribe();
@@ -223,24 +189,36 @@ function LargeCard({ panel, index, progress, total, cardWidth }: any) {
   return (
     <div
       style={{ width: `${cardWidth}vw` }}
-      className="relative flex-shrink-0 h-full bg-neutral-900 overflow-hidden"
+      className="relative flex-shrink-0 h-full overflow-hidden flex items-center justify-center border-r border-white/5 last:border-r-0"
     >
-      <video
-        ref={videoRef}
-        src={panel.video}
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+      <motion.div 
+        style={{ x: parallaxX, scale: videoScale }}
+        className="absolute inset-0 w-[120%] -left-[10%] h-full"
+      >
+        <video
+          ref={videoRef}
+          src={panel.video}
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
+      
+      {/* Dark overlay that fades away when active */}
+      <motion.div 
+        style={{ opacity: overlayOpacity }}
+        className="absolute inset-0 bg-black z-10 pointer-events-none" 
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
       
       <motion.div 
-        style={{ opacity: textOpacity }}
-        className="absolute bottom-6 md:bottom-10 left-0 right-0 text-center px-4 md:px-6"
+        style={{ opacity: textOpacity, y: textY }}
+        className="absolute bottom-10 md:bottom-16 left-0 right-0 text-center px-4 md:px-8 z-20"
       >
-        <p className="text-[7px] md:text-[9px] tracking-[0.4em] uppercase text-white/50 mb-1">{panel.location}</p>
-        <h3 className="text-lg md:text-xl font-bold uppercase tracking-tighter text-white">{panel.title}</h3>
+        <p className="text-[8px] md:text-[10px] tracking-[0.4em] uppercase text-white/70 mb-2 font-medium">{panel.location}</p>
+        <h3 className="text-2xl md:text-4xl font-light uppercase tracking-widest text-white">{panel.title}</h3>
       </motion.div>
     </div>
   );
