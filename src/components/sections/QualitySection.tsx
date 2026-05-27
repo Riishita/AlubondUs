@@ -184,7 +184,14 @@ useEffect(() => {
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white transition-transform md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
-                <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">100+ Countries</h2>
+                <div className="mb-2">
+                  <span className="text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                    100+
+                  </span>
+                  <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
+                    Countries Reached
+                  </span>
+                </div>
                 <p className="text-xs leading-relaxed md:text-sm text-white/80">
                   Delivering trusted façade solutions across diverse global markets with consistent quality and
                   performance.
@@ -196,7 +203,14 @@ useEffect(() => {
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
-                <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">50,000+ Projects Worldwide</h2>
+                <div className="mb-2">
+                  <span className="text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                    50,000+
+                  </span>
+                  <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
+                    Projects Worldwide
+                  </span>
+                </div>
                 <p className="text-xs leading-relaxed md:text-sm text-white/80">
                   From iconic skylines to modern infrastructure, our panels power projects at every scale.
                 </p>
@@ -207,7 +221,14 @@ useEffect(() => {
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
-                <h2 className="font-heading mb-2 text-lg font-medium md:mb-3 md:text-2xl">35+ Industry Leadership</h2>
+                <div className="mb-2">
+                  <span className="text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                    35+
+                  </span>
+                  <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
+                    Years of Leadership
+                  </span>
+                </div>
                 <p className="text-xs leading-relaxed md:text-sm text-white/80">
                   Decades of innovation, engineering excellence, and leadership in advanced building materials.
                 </p>

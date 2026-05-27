@@ -3,7 +3,8 @@ import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorP
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei"; // Added useTexture
 import { useEffect, useState, useRef, Suspense } from "react"; // Added Suspense
-import { motion, AnimatePresence, MotionValue, useScroll } from "framer-motion";
+import { motion, AnimatePresence, MotionValue } from "framer-motion";
+import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 /* ================= 3D MODEL ================= */
 function PanelModel({
@@ -130,10 +131,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
     return () => clearTimeout(timer);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+  const { scrollYProgress } = useSectionScroll(sectionRef, ["start 90%", "end 10%"]);
 
   const activeProgress = progress || scrollYProgress;
 
@@ -151,9 +149,9 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
     <section
       ref={sectionRef}
       {...cursorSectionProps}
-      className={`w-full h-[100vh] relative ${cursorSectionClassName}`}
+      className={`w-full h-screen relative overflow-hidden ${cursorSectionClassName}`}
     >
-      <div className="sticky top-0 h-screen w-full relative overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24">
+      <div className="h-full w-full overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24 relative">
       
       {/* 🔵 3D CANVAS */}
       <motion.div

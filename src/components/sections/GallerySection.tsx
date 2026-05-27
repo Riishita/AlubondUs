@@ -3,6 +3,8 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+
 const panels = [
   { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066850/VN20260506_165456_ujqlmd.mp4", title: "Krestovsky Stadium", location: "St. Petersburg, Russia" },
   { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066849/VN20260506_165518_q1j310.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
@@ -13,6 +15,7 @@ const panels = [
 export default function PremiumGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -23,7 +26,7 @@ export default function PremiumGallery() {
 
   const cardWidth = isMobile ? 85 : 40;
   // Reduced card height on mobile to provide more breathing room for the button
-  const cardHeight = isMobile ? "45vh" : "70vh";
+  const cardHeight = isMobile ? "38vh" : "70vh";
   
   const totalMove = (panels.length - 1) * cardWidth;
 
@@ -39,7 +42,11 @@ export default function PremiumGallery() {
   const buttonScale = useTransform(smoothProgress, [0.9, 1], [0.8, 1]);
 
   return (
-    <section ref={containerRef} className="bg-neutral-950 relative h-[400vh] text-white">
+    <section 
+      ref={containerRef} 
+      className={`bg-neutral-950 relative h-[400vh] text-white ${cursorSectionClassName}`}
+      {...cursorSectionProps}
+    >
       <div className="sticky top-0 h-screen w-full flex flex-col lg:grid lg:grid-cols-12 items-center px-6 lg:px-16 gap-8 overflow-hidden">
         
         {/* Left Text Column */}
@@ -55,7 +62,7 @@ export default function PremiumGallery() {
         </div>
 
         {/* Right Gallery Column - Added margin bottom for mobile separation */}
-        <div className="lg:col-span-8 w-full flex items-center justify-center lg:justify-end mb-16 lg:mb-0">
+        <div className="lg:col-span-8 w-full flex items-center justify-center lg:justify-end mb-24 lg:mb-0">
           <div 
             className="relative overflow-hidden rounded-2xl border border-white/10"
             style={{ width: `${cardWidth}vw`, height: cardHeight }}

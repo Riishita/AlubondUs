@@ -2,11 +2,13 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import FireHorizontalExperience from "./CertificationSection"; 
 
 export default function CinematicVerticalTear() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -31,8 +33,9 @@ export default function CinematicVerticalTear() {
   return (
     <div 
       ref={containerRef} 
-      className="relative bg-black"
+      className={`relative bg-black ${cursorSectionClassName}`}
       style={{ height: isMobile ? "150vh" : "200vh" }}
+      {...cursorSectionProps}
     >
       <div id="certificatesection" className="absolute top-0 w-full h-full pointer-events-none" />
       

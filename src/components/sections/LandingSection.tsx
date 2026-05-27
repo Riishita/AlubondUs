@@ -65,7 +65,7 @@ const LandingHero = () => {
 
           {/* CONTENT */}
           <motion.div
-            className="relative z-10 flex h-full w-full items-center justify-between px-6 pt-24 md:px-20 lg:px-24"
+            className="relative z-10 flex flex-col md:flex-row h-full w-full items-start md:items-center justify-center md:justify-between px-6 pt-24 pb-12 md:pb-0 md:px-20 lg:px-24 gap-8 md:gap-0"
             style={{ y: contentY, opacity: contentOpacity }}
           >
             {/* LEFT - BOLDER TYPOGRAPHY */}
@@ -101,14 +101,14 @@ const LandingHero = () => {
               </motion.button>
             </motion.div>
 
-            {/* RIGHT - BOLD STATS */}
-            <motion.div className="hidden flex-col items-end gap-12 md:flex z-10">
+            {/* RIGHT - BOLD STATS (Now responsive and visible on mobile) */}
+            <motion.div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start w-full md:w-auto gap-4 md:gap-12 mt-4 md:mt-0 z-10 border-t border-white/10 md:border-none pt-8 md:pt-0">
               {stats.map((stat) => (
-                <div key={stat.label} className="text-right">
-                  <p className="text-5xl font-black text-white tracking-tight drop-shadow-2xl">
+                <div key={stat.label} className="text-left md:text-right flex-1 md:flex-initial">
+                  <p className="text-4xl md:text-5xl font-black text-white tracking-tight drop-shadow-2xl">
                     {stat.value}
                   </p>
-                  <p className="mt-2 text-[10px] font-bold tracking-[0.3em] text-[#59c4ee] uppercase">
+                  <p className="mt-1 md:mt-2 text-[9px] md:text-[10px] font-bold tracking-[0.3em] text-[#59c4ee] uppercase">
                     {stat.label}
                   </p>
                 </div>
