@@ -22,9 +22,9 @@ export default function FireHorizontalExperience({
   const [isHovered, setIsHovered] = useState(false);
 
   // Content fades in as video shrinks
-  const contentOpacity = useTransform(scrollProgress, [0.15, 0.35], [0, 1]);
+  const contentOpacity = useTransform(scrollProgress, [0.2, 0.6], [0, 1]);
   // Move text slightly up as it appears
-  const contentY = useTransform(scrollProgress, [0.15, 0.35], [20, 0]);
+  const contentY = useTransform(scrollProgress, [0.2, 0.6], [20, 0]);
 
   return (
     <div className="relative h-screen w-full bg-[#F7F7F5] overflow-hidden">

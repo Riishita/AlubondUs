@@ -13,6 +13,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLogo, setActiveLogo] = useState("/Logo1.png");
+  const [showLogo, setShowLogo] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +36,10 @@ const Navbar = () => {
       }
 
       setActiveLogo(useLogo2 ? "/Logo2.png" : "/Logo1.png");
+
+      // Hide logo once user scrolls past the landing section
+      const scrollY = window.scrollY || window.pageYOffset;
+      setShowLogo(scrollY < window.innerHeight * 0.8);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -53,7 +58,7 @@ const Navbar = () => {
         transition={{ duration: 0.7, delay: 0.2 }}
       >
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center transition-opacity duration-500" style={{ opacity: showLogo ? 1 : 0, pointerEvents: showLogo ? 'auto' : 'none' }}>
           <img
   src={activeLogo}
   alt="Alubond U.S.A"

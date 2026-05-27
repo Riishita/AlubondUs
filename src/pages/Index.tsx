@@ -8,8 +8,8 @@ const HomeContent = lazy(() => import("@/components/sections/HomeContent"));
 const QualitySection = lazy(() => import("@/components/sections/QualitySection"));
 const Tearffect = lazy(() => import("@/components/sections/TearEffect"));
 
-// const SheetDetail = lazy(() => import("@/components/sections/SheetDetail"));
 // const CertificationSection = lazy(() => import("@/components/sections/CertificationSection"));
+const SheetDetail = lazy(() => import("@/components/sections/SheetDetail"));
 
 const MaterialSection = lazy(() => import("@/components/sections/MaterialSection"));
 const ApplicationSection = lazy(() => import("@/components/sections/ApplicationSection"));
@@ -36,13 +36,14 @@ const Index = () => {
 
           <div className="relative isolate">
             <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
-
+            
             {/* Parallax Overlay: TearEffect scrolls OVER QualitySection */}
             <div className="relative z-10 -mt-[100vh]">
               <Suspense fallback={<div className="min-h-screen" />}><Tearffect /></Suspense>
             </div>
           </div>
-          <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
+          <Suspense fallback={<div className="min-h-screen" />}><SheetDetail /></Suspense>
+          <Suspense fallback={<div />}><MaterialSection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
     
               <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>

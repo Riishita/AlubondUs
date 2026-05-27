@@ -170,7 +170,7 @@ const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
     <section ref={ref} className="relative h-[100vh]">
       
       {/* Background */}
-      <motion.div className="absolute inset-0 transform-gpu" style={{ y: imageY, scale: imageScale }}>
+      <div className="absolute inset-0">
         <img
           src={heroData.image}
           alt="Color and finishes"
@@ -189,7 +189,7 @@ const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
             )`,
           }}
         />
-      </motion.div>
+      </div>
 
       
 
@@ -270,32 +270,85 @@ const MaterialsSection = () => {
     <section ref={ref} className="gradient-lumina py-24 px-8 md:px-16">
 
       {/* ================= FILTERS ================= */}
-      <motion.div
-        className="flex flex-wrap gap-3 mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ type: "spring", stiffness: 50, damping: 20 }}
-      >
-        {categories.map((cat, i) => (
-          <motion.button
-            key={cat}
-            onClick={() => setActive(cat)}
-            className={`px-6 py-2 rounded-full text-sm font-medium border transition-all duration-300
-              ${
-                active === cat
-                  ? "border-blue-500 text-orange-500 bg-white shadow-sm"
-                  : "border-gray-300 text-gray-700 bg-white hover:border-gray-500"
-              }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: i * 0.05, type: "spring", stiffness: 100, damping: 15 }}
-          >
-            {cat}
-          </motion.button>
-        ))}
-      </motion.div>
+     <motion.div
+  className="mb-20 flex flex-wrap gap-4"
+  initial={{ opacity: 0, y: 30 }}
+  animate={isInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ type: "spring", stiffness: 60, damping: 18 }}
+>
+  {categories.map((cat, i) => (
+    <motion.button
+      key={cat}
+      onClick={() => setActive(cat)}
+      whileHover={{
+        y: -4,
+        scale: 1.04,
+      }}
+      whileTap={{ scale: 0.97 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        delay: i * 0.04,
+        type: "spring",
+        stiffness: 120,
+        damping: 15,
+      }}
+      className={`group relative overflow-hidden rounded-[24px] px-7 py-3.5 text-sm font-medium tracking-[0.01em] transition-all duration-500
+      ${
+        active === cat
+          ? "text-white shadow-[0_15px_50px_rgba(15,23,42,0.28)]"
+          : "border border-white/40 bg-white/60 text-[#1A1A1A] backdrop-blur-xl hover:bg-white/90"
+      }`}
+    >
+      {/* Active Aurora Gradient */}
+      {active === cat && (
+        <>
+          <motion.div
+            className="absolute inset-0 rounded-[24px]"
+            animate={{
+              background: [
+             "linear-gradient(135deg, #071B3A 0%, #123B6D 45%, #1E7FB5 100%)",
+    "linear-gradient(135deg, #081A35 0%, #144978 50%, #238CC2 100%)",
+    "linear-gradient(135deg, #0A2345 0%, #18588A 55%, #2A9BD1 100%)",
+              ],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+
+          {/* inner glass */}
+          <div className="absolute inset-[1px] rounded-[23px] border border-white/10 bg-white/5 backdrop-blur-xl" />
+        </>
+      )}
+
+      {/* Hover Glow */}
+      <div className="absolute inset-0 rounded-[24px] bg-gradient-to-r from-white/10 via-transparent to-white/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      {/* Shine Sweep */}
+      <div className="absolute -left-24 top-0 h-full w-20 rotate-12 bg-white/25 blur-xl opacity-0 transition-all duration-700 group-hover:left-[120%] group-hover:opacity-100" />
+
+      {/* Content */}
+      <span className="relative z-10 flex items-center gap-2">
+        {active === cat && (
+          <span className="h-2 w-2 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]" />
+        )}
+
+        <span
+          className={`transition-all duration-300 ${
+            active === cat
+              ? "font-semibold tracking-[0.02em]"
+              : "group-hover:text-black"
+          }`}
+        >
+          {cat}
+        </span>
+      </span>
+    </motion.button>
+  ))}
+</motion.div>
 
       {/* ================= DESCRIPTION ================= */}
       <motion.p
