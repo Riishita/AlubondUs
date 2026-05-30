@@ -58,7 +58,7 @@ const LandingHero = () => {
 
             {/* ENHANCED OVERLAYS FOR READABILITY */}
             <motion.div
-              className="absolute inset-0 bg-black/60"
+              className="absolute inset-0 bg-black/20"
               style={{ opacity: overlayOpacity }}
             />
           </motion.div>
