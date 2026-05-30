@@ -77,8 +77,8 @@ export default function ApplicationSection() {
     ["start end", "end start"]
   );
 
-  const bgRadius = useTransform(scrollYProgress, [0.08, 0.42], ["0%", "140%"]);
-  const fgRadius = useTransform(scrollYProgress, [0.14, 0.52], ["0%", "135%"]);
+  const bgRadius = useTransform(scrollYProgress, [0.08, 0.42], ["20%", "140%"]);
+  const fgRadius = useTransform(scrollYProgress, [0.14, 0.52], ["20%", "135%"]);
   const contentOpacity = useTransform(scrollYProgress, [0.12, 0.32], [0.35, 1]);
   const contentScale = useTransform(scrollYProgress, [0.1, 0.45], [0.94, 1]);
 

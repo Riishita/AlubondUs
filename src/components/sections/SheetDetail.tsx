@@ -26,6 +26,7 @@ function PanelModel({
   ];
 
   const [scale, setScale] = useState(0.8);
+
   useEffect(() => {
     const handleResize = () => setScale(window.innerWidth < 1024 ? 0.5 : 0.8);
     handleResize();
@@ -131,99 +132,173 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
     return () => clearTimeout(timer);
   }, []);
 
-  const { scrollYProgress } = useSectionScroll(sectionRef, ["start 90%", "end 10%"]);
+ const { scrollYProgress } = useSectionScroll(
+  sectionRef,
+  ["start start", "end end"]
+);
 
   const activeProgress = progress || scrollYProgress;
 
   useEffect(() => {
-    if (!activeProgress) return;
-    return activeProgress.on("change", (v) => {
-      let newIndex = Math.floor(v * 5);
-      if (newIndex >= 5) newIndex = 4;
-      if (newIndex < 0) newIndex = 0;
-      setIndex(newIndex);
-    });
-  }, [activeProgress]);
+  if (!activeProgress) return;
 
-  return (
-    <section
-      ref={sectionRef}
-      {...cursorSectionProps}
-      className={`w-full h-screen relative overflow-hidden ${cursorSectionClassName}`}
-    >
+  return activeProgress.on("change", (v) => {
+    const totalSteps = steps.length;
+
+    const newIndex = Math.min(
+      Math.floor(v * totalSteps),
+      totalSteps - 1
+    );
+
+    setIndex(newIndex);
+  });
+}, [activeProgress]);
+
+ return (
+  <section
+    ref={sectionRef}
+    {...cursorSectionProps}
+    className={`relative h-[500vh] ${cursorSectionClassName}`}
+  >
+    <div className="sticky top-0 h-screen overflow-hidden">
       <div className="h-full w-full overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24 relative">
-      
-      {/* 🔵 3D CANVAS */}
-      <motion.div
-        transition={{ duration: 0.8 }}
-        className="absolute inset-0 z-0 pointer-events-none mt-20 md:mt-0"
-      >
-        <Canvas camera={{ position: [3, 3, 5], fov: 45 }}>
-          <Suspense fallback={null}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[5, 5, 5]} intensity={1.2} />
-            <group rotation={[0.3, 0.5, 0]}>
-              <PanelModel activeLayer={index} split={split} />
-            </group>
-            <OrbitControls
-              enableZoom={false}
-              enablePan={false}
-              enableRotate={!isMobile}
-              autoRotate
-              autoRotateSpeed={4}
-              enableDamping
-              dampingFactor={0.05}
-            />
-          </Suspense>
-        </Canvas>
-      </motion.div>
 
-      {/* LEFT TEXT */}
-      {!showNext && (
-        <div className="absolute top-10 md:top-24 left-6 md:left-16 right-6 md:max-w-md z-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -40 }}
-              transition={{ duration: 0.5 }}
-            >
-              <p className="text-orange-400 mb-1 text-sm md:text-base">
-                {steps[index].id}
-              </p>
-              <h2 className="text-2xl md:text-4xl font-bold mb-3">
-                {steps[index].title}
-              </h2>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                {steps[index].desc}
-              </p>
-              <p className="text-gray-400 text-[10px] md:text-xs mt-4 tracking-wider">
-                {steps[index].details}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+        {/* Desktop Layout Guide */}
+        <div className="hidden md:grid absolute inset-0 grid-cols-[50%_30%_20%] pointer-events-none">
+          <div />
+          <div />
+          <div />
         </div>
-      )}
 
-      {/* RIGHT STEP LIST */}
-      {!showNext && (
-        <div className="absolute bottom-10 left-6 right-6 md:right-16 md:left-auto flex md:flex-col flex-wrap md:space-y-4 gap-3 md:gap-0 justify-center md:justify-end text-right z-10">
-          {steps.map((item, i) => (
-            <p
-              key={item.id}
-              className={`cursor-pointer text-xs md:text-base transition-colors duration-300 whitespace-nowrap ${
-                i === index ? "text-orange-500 font-bold" : "text-white/60"
-              }`}
-              onClick={() => setIndex(i)}
-            >
-              <span className="hidden md:inline">{item.id}. </span>
-              {item.right}
-            </p>
-          ))}
-        </div>
-      )}
+        {/* 🔵 3D CANVAS */}
+        <motion.div
+  transition={{ duration: 0.8 }}
+  className="
+    absolute
+    inset-0
+    z-0
+    pointer-events-none
+    mt-20
+    md:mt-0
+    md:left-[15%]
+  "
+>
+          <Canvas camera={{ position: [3, 3, 5], fov: 45 }}>
+            <Suspense fallback={null}>
+              <ambientLight intensity={0.5} />
+              <directionalLight
+                position={[5, 5, 5]}
+                intensity={1.2}
+              />
+
+              <group rotation={[0.3, 0.5, 0]}>
+                <PanelModel
+                  activeLayer={index}
+                  split={split}
+                />
+              </group>
+
+              <OrbitControls
+                enableZoom={false}
+                enablePan={false}
+                enableRotate={!isMobile}
+                autoRotate
+                autoRotateSpeed={4}
+                enableDamping
+                dampingFactor={0.05}
+              />
+            </Suspense>
+          </Canvas>
+        </motion.div>
+
+        {/* LEFT TEXT */}
+        {!showNext && (
+          <div
+            className="
+              absolute
+              top-10
+              md:top-24
+              left-6
+              md:left-16
+              w-[300px]
+              md:w-[38vw]
+              md:max-w-[520px]
+              z-10
+            "
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -40 }}
+                transition={{ duration: 0.5 }}
+              >
+                <p className="text-orange-400 mb-1 text-sm md:text-base">
+                  {steps[index].id}
+                </p>
+
+                <h2 className="text-2xl md:text-4xl font-bold mb-3 leading-[1.1] break-words">
+                  {steps[index].title}
+                </h2>
+
+                <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                  {steps[index].desc}
+                </p>
+
+                <p className="text-gray-400 text-[10px] md:text-xs mt-4 tracking-wider">
+                  {steps[index].details}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        )}
+
+        {/* RIGHT STEP LIST */}
+        {!showNext && (
+          <div
+            className="
+              absolute
+              right-6
+              md:right-16
+              bottom-10
+              md:top-1/2
+              md:-translate-y-1/2
+              left-auto
+              flex
+              md:flex-col
+              flex-wrap
+              md:space-y-4
+              gap-3
+              md:gap-0
+              justify-end
+              md:justify-end
+              items-end
+              text-right
+              z-10
+              md:max-w-[20vw]
+            "
+          >
+            {steps.map((item, i) => (
+              <p
+                key={item.id}
+                className={`cursor-pointer text-xs md:text-base transition-colors duration-300 whitespace-nowrap ${
+                  i === index
+                    ? "text-orange-500 font-bold"
+                    : "text-white/60"
+                }`}
+                onClick={() => setIndex(i)}
+              >
+                <span className="hidden md:inline">
+                  {item.id}.
+                </span>{" "}
+                {item.right}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

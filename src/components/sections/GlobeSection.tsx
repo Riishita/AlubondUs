@@ -127,7 +127,7 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
     controls.enablePan = false;
     controls.enableRotate = !isTabletOrMobile;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 12;
+    controls.autoRotateSpeed = 6;
   }, [isTabletOrMobile]);
 
   useEffect(() => {
