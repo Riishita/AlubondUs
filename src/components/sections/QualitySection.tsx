@@ -177,7 +177,7 @@ useEffect(() => {
           </motion.div>
 
           {/* CARDS - Responsive Grid */}
-          <div className="absolute left-0 top-[130vh] w-full px-6 md:px-16">
+          <div className="absolute left-0 top-[110vh] w-full px-6 md:px-16">
             <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
               <motion.div 
                 whileHover={{ scale: 1.02, y: -5 }}
@@ -185,7 +185,7 @@ useEffect(() => {
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white transition-transform md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
-                  <span className="text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                  <span className="text-4xl md:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
                     100+
                   </span>
                   <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
@@ -204,7 +204,7 @@ useEffect(() => {
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
-                  <span className="text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                  <span className="text-4xl md:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
                     50,000+
                   </span>
                   <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
@@ -222,7 +222,7 @@ useEffect(() => {
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
-                  <span className="text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                  <span className="text-4xl md:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
                     35+
                   </span>
                   <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
