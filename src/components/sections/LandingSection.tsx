@@ -80,11 +80,11 @@ const LandingHero = () => {
                 Alubond U.S.A — Est. 1989
               </motion.p>
 
-              <motion.h1 variants={VARIANTS.framerFadeUp} className="text-5xl font-black leading-[0.9] tracking-tighter text-white sm:text-7xl lg:text-8xl drop-shadow-2xl">
+              <motion.h1 variants={VARIANTS.framerFadeUp} className="text-5xl font-black leading-[0.9] tracking-tighter text-white sm:text-8xl lg:text-7xl drop-shadow-2xl">
                 WORLD’S LARGEST
               </motion.h1>
 
-              <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-8 text-5xl font-black sm:text-7xl lg:text-8xl tracking-tighter drop-shadow-2xl" style={{ color: "#59c4ee" }}>
+              <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-8 text-5xl font-black sm:text-8xl lg:text-7xl tracking-tighter drop-shadow-xl" style={{ color: "#59c4ee" }}>
                 ACP BRAND
               </motion.h2>
 

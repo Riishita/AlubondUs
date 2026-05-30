@@ -173,7 +173,7 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
       ringsData={selectedPlace ? [selectedPlace] : []}
       ringLat={(d: any) => d.lat}
       ringLng={(d: any) => d.lng}
-      ringColor={() => ["#77a8f5", "#ffce9b"]}
+      ringColor={() => ["#77a8f5", "#3db3d7"]}
       ringMaxRadius={5}
       ringPropagationSpeed={2}
       ringRepeatPeriod={1000}
@@ -248,7 +248,7 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
               <h2 className="text-2xl font-semibold mb-2 pr-6">{selectedPlace.name}</h2>
               <p className="text-white/70 mb-6 text-sm leading-relaxed">{selectedPlace.description}</p>
               <div className="grid grid-cols-2 gap-3">
-                <button className="px-4 py-2.5 rounded-full border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-black transition font-medium text-sm">Contact</button>
+                 <button className="px-4 py-2.5 rounded-full border border-[#59c4ee] text-[#59c4ee] hover:bg-[#59c4ee] hover:text-black transition font-medium text-sm">Contact</button>
                 <button className="px-4 py-2.5 rounded-full border border-white/30 hover:bg-white/10 transition text-sm">Website</button>
               </div>
             </motion.div>

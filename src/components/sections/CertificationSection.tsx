@@ -37,23 +37,23 @@ export default function FireHorizontalExperience({
         </div>
       </div>
 
-      <div className={`relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12 ${isMobile ? 'pt-[40vh]' : ''}`}>
+      <div className={`relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col justify-start pt-16 md:pt-24 px-6 md:px-12 ${isMobile ? 'pt-[40vh]' : ''}`}>
         <motion.div style={{ opacity: contentOpacity, y: contentY }} className="w-full md:max-w-xl">
-          <p className="text-[10px] md:text-xs tracking-[0.3em] text-black uppercase mb-4 md:mb-8">
+          <p className="text-[10px] md:text-xs tracking-[0.3em] text-[#1A1A1A] uppercase mb-2 md:mb-4">
             002 / FIRE & SAFETY
           </p>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading leading-[1.1] mb-4 md:mb-6">
-            <span className="block text-[#2b2b2b]">Fire Standards & </span>
-            <span className="block text-orange-500 italic">Certifications</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading leading-[1.1] mb-2 md:mb-3">
+            <span className="block text-[#1A1A1A]">Fire Standards & </span>
+            <span className="block text-[#0a4b7c] italic">Certifications</span>
           </h2>
           
-          <p className="text-[#6B6B6B] text-xs sm:text-sm md:text-lg max-w-md mb-6 md:mb-10">
+          <p className="text-[#374151] text-xs sm:text-sm md:text-lg max-w-md mb-4 md:mb-6">
             From European classifications to American NFPA codes,
             every panel is independently tested and globally certified.
           </p>
 
-          <button className="group inline-flex items-center gap-2 px-6 py-2.5 md:py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-300 text-xs md:text-sm mb-8 md:mb-12">
+          <button className="group inline-flex items-center gap-2 px-6 py-2.5 md:py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-300 text-xs md:text-sm mb-4 md:mb-6">
             <span className="relative z-10 group-hover:text-white transition">
               View all certifications →
             </span>
@@ -68,7 +68,7 @@ export default function FireHorizontalExperience({
             <motion.div
               animate={{ x: isHovered ? undefined : [0, -800] }}
               transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-              className="flex w-max gap-4 md:gap-6 py-2"
+              className="flex w-max gap-4 md:gap-6 py-4"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -86,11 +86,11 @@ export default function FireHorizontalExperience({
 
 function Card({ item }: { item: (typeof certs)[number] }) {
   return (
-    <div className="w-[140px] sm:w-[180px] md:w-[260px] rounded-xl border border-[#E5E5E5] bg-white p-3 md:p-5 shadow-sm shrink-0 transition-transform hover:scale-[1.02]">
-      <h3 className="text-[10px] sm:text-xs md:text-base font-semibold text-[#1A1A1A] line-clamp-1">{item.title}</h3>
-      <p className="text-[8px] sm:text-[10px] md:text-xs mt-1 text-[#6B6B6B] leading-tight line-clamp-2">{item.desc}</p>
-      <div className="mt-3 md:mt-7">
-        <p className="text-[7px] sm:text-[8px] md:text-[10px] font-bold text-orange-500 tracking-widest uppercase">{item.tag}</p>
+    <div className="w-[130px] sm:w-[170px] md:w-[240px] rounded-xl border border-[#D1D5DB] bg-white p-3 md:p-4 shadow-md shrink-0 transition-transform hover:scale-[1.02]">
+      <h3 className="text-[10px] sm:text-xs md:text-base font-bold text-[#111827] line-clamp-1">{item.title}</h3>
+      <p className="text-[8px] sm:text-[10px] md:text-xs mt-1 text-[#4B5563] leading-tight line-clamp-2">{item.desc}</p>
+      <div className="mt-2 md:mt-4">
+        <p className="text-[7px] sm:text-[8px] md:text-[10px] font-extrabold text-[#0a4b7c] tracking-widest uppercase">{item.tag}</p>
       </div>
     </div>
   );

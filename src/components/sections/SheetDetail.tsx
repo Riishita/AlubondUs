@@ -20,7 +20,7 @@ function PanelModel({
   const layers = [
     { y: 0.5, base: "#ffffff", active: "#29272777" }, // Set to white to show texture clearly
     { y: 0.25, base: "#BFC5CC", active: "#aeaca5" },
-    { y: 0, base: "#E8EAED", active: "#cb650b" },
+    { y: 0, base: "#E8EAED", active: "#b98e3e" },
     { y: -0.25, base: "#778899", active: "#AAB4BF" },
     { y: -0.5, base: "#BFC5CC", active: "#707070" },
   ];
@@ -234,7 +234,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 exit={{ opacity: 0, y: -40 }}
                 transition={{ duration: 0.5 }}
               >
-                <p className="text-orange-400 mb-1 text-sm md:text-base">
+                <p className="text-Black mb-1 text-sm md:text-base">
                   {steps[index].id}
                 </p>
 
@@ -284,8 +284,8 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 key={item.id}
                 className={`cursor-pointer text-xs md:text-base transition-colors duration-300 whitespace-nowrap ${
                   i === index
-                    ? "text-orange-500 font-bold"
-                    : "text-white/60"
+                    ? "text-black font-bold"
+                    : "text-White/60"
                 }`}
                 onClick={() => setIndex(i)}
               >

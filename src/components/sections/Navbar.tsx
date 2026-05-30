@@ -121,7 +121,7 @@ const Navbar = () => {
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl md:text-3xl lg:text-5xl font-medium text-white/90 transition-colors hover:text-[#EA6A2A]"
+                    className="text-2xl md:text-3xl lg:text-5xl font-medium text-white/90 transition-colors hover:text-[#59c4ee]"
                     style={{ fontFamily: "var(--font-display)" }}
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}

@@ -93,12 +93,12 @@ export default function SmoothTransitionWrapper() {
             <div>
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-heading leading-[0.95] tracking-tight">
                 ALUBOND <br />
-                <span className="text-orange-500">PHILOSOPHY</span>
+                <span className="text-[#134d7a]">PHILOSOPHY</span>
               </h2>
             </div>
             <div className="text-sm md:text-xl text-black/70 leading-relaxed max-w-lg lg:pt-4">
               Architecture should speak of its time and place, but yearn for timelessness.
-              <div className="mt-2 md:mt-4 text-[9px] md:text-sm text-orange-500 tracking-widest font-medium uppercase">
+              <div className="mt-2 md:mt-4 text-[9px] md:text-sm text-[#134d7a] tracking-widest font-medium uppercase">
                 — FRANK GEHRY
               </div>
             </div>
