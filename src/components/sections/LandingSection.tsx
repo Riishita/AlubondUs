@@ -76,15 +76,15 @@ const LandingHero = () => {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <motion.p variants={VARIANTS.framerFadeUp} className="mb-6 text-[11px] font-bold uppercase tracking-[0.4em] text-white/80">
+              <motion.p variants={VARIANTS.framerFadeUp} className="mb-6 text-[11px] font-bold uppercase tracking-[0.4em] text-white/80" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 Alubond U.S.A — Est. 1989
               </motion.p>
 
-              <motion.h1 variants={VARIANTS.framerFadeUp} className="text-5xl font-black leading-[0.9] tracking-tighter text-white sm:text-8xl lg:text-7xl drop-shadow-2xl">
-                WORLD’S LARGEST
+              <motion.h1 variants={VARIANTS.framerFadeUp} className="text-6xl font-black leading-none tracking-wide text-white sm:text-9xl lg:text-8xl drop-shadow-2xl uppercase" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, letterSpacing: '0.02em' }}>
+                WORLD'S LARGEST
               </motion.h1>
 
-              <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-8 text-5xl font-black sm:text-8xl lg:text-7xl tracking-tighter drop-shadow-xl" style={{ color: "#59c4ee" }}>
+              <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-8 text-6xl font-black sm:text-6xl lg:text-8xl uppercase drop-shadow-6xl" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, letterSpacing: '0.02em', color: "#59c4ee" }}>
                 ACP BRAND
               </motion.h2>
 
@@ -105,10 +105,10 @@ const LandingHero = () => {
             <motion.div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start w-full md:w-auto gap-4 md:gap-12 mt-4 md:mt-0 z-10 border-t border-white/10 md:border-none pt-8 md:pt-0">
               {stats.map((stat) => (
                 <div key={stat.label} className="text-left md:text-right flex-1 md:flex-initial">
-                  <p className="text-4xl md:text-5xl font-black text-white tracking-tight drop-shadow-2xl">
+                  <p className="text-4xl md:text-6xl font-black text-white drop-shadow-2xl uppercase" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600, letterSpacing: '0.02em', lineHeight: 1 }}>
                     {stat.value}
                   </p>
-                  <p className="mt-1 md:mt-2 text-[9px] md:text-[10px] font-bold tracking-[0.3em] text-[#59c4ee] uppercase">
+                  <p className="mt-1 md:mt-2 text-[9px] md:text-[10px] font-bold tracking-[0.3em] text-[#59c4ee] uppercase" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {stat.label}
                   </p>
                 </div>
