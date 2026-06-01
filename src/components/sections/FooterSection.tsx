@@ -112,7 +112,7 @@ const CTASection = () => {
         style={{ opacity: fadeIn, scale: reduceMotion ? 1 : scaleIn }}
         className="relative z-10 max-w-7xl mx-auto w-full transform-gpu flex flex-col items-start"
       >
-        <p className="text-[10px] md:text-xs tracking-[0.3em] text-white/60 mb-6 uppercase">
+        <p className="type-overline text-white/60 mb-6">
           006 / Let's Build
         </p>
 
@@ -120,12 +120,12 @@ const CTASection = () => {
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-[80px] font-medium leading-[1.1] mb-8 tracking-tight"
+          className="type-h1 mb-8"
         >
           REQUEST <br /> TECHNICAL SPECS
         </motion.h2>
 
-        <p className="text-white/80 text-lg md:text-xl max-w-xl mb-12 leading-relaxed font-light">
+        <p className="type-body text-white/80 max-w-xl mb-12">
           Get datasheets, fire test reports, and sample panels delivered
           to your specification team.
         </p>
@@ -134,14 +134,14 @@ const CTASection = () => {
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-            className="px-8 py-4 rounded-full bg-white text-[#1E2A5A] font-medium flex items-center gap-3 shadow-lg hover:shadow-blue-500/40 transition-all"
+            className="type-btn px-8 py-4 rounded-full bg-white text-[#1E2A5A] flex items-center gap-3 shadow-lg hover:shadow-blue-500/40 transition-all"
           >
             Request Technical Specs <ArrowRight size={18} />
           </motion.button>
 
           <motion.button
             whileHover={reduceMotion ? undefined : { scale: 1.03 }}
-            className="px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-all flex items-center gap-3"
+            className="type-btn px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-all flex items-center gap-3"
           >
             <Download size={18} className="text-white/70" /> Downloads
           </motion.button>
@@ -180,7 +180,7 @@ const SectionDivider = () => {
 const Footer = () => {
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
-  const columnHeaderStyle = "text-white/40 uppercase tracking-[0.15em] text-[12px] mb-6 font-medium";
+  const columnHeaderStyle = "type-overline text-white/40 mb-6";
   const linkStyle = "text-white/80 hover:text-white transition-colors duration-300 cursor-pointer flex items-center";
 
   const socialIcons: Record<string, any> = {
@@ -198,7 +198,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto w-full">
         {/* Top Text */}
         <div className="mb-10">
-          <h4 className="text-[28px] md:text-[32px] lg:text-[32px] font-light text-white/90 leading-[1.3] max-w-2xl">
+          <h4 className="type-body text-white/90 max-w-2xl">
             Precision-engineered façade solutions designed to bring <span className="text-[#5b98aa]">architectural vision</span> to life.
           </h4>
         </div>
@@ -207,7 +207,7 @@ const Footer = () => {
         <div className="w-full h-px bg-white/10 mb-20" />
 
         {/* Middle Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 text-[14px] md:text-[15px] font-light mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 type-body-sm mb-16">
           
           {/* Col 1: Contact */}
           <div className="flex flex-col gap-5">
@@ -253,7 +253,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section: Copyright & Legal Links Horizontal */}
-        <div className="flex flex-col sm:flex-row justify-between items-center text-[13px] text-white/40 gap-6 mt-12">
+        <div className="flex flex-col sm:flex-row justify-between items-center type-body-sm text-white/40 gap-6 mt-12">
           <p>© 2026 Alubond U.S.A. All Rights Reserved.</p>
           
           <div className="flex gap-8">

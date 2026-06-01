@@ -20,7 +20,7 @@ function PanelModel({
   const layers = [
     { y: 0.5, base: "#ffffff", active: "#29272777" }, // Set to white to show texture clearly
     { y: 0.25, base: "#BFC5CC", active: "#aeaca5" },
-    { y: 0, base: "#E8EAED", active: "#b98e3e" },
+    { y: 0, base: "#E8EAED", active: "#b47125" },
     { y: -0.25, base: "#778899", active: "#AAB4BF" },
     { y: -0.5, base: "#BFC5CC", active: "#707070" },
   ];
@@ -238,7 +238,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                   {steps[index].id}
                 </p>
 
-                <h2 className="text-2xl md:text-4xl font-bold mb-3 leading-[1.1] break-words">
+                <h2 className="text-2xl md:text-4xl font-semibold mb-3 leading-[1.1] break-words">
                   {steps[index].title}
                 </h2>
 

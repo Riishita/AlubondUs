@@ -52,11 +52,18 @@ export default function PremiumGallery() {
         {/* Left Text Column */}
         <div className="lg:col-span-4 flex flex-col justify-center h-full pt-12 lg:pt-0 z-20">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-4">
-            <p className="text-white/40 uppercase text-[10px] tracking-[0.4em] font-medium">005 / Portfolio</p>
-            <h2 className="text-4xl lg:text-6xl font-medium leading-tight">
-              TRUSTED BY<br/>
-              <span className="italic font-light text-white/60"> ARCHITECTS.</span>
-            </h2>
+            <p className="type-overline text-white/50">
+                004 / Applications
+              </p>
+
+              <div className="flex justify-between flex-wrap gap-6 mt-5">
+                <h1 className="type-h1 text-white uppercase">
+
+                 
+                  TRUSTED BY <br /> ARCHITECTS.
+                </h1>
+                 </div>
+
             <div className="w-16 h-[1px] bg-white/20 mt-8" />
           </motion.div>
         </div>
@@ -72,8 +79,8 @@ export default function PremiumGallery() {
                 <div key={i} style={{ width: `${cardWidth}vw` }} className="relative h-full flex-shrink-0">
                   <video src={panel.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-                    <p className="text-[10px] tracking-[0.3em] uppercase text-white/60">{panel.location}</p>
-                    <h3 className="text-2xl font-light tracking-wide">{panel.title}</h3>
+                    <p className="type-overline text-white/60">{panel.location}</p>
+                    <h3 className="type-h3">{panel.title}</h3>
                   </div>
                 </div>
               ))}
@@ -86,7 +93,7 @@ export default function PremiumGallery() {
           style={{ opacity: buttonOpacity, scale: buttonScale }}
           className="absolute bottom-8 lg:bottom-12 left-0 right-0 flex justify-center z-30"
         >
-          <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] tracking-[0.3em] uppercase font-medium rounded-full hover:bg-white hover:text-black transition-all duration-300">
+          <button className="type-btn px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300">
             View All Projects
           </button>
         </motion.div>

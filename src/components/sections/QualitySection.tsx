@@ -157,7 +157,7 @@ useEffect(() => {
             style={{ y: rm ? 0 : p1 }} 
             className="absolute left-[8%] top-[20vh] max-w-[85%] sm:max-w-md md:left-[6%]"
           >
-            <h2 className="font-heading text-3xl font-light leading-tight sm:text-4xl md:text-5xl text-white drop-shadow-lg">
+            <h2 className="type-h2 text-white drop-shadow-lg">
               What happens when design meets limitless possibility?
             </h2>
           </motion.div>
@@ -167,10 +167,10 @@ useEffect(() => {
             style={{ y: rm ? 0 : p2 }}
             className="absolute right-[8%] top-[75vh] max-w-[85%] text-right sm:max-w-md md:right-[6%] md:top-[70vh]"
           >
-            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl text-white drop-shadow-lg">
+            <h2 className="type-h2 mb-4 text-white drop-shadow-lg">
               We build beyond borders
             </h2>
-            <p className="text-sm text-white/90 md:text-base drop-shadow-md">
+            <p className="type-body-sm text-white/90 drop-shadow-md">
               Multi-layer architecture ensures fire resistance, weather protection, and unmatched reliability in
               extreme environments.
             </p>
@@ -185,14 +185,14 @@ useEffect(() => {
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white transition-transform md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
-                  <span className="text-4xl md:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                  <span className="type-stat bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
                     100+
                   </span>
-                  <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
+                  <span className="type-overline text-[#59c4ee] block">
                     Countries Reached
                   </span>
                 </div>
-                <p className="text-xs leading-relaxed md:text-sm text-white/80">
+                <p className="type-body-sm text-white/80">
                   Delivering trusted façade solutions across diverse global markets with consistent quality and
                   performance.
                 </p>
@@ -204,14 +204,14 @@ useEffect(() => {
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
-                  <span className="text-4xl md:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                  <span className="type-stat bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
                     50,000+
                   </span>
-                  <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
+                  <span className="type-overline text-[#59c4ee] block">
                     Projects Worldwide
                   </span>
                 </div>
-                <p className="text-xs leading-relaxed md:text-sm text-white/80">
+                <p className="type-body-sm text-white/80">
                   From iconic skylines to modern infrastructure, our panels power projects at every scale.
                 </p>
               </motion.div>
@@ -222,14 +222,14 @@ useEffect(() => {
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
-                  <span className="text-4xl md:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
+                  <span className="type-stat bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
                     35+
                   </span>
-                  <span className="font-heading text-xs md:text-sm font-bold uppercase tracking-wider text-[#59c4ee] block">
+                  <span className="type-overline text-[#59c4ee] block">
                     Years of Leadership
                   </span>
                 </div>
-                <p className="text-xs leading-relaxed md:text-sm text-white/80">
+                <p className="type-body-sm text-white/80">
                   Decades of innovation, engineering excellence, and leadership in advanced building materials.
                 </p>
               </motion.div>
@@ -238,11 +238,11 @@ useEffect(() => {
 
           {/* LEFT TEXT 2 */}
           <motion.div 
-            style={{ y: rm ? 0 : p3 }}
-            className="absolute left-[8%] top-[200vh] max-w-[85%] sm:max-w-md md:left-[6%]"
+            style={{ y: rm ? 0 : p1 }}
+            className="absolute left-[8%] top-[210vh] max-w-[85%] sm:max-w-md md:left-[6%]"
           >
-            <h2 className="font-heading mb-4 text-3xl font-light sm:text-4xl md:text-5xl text-white drop-shadow-lg">Uncompromised Durability</h2>
-            <p className="text-sm text-white/90 md:text-base drop-shadow-md">
+            <h2 className="type-h2 mb-4 text-white drop-shadow-lg">Uncompromised Durability</h2>
+            <p className="type-body-sm text-white/90 drop-shadow-md">
               From impact to exposure, it holds its integrity—proving durability where it matters most.
             </p>
           </motion.div>

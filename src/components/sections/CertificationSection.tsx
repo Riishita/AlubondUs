@@ -37,23 +37,23 @@ export default function FireHorizontalExperience({
         </div>
       </div>
 
-      <div className={`relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col justify-start pt-16 md:pt-24 px-6 md:px-12 ${isMobile ? 'pt-[40vh]' : ''}`}>
+      <div className={`relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col justify-start pt-24 md:pt-24 px-6 md:px-12 ${isMobile ? 'pt-[40vh]' : ''}`}>
         <motion.div style={{ opacity: contentOpacity, y: contentY }} className="w-full md:max-w-xl">
-          <p className="text-[10px] md:text-xs tracking-[0.3em] text-[#1A1A1A] uppercase mb-2 md:mb-4">
+          <p className="type-overline text-[#1A1A1A] mb-10 md:mb-4">
             002 / FIRE & SAFETY
           </p>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading leading-[1.1] mb-2 md:mb-3">
+          <h2 className="type-h1 mb-2 md:mb-20">
             <span className="block text-[#1A1A1A]">Fire Standards & </span>
             <span className="block text-[#0a4b7c] italic">Certifications</span>
           </h2>
           
-          <p className="text-[#374151] text-xs sm:text-sm md:text-lg max-w-md mb-4 md:mb-6">
+          <p className="type-body-sm text-[#374151] max-w-md mb-4 md:mb-6">
             From European classifications to American NFPA codes,
             every panel is independently tested and globally certified.
           </p>
 
-          <button className="group inline-flex items-center gap-2 px-6 py-2.5 md:py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-300 text-xs md:text-sm mb-4 md:mb-6">
+          <button className="type-btn group inline-flex items-center gap-2 px-6 py-2.5 md:py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-300 mb-4 md:mb-6">
             <span className="relative z-10 group-hover:text-white transition">
               View all certifications →
             </span>
@@ -87,10 +87,10 @@ export default function FireHorizontalExperience({
 function Card({ item }: { item: (typeof certs)[number] }) {
   return (
     <div className="w-[130px] sm:w-[170px] md:w-[240px] rounded-xl border border-[#D1D5DB] bg-white p-3 md:p-4 shadow-md shrink-0 transition-transform hover:scale-[1.02]">
-      <h3 className="text-[10px] sm:text-xs md:text-base font-bold text-[#111827] line-clamp-1">{item.title}</h3>
-      <p className="text-[8px] sm:text-[10px] md:text-xs mt-1 text-[#4B5563] leading-tight line-clamp-2">{item.desc}</p>
-      <div className="mt-2 md:mt-4">
-        <p className="text-[7px] sm:text-[8px] md:text-[10px] font-extrabold text-[#0a4b7c] tracking-widest uppercase">{item.tag}</p>
+      <h3 className="type-h3 text-[#111827] line-clamp-1">{item.title}</h3>
+      <p className="type-body-sm mt-5 text-[#4B5563] line-clamp-2">{item.desc}</p>
+      <div className="mt-10 md:mt-4">
+        <p className="type-overline text-[#0a4b7c]">{item.tag}</p>
       </div>
     </div>
   );

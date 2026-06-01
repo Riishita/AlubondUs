@@ -199,7 +199,7 @@ const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
         style={{ y: textY }}
       >
         <motion.p
-  className="text-xs tracking-[0.3em] text-white/50 uppercase mb-16"
+  className="type-overline text-white/50 mb-16"
   style={{
     color: heroData.text.color,
     opacity: 0.9,
@@ -211,10 +211,10 @@ const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
 
         <motion.h1
-  className="text-6xl md:text-8xl font-heading leading-[0.95] tracking-tight"
+  className="type-h1"
   style={{
     color: heroData.text.color,
-    textShadow: "0 4px 20px rgba(0,0,0,0.8)", // 🔥 makes text pop
+    textShadow: "0 4px 20px rgba(0,0,0,0.8)",
   }}
 >
           {heroData.title[0]}
@@ -244,7 +244,7 @@ const MarqueeStrip = () => {
         {[...words, ...words].map((word, i) => (
           <span
             key={i}
-            className="text-sm font-medium tracking-[0.15em] uppercase opacity-60"
+            className="type-overline opacity-60"
           >
             {word} <span className="mx-4 opacity-30">●</span>
           </span>
@@ -293,7 +293,7 @@ const MaterialsSection = () => {
         stiffness: 120,
         damping: 15,
       }}
-      className={`group relative overflow-hidden rounded-[24px] px-7 py-3.5 text-sm font-medium tracking-[0.01em] transition-all duration-500
+      className={`group relative overflow-hidden rounded-[24px] px-7 py-3.5 type-body-sm transition-all duration-500
       ${
         active === cat
           ? "text-white shadow-[0_15px_50px_rgba(15,23,42,0.28)]"
@@ -339,7 +339,7 @@ const MaterialsSection = () => {
         <span
           className={`transition-all duration-300 ${
             active === cat
-              ? "font-semibold tracking-[0.02em]"
+              ? "opacity-100"
               : "group-hover:text-black"
           }`}
         >
@@ -352,7 +352,7 @@ const MaterialsSection = () => {
 
       {/* ================= DESCRIPTION ================= */}
       <motion.p
-        className="text-gray-500 text-base md:text-lg mb-12 max-w-xl"
+        className="type-body-sm text-gray-500 mb-12 max-w-xl"
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.2, type: "spring", stiffness: 50, damping: 20 }}
@@ -445,7 +445,7 @@ const MaterialsSection = () => {
               <AnimatePresence>
                 {hovered === i && (
                   <motion.div
-                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur-md text-white text-[10px] tracking-wider uppercase px-4 py-2 rounded-full whitespace-nowrap z-20 shadow-xl"
+                    className="type-overline absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur-md text-white px-4 py-2 rounded-full whitespace-nowrap z-20 shadow-xl"
                     initial={{ opacity: 0, y: -8, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -8, scale: 0.9 }}
@@ -467,11 +467,11 @@ const MaterialsSection = () => {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.4, type: "spring", stiffness: 50, damping: 20 }}
       >
-        <p className="text-gray-500 text-sm md:text-base max-w-md mb-6 md:mb-0">
+        <p className="type-body-sm text-gray-500 max-w-md mb-6 md:mb-0">
           Over 200 colours, wood grains, stone finishes, and metallic effects available.
         </p>
 
-          <button className="group mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-500 shadow-sm hover:shadow-md">
+          <button className="type-btn group mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-500 shadow-sm hover:shadow-md">
             
             <span className="relative z-10 group-hover:text-white transition-colors duration-300">
               Explore Color Studio

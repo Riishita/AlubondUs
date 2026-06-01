@@ -2,6 +2,7 @@
 
 import Globe from "react-globe.gl";
 import { useRef, useEffect, useMemo, useState } from "react";
+import * as THREE from "three";
 import {
   motion,
   useTransform,
@@ -25,6 +26,18 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [showPoints, setShowPoints] = useState(false);
   const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
+  const [countries, setCountries] = useState({ features: [] });
+
+  useEffect(() => {
+    fetch('/countries.json?v=2')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.features) {
+          setCountries(data);
+        }
+      })
+      .catch(err => console.error("Error fetching countries:", err));
+  }, []);
 
   useEffect(() => {
     // Threshold set to 1024px to cover mobile and tablet
@@ -141,15 +154,36 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
     return () => unsubscribe();
   }, [leftOpacity]);
 
+  const globeMaterial = useMemo(() => {
+    return new THREE.MeshPhongMaterial({
+      color: 0x000000,
+      transparent: true,
+      opacity: 0.3,
+      depthWrite: false,
+    });
+  }, []);
+
   const globe = useMemo(() => (
     <Globe
       ref={globeRef}
       width={isTabletOrMobile ? 320 : 650}
       height={isTabletOrMobile ? 320 : 650}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+      globeMaterial={globeMaterial}
       backgroundColor="rgba(0,0,0,0)"
       rendererConfig={{ antialias: false, alpha: true, powerPreference: "high-performance", precision: "lowp" }}
       animateIn={false}
+      showAtmosphere={false}
+      atmosphereColor="#2f2f2f"
+      atmosphereAltitude={0.1}
+      polygonsData={countries.features}
+      polygonCapColor={() => "rgba(0, 0, 0, 0)"}
+      polygonSideColor={() => "rgba(0, 0, 0, 0)"}
+      polygonStrokeColor={() => "rgb(255, 255, 255)"}
+      hexPolygonsData={countries.features}
+      hexPolygonResolution={3}
+      hexPolygonMargin={0.3}
+      hexPolygonAltitude={0.01}
+      hexPolygonColor={() => "#949494b9"}
       htmlElementsData={showPoints ? locations : []}
       htmlLat={(d: any) => d.lat}
       htmlLng={(d: any) => d.lng}
@@ -173,19 +207,19 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
       ringsData={selectedPlace ? [selectedPlace] : []}
       ringLat={(d: any) => d.lat}
       ringLng={(d: any) => d.lng}
-      ringColor={() => ["#77a8f5", "#3db3d7"]}
+      ringColor={() => ["#02235a", "#010036"]}
       ringMaxRadius={5}
       ringPropagationSpeed={2}
       ringRepeatPeriod={1000}
     />
-  ), [showPoints, selectedPlace, isTabletOrMobile]);
+  ), [showPoints, selectedPlace, isTabletOrMobile, countries, globeMaterial]);
 
   return (
     <section ref={sectionRef} className={cn("relative h-screen w-full bg-black overflow-hidden", cursorSectionClassName)} {...cursorSectionProps}>
       <div className="relative w-full h-full">
         <div className="gradient-amaterasu min-h-screen px-6 md:px-10 py-24" />
 
-        <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="absolute top-[12%] w-full text-center text-white font-light tracking-[-2px] text-[clamp(40px,10vw,180px)]">
+        <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="type-display absolute top-[12%] w-full text-center text-white uppercase">
           Global Impact
         </motion.h1>
 
@@ -196,17 +230,17 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
 
         {/* Centered text and buttons for Tablet/Mobile */}
         <motion.div style={{ opacity: leftOpacity, y: leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[42%] left-0 w-full px-6 text-center" : "left-[6%] top-1/2 -translate-y-1/2 max-w-xl")}>
-          <h2 className="text-3xl md:text-5xl font-semibold mb-6">Our Global Presence <br /><span>Powers Local Delivery</span></h2>
+          <h2 className="type-h2 mb-6 text-white">Our Global Presence <br /><span>Powers Local Delivery</span></h2>
 
           <div className="mb-8">
-            <p className="text-[10px] md:text-xs mb-2 opacity-60">● MANUFACTURING</p>
+            <p className="type-overline mb-2 opacity-60">● MANUFACTURING</p>
             <div className={cn("flex flex-wrap gap-3", isTabletOrMobile ? "justify-center" : "justify-start")}>
               {["UAE", "India", "Europe"].map((item) => (
                 <button
                   key={item}
                   onMouseEnter={() => handleHover(item)}
                   onClick={() => handleClick(item)}
-                  className={cn("px-4 py-2 rounded-full border transition-all duration-300 text-sm md:text-base", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
+                  className={cn("type-body-sm px-4 py-2 rounded-full border transition-all duration-300", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
                 >
                   {item}
                 </button>
@@ -215,14 +249,14 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
           </div>
 
           <div>
-            <p className="text-[10px] md:text-xs mb-2 opacity-60">● OFFICES</p>
+            <p className="type-overline mb-2 opacity-60">● OFFICES</p>
             <div className={cn("flex flex-wrap gap-3", isTabletOrMobile ? "justify-center" : "justify-start")}>
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
                 <button
                   key={item}
                   onMouseEnter={() => handleHover(item)}
                   onClick={() => handleClick(item)}
-                  className={cn("px-4 py-2 rounded-full border transition-all duration-300 text-sm md:text-base", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
+                  className={cn("type-body-sm px-4 py-2 rounded-full border transition-all duration-300", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
                 >
                   {item}
                 </button>
@@ -245,11 +279,11 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
               )}
             >
               <button onClick={() => { setSelectedPlace(null); resetGlobeView(); }} className="absolute top-6 right-4 text-white/40 hover:text-white p-2">✕</button>
-              <h2 className="text-2xl font-semibold mb-2 pr-6">{selectedPlace.name}</h2>
-              <p className="text-white/70 mb-6 text-sm leading-relaxed">{selectedPlace.description}</p>
+              <h2 className="type-h3 mb-2 pr-6 text-white">{selectedPlace.name}</h2>
+              <p className="type-body-sm text-white/70 mb-6">{selectedPlace.description}</p>
               <div className="grid grid-cols-2 gap-3">
-                 <button className="px-4 py-2.5 rounded-full border border-[#59c4ee] text-[#59c4ee] hover:bg-[#59c4ee] hover:text-black transition font-medium text-sm">Contact</button>
-                <button className="px-4 py-2.5 rounded-full border border-white/30 hover:bg-white/10 transition text-sm">Website</button>
+                 <button className="type-btn px-4 py-2.5 rounded-full border border-[#59c4ee] text-[#59c4ee] hover:bg-[#59c4ee] hover:text-black transition">Contact</button>
+                <button className="type-btn px-4 py-2.5 rounded-full border border-white/30 hover:bg-white/10 transition">Website</button>
               </div>
             </motion.div>
           )}

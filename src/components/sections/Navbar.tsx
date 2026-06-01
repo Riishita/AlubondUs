@@ -121,8 +121,7 @@ const Navbar = () => {
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl md:text-3xl lg:text-5xl font-medium text-white/90 transition-colors hover:text-[#59c4ee]"
-                    style={{ fontFamily: "var(--font-display)" }}
+                    className="type-h2 text-white/90 transition-colors hover:text-[#59c4ee]"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
@@ -135,7 +134,7 @@ const Navbar = () => {
 
               {/* Bottom info */}
               <motion.div
-  className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md flex flex-col md:flex-row items-center justify-center gap-3 md:gap-12 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/50 text-center md:text-left"
+  className="type-overline absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md flex flex-col md:flex-row items-center justify-center gap-3 md:gap-12 text-white/50 text-center md:text-left"
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
   transition={{ delay: 0.6 }}

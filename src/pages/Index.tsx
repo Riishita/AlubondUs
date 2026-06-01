@@ -1,5 +1,6 @@
 import { lazy, Suspense, useCallback, useState } from "react";
 import Preloader from "@/components/Preloader";
+import { useScrollLock } from "@/hooks/useScrollLock";
 
 import LandingSection from "@/components/sections/LandingSection";
 
@@ -20,6 +21,8 @@ const FooterSection = lazy(() => import("@/components/sections/FooterSection"));
 const Index = () => {
   const [loading, setLoading] = useState(true);
 
+  useScrollLock(loading);
+
   const handlePreloaderComplete = useCallback(() => {
     setLoading(false);
   }, []);
@@ -27,7 +30,10 @@ const Index = () => {
   return (
     <>
       {loading && <Preloader onComplete={handlePreloaderComplete} />}
-      <main className={`${loading ? "opacity-0" : "opacity-100"} transition-opacity duration-700`}>
+      <main
+        className={`${loading ? "invisible" : "visible"} transition-opacity duration-700`}
+        aria-hidden={loading}
+      >
         <LandingSection />
         <div className="relative z-10 bg-black w-full">
           {/* <Suspense fallback={<div className="min-h-screen" />}><GlobeSection /></Suspense>

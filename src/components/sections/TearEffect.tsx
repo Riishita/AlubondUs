@@ -8,7 +8,7 @@ import FireHorizontalExperience from "./CertificationSection";
 export default function CinematicVerticalTear() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(true);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -42,7 +42,7 @@ export default function CinematicVerticalTear() {
       {/* STICKY CONTAINER: Certification + Video */}
       <div className="sticky top-0 h-screen w-full z-10 overflow-hidden">
         {/* CERTIFICATION SECTION BACKGROUND (always present, revealed as video shrinks) */}
-        <div className="absolute inset-0 w-full h-full bg-[#F7F7F5]">
+        <div className="absolute inset-0 w-full h-full ">
           <FireHorizontalExperience scrollProgress={scrollYProgress} isMobile={isMobile} />
         </div>
 

@@ -134,16 +134,18 @@ export default function ApplicationSection() {
 
             {/* HEADER */}
             <div className="max-w-6xl mx-auto mb-16 px-6">
-              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+              <p className="type-overline text-white/50">
                 004 / Applications
               </p>
 
-              <div className="flex justify-between flex-wrap gap-6 mt-5">
-                <h2 className="text-4xl md:text-7xl font-heading">
-                  WHERE ALUBOND <br /> PERFORMS
-                </h2>
+              <div className="flex justify-between flex-wrap gap-4 mt-5">
+                <h1 className="type-h1 text-white uppercase">
 
-                <p className="max-w-sm text-white/60">
+                  
+                  WHERE ALUBOND <br /> PERFORMS
+                </h1>
+
+                <p className="type-body-sm max-w-sm text-white/60">
                   Seven industries. One material.
                   Endless architectural possibility.
                 </p>
@@ -181,11 +183,12 @@ export default function ApplicationSection() {
                     </div>
 
                     <div className="p-5 md:p-6 relative z-10 bg-gradient-to-b from-white/5 to-transparent">
-                      <p className="text-[10px] text-white/50 tracking-widest font-medium uppercase mb-1">{card.id}</p>
-                      <h3 className="text-base md:text-xl font-light uppercase tracking-tight text-white drop-shadow-sm mb-2">
+                      <p className="type-overline text-white/50 mb-1">{card.id}</p>
+                      <h3 className="type-h3 uppercase text-white drop-shadow-sm mb-2">
+                        
                         {card.title}
                       </h3>
-                      <p className="text-xs md:text-sm text-white/70 leading-relaxed font-light">
+                      <p className="type-body-sm text-white/70 leading-relaxed">
                         {card.desc}
                       </p>
                     </div>
