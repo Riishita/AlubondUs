@@ -202,9 +202,14 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
       pointLat={(d: any) => d.lat}
       pointLng={(d: any) => d.lng}
       pointColor={() => "#c2d6f7"}
-      pointAltitude={0.02}
-      pointRadius={0.5}
-      ringsData={selectedPlace ? [selectedPlace] : []}
+      pointAltitude={0.08}
+pointRadius={0.6}
+      ringsData={
+  selectedPlace
+    ? [{ ...selectedPlace, altitude: 0.1 }]
+    : []
+}
+ringAltitude={(d: any) => d.altitude}
       ringLat={(d: any) => d.lat}
       ringLng={(d: any) => d.lng}
       ringColor={() => ["#02235a", "#010036"]}

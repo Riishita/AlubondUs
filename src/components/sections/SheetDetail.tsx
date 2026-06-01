@@ -284,7 +284,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 key={item.id}
                 className={`cursor-pointer text-xs md:text-base transition-colors duration-300 whitespace-nowrap ${
                   i === index
-                    ? "text-White font-bold"
+                    ? "text-[#0a284f] font-bold"
                     : "text-White/60"
                 }`}
                 onClick={() => setIndex(i)}
