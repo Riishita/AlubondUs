@@ -158,7 +158,7 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
     return new THREE.MeshPhongMaterial({
       color: 0x000000,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.7,
       depthWrite: false,
     });
   }, []);
@@ -191,9 +191,11 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
         const el = document.createElement("div");
         el.className = "globe-marker pointer-events-auto";
         el.innerHTML = `
-          <div style="display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-100%);cursor:pointer;">
-            <img src="/${d.logo}" style="width:${isTabletOrMobile ? "24px" : "30px"};height:${isTabletOrMobile ? "24px" : "30px"};" />
-            <span style="color:white;text-shadow:0px 0px 4px black;font-size:${isTabletOrMobile ? "12px" : "14px"};pointer-events:none;">${d.name}</span>
+          <div style="display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-100%);cursor:pointer;transition:transform 0.3s ease;" class="group">
+            <div style="width:${isTabletOrMobile ? "32px" : "40px"};height:${isTabletOrMobile ? "32px" : "40px"};border-radius:50%;background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);transition:all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.transform='scale(1)';this.style.background='rgba(255,255,255,0.05)';">
+              <img src="/${d.logo}" style="width:${isTabletOrMobile ? "18px" : "22px"};height:${isTabletOrMobile ? "18px" : "22px"};object-fit:contain;" />
+            </div>
+            <span style="color:white;text-shadow:0px 2px 8px rgba(0,0,0,0.9);font-size:${isTabletOrMobile ? "11px" : "13px"};font-weight:400;margin-top:8px;letter-spacing:0.05em;pointer-events:none;opacity:0.9;">${d.name}</span>
           </div>`;
         el.onclick = () => handleClick(d.name);
         el.onmouseenter = () => handleHover(d.name);
@@ -212,10 +214,10 @@ pointRadius={0.6}
 ringAltitude={(d: any) => d.altitude}
       ringLat={(d: any) => d.lat}
       ringLng={(d: any) => d.lng}
-      ringColor={() => ["#f7f7f7", "#ffffff"]}
-      ringMaxRadius={4}
-      ringPropagationSpeed={2}
-      ringRepeatPeriod={1000}
+      ringColor={() => "#59c4ee"}
+      ringMaxRadius={5}
+      ringPropagationSpeed={1.5}
+      ringRepeatPeriod={1200}
     />
   ), [showPoints, selectedPlace, isTabletOrMobile, countries, globeMaterial]);
 
@@ -224,7 +226,7 @@ ringAltitude={(d: any) => d.altitude}
       <div className="relative w-full h-full">
         <div className="gradient-amaterasu min-h-screen px-6 md:px-10 py-24" />
 
-        <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="type-display absolute top-[12%] w-full text-center text-white uppercase">
+        <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="absolute top-[12%] w-full text-center text-5xl md:text-9xl font-extralight tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
           Global Impact
         </motion.h1>
 
@@ -234,18 +236,29 @@ ringAltitude={(d: any) => d.altitude}
         </motion.div>
 
         {/* Centered text and buttons for Tablet/Mobile */}
-        <motion.div style={{ opacity: leftOpacity, y: leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[42%] left-0 w-full px-6 text-center" : "left-[6%] top-1/2 -translate-y-1/2 max-w-xl")}>
-          <h2 className="type-h2 mb-6 text-white">Our Global Presence <br /><span>Powers Local Delivery</span></h2>
+        <motion.div style={{ opacity: leftOpacity, y: leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[42%] left-0 w-full px-6 text-center" : "left-[8%] top-1/2 -translate-y-1/2 max-w-xl")}>
+          <h2 className="text-4xl md:text-5xl font-light leading-tight mb-10 text-white">
+            Our Global Presence <br />
+            <span className="text-[#59c4ee] font-medium">Powers Local Delivery</span>
+          </h2>
 
-          <div className="mb-8">
-            <p className="type-overline mb-2 opacity-60">● MANUFACTURING</p>
+          <div className="mb-10">
+            <div className={cn("flex items-center gap-3 mb-5", isTabletOrMobile ? "justify-center" : "justify-start")}>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#59c4ee] shadow-[0_0_8px_#59c4ee]"></div>
+              <p className="text-xs tracking-[0.2em] uppercase text-white/60 font-medium">Manufacturing</p>
+            </div>
             <div className={cn("flex flex-wrap gap-3", isTabletOrMobile ? "justify-center" : "justify-start")}>
               {["UAE", "India", "Europe"].map((item) => (
                 <button
                   key={item}
                   onMouseEnter={() => handleHover(item)}
                   onClick={() => handleClick(item)}
-                  className={cn("type-body-sm px-4 py-2 rounded-full border transition-all duration-300", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
+                  className={cn(
+                    "text-sm px-6 py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 
+                    selectedPlace?.name === item 
+                      ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.2)] scale-105" 
+                      : "bg-white/5 border-white/10 text-white hover:bg-white/15 hover:border-white/30 hover:-translate-y-0.5"
+                  )}
                 >
                   {item}
                 </button>
@@ -254,14 +267,22 @@ ringAltitude={(d: any) => d.altitude}
           </div>
 
           <div>
-            <p className="type-overline mb-2 opacity-60">● OFFICES</p>
+            <div className={cn("flex items-center gap-3 mb-5", isTabletOrMobile ? "justify-center" : "justify-start")}>
+              <div className="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+              <p className="text-xs tracking-[0.2em] uppercase text-white/60 font-medium">Offices</p>
+            </div>
             <div className={cn("flex flex-wrap gap-3", isTabletOrMobile ? "justify-center" : "justify-start")}>
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
                 <button
                   key={item}
                   onMouseEnter={() => handleHover(item)}
                   onClick={() => handleClick(item)}
-                  className={cn("type-body-sm px-4 py-2 rounded-full border transition-all duration-300", selectedPlace?.name === item ? "bg-white text-black scale-105" : "border-white/40 hover:bg-white/20 hover:scale-105")}
+                  className={cn(
+                    "text-sm px-6 py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 
+                    selectedPlace?.name === item 
+                      ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.2)] scale-105" 
+                      : "bg-white/5 border-white/10 text-white hover:bg-white/15 hover:border-white/30 hover:-translate-y-0.5"
+                  )}
                 >
                   {item}
                 </button>
@@ -273,22 +294,42 @@ ringAltitude={(d: any) => d.altitude}
         <AnimatePresence>
           {selectedPlace && (
             <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.96, x: isTabletOrMobile ? "-50%" : "0%" }}
+              initial={{ opacity: 0, y: 40, scale: 0.95, x: isTabletOrMobile ? "-50%" : "0%" }}
               animate={{ opacity: 1, y: 0, scale: 1, x: isTabletOrMobile ? "-50%" : "0%" }}
-              exit={{ opacity: 0, y: 20, x: isTabletOrMobile ? "-50%" : "0%" }}
+              exit={{ opacity: 0, y: 20, scale: 0.95, x: isTabletOrMobile ? "-50%" : "0%" }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className={cn(
-                "absolute z-50 p-6 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 text-white shadow-2xl transition-all duration-300",
+                "absolute z-50 p-6 rounded-3xl bg-[#0a0a0a]/60 backdrop-blur-3xl border border-white/10 text-white shadow-[0_30px_60px_rgba(0,0,0,0.5)] overflow-hidden",
                 isTabletOrMobile
-                  ? "bottom-8 left-1/2 w-[90%] max-w-[480px]"
-                  : "bottom-[5%] left-[6%] w-[380px]"
+                  ? "bottom-6 left-1/2 w-[90%] max-w-[340px]"
+                  : "bottom-[8%] left-[8%] w-[340px]"
               )}
             >
-              <button onClick={() => { setSelectedPlace(null); resetGlobeView(); }} className="absolute top-6 right-4 text-white/40 hover:text-white p-2">✕</button>
-              <h2 className="type-h3 mb-2 pr-6 text-white">{selectedPlace.name}</h2>
-              <p className="type-body-sm text-white/70 mb-6">{selectedPlace.description}</p>
-              <div className="grid grid-cols-2 gap-3">
-                 <button className="type-btn px-4 py-2.5 rounded-full border border-[#59c4ee] text-[#59c4ee] hover:bg-[#59c4ee] hover:text-black transition">Contact</button>
-                <button className="type-btn px-4 py-2.5 rounded-full border border-white/30 hover:bg-white/10 transition">Website</button>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+              
+              <button 
+                onClick={(e) => { e.stopPropagation(); setSelectedPlace(null); resetGlobeView(); }} 
+                className="absolute top-5 right-5 text-white/40 hover:text-white transition-colors duration-300 p-2 rounded-full hover:bg-white/10 z-20 cursor-pointer"
+                aria-label="Close"
+              >
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+
+              <div className="relative z-10">
+                <h3 className="text-2xl font-light mb-2 pr-6 text-white">{selectedPlace.name}</h3>
+                <p className="text-sm font-light text-white/60 leading-relaxed mb-6 min-h-[50px]">{selectedPlace.description}</p>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <button className="group relative w-full overflow-hidden rounded-full border border-[#59c4ee] bg-transparent px-4 py-2.5 text-sm font-medium text-[#59c4ee] transition-all duration-300 hover:text-black">
+                    <span className="relative z-10">Contact</span>
+                    <div className="absolute inset-0 bg-[#59c4ee] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out -z-0" />
+                  </button>
+                  <button className="group w-full rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30">
+                    Website
+                  </button>
+                </div>
               </div>
             </motion.div>
           )}

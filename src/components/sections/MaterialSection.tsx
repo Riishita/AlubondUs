@@ -21,6 +21,7 @@ const heroData = {
 
 const categories = [
   "Wood",
+  "Solid",
   "Metallic",
   "Stone & Marbles",
   "Patina",
