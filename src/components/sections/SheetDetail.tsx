@@ -3,7 +3,7 @@ import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorP
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei"; // Added useTexture
 import { useEffect, useState, useRef, Suspense } from "react"; // Added Suspense
-import { motion, AnimatePresence, MotionValue } from "framer-motion";
+import { motion, AnimatePresence, MotionValue, useInView } from "framer-motion";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 /* ================= 3D MODEL ================= */
@@ -116,6 +116,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
   const [showNext, setShowNext] = useState(false);
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const isInView = useInView(sectionRef);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
@@ -140,7 +141,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
   const activeProgress = progress || scrollYProgress;
 
   useEffect(() => {
-  if (!activeProgress) return;
+  if (!activeProgress || isMobile) return;
 
   return activeProgress.on("change", (v) => {
     const totalSteps = steps.length;
@@ -152,13 +153,13 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
 
     setIndex(newIndex);
   });
-}, [activeProgress]);
+}, [activeProgress, isMobile]);
 
  return (
   <section
     ref={sectionRef}
     {...cursorSectionProps}
-    className={`relative h-[500vh] ${cursorSectionClassName}`}
+    className={`relative h-[100vh] md:h-[500vh] ${cursorSectionClassName}`}
   >
     <div className="sticky top-0 h-screen overflow-hidden">
       <div className="h-full w-full overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24 relative">
@@ -183,7 +184,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
     md:left-[15%]
   "
 >
-          <Canvas camera={{ position: [3, 3, 5], fov: 45 }}>
+          <Canvas camera={{ position: [3, 3, 5], fov: 45 }} frameloop={isInView ? "always" : "demand"}>
             <Suspense fallback={null}>
               <ambientLight intensity={0.5} />
               <directionalLight
@@ -234,21 +235,23 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 exit={{ opacity: 0, y: -40 }}
                 transition={{ duration: 0.5 }}
               >
-                <p className="text-Black mb-1 text-sm md:text-base">
-                  {steps[index].id}
+                <p className="type-overline text-white/50 mb-3 md:mb-4">
+                  STEP {steps[index].id}
                 </p>
 
-                <h2 className="text-2xl md:text-4xl font-semibold mb-3 leading-[1.1] break-words">
+                <h2 className="type-h2 text-white mb-4 md:mb-6">
                   {steps[index].title}
                 </h2>
 
-                <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                <p className="type-body-sm text-white/70 mb-6 md:mb-8 max-w-sm">
                   {steps[index].desc}
                 </p>
 
-                <p className="text-gray-400 text-[10px] md:text-xs mt-4 tracking-wider">
-                  {steps[index].details}
-                </p>
+                <div className="pt-4 md:pt-6 border-t border-white/10">
+                  <p className="type-label text-white/40 leading-relaxed max-w-sm">
+                    {steps[index].details}
+                  </p>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -259,41 +262,42 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
           <div
             className="
               absolute
+              bottom-8
+              left-6
               right-6
-              md:right-16
-              bottom-10
+              md:left-auto
+              md:bottom-auto
               md:top-1/2
               md:-translate-y-1/2
-              left-auto
+              md:right-16
               flex
               md:flex-col
-              flex-wrap
-              md:space-y-4
-              gap-3
-              md:gap-0
-              justify-end
-              md:justify-end
-              items-end
-              text-right
+              overflow-x-auto
+              md:overflow-visible
+              gap-6
               z-10
-              md:max-w-[20vw]
+              scrollbar-hide
+              md:items-end
+              pb-2
+              md:pb-0
             "
           >
             {steps.map((item, i) => (
-              <p
+              <div
                 key={item.id}
-                className={`cursor-pointer text-xs md:text-base transition-colors duration-300 whitespace-nowrap ${
-                  i === index
-                    ? "text-[#0a284f] font-bold"
-                    : "text-White/60"
-                }`}
+                className="flex items-center gap-3 md:gap-4 cursor-pointer group shrink-0"
                 onClick={() => setIndex(i)}
               >
-                <span className="hidden md:inline">
-                  {item.id}.
-                </span>{" "}
-                {item.right}
-              </p>
+                <div className={`md:hidden h-[2px] transition-all duration-500 ${i === index ? "w-8 bg-white" : "w-3 bg-white/20 group-hover:bg-white/40"}`} />
+                <span
+                  className={`type-label transition-colors duration-500 ${
+                    i === index ? "text-white" : "text-white/40 group-hover:text-white/60"
+                  }`}
+                >
+                  {item.right}
+                </span>
+                <div className={`hidden md:block h-[1px] transition-all duration-500 ${i === index ? "w-16 bg-white" : "w-6 bg-white/20 group-hover:w-10 group-hover:bg-white/40"}`} />
+              </div>
             ))}
           </div>
         )}

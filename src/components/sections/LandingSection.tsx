@@ -53,7 +53,7 @@ const LandingHero = () => {
               className="h-full w-full object-cover brightness-[0.7] contrast-[1.1]"
               muted playsInline loop autoPlay preload="auto"
             >
-              <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066245/8996270-uhd_3840_2160_30fps_qfalkr.mp4" type="video/mp4" />
+              <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1780590083/1780589760879668_jnjzbr.mp4" type="video/mp4" />
             </video>
             <motion.div
               className="absolute inset-0 bg-black/20"
@@ -79,11 +79,11 @@ const LandingHero = () => {
                   Alubond U.S.A — Est. 1989
                 </motion.p>
 
-                <motion.h1 variants={VARIANTS.framerFadeUp} className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white uppercase" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+                <motion.h1 variants={VARIANTS.framerFadeUp} className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white uppercase">
                   WORLD'S LARGEST
                 </motion.h1>
 
-                <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#59c4ee" }}>
+                <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-[#59c4ee]">
                   ACP BRAND
                 </motion.h2>
 
@@ -106,7 +106,7 @@ const LandingHero = () => {
               >
                 {stats.map((stat) => (
                   <div key={stat.label}>
-                    <p className="text-3xl md:text-5xl font-black text-white uppercase" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+                    <p className="text-3xl md:text-5xl font-black text-white uppercase">
                       {stat.value}
                     </p>
                     <p className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-[#59c4ee] uppercase">

@@ -3,11 +3,9 @@
 import { useRef, useState } from "react";
 import {
   motion,
-  useScroll,
   useTransform,
   useInView,
   AnimatePresence,
-  useReducedMotion,
 } from "framer-motion";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
@@ -17,21 +15,8 @@ import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 const heroData = {
   image: "/images/Hero-palatte.jpeg",
-
   label: "003 / Color & Finishes",
   title: ["A Palette", "Without Limits"],
-
-  // 🔥 CONTROL HERE
-  overlay: {
-    opacityFrom: 0.5, // bottom (0–1)
-    opacityVia: 0.4,  // middle
-    opacityTo: 0.0,   // top
-  },
-
-  text: {
-    color: "#ffffff",
-    opacity: 1,
-  },
 };
 
 const categories = [
@@ -56,42 +41,42 @@ const words = [
 const materials = [
   { name: "WHITEAHORN", image: "/materials/Wood1.webp", category: "Wood" },
   { name: "ORIENTAL CANE", image: "/materials/Wood2.webp", category: "Wood" },
-   { name: "NATURAL OAK", image: "/materials/Wood3.webp", category: "Wood" },
+  { name: "NATURAL OAK", image: "/materials/Wood3.webp", category: "Wood" },
   { name: "WALNUT", image: "/materials/Wood4.webp", category: "Wood" },
   { name: "ROSEWOOD", image: "/materials/Wood5.webp", category: "Wood" },
   { name: "ROYAL TEAK", image: "/materials/Wood6.webp", category: "Wood" },
-   { name: "TEAK", image: "/materials/Wood7.webp", category: "Wood" },
+  { name: "TEAK", image: "/materials/Wood7.webp", category: "Wood" },
   { name: "DARKTEAK", image: "/materials/Wood8.webp", category: "Wood" },
   { name: "QUERCUS", image: "/materials/Wood9.webp", category: "Wood" },
   { name: "WENGE", image: "/materials/Wood10.webp", category: "Wood" },
-   { name: "ROYAL WENGE ", image: "/materials/Wood11.webp", category: "Wood" },
+  { name: "ROYAL WENGE ", image: "/materials/Wood11.webp", category: "Wood" },
   { name: "MAHOGANY", image: "/materials/Wood12.webp", category: "Wood" },
 
-    { name: "CHAMPAGNE GOLD", image: "/materials/Metallic1.webp", category: "Metallic" },
+  { name: "CHAMPAGNE GOLD", image: "/materials/Metallic1.webp", category: "Metallic" },
   { name: "BRIGHT CHAMPAGNE SILVER", image: "/materials/Metallic2.webp", category: "Metallic" },
-   { name: "METALLIC BLACK", image: "/materials/Metallic3.webp", category: "Metallic" },
+  { name: "METALLIC BLACK", image: "/materials/Metallic3.webp", category: "Metallic" },
   { name: "METALLIC BRONZE", image: "/materials/Metallic4.webp", category: "Metallic" },
   { name: "METALLIC GOLD", image: "/materials/Metallic5.webp", category: "Metallic" },
   { name: "DESERT ROSE METALLIC", image: "/materials/Metallic6.webp", category: "Metallic" },
-   { name: "BRUSHED SILVER", image: "/materials/Metallic7.webp", category: "Metallic" },
+  { name: "BRUSHED SILVER", image: "/materials/Metallic7.webp", category: "Metallic" },
   { name: "BRIGHT SILVER", image: "/materials/Metallic8.webp", category: "Metallic" },
   { name: "METALLIC BRASS", image: "/materials/Metallic9.webp", category: "Metallic" },
   { name: "RAW GREY", image: "/materials/Metallic10.webp", category: "Metallic" },
-   { name: "GRAY METALLIC SILVER ", image: "/materials/Metallic11.webp", category: "Metallic" },
+  { name: "GRAY METALLIC SILVER ", image: "/materials/Metallic11.webp", category: "Metallic" },
   { name: "METALLIC JADE", image: "/materials/Metallic12.webp", category: "Metallic" },
-    { name: "SMOKE SILVER", image: "/materials/Metallic13.webp", category: "Metallic" },
-   { name: "ROYAL WENGE ", image: "/materials/Metallic14.webp", category: "Metallic" },
+  { name: "SMOKE SILVER", image: "/materials/Metallic13.webp", category: "Metallic" },
+  { name: "ROYAL WENGE ", image: "/materials/Metallic14.webp", category: "Metallic" },
   { name: "BLUE METALLIC", image: "/materials/Metallic15.webp", category: "Metallic" },
 
   { name: "WHITE GRANITE ", image: "/materials/Stone1.webp", category: "Stone & Marbles" },
   { name: "YELLOW GRANITE ", image: "/materials/Stone2.webp", category: "Stone & Marbles" },
- { name: "ROSA PORRINHO", image: "/materials/Stone3.webp", category: "Stone & Marbles" },
+  { name: "ROSA PORRINHO", image: "/materials/Stone3.webp", category: "Stone & Marbles" },
   { name: "ROSA GRANITE  ", image: "/materials/Stone4.webp", category: "Stone & Marbles" },
   { name: "SERPEGIANTE  ", image: "/materials/Stone5.webp", category: "Stone & Marbles" },
   { name: "GRANITE NERO ", image: "/materials/Stone6.webp", category: "Stone & Marbles" },
- { name: "WHITE MARBLE ", image: "/materials/Stone7.webp", category: "Stone & Marbles" },
+  { name: "WHITE MARBLE ", image: "/materials/Stone7.webp", category: "Stone & Marbles" },
   { name: "RAVERTINE  ", image: "/materials/Stone8.webp", category: "Stone & Marbles" },
- { name: "YELLOW MARBLE ", image: "/materials/Stone9.webp", category: "Stone & Marbles" },
+  { name: "YELLOW MARBLE ", image: "/materials/Stone9.webp", category: "Stone & Marbles" },
   { name: "CAFEE MARNO  ", image: "/materials/Stone10.webp", category: "Stone & Marbles" },
 
   { name: "AB-SS-003", image: "/materials/Patina1.webp", category: "Patina" },
@@ -101,27 +86,27 @@ const materials = [
   { name: "AB-SS-007", image: "/materials/Patina5.webp", category: "Patina" },
   { name: "AB-SS-008", image: "/materials/Patina6.webp", category: "Patina" },
 
-    { name: "AB-SS-003", image: "/materials/Concrete1.webp", category: "Concrete" },
-{ name: "AB-SS-004", image: "/materials/Concrete2.webp", category: "Concrete" },
-{ name: "AB-SS-005", image: "/materials/Concrete3.webp", category: "Concrete" },
-{ name: "AB-SS-006", image: "/materials/Concrete4.webp", category: "Concrete" },
+  { name: "AB-SS-003", image: "/materials/Concrete1.webp", category: "Concrete" },
+  { name: "AB-SS-004", image: "/materials/Concrete2.webp", category: "Concrete" },
+  { name: "AB-SS-005", image: "/materials/Concrete3.webp", category: "Concrete" },
+  { name: "AB-SS-006", image: "/materials/Concrete4.webp", category: "Concrete" },
 
   { name: "AB-SS-003", image: "/materials/Texture1.webp", category: "Texture" },
-{ name: "AB-SS-004", image: "/materials/Texture2.webp", category: "Texture" },
-{ name: "AB-SS-005", image: "/materials/Texture3.webp", category: "Texture" },
-{ name: "AB-SS-006", image: "/materials/Texture4.webp", category: "Texture" },
-{ name: "AB-SS-007", image: "/materials/Texture5.webp", category: "Texture" },
-{ name: "AB-SS-008", image: "/materials/Texture6.webp", category: "Texture" },
+  { name: "AB-SS-004", image: "/materials/Texture2.webp", category: "Texture" },
+  { name: "AB-SS-005", image: "/materials/Texture3.webp", category: "Texture" },
+  { name: "AB-SS-006", image: "/materials/Texture4.webp", category: "Texture" },
+  { name: "AB-SS-007", image: "/materials/Texture5.webp", category: "Texture" },
+  { name: "AB-SS-008", image: "/materials/Texture6.webp", category: "Texture" },
 
   { name: "AB-SS-003", image: "/materials/Brush1.webp", category: "Brush" },
-{ name: "AB-SS-004", image: "/materials/Brush2.webp", category: "Brush" },
-{ name: "AB-SS-005", image: "/materials/Brush3.webp", category: "Brush" },
-{ name: "AB-SS-006", image: "/materials/Brush4.webp", category: "Brush" },
-{ name: "AB-SS-007", image: "/materials/Brush5.webp", category: "Brush" },
-{ name: "AB-SS-008", image: "/materials/Brush6.webp", category: "Brush" },
-{ name: "AB-SS-009", image: "/materials/Brush7.webp", category: "Brush" },
+  { name: "AB-SS-004", image: "/materials/Brush2.webp", category: "Brush" },
+  { name: "AB-SS-005", image: "/materials/Brush3.webp", category: "Brush" },
+  { name: "AB-SS-006", image: "/materials/Brush4.webp", category: "Brush" },
+  { name: "AB-SS-007", image: "/materials/Brush5.webp", category: "Brush" },
+  { name: "AB-SS-008", image: "/materials/Brush6.webp", category: "Brush" },
+  { name: "AB-SS-009", image: "/materials/Brush7.webp", category: "Brush" },
 
-{ name: "BRONZE", image: "/materials/Anodised1.webp", category: "Anodised" },
+  { name: "BRONZE", image: "/materials/Anodised1.webp", category: "Anodised" },
   { name: "BRUSH ", image: "/materials/Anodised2.webp", category: "Anodised" },
   { name: "GOLD 20", image: "/materials/Anodised3.webp", category: "Anodised" },
   { name: "BROWN", image: "/materials/Anodised4.webp", category: "Anodised" },
@@ -145,12 +130,10 @@ const materials = [
   { name: "AB-SS-007", image: "/materials/Prismatic5.webp", category: "Prismatic" },
   { name: "AB-SS-008 ", image: "/materials/Prismatic6.webp", category: "Prismatic" },
 
-
   { name: "SPARKLING BLACK", image: "/materials/Sparkle1.webp", category: "Sparkle" },
   { name: "SPARKLING WHITE", image: "/materials/Sparkle2.webp", category: "Sparkle" },
   { name: "SPARKLING GOLD", image: "/materials/Sparkle3.webp", category: "Sparkle" },
   { name: "SPARKLING GREY", image: "/materials/Sparkle4.webp", category: "Sparkle" },
-  
 ];
 
 /* ================= HERO ================= */
@@ -162,64 +145,51 @@ const HeroSection = () => {
     ref,
     ["start start", "end start"]
   );
-const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   return (
-    <section ref={ref} className="relative h-[100vh]">
+    <section ref={ref} className="relative h-screen overflow-hidden">
       
-      {/* Background */}
-      <div className="absolute inset-0">
+      {/* Background Image with Scale Parallax */}
+      <motion.div className="absolute inset-0 transform-gpu will-change-transform" style={{ scale: imageScale }}>
         <img
           src={heroData.image}
           alt="Color and finishes"
-          className="w-full h-[110%] object-cover"
+          className="w-full h-full object-cover"
           loading="lazy"
         />
+        {/* Elegant Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+      </motion.div>
 
-        {/* 🔥 DYNAMIC OVERLAY */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(to top,
-              rgba(0,0,0,${heroData.overlay.opacityFrom}),
-              rgba(0,0,0,${heroData.overlay.opacityVia}),
-              rgba(0,0,0,${heroData.overlay.opacityTo})
-            )`,
-          }}
-        />
-      </div>
-
-      
-
-      {/* Text */}
+      {/* Hero Content */}
       <motion.div
-        className="relative z-10 flex flex-col justify-end h-full px-8 md:px-16 pb-20"
+        className="relative z-10 flex flex-col items-center justify-center h-full px-8 md:px-16 pt-20 transform-gpu will-change-transform"
         style={{ y: textY }}
       >
-        <motion.p
-  className="type-overline text-white/50 mb-16"
-  style={{
-    color: heroData.text.color,
-    opacity: 0.9,
-    textShadow: "0 2px 10px rgba(106, 106, 106, 0.6)",
-  }}
->
-  {heroData.label}
-</motion.p>
-
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="inline-flex items-center gap-3 mb-6 md:mb-10"
+        >
+          <span className="h-[1px] w-8 md:w-12 bg-white/60"></span>
+          <p className="tracking-[0.2em] text-[10px] md:text-xs font-semibold text-white uppercase">
+            {heroData.label}
+          </p>
+          <span className="h-[1px] w-8 md:w-12 bg-white/60"></span>
+        </motion.div>
 
         <motion.h1
-  className="type-h1"
-  style={{
-    color: heroData.text.color,
-    textShadow: "0 4px 20px rgba(0,0,0,0.8)",
-  }}
->
-          {heroData.title[0]}
-          <br />
-          {heroData.title[1]}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white mb-6 leading-[1.1] text-center"
+          style={{ textShadow: "0 10px 40px rgba(0,0,0,0.5)" }}
+        >
+          {heroData.title[0]} <br />
+          <span className="text-white/90">{heroData.title[1]}</span>
         </motion.h1>
       </motion.div>
     </section>
@@ -228,25 +198,24 @@ const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
 /* ================= MARQUEE ================= */
 
-
 const MarqueeStrip = () => {
   return (
-    <div className="py-6 bg-[#134d7a] text-white overflow-hidden">
+    <div className="py-5 bg-[#1A1A1A] border-t border-white/10 text-white/80 overflow-hidden relative z-20 shadow-2xl">
       <motion.div
-        className="flex gap-12 whitespace-nowrap"
+        className="flex gap-12 whitespace-nowrap transform-gpu will-change-transform"
         animate={{ x: ["0%", "-50%"] }}
         transition={{
           repeat: Infinity,
           ease: "linear",
-          duration: 20, // 🔥 speed control (lower = faster)
+          duration: 30, // Smoother, slightly slower speed
         }}
       >
-        {[...words, ...words].map((word, i) => (
+        {[...words, ...words, ...words].map((word, i) => (
           <span
             key={i}
-            className="type-overline opacity-60"
+            className="text-xs md:text-sm tracking-[0.2em] uppercase font-semibold"
           >
-            {word} <span className="mx-4 opacity-30">●</span>
+            {word} <span className="mx-6 md:mx-10 opacity-30 text-[#0a4b7c]">◆</span>
           </span>
         ))}
       </motion.div>
@@ -259,7 +228,6 @@ const MarqueeStrip = () => {
 const MaterialsSection = () => {
   const [active, setActive] = useState("Wood");
   const [hovered, setHovered] = useState<number | null>(null);
-  const reduceMotion = useReducedMotion();
 
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -267,224 +235,155 @@ const MaterialsSection = () => {
   const filtered = materials.filter((m) => m.category === active);
 
   return (
-    <section ref={ref} className="gradient-lumina py-24 px-8 md:px-16">
+    <section ref={ref} className="bg-[#FAFAFA] py-24 md:py-32 px-6 md:px-16 lg:px-24 relative overflow-hidden">
 
-      {/* ================= FILTERS ================= */}
-     <motion.div
-  className="mb-20 flex flex-wrap gap-4"
-  initial={{ opacity: 0, y: 30 }}
-  animate={isInView ? { opacity: 1, y: 0 } : {}}
-  transition={{ type: "spring", stiffness: 60, damping: 18 }}
->
-  {categories.map((cat, i) => (
-    <motion.button
-      key={cat}
-      onClick={() => setActive(cat)}
-      whileHover={{
-        y: -4,
-        scale: 1.04,
-      }}
-      whileTap={{ scale: 0.97 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        delay: i * 0.04,
-        type: "spring",
-        stiffness: 120,
-        damping: 15,
-      }}
-      className={`group relative overflow-hidden rounded-[24px] px-7 py-3.5 type-body-sm transition-all duration-500
-      ${
-        active === cat
-          ? "text-white shadow-[0_15px_50px_rgba(15,23,42,0.28)]"
-          : "border border-white/40 bg-white/60 text-[#1A1A1A] backdrop-blur-xl hover:bg-white/90"
-      }`}
-    >
-      {/* Active Aurora Gradient */}
-      {active === cat && (
-        <>
+      {/* Subtle Background Elements */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-black/[0.02] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[#0a4b7c]/[0.03] rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-[1600px] mx-auto">
+        {/* ================= HEADER & DESCRIPTION ================= */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <motion.div
-            className="absolute inset-0 rounded-[24px]"
-            animate={{
-              background: [
-             "linear-gradient(135deg, #071B3A 0%, #123B6D 45%, #1E7FB5 100%)",
-    "linear-gradient(135deg, #081A35 0%, #144978 50%, #238CC2 100%)",
-    "linear-gradient(135deg, #0A2345 0%, #18588A 55%, #2A9BD1 100%)",
-              ],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-light tracking-tight text-[#1A1A1A] mb-4">
+              Material <span className="text-[#0a4b7c]">Library</span>
+            </h2>
+            <p className="text-base md:text-lg text-[#6B7280] max-w-lg font-light leading-relaxed">
+              Explore our comprehensive collection of architectural finishes, featuring tactile surfaces, vibrant solid colors, and elegant natural textures.
+            </p>
+          </motion.div>
+        </div>
 
-          {/* inner glass */}
-          <div className="absolute inset-[1px] rounded-[23px] border border-white/10 bg-white/5 backdrop-blur-xl" />
-        </>
-      )}
-
-      {/* Hover Glow */}
-      <div className="absolute inset-0 rounded-[24px] bg-gradient-to-r from-white/10 via-transparent to-white/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-      {/* Shine Sweep */}
-      <div className="absolute -left-24 top-0 h-full w-20 rotate-12 bg-white/25 blur-xl opacity-0 transition-all duration-700 group-hover:left-[120%] group-hover:opacity-100" />
-
-      {/* Content */}
-      <span className="relative z-10 flex items-center gap-2">
-        {active === cat && (
-          <span className="h-2 w-2 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]" />
-        )}
-
-        <span
-          className={`transition-all duration-300 ${
-            active === cat
-              ? "opacity-100"
-              : "group-hover:text-black"
-          }`}
+        {/* ================= FILTERS ================= */}
+        <motion.div
+          className="mb-16 flex flex-wrap gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {cat}
-        </span>
-      </span>
-    </motion.button>
-  ))}
-</motion.div>
-
-      {/* ================= DESCRIPTION ================= */}
-      <motion.p
-        className="type-body-sm text-gray-500 mb-12 max-w-xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.2, type: "spring", stiffness: 50, damping: 20 }}
-      >
-        Texture series — tactile surface interest for feature walls and cladding.
-      </motion.p>
-
-      {/* ================= SWATCHES ================= */}
-      <div className="mb-20 flex flex-wrap gap-4 md:gap-5 [perspective:1000px]">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((mat, i) => (
-            <motion.div
-              key={mat.name + i}
-              layout
-              className="group relative transform-gpu"
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: -20 }}
-              transition={{ delay: i * 0.04, type: "spring", stiffness: 150, damping: 15 }}
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
+          {categories.map((cat, i) => (
+            <motion.button
+              key={cat}
+              onClick={() => setActive(cat)}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className={`relative overflow-hidden rounded-full px-6 py-3 text-xs md:text-sm font-medium tracking-wide transition-all duration-300
+              ${
+                active === cat
+                  ? "bg-[#1A1A1A] text-white shadow-lg shadow-black/10 scale-105"
+                  : "bg-white border border-gray-200 text-[#4B5563] hover:border-gray-300 hover:shadow-md"
+              }`}
             >
-              {/* 🔥 3D CARD */}
-              <div
-                className="relative [perspective:1000px]"
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-
-                  const rotateX = ((y - rect.height / 2) / rect.height) * -20;
-                  const rotateY = ((x - rect.width / 2) / rect.width) * 20;
-
-                  const card = e.currentTarget.firstElementChild as HTMLElement;
-
-                  card.style.transform = `
-                    perspective(900px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                    scale(1.12)
-                  `;
-                }}
-                onMouseLeave={(e) => {
-                  const card = e.currentTarget.firstElementChild as HTMLElement;
-
-                  card.style.transform = `
-                    perspective(900px)
-                    rotateX(0deg)
-                    rotateY(0deg)
-                    scale(1)
-                  `;
-                }}
-              >
-                <div
-                  className="relative h-20 w-20 md:h-24 md:w-24 rounded-xl shadow-xl transition-transform duration-300 ease-[0.32,0.72,0,1]"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  {/* IMAGE (depth) */}
-                  <img
-                    src={mat.image}
-                    alt={mat.name}
-                    className="w-full h-full object-cover rounded-xl"
-                    loading="lazy"
-                    style={{ transform: "translateZ(40px)" }}
-                  />
-
-                  {/* LIGHT REFLECTION */}
-                  <div
-                    className="absolute inset-0 rounded-xl pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(120deg, rgba(255,255,255,0.35), transparent 40%)",
-                      transform: "translateZ(50px)",
-                      mixBlendMode: "overlay",
-                    }}
-                  />
-
-                  {/* DEPTH SHADOW */}
-                  <div
-                    className="absolute inset-0 rounded-xl"
-                    style={{
-                      transform: "translateZ(-20px)",
-                      boxShadow: "0 30px 60px rgba(0,0,0,0.25)",
-                    }}
-                  />
-                </div>
-              </div>
-              
-              {/* Tooltip */}
-              <AnimatePresence>
-                {hovered === i && (
-                  <motion.div
-                    className="type-overline absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur-md text-white px-4 py-2 rounded-full whitespace-nowrap z-20 shadow-xl"
-                    initial={{ opacity: 0, y: -8, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.9 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  >
-                    {mat.name}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              <span className="relative z-10">{cat}</span>
+            </motion.button>
           ))}
-        </AnimatePresence>
-      </div>
+        </motion.div>
 
-      {/* ================= BOTTOM ================= */}
-      <motion.div
-        className="flex flex-col md:flex-row items-start md:items-center justify-between pt-8 border-t border-gray-200/50"
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.4, type: "spring", stiffness: 50, damping: 20 }}
-      >
-        <p className="type-body-sm text-gray-500 max-w-md mb-6 md:mb-0">
-          Over 200 colours, wood grains, stone finishes, and metallic effects available.
-        </p>
+        {/* ================= SWATCHES GRID ================= */}
+        <div className="flex flex-wrap content-start items-start gap-6 md:gap-8 min-h-[250px]">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((mat, i) => (
+              <motion.div
+                key={mat.name + i}
+                layout
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                transition={{ delay: i * 0.05, type: "spring", stiffness: 200, damping: 20 }}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                className="relative group cursor-pointer"
+              >
+                {/* 🔥 3D CARD IMPLEMENTATION */}
+                <div
+                  className="relative [perspective:1200px]"
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateX = ((y - rect.height / 2) / rect.height) * -25;
+                    const rotateY = ((x - rect.width / 2) / rect.width) * 25;
+                    const card = e.currentTarget.firstElementChild as HTMLElement;
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    const card = e.currentTarget.firstElementChild as HTMLElement;
+                    card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+                  }}
+                >
+                  <div
+                    className="relative w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 transition-transform duration-400 ease-out flex items-center justify-center p-2"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    {/* Material Image */}
+                    <img
+                      src={mat.image}
+                      alt={mat.name}
+                      className="w-full h-full object-cover rounded-xl shadow-inner"
+                      loading="lazy"
+                      style={{ transform: "translateZ(30px)" }}
+                    />
+                    
+                    {/* Gloss Reflection Overlay */}
+                    <div 
+                      className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: "linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%)",
+                        transform: "translateZ(40px)"
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                {/* Tooltip Popup */}
+                <AnimatePresence>
+                  {hovered === i && (
+                    <motion.div
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-[#1A1A1A] text-white px-4 py-2 rounded-lg text-xs tracking-wider uppercase font-medium whitespace-nowrap z-50 shadow-2xl pointer-events-none"
+                      initial={{ opacity: 0, y: -10, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -5, scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    >
+                      {mat.name}
+                      {/* Triangle Pointer */}
+                      <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#1A1A1A] rotate-45" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
 
-          <button className="type-btn group mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#E5E5E5] text-[#1A1A1A] overflow-hidden relative transition-all duration-500 shadow-sm hover:shadow-md">
-            
-            <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+        {/* ================= BOTTOM CTA ================= */}
+        <motion.div
+          className="mt-16 pt-10 border-t border-gray-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div>
+            <h4 className="text-xl font-medium text-[#1A1A1A] mb-2">Can't find what you're looking for?</h4>
+            <p className="text-sm text-[#6B7280] max-w-md font-light">
+              We offer bespoke color matching and custom finishes engineered specifically for your architectural requirements.
+            </p>
+          </div>
+
+          <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+            <span className="relative z-10 text-xs md:text-sm tracking-wider font-bold uppercase group-hover:text-white transition-colors duration-300">
               Explore Color Studio
             </span>
-
-            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white">
-              →
-            </span>
-
-            {/* hover bg */}
-            <span className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-[0.32,0.72,0,1] rounded-full" />
+            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white">→</span>
+            <div className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
           </button>
-      </motion.div>
+        </motion.div>
+
+      </div>
     </section>
   );
 };
@@ -500,7 +399,7 @@ export default function SixthSection() {
       <HeroSection />
 
       {/* SCROLL CONTENT (slides over) */}
-      <div className="relative z-20 bg-white">
+      <div className="relative z-20 bg-[#FAFAFA]">
         <MarqueeStrip />
         <MaterialsSection />
       </div>

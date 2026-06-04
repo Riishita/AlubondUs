@@ -14,6 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
+        sans: ['General Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['General Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['General Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         heading: ['General Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         body:    ['General Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },

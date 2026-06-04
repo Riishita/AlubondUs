@@ -49,7 +49,7 @@ const Index = () => {
             </div>
           </div>
           <Suspense fallback={<div className="min-h-screen" />}><SheetDetail /></Suspense>
-          <Suspense fallback={<div />}><MaterialSection /></Suspense>
+          <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
     
               <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>

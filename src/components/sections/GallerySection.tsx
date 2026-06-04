@@ -44,11 +44,32 @@ export default function PremiumGallery() {
   return (
     <section 
       ref={containerRef} 
-      className={`bg-neutral-950 relative h-[400vh] text-white ${cursorSectionClassName}`}
+      className={`bg-black relative h-[400vh] text-white ${cursorSectionClassName}`}
       {...cursorSectionProps}
     >
       <div className="sticky top-0 h-screen w-full flex flex-col lg:grid lg:grid-cols-12 items-center px-6 lg:px-16 gap-8 overflow-hidden">
         
+        {/* Aesthetic Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/80 via-black to-neutral-900/50" />
+          <motion.div 
+            style={{ 
+              opacity: useTransform(smoothProgress, [0, 0.5, 1], [0.3, 0.6, 0.3]),
+              y: useTransform(smoothProgress, [0, 1], ["0%", "20%"])
+            }}
+            className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-white/5 blur-[120px] transform-gpu will-change-transform" 
+          />
+          <motion.div 
+            style={{ 
+              opacity: useTransform(smoothProgress, [0, 0.5, 1], [0.2, 0.5, 0.2]), 
+              scale: useTransform(smoothProgress, [0, 1], [1, 1.2]) 
+            }}
+            className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-neutral-800/40 blur-[150px] transform-gpu will-change-transform" 
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80"></div>
+        </div>
+
         {/* Left Text Column */}
         <div className="lg:col-span-4 flex flex-col justify-center h-full pt-12 lg:pt-0 z-20">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-4">
@@ -69,12 +90,12 @@ export default function PremiumGallery() {
         </div>
 
         {/* Right Gallery Column - Added margin bottom for mobile separation */}
-        <div className="lg:col-span-8 w-full flex items-center justify-center lg:justify-end mb-24 lg:mb-0">
+        <div className="lg:col-span-8 w-full flex items-center justify-center lg:justify-end mb-24 lg:mb-0 z-20">
           <div 
             className="relative overflow-hidden rounded-2xl border border-white/10"
             style={{ width: `${cardWidth}vw`, height: cardHeight }}
           >
-            <motion.div style={{ x: xTransform }} className="flex h-full w-max">
+            <motion.div style={{ x: xTransform }} className="flex h-full w-max transform-gpu will-change-transform">
               {panels.map((panel, i) => (
                 <div key={i} style={{ width: `${cardWidth}vw` }} className="relative h-full flex-shrink-0">
                   <video src={panel.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />

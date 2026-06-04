@@ -6,6 +6,7 @@ import {
   motion,
   useTransform,
   useReducedMotion,
+  useInView,
 } from "framer-motion";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 
@@ -17,6 +18,7 @@ export default function QualitySection() {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
+  const isInView = useInView(ref);
 
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
@@ -63,7 +65,7 @@ export default function QualitySection() {
 
 useEffect(() => {
   const video = videoRef.current;
-  if (!video || reduceMotion) return;
+  if (!video || reduceMotion || !isInView) return;
 
   let rafId: number;
   let isSeeking = false; // Track if the video is currently seeking
@@ -103,7 +105,7 @@ useEffect(() => {
     cancelAnimationFrame(rafId);
     video.removeEventListener("seeked", onSeeked);
   };
-}, [reduceMotion]);
+}, [reduceMotion, isInView]);
 
   // Content moves up; adjusted range for better mobile/desktop parity
   const contentY = useTransform(
@@ -180,8 +182,11 @@ useEffect(() => {
           <div className="absolute left-0 top-[110vh] w-full px-6 md:px-16">
             <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
               <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
                 whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25, delay: 0.1 }}
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white transition-transform md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
@@ -199,8 +204,11 @@ useEffect(() => {
               </motion.div>
 
               <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
                 whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25, delay: 0.2 }}
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">
@@ -217,8 +225,11 @@ useEffect(() => {
               </motion.div>
 
               <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
                 whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25, delay: 0.3 }}
                 className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <div className="mb-2">

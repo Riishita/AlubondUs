@@ -22,45 +22,42 @@ export default function CinematicVerticalTear() {
     offset: ["start start", "end end"],
   });
 
-  // --- PHASE 1: VIDEO SHIFT ---
-  // On desktop: shrinks to 50% width and shifts right
-  // On mobile/tablet: shrinks to 40vh height at the top
-  const videoWidth = useTransform(scrollYProgress, [0, 0.8], ["100%", isMobile ? "100%" : "50%"]);
-  const videoHeight = useTransform(scrollYProgress, [0, 0.8], ["100vh", isMobile ? "40vh" : "100vh"]);
-  const videoLeft = useTransform(scrollYProgress, [0, 0.8], ["0%", isMobile ? "0%" : "50%"]);
-  const videoTop = useTransform(scrollYProgress, [0, 0.8], ["0%", "0%"]);
+  // Slide the container horizontally
+  const containerX = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
   return (
     <div 
       ref={containerRef} 
       className={`relative bg-black ${cursorSectionClassName}`}
-      style={{ height: isMobile ? "150vh" : "200vh" }}
+      style={{ height: "200vh" }}
       {...cursorSectionProps}
     >
       <div id="certificatesection" className="absolute top-0 w-full h-full pointer-events-none" />
       
-      {/* STICKY CONTAINER: Certification + Video */}
+      {/* STICKY CONTAINER: Locks to screen while scrolling */}
       <div className="sticky top-0 h-screen w-full z-10 overflow-hidden">
-        {/* CERTIFICATION SECTION BACKGROUND (always present, revealed as video shrinks) */}
-        <div className="absolute inset-0 w-full h-full ">
-          <FireHorizontalExperience scrollProgress={scrollYProgress} isMobile={isMobile} />
-        </div>
-
-        {/* SINGLE VIDEO LAYER - Shrinks and shifts right */}
-        <motion.div
-          style={{ 
-            width: videoWidth, 
-            height: videoHeight,
-            left: videoLeft,
-            top: videoTop,
-          }}
-          className="absolute z-20 overflow-hidden bg-black shadow-[0_0_50px_rgba(0,0,0,0.5)] pointer-events-none"
+        
+        {/* HORIZONTAL SLIDING TRACK: Holds Video (left) and Certification (right) */}
+        <motion.div 
+          style={{ x: containerX }}
+          className="flex h-full w-[200vw]"
         >
-          <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-            <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065540/VN20260413_125908_bxq5dm.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/30" />
+          
+          {/* VIDEO SECTION: Takes up first 100vw */}
+          <div className="w-[100vw] h-full relative shrink-0">
+            <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+              <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065540/VN20260413_125908_bxq5dm.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+          </div>
+
+          {/* CERTIFICATION SECTION: Takes up second 100vw */}
+          <div className="w-[100vw] h-full relative shrink-0">
+            <FireHorizontalExperience scrollProgress={scrollYProgress} isMobile={isMobile} />
+          </div>
+
         </motion.div>
+
       </div>
     </div>
   );

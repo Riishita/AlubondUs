@@ -73,57 +73,81 @@ export default function SmoothTransitionWrapper() {
           <motion.div
             key={i}
             style={{ height: h }}
-            className="flex-1 bg-[#eae7e2] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
+            className="flex-1 bg-[#F7F7F5] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
           />
         ))}
       </div>
 
-      {/* 🧱 PHILOSOPHY SECTION - Responsive spacing and font sizes */}
+      {/* 🧱 PHILOSOPHY SECTION - Premium Editorial Layout */}
       <motion.div
         style={{
           opacity: isRevealed ? philosophyOpacity : 0,
           y: philosophyY,
           pointerEvents: isRevealed ? "auto" : "none",
         }}
-        className="sticky top-0 h-screen z-20 flex items-center justify-center px-6 py-12 md:p-20 text-[#1f2937]"
+        className="sticky top-0 h-screen z-20 flex items-center justify-center px-6 py-12 md:p-20 text-[#1f2937] overflow-hidden"
       >
-        <motion.div style={{ y: philosophyParallaxY }} className="max-w-6xl w-full flex flex-col justify-center">
-          <p className="type-overline text-black/40 mb-6 md:mb-16">
-            001 / Philosophy
-          </p>
+        <motion.div style={{ y: philosophyParallaxY }} className="max-w-[1400px] w-full flex flex-col justify-center relative">
+          
+          {/* Subtle Background Accent */}
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-[#0a4b7c]/5 rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-20 items-start mb-8 md:mb-16">
-            <div>
-              <h2 className="type-h1">
-                ALUBOND <br />
-                <span className="text-[#134d7a]">PHILOSOPHY</span>
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left side: Heading */}
+            <div className="lg:col-span-5 flex flex-col justify-center">
+              <div className="inline-flex items-center gap-3 mb-6 md:mb-8">
+                <span className="h-[1px] w-8 bg-[#0a4b7c]"></span>
+                <p className="tracking-[0.2em] text-[10px] md:text-xs font-semibold text-[#0a4b7c] uppercase">
+                  001 / Philosophy
+                </p>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-[#1A1A1A] leading-[1.1] mb-6 md:mb-8">
+                Alubond <br />
+                <span className="text-[#0a4b7c]">Philosophy</span>
               </h2>
+
+              <p className="text-base md:text-lg text-[#4B5563] leading-relaxed font-light max-w-md">
+                At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site.
+              </p>
+
+              <button className="mt-8 md:mt-12 group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:shadow-[#1A1A1A]/20 hover:-translate-y-1">
+                <span className="relative z-10 text-xs md:text-sm tracking-wider font-medium uppercase">
+                  Explore Our Story
+                </span>
+                <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <div className="absolute inset-0 bg-[#0a4b7c] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+              </button>
             </div>
-            <div className="type-body text-black/70 max-w-lg lg:pt-4">
-              Architecture should speak of its time and place, but yearn for timelessness.
-              <div className="type-overline mt-2 md:mt-4 text-[#134d7a]">
-                — FRANK GEHRY
+
+            {/* Right side: Editorial Quote Card */}
+            <div className="lg:col-span-7 relative">
+              {/* Huge Decorative Quote Mark */}
+              <div className="absolute -top-12 md:-top-20 -left-6 md:-left-12 text-[120px] md:text-[200px] text-[#0a4b7c]/10 leading-none select-none pointer-events-none">
+                "
+              </div>
+              
+              <div className="relative bg-white/70 backdrop-blur-xl border border-white p-8 md:p-14 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_80px_rgba(0,0,0,0.06)] transition-shadow duration-500">
+                <h3 className="text-2xl md:text-4xl text-[#1A1A1A] leading-snug md:leading-normal mb-8 md:mb-10 font-light">
+                  "Architecture should speak of its time and place, but yearn for timelessness."
+                </h3>
+                
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-[1px] bg-[#0a4b7c]"></div>
+                  <div className="tracking-[0.2em] text-[10px] md:text-xs font-bold text-[#0a4b7c] uppercase">
+                    Frank Gehry
+                  </div>
+                </div>
+
+                <div className="mt-8 md:mt-12 pt-8 md:pt-10 border-t border-gray-200">
+                  <p className="text-sm md:text-base text-[#6B7280] leading-relaxed font-light">
+                    "A façade is not just the outer skin of a building — it is the expression of its character, ambition, and identity."
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="max-w-3xl border-t border-black/10 pt-8 md:pt-20">
-            <p className="type-body italic text-black/70 mb-4 md:mb-8">
-              "A façade is not just the outer skin of a building — it is the expression of its character, ambition, and identity."
-            </p>
-            <p className="type-body text-black/60 max-w-2xl">
-              At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site.
-            </p>
-            
-            <button className="type-btn mt-8 md:mt-12 group relative inline-flex items-center gap-3 px-6 md:px-8 py-2.5 md:py-3 rounded-full border border-black/20 overflow-hidden transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]">
-              <span className="relative z-10 text-[#1f2937] group-hover:text-white transition">
-                Explore Our Story
-              </span>
-              <span className="relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-white">
-                →
-              </span>
-              <span className="absolute inset-0 bg-[#1f2937] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-[0.32,0.72,0,1] rounded-full" />
-            </button>
           </div>
         </motion.div>
       </motion.div>

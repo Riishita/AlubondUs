@@ -176,14 +176,14 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
       atmosphereColor="#2f2f2f"
       atmosphereAltitude={0.1}
       polygonsData={countries.features}
-      polygonCapColor={() => "rgba(0, 0, 0, 0)"}
+      polygonCapColor={() => "rgba(165, 165, 165, 0.48)"}
       polygonSideColor={() => "rgba(0, 0, 0, 0)"}
-      polygonStrokeColor={() => "rgb(255, 255, 255)"}
+      polygonStrokeColor={() => "rgb(224, 224, 224)"}
       hexPolygonsData={countries.features}
       hexPolygonResolution={3}
       hexPolygonMargin={0.3}
       hexPolygonAltitude={0.01}
-      hexPolygonColor={() => "#949494b9"}
+      hexPolygonColor={() => "#23232340"}
       htmlElementsData={showPoints ? locations : []}
       htmlLat={(d: any) => d.lat}
       htmlLng={(d: any) => d.lng}
@@ -201,7 +201,7 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
       }}
       pointLat={(d: any) => d.lat}
       pointLng={(d: any) => d.lng}
-      pointColor={() => "#c2d6f7"}
+      pointColor={() => "#ffffff"}
       pointAltitude={0.08}
 pointRadius={0.6}
       ringsData={
@@ -212,8 +212,8 @@ pointRadius={0.6}
 ringAltitude={(d: any) => d.altitude}
       ringLat={(d: any) => d.lat}
       ringLng={(d: any) => d.lng}
-      ringColor={() => ["#02235a", "#010036"]}
-      ringMaxRadius={5}
+      ringColor={() => ["#f7f7f7", "#ffffff"]}
+      ringMaxRadius={4}
       ringPropagationSpeed={2}
       ringRepeatPeriod={1000}
     />
