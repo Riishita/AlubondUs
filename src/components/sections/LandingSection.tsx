@@ -79,9 +79,9 @@ const LandingHero = () => {
                   Alubond U.S.A — Est. 1989
                 </motion.p>
 
-                <motion.h1 variants={VARIANTS.framerFadeUp} className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white uppercase">
+                <motion.h2 variants={VARIANTS.framerFadeUp} className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white uppercase">
                   WORLD'S LARGEST
-                </motion.h1>
+                </motion.h2>
 
                 <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-[#59c4ee]">
                   ACP BRAND
@@ -92,11 +92,12 @@ const LandingHero = () => {
                 </motion.p>
 
                 <motion.button
-                  variants={VARIANTS.framerFadeUp}
-                  className="px-8 py-3 md:px-10 md:py-4 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] bg-white text-black hover:bg-[#59c4ee] hover:text-white transition-colors duration-300"
-                >
-                  Discover Innovation ↓
-                </motion.button>
+                variants={VARIANTS.framerFadeUp}
+                className="px-8 py-4 md:px-10 text-[14px] md:text-[15px] font-medium rounded bg-white/30 backdrop-blur-lg border border-white/10 text-white hover:bg-white hover:text-black transition-all duration-500 ease-out"
+              >
+                Discover Innovation
+              </motion.button>
+
               </motion.div>
 
               {/* Stats Wrapper - Fixed for mobile overflow */}
@@ -109,7 +110,7 @@ const LandingHero = () => {
                     <p className="text-3xl md:text-5xl font-black text-white uppercase">
                       {stat.value}
                     </p>
-                    <p className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-[#59c4ee] uppercase">
+                    <p className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-white uppercase">
                       {stat.label}
                     </p>
                   </div>

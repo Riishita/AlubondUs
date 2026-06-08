@@ -73,7 +73,7 @@ export default function SmoothTransitionWrapper() {
           <motion.div
             key={i}
             style={{ height: h }}
-            className="flex-1 bg-[#F7F7F5] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
+            className="flex-1 bg-[#FAF9F4] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
           />
         ))}
       </div>

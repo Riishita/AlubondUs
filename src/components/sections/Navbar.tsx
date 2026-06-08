@@ -1,5 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+"use client";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const navLinks = [
   { label: "About Us", href: "#about" },
@@ -11,142 +12,71 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const [hidden, setHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeLogo, setActiveLogo] = useState("/Logo1.png");
-  const [showLogo, setShowLogo] = useState(true);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const philosophy = document.getElementById("philosophy");
-      const certificate = document.getElementById("certificatesection");
-      const gallery = document.getElementById("gallerysection");
-
-      const sections = [philosophy, certificate, gallery];
-      let useLogo2 = false;
-      const navBottom = 100; // Approximate bottom threshold for the navbar
-
-      for (const sec of sections) {
-        if (sec) {
-          const rect = sec.getBoundingClientRect();
-          if (rect.top <= navBottom && rect.bottom >= navBottom) {
-            useLogo2 = true;
-            break;
-          }
-        }
-      }
-
-      setActiveLogo(useLogo2 ? "/Logo2.png" : "/Logo1.png");
-
-      // Hide logo once user scrolls past the landing section
-      const scrollY = window.scrollY || window.pageYOffset;
-      setShowLogo(scrollY < window.innerHeight * 0.8);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) setHidden(true);
+    else setHidden(false);
+  });
 
   return (
-    <>
-      {/* Top Navbar */}
-      <motion.nav
-        className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-8 py-5 md:px-12"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
-      >
+    <motion.nav
+      variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: -100, opacity: 0 } }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      // Changed to top-0 for attachment, removed inset-x-0 for full width container
+      className="fixed top-0 left-0 right-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200/50"
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-2 h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center transition-opacity duration-500" style={{ opacity: showLogo ? 1 : 0, pointerEvents: showLogo ? 'auto' : 'none' }}>
-          <img
-  src={activeLogo}
-  alt="Alubond U.S.A"
-  className="h-20 md:h-22 object-contain brightness-110 contrast-110"
-/>
+        <a href="/" className="flex items-center shrink-0">
+          <img src="/Logo.png" alt="Logo" className="h-20 w-auto object-contain" />
+        </a>
+
+        {/* Desktop Navigation - Clean, minimalist style */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a 
+              key={link.label} 
+              href={link.href} 
+              className="text-gray-700 text-sm font-medium hover:text-black transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
 
-        {/* Hamburger */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[7px]"
-        >
-          <motion.span
-            className="block h-[2px] w-7 bg-white/90"
-            animate={isOpen ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
-          />
-          <motion.span
-            className="block h-[2px] w-7 bg-white/90"
-            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-          />
-          <motion.span
-            className="block h-[2px] w-7 bg-white/90"
-            animate={isOpen ? { rotate: -45, y: -9 } : { rotate: 0, y: 0 }}
-          />
+        {/* Mobile Menu Toggle */}
+        <button className="md:hidden p-2 z-50" onClick={() => setIsOpen(!isOpen)}>
+          <div className={`w-6 h-0.5 bg-black transition-all ${isOpen ? "rotate-45 translate-y-1.5" : ""}`} />
+          <div className={`w-6 h-0.5 bg-black my-1.5 ${isOpen ? "opacity-0" : ""}`} />
+          <div className={`w-6 h-0.5 bg-black transition-all ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
         </button>
-      </motion.nav>
+      </div>
 
-      {/* Overlay + Side Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <>
-            {/* 🔵 Gradient Overlay */}
-            <motion.div
-              className="fixed inset-0 z-30"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(20,27,58,0.5), rgba(20,27,58,0.7))",
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-            />
-
-            {/* 🔥 Gradient Side Menu */}
-            <motion.div
-              className="fixed right-0 top-0 z-40 flex h-full w-full items-center justify-center sm:w-1/2"
-              style={{
-                background:
-                  "linear-gradient(135deg, #1f2b5e 0%, #3db3d7 100%)",
-              }}
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <nav className="flex flex-col items-center gap-6">
-                {navLinks.map((link, i) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="type-h2 text-white/90 transition-colors hover:text-[#59c4ee]"
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5, delay: 0.1 + i * 0.07 }}
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-              </nav>
-
-              {/* Bottom info */}
-              <motion.div
-  className="type-overline absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md flex flex-col md:flex-row items-center justify-center gap-3 md:gap-12 text-white/50 text-center md:text-left"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 0.6 }}
->
-  <span className="break-all">info@alubondusa.com</span>
-  <span className="whitespace-nowrap">+1 (305) 000-0000</span>
-</motion.div>
-            </motion.div>
-          </>
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-b border-gray-100 overflow-hidden"
+          >
+            <div className="flex flex-col p-6 gap-4">
+              {navLinks.map((link) => (
+                <a key={link.label} href={link.href} onClick={() => setIsOpen(false)} className="text-gray-800 font-medium text-lg">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </motion.nav>
   );
 };
 

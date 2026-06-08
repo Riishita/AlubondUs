@@ -1,12 +1,10 @@
 "use client";
 
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
-
 import {
   motion,
   useMotionTemplate,
   useReducedMotion,
-  useScroll,
   useTransform,
   useMotionValue,
   animate,
@@ -18,8 +16,7 @@ const cards = [
   {
     img: "/images/BUILDINGFACADES.png",
     title: "BUILDING FACADES",
-    desc:
-      "Curtain walls, rainscreen cladding, and architectural envelope systems.",
+    desc: "Curtain walls, rainscreen cladding, and architectural envelope systems.",
     id: "01",
   },
   {
@@ -68,8 +65,7 @@ export default function ApplicationSection() {
   const duplicatedCards = useMemo(() => [...cards, ...cards], []);
 
   // ✅ Cursor
-  const { cursorSectionProps, cursorSectionClassName } =
-    useCustomCursorBindings(false);
+  const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
   // ✅ Scroll animation values
   const { smoothProgress: scrollYProgress } = useSectionScroll(
@@ -85,7 +81,7 @@ export default function ApplicationSection() {
   const bgClip = useMotionTemplate`circle(${bgRadius} at 50% 100%)`;
   const fgClip = useMotionTemplate`circle(${fgRadius} at 50% 100%)`;
 
-  // ✅ NEW: motion value for smooth control
+  // ✅ motion value for auto-scroll track
   const x = useMotionValue(0);
   const controls = useRef<any>(null);
 
@@ -94,9 +90,9 @@ export default function ApplicationSection() {
     if (reduceMotion) return;
 
     if (!pause) {
-      controls.current = animate(x, [-0, -1500], {
+      controls.current = animate(x, [-0, -2000], {
         ease: "linear",
-        duration: 25,
+        duration: 35,
         repeat: Infinity,
       });
     } else {
@@ -111,8 +107,10 @@ export default function ApplicationSection() {
       ref={sectionRef}
       {...cursorSectionProps}
       className={`relative h-[220vh] gradient-lumina ${cursorSectionClassName}`}
+      id="applications"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
+        
         {/* BACKGROUND */}
         <motion.div
           className="absolute inset-0 z-0"
@@ -123,29 +121,27 @@ export default function ApplicationSection() {
 
         {/* CONTENT */}
         <motion.div
-          className="relative z-10 h-full w-full"
+          className="relative z-10 h-full w-full flex flex-col justify-center"
           style={{
             clipPath: fgClip,
             opacity: contentOpacity,
             scale: contentScale,
           }}
         >
-          <div className="relative h-full w-full px-0 py-20 text-white">
+          <div className="w-full px-0 py-20 text-white">
 
             {/* HEADER */}
-            <div className="max-w-6xl mx-auto mb-16 px-6">
-              <p className="type-overline text-white/50">
+            <div className="max-w-7xl mx-auto mb-20 px-6">
+              <p className="type-overline text-white/50 mb-6">
                 004 / Applications
               </p>
 
-              <div className="flex justify-between flex-wrap gap-4 mt-5">
-                <h1 className="type-h1 text-white uppercase">
-
-                  
+              <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-10 mt-5">
+                <h1 className="type-h1 text-white uppercase leading-[0.95]">
                   WHERE ALUBOND <br /> PERFORMS
                 </h1>
 
-                <p className="type-body-sm max-w-sm text-white/60">
+                <p className="type-body-sm max-w-sm text-white/60 mb-2">
                   Seven industries. One material.
                   Endless architectural possibility.
                 </p>
@@ -153,53 +149,68 @@ export default function ApplicationSection() {
             </div>
 
             {/* CAROUSEL */}
-            <div className="relative mt-10">
-
+            <div className="relative mt-16">
               <motion.div
                 style={{ x }}
                 drag="x"
-                dragConstraints={{ left: -2000, right: 0 }}
+                dragConstraints={{ left: -2500, right: 0 }}
                 dragElastic={0.1}
                 dragTransition={{ bounceStiffness: 50, bounceDamping: 20 }}
                 onMouseEnter={() => setPause(true)}
                 onMouseLeave={() => setPause(false)}
-                className="flex w-max gap-5 px-6 md:px-16"
+                className="flex w-max gap-10 px-6 md:px-16"
               >
                 {duplicatedCards.map((card, i) => (
-                  <motion.div
-                    key={`${card.id}-${i}`}
-                    className="group w-[260px] md:w-[320px] rounded-2xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-colors duration-500 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-grab active:cursor-grabbing"
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  >
-                    <div className="w-full h-[160px] md:h-[200px] overflow-hidden relative">
-                      <motion.img
-                        src={card.img}
-                        className="w-full h-full object-cover origin-center"
-                        whileHover={{ scale: 1.08 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-                    </div>
-
-                    <div className="p-5 md:p-6 relative z-10 bg-gradient-to-b from-white/5 to-transparent">
-                      <p className="type-overline text-white/50 mb-1">{card.id}</p>
-                      <h3 className="type-h3 uppercase text-white drop-shadow-sm mb-2">
-                        
-                        {card.title}
-                      </h3>
-                      <p className="type-body-sm text-white/70 leading-relaxed">
-                        {card.desc}
-                      </p>
-                    </div>
-                  </motion.div>
+                  <Card key={`${card.id}-${i}`} card={card} index={i} />
                 ))}
               </motion.div>
-
             </div>
           </div>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function Card({ card, index }: { card: typeof cards[0]; index: number }) {
+  return (
+    <motion.div 
+      className="group relative h-[280px] w-[280px] md:h-[280px] md:w-[350px] overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 shrink-0 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-grab active:cursor-grabbing"
+      whileHover={{ y: -10, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+    >
+      <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+         <motion.img 
+            src={card.img} 
+            alt={card.title}
+            className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+         />
+         {/* Dual gradient for max legibility and aesthetics */}
+         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90 opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+         <div className="absolute inset-0 bg-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
+
+      {/* TEXT CONTENT */}
+      <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 flex flex-col justify-end">
+         <div className="overflow-hidden mb-2">
+            <p className="type-overline text-white/60 group-hover:text-accent transition-colors duration-300">
+               {card.id}
+            </p>
+         </div>
+         
+         <h3 className="type-h3 uppercase text-white mb-2 drop-shadow-md leading-tight transform transition-transform duration-500 group-hover:-translate-y-1">
+            {card.title}
+         </h3>
+         
+         <div className="overflow-hidden h-0 group-hover:h-auto transition-all duration-500 ease-in-out">
+            <p className="type-body-sm text-white/80 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out delay-75 line-clamp-2">
+               {card.desc}
+            </p>
+         </div>
+      </div>
+      
+      {/* GLOW EFFECT ON HOVER */}
+      <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/0 group-hover:ring-white/30 transition-all duration-500 pointer-events-none" />
+    </motion.div>
   );
 }

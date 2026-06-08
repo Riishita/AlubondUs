@@ -7,11 +7,9 @@ import LandingSection from "@/components/sections/LandingSection";
 const GlobeSection = lazy(() => import("@/components/sections/GlobeSection"));
 const HomeContent = lazy(() => import("@/components/sections/HomeContent"));
 const QualitySection = lazy(() => import("@/components/sections/QualitySection"));
-const Tearffect = lazy(() => import("@/components/sections/TearEffect"));
-
-// const CertificationSection = lazy(() => import("@/components/sections/CertificationSection"));
+const SoleneScrollSequence = lazy(() => import("@/components/sections/SoleneScrollSequence"));
 const SheetDetail = lazy(() => import("@/components/sections/SheetDetail"));
-
+const Featurednews = lazy(() => import("@/components/sections/FeaturedNews"));
 const MaterialSection = lazy(() => import("@/components/sections/MaterialSection"));
 const ApplicationSection = lazy(() => import("@/components/sections/ApplicationSection"));
 const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
@@ -43,15 +41,14 @@ const Index = () => {
           <div className="relative isolate">
             <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
             
-            {/* Parallax Overlay: TearEffect scrolls OVER QualitySection */}
             <div className="relative z-10 -mt-[100vh]">
-              <Suspense fallback={<div className="min-h-screen" />}><Tearffect /></Suspense>
+              <Suspense fallback={<div className="min-h-screen" />}><SoleneScrollSequence /></Suspense>
             </div>
           </div>
           <Suspense fallback={<div className="min-h-screen" />}><SheetDetail /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
-    
+    <Suspense fallback={<div className="min-h-screen" />}><Featurednews /></Suspense>
               <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
         
           <Suspense fallback={<div className="min-h-[50vh]" />}><FooterSection /></Suspense>
