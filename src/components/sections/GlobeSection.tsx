@@ -154,11 +154,47 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
     return () => unsubscribe();
   }, [leftOpacity]);
 
+  const networkData = useMemo(() => {
+    // Generate nodes floating around the globe
+    const nodes = [...Array(80).keys()].map(() => ({
+      lat: (Math.random() - 0.5) * 180,
+      lng: (Math.random() - 0.5) * 360,
+      alt: Math.random() * 0.3 + 0.1,
+      size: Math.random() * 0.8 + 0.3
+    }));
+
+    const arcs: any[] = [];
+    for (let i = 0; i < nodes.length; i++) {
+      let connections = 0;
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dist = Math.sqrt(
+          Math.pow(nodes[i].lat - nodes[j].lat, 2) + 
+          Math.pow(nodes[i].lng - nodes[j].lng, 2)
+        );
+        if (dist < 40 && connections < 3) {
+          arcs.push({
+            startLat: nodes[i].lat,
+            startLng: nodes[i].lng,
+            startAlt: nodes[i].alt,
+            endLat: nodes[j].lat,
+            endLng: nodes[j].lng,
+            endAlt: nodes[j].alt,
+            color: 'rgba(89,196,238,0.6)'
+          });
+          connections++;
+        }
+      }
+    }
+    return { nodes, arcs };
+  }, []);
+
   const globeMaterial = useMemo(() => {
     return new THREE.MeshPhongMaterial({
-      color: 0x000000,
+      color: 0x052b4a,
+      emissive: 0x083d6a,
+      emissiveIntensity: 0.4,
       transparent: true,
-      opacity: 0.7,
+      opacity: 0.8,
       depthWrite: false,
     });
   }, []);
@@ -172,18 +208,38 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
       backgroundColor="rgba(0,0,0,0)"
       rendererConfig={{ antialias: false, alpha: true, powerPreference: "high-performance", precision: "lowp" }}
       animateIn={false}
-      showAtmosphere={false}
-      atmosphereColor="#2f2f2f"
-      atmosphereAltitude={0.1}
+      showAtmosphere={true}
+      atmosphereColor="#59c4ee"
+      atmosphereAltitude={0.25}
       polygonsData={countries.features}
-      polygonCapColor={() => "rgba(165, 165, 165, 0.48)"}
+      polygonCapColor={() => "rgba(89, 196, 238, 0.3)"}
       polygonSideColor={() => "rgba(0, 0, 0, 0)"}
-      polygonStrokeColor={() => "rgb(224, 224, 224)"}
-      hexPolygonsData={countries.features}
-      hexPolygonResolution={3}
-      hexPolygonMargin={0.3}
-      hexPolygonAltitude={0.01}
-      hexPolygonColor={() => "#23232340"}
+      polygonStrokeColor={() => "rgba(89, 196, 238, 1)"}
+      arcsData={networkData.arcs}
+      arcStartLat="startLat"
+      arcStartLng="startLng"
+      arcStartAlt="startAlt"
+      arcEndLat="endLat"
+      arcEndLng="endLng"
+      arcEndAlt="endAlt"
+      arcColor="color"
+      arcAltitudeAutoScale={0.1}
+      arcStroke={0.3}
+      arcDashLength={0.5}
+      arcDashGap={0.1}
+      arcDashAnimateTime={3000}
+      customLayerData={networkData.nodes}
+      customThreeObject={(d: any) => {
+        return new THREE.Mesh(
+          new THREE.SphereGeometry(d.size),
+          new THREE.MeshBasicMaterial({ color: 0x59c4ee })
+        );
+      }}
+      customThreeObjectUpdate={(obj: any, d: any) => {
+        if (globeRef.current) {
+          Object.assign(obj.position, globeRef.current.getCoords(d.lat, d.lng, d.alt));
+        }
+      }}
       htmlElementsData={showPoints ? locations : []}
       htmlLat={(d: any) => d.lat}
       htmlLng={(d: any) => d.lng}
@@ -201,11 +257,6 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
         el.onmouseenter = () => handleHover(d.name);
         return el;
       }}
-      pointLat={(d: any) => d.lat}
-      pointLng={(d: any) => d.lng}
-      pointColor={() => "#ffffff"}
-      pointAltitude={0.08}
-pointRadius={0.6}
       ringsData={
   selectedPlace
     ? [{ ...selectedPlace, altitude: 0.1 }]
@@ -214,12 +265,12 @@ pointRadius={0.6}
 ringAltitude={(d: any) => d.altitude}
       ringLat={(d: any) => d.lat}
       ringLng={(d: any) => d.lng}
-      ringColor={() => "#59c4ee"}
+      ringColor={() => "#f9f9f9"}
       ringMaxRadius={5}
       ringPropagationSpeed={1.5}
       ringRepeatPeriod={1200}
     />
-  ), [showPoints, selectedPlace, isTabletOrMobile, countries, globeMaterial]);
+  ), [showPoints, selectedPlace, isTabletOrMobile, countries, globeMaterial, networkData]);
 
   return (
     <section ref={sectionRef} className={cn("relative h-screen w-full bg-black overflow-hidden", cursorSectionClassName)} {...cursorSectionProps}>
