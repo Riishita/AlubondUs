@@ -31,9 +31,10 @@ export const TRANSITIONS = {
   },
   
   // Spring configurations for 'useSpring'
+  // Tuned for smooth, fluid scroll: high damping eliminates oscillation
   spring: {
-    stiffness: 40,
-    damping: 10,
+    stiffness: 80,
+    damping: 20,
     mass: 1,
   } as SpringOptions,
   

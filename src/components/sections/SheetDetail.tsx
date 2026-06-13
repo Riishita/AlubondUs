@@ -248,7 +248,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 </p>
 
                 <div className="pt-4 md:pt-6 border-t border-white/10">
-                  <p className="type-label text-white/40 leading-relaxed max-w-sm">
+                  <p className="type-body-sm text-white/70 leading-relaxed max-w-sm">
                     {steps[index].details}
                   </p>
                 </div>
@@ -296,7 +296,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 >
                   {item.right}
                 </span>
-                <div className={`hidden md:block h-[1px] transition-all duration-500 ${i === index ? "w-16 bg-white" : "w-6 bg-white/20 group-hover:w-10 group-hover:bg-white/40"}`} />
+                <div className={`hidden md:block h-[2px] transition-all duration-500 ${i === index ? "w-16 bg-white" : "w-6 bg-white/40 group-hover:w-10 group-hover:bg-white/60"}`} />
               </div>
             ))}
           </div>

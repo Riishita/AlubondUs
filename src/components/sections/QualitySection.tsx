@@ -1,262 +1,148 @@
 "use client";
 
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
-import { useEffect, useRef } from "react";
-import {
-  motion,
-  useTransform,
-  useReducedMotion,
-  useInView,
-} from "framer-motion";
-import { useSectionScroll } from "@/hooks/useSectionScroll";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-function clamp(v: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, v));
-}
+const stats = [
+  {
+    stat: "100+",
+    label: "Countries Reached",
+    desc: "Delivering trusted façade solutions across diverse global markets with consistent quality and performance.",
+    accent: "#0a4b7c",
+  },
+  {
+    stat: "50,000+",
+    label: "Projects Worldwide",
+    desc: "From iconic skylines to modern infrastructure, our panels power projects at every scale.",
+    accent: "#0a4b7c",
+  },
+  {
+    stat: "35+",
+    label: "Years of Leadership",
+    desc: "Decades of innovation, engineering excellence, and leadership in advanced building materials.",
+    accent: "#0a4b7c",
+  },
+];
 
 export default function QualitySection() {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const reduceMotion = useReducedMotion();
-  const isInView = useInView(ref);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
-
-  const { smoothProgress } = useSectionScroll(
-    ref,
-    ["start start", "end end"]
-  );
-
-  const STEP_START = 0.1;
-  const STEP_END = 0.9;
-
-  // ================= VIDEO LOGIC (Unchanged) =================
-  const durationRef = useRef(0);
-  const currentTime = useRef(0);
-  const targetTime = useRef(0);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const onLoaded = () => {
-      durationRef.current = video.duration || 0;
-    };
-    video.addEventListener("loadedmetadata", onLoaded);
-    return () => video.removeEventListener("loadedmetadata", onLoaded);
-  }, []);
-
-  useEffect(() => {
-  return smoothProgress.on("change", (p) => {
-    if (reduceMotion) return;
-
-    const d = durationRef.current;
-    if (!d) return;
-
-    const normalized = clamp(
-      (p - STEP_START) / (STEP_END - STEP_START),
-      0,
-      1
-    );
-
-    targetTime.current = normalized * d;
-  });
-}, [smoothProgress, reduceMotion]);
-
-useEffect(() => {
-  const video = videoRef.current;
-  if (!video || reduceMotion || !isInView) return;
-
-  let rafId: number;
-  let isSeeking = false; // Track if the video is currently seeking
-
-  const onSeeked = () => {
-    isSeeking = false;
-  };
-
-  video.addEventListener("seeked", onSeeked);
-
-  const update = () => {
-    const d = durationRef.current;
-    if (!d) {
-      rafId = requestAnimationFrame(update);
-      return;
-    }
-
-    const diff = targetTime.current - currentTime.current;
-    
-    // 1. Smoothly interpolate the logical time
-    currentTime.current += diff * 0.07; // Slightly slower for more "weight"
-
-    // 2. Only update the video if:
-    //    - The difference is significant (> 0.05s)
-    //    - The video is NOT currently busy seeking
-    if (!isSeeking && Math.abs(video.currentTime - currentTime.current) > 0.05) {
-      isSeeking = true;
-      video.currentTime = currentTime.current;
-    }
-
-    rafId = requestAnimationFrame(update);
-  };
-
-  rafId = requestAnimationFrame(update);
-  
-  return () => {
-    cancelAnimationFrame(rafId);
-    video.removeEventListener("seeked", onSeeked);
-  };
-}, [reduceMotion, isInView]);
-
-  // Content moves up; adjusted range for better mobile/desktop parity
-  const contentY = useTransform(
-    smoothProgress,
-    [0, 0.1, 0.82, 1],
-    ["0%", "-10%", "-150%", "-220%"] // Switched to % for better cross-device scaling
-  );
-
-  // Individual Parallax Offsets for "Framer Feel"
-  const p1 = useTransform(smoothProgress, [0, 1], [0, -150]);
-  const p2 = useTransform(smoothProgress, [0, 1], [0, -300]);
-  const p3 = useTransform(smoothProgress, [0, 1], [0, -200]);
-  
-  const rm = Boolean(reduceMotion);
 
   return (
     <section
       ref={ref}
       {...cursorSectionProps}
-      className={`relative z-10 h-[600vh] md:h-[650vh] w-full ${cursorSectionClassName}`}
+      className={`relative w-full bg-white ${cursorSectionClassName}`}
+      style={{ minHeight: "100vh" }}
     >
-      <div className="sticky top-0 z-10 h-screen w-full overflow-hidden [transform:translateZ(0)]">
-        {/* VIDEO BACKGROUND */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.video
-            ref={videoRef}
-            src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065525/VN20260424_193642_oykfnh.mp4"
-            muted
-            playsInline
-            preload="auto"
-            className="
-              absolute top-1/2 left-1/2 
-              min-w-full min-h-full 
-              w-auto h-auto 
-              -translate-x-1/2 -translate-y-1/2
-              object-cover
-              will-change-transform
-            "
-          />
-          {/* Overlay for readability */}
-          <div className="absolute inset-0 bg-black/10" />
+      {/* ── Main two-column layout ── */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20 flex flex-col h-full">
+
+        {/* TOP ROW: Left text + Right video */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center flex-1">
+
+          {/* ── LEFT: Text ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -32 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col justify-center"
+          >
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-3 mb-6">
+              <span className="h-[1px] w-8 bg-[#0a4b7c]" />
+              <p className="tracking-[0.2em] text-[10px] md:text-xs font-semibold text-[#0a4b7c] uppercase">
+                002 / Quality
+              </p>
+            </div>
+
+            {/* Heading */}
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#1A1A1A] leading-[1.1] mb-6">
+              Uncompromised <br />
+              <span className="text-[#0a4b7c] font-medium">Water Resistance</span>
+            </h2>
+
+            {/* Body */}
+            <p className="text-base md:text-lg text-[#4B5563] leading-relaxed font-light max-w-md mb-8">
+              Designed to perform in the harshest environments, Alubond ACP panels resist water penetration, moisture absorption, and surface degradation. Whether exposed to heavy rain, humidity, or continuous moisture, they maintain their structural integrity and flawless finish.
+            </p>
+
+            {/* Decorative line */}
+            <div className="w-16 h-[1px] bg-[#0a4b7c]/30 mt-10" />
+          </motion.div>
+
+          {/* ── RIGHT: Video in a rounded box ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 32 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            className="relative w-full"
+          >
+            {/* Soft shadow backdrop */}
+            <div className="absolute -inset-3 bg-[#0a4b7c]/8 rounded-[2rem] blur-2xl pointer-events-none" />
+
+            <div
+              className="relative overflow-hidden rounded-[1.75rem] border border-[#0a4b7c]/10 shadow-[0_24px_80px_rgba(10,75,124,0.12)]"
+              style={{ aspectRatio: "16/10" }}
+            >
+              <video
+                src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065525/VN20260424_193642_oykfnh.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
+              {/* Subtle inner vignette */}
+              <div className="absolute inset-0 rounded-[1.75rem] shadow-[inset_0_0_40px_rgba(0,0,0,0.08)] pointer-events-none" />
+            </div>
+
+            {/* Video caption tag */}
+            <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-[#0a4b7c]/10 shadow-sm">
+              <p className="text-[10px] tracking-[0.18em] uppercase font-semibold text-[#0a4b7c]">
+                ADVANCED WATER RESISTANCE TESTED
+              </p>
+            </div>
+          </motion.div>
         </div>
 
-        {/* SCROLLING CONTENT LAYER */}
+        {/* ── BOTTOM ROW: 3 Stat Cards ── */}
         <motion.div
-          style={{ y: rm ? 0 : contentY }}
-          className="relative z-10 h-full w-full will-change-transform"
+          initial={{ opacity: 0, y: 32 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-10"
         >
-          {/* LEFT TEXT 1 */}
-          <motion.div 
-            style={{ y: rm ? 0 : p1 }} 
-            className="absolute left-[8%] top-[20vh] max-w-[85%] sm:max-w-md md:left-[6%]"
-          >
-            <h2 className="type-h2 text-white drop-shadow-lg">
-              What happens when design meets limitless possibility?
-            </h2>
-          </motion.div>
-
-          {/* RIGHT TEXT */}
-          <motion.div 
-            style={{ y: rm ? 0 : p2 }}
-            className="absolute right-[8%] top-[75vh] max-w-[85%] text-right sm:max-w-md md:right-[6%] md:top-[70vh]"
-          >
-            <h2 className="type-h2 mb-4 text-white drop-shadow-lg">
-              We build beyond borders
-            </h2>
-            <p className="type-body-sm text-white/90 drop-shadow-md">
-              Multi-layer architecture ensures fire resistance, weather protection, and unmatched reliability in
-              extreme environments.
-            </p>
-          </motion.div>
-
-          {/* CARDS - Responsive Grid */}
-          <div className="absolute left-0 top-[110vh] w-full px-6 md:px-16">
-            <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25, delay: 0.1 }}
-                className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white transition-transform md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              whileHover={{ y: -4, boxShadow: "0 16px 48px rgba(10,75,124,0.12)" }}
+              transition={{ type: "spring", stiffness: 400, damping: 28 }}
+              className="bg-white border border-[#0a4b7c]/10 rounded-2xl p-6 md:p-7 shadow-[0_4px_24px_rgba(10,75,124,0.06)] cursor-default"
+            >
+              {/* Stat */}
+              <span
+                className="block text-3xl md:text-4xl font-semibold tracking-tight mb-1"
+                style={{ color: "#0a4b7c" }}
               >
-                <div className="mb-2">
-                  <span className="type-stat bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
-                    100+
-                  </span>
-                  <span className="type-overline text-[#59c4ee] block">
-                    Countries Reached
-                  </span>
-                </div>
-                <p className="type-body-sm text-white/80">
-                  Delivering trusted façade solutions across diverse global markets with consistent quality and
-                  performance.
-                </p>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25, delay: 0.2 }}
-                className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-              >
-                <div className="mb-2">
-                  <span className="type-stat bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
-                    50,000+
-                  </span>
-                  <span className="type-overline text-[#59c4ee] block">
-                    Projects Worldwide
-                  </span>
-                </div>
-                <p className="type-body-sm text-white/80">
-                  From iconic skylines to modern infrastructure, our panels power projects at every scale.
-                </p>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25, delay: 0.3 }}
-                className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 text-white md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-              >
-                <div className="mb-2">
-                  <span className="type-stat bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#59c4ee] block mb-1">
-                    35+
-                  </span>
-                  <span className="type-overline text-[#59c4ee] block">
-                    Years of Leadership
-                  </span>
-                </div>
-                <p className="type-body-sm text-white/80">
-                  Decades of innovation, engineering excellence, and leadership in advanced building materials.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* LEFT TEXT 2 */}
-          <motion.div 
-            style={{ y: rm ? 0 : p1 }}
-            className="absolute left-[8%] top-[210vh] max-w-[85%] sm:max-w-md md:left-[6%]"
-          >
-            <h2 className="type-h2 mb-4 text-white drop-shadow-lg">Uncompromised Durability</h2>
-            <p className="type-body-sm text-white/90 drop-shadow-md">
-              From impact to exposure, it holds its integrity—proving durability where it matters most.
-            </p>
-          </motion.div>
+                {s.stat}
+              </span>
+              {/* Label */}
+              <span className="block text-[10px] tracking-[0.22em] uppercase font-semibold text-[#0a4b7c]/60 mb-3">
+                {s.label}
+              </span>
+              {/* Divider */}
+              <div className="w-8 h-[1px] bg-[#0a4b7c]/20 mb-3" />
+              {/* Desc */}
+              <p className="text-sm text-[#6B7280] leading-relaxed font-light">
+                {s.desc}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

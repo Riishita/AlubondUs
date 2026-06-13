@@ -74,7 +74,7 @@ export default function PremiumGallery() {
         <div className="lg:col-span-4 flex flex-col justify-center h-full pt-12 lg:pt-0 z-20">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-4">
             <p className="type-overline text-white/50">
-                004 / Applications
+                006 / Gallery
               </p>
 
               <div className="flex justify-between flex-wrap gap-6 mt-5">

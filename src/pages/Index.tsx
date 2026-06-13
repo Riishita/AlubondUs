@@ -1,6 +1,4 @@
-import { lazy, Suspense, useCallback, useState } from "react";
-import Preloader from "@/components/Preloader";
-import { useScrollLock } from "@/hooks/useScrollLock";
+import { lazy, Suspense } from "react";
 
 import LandingSection from "@/components/sections/LandingSection";
 
@@ -14,32 +12,15 @@ const ApplicationSection = lazy(() => import("@/components/sections/ApplicationS
 const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
 const FooterSection = lazy(() => import("@/components/sections/FooterSection"));
 const Index = () => {
-  const [loading, setLoading] = useState(true);
-
-  useScrollLock(loading);
-
-  const handlePreloaderComplete = useCallback(() => {
-    setLoading(false);
-  }, []);
-
   return (
     <>
-      {loading && <Preloader onComplete={handlePreloaderComplete} />}
-      <main
-        className={`${loading ? "invisible" : "visible"} transition-opacity duration-700`}
-        aria-hidden={loading}
-      >
+      <main>
         <LandingSection />
         <div className="relative z-10 bg-black w-full">
           <Suspense fallback={<div className="min-h-screen" />}><HomeContent /></Suspense>
 
-          <div className="relative isolate">
-            <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
-            
-            <div className="relative z-10 -mt-[100vh]">
-              <Suspense fallback={<div className="min-h-screen" />}><SoleneScrollSequence /></Suspense>
-            </div>
-          </div>
+          <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
+          <Suspense fallback={<div className="min-h-screen" />}><SoleneScrollSequence /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><SheetDetail /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>

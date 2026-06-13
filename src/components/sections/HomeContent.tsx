@@ -27,8 +27,8 @@ export default function SmoothTransitionWrapper() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    damping: 10,
-    stiffness: 40,
+    damping: 20,
+    stiffness: 80,
   });
 
   const stripStart = 0.70;
@@ -73,7 +73,7 @@ export default function SmoothTransitionWrapper() {
           <motion.div
             key={i}
             style={{ height: h }}
-            className="flex-1 bg-[#FAF9F4] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
+            className="flex-1 bg-[#F8F8F8] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
           />
         ))}
       </div>

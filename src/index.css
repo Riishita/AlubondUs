@@ -97,6 +97,7 @@
     letter-spacing: var(--ls-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -176,7 +177,7 @@
   /* ── Labels / overlines ── */
   .type-label {
     font-family: var(--font-base);
-    font-size: var(--fs-label);
+    font-size: 12px;
     font-weight: var(--fw-medium);
     letter-spacing: var(--ls-widest);
     line-height: 1;
@@ -307,3 +308,20 @@
 .reveal-delay-2      { transition-delay: 0.2s; }
 .reveal-delay-3      { transition-delay: 0.3s; }
 .reveal-delay-4      { transition-delay: 0.4s; }
+
+/* ─────────────────────────────────────────
+   GLOBE MARKER PULSE
+───────────────────────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(2.2); opacity: 0;   }
+  100% { transform: scale(2.2); opacity: 0;   }
+}
+
+/* ─────────────────────────────────────────
+   APPLICATION SECTION MARQUEE
+───────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

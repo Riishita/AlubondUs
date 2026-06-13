@@ -247,11 +247,12 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
         const el = document.createElement("div");
         el.className = "globe-marker pointer-events-auto";
         el.innerHTML = `
-          <div style="display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-100%);cursor:pointer;transition:transform 0.3s ease;" class="group">
-            <div style="width:${isTabletOrMobile ? "32px" : "40px"};height:${isTabletOrMobile ? "32px" : "40px"};border-radius:50%;background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);transition:all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.transform='scale(1)';this.style.background='rgba(255,255,255,0.05)';">
-              <img src="/${d.logo}" style="width:${isTabletOrMobile ? "18px" : "22px"};height:${isTabletOrMobile ? "18px" : "22px"};object-fit:contain;" />
+          <div style="display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-100%);cursor:pointer;transition:transform 0.3s ease;">
+            <div style="position:relative;width:${isTabletOrMobile ? "10px" : "12px"};height:${isTabletOrMobile ? "10px" : "12px"};">
+              <div style="position:absolute;inset:0;border-radius:50%;background:#59c4ee;box-shadow:0 0 8px 2px rgba(89,196,238,0.7);transition:transform 0.3s ease;" onmouseover="this.style.transform='scale(1.4)';" onmouseout="this.style.transform='scale(1)';"></div>
+              <div style="position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(89,196,238,0.35);animation:pulse-ring 2s ease-out infinite;"></div>
             </div>
-            <span style="color:white;text-shadow:0px 2px 8px rgba(0,0,0,0.9);font-size:${isTabletOrMobile ? "11px" : "13px"};font-weight:400;margin-top:8px;letter-spacing:0.05em;pointer-events:none;opacity:0.9;">${d.name}</span>
+            <span style="color:white;text-shadow:0px 2px 8px rgba(0,0,0,0.9);font-size:${isTabletOrMobile ? "10px" : "12px"};font-weight:400;margin-top:6px;letter-spacing:0.06em;pointer-events:none;opacity:0.85;white-space:nowrap;">${d.name}</span>
           </div>`;
         el.onclick = () => handleClick(d.name);
         el.onmouseenter = () => handleHover(d.name);
@@ -290,7 +291,7 @@ ringAltitude={(d: any) => d.altitude}
         <motion.div style={{ opacity: leftOpacity, y: leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[42%] left-0 w-full px-6 text-center" : "left-[8%] top-1/2 -translate-y-1/2 max-w-xl")}>
           <h2 className="text-4xl md:text-5xl font-light leading-tight mb-10 text-white">
             Our Global Presence <br />
-            <span className="text-[#59c4ee] font-medium">Powers Local Delivery</span>
+            <span className="text-white font-medium">Powers Local Delivery</span>
           </h2>
 
           <div className="mb-10">
@@ -373,9 +374,9 @@ ringAltitude={(d: any) => d.altitude}
                 <p className="text-sm font-light text-white/60 leading-relaxed mb-6 min-h-[50px]">{selectedPlace.description}</p>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  <button className="group relative w-full overflow-hidden rounded-full border border-[#59c4ee] bg-transparent px-4 py-2.5 text-sm font-medium text-[#59c4ee] transition-all duration-300 hover:text-black">
+                  <button className="group relative w-full overflow-hidden rounded-full border border-white bg-transparent px-4 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:text-black">
                     <span className="relative z-10">Contact</span>
-                    <div className="absolute inset-0 bg-[#59c4ee] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out -z-0" />
+                    <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out -z-0" />
                   </button>
                   <button className="group w-full rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30">
                     Website

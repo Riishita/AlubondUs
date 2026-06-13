@@ -57,17 +57,17 @@ export default function SoleneScrollSequence() {
   const certCardsY = useTransform(smoothProgress, [0.5, 1], ["100vh", "-150vh"]);
 
   return (
-    <div ref={containerRef} className="relative h-[400vh] w-full bg-[#FAF9F4]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#FAF9F4]">
+    <div ref={containerRef} className="relative h-[400vh] w-full bg-white">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-white">
         
         {/* ================= INITIAL TEXT LAYER ================= */}
         <motion.div 
           style={{ opacity: initialTextOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center px-4 md:px-20 text-center z-20 pointer-events-none bg-[#FAF9F4]"
+          className="absolute inset-0 flex flex-col items-center justify-center px-4 md:px-20 text-center z-20 pointer-events-none bg-[#F8F8F8]"
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-tight font-light text-black max-w-5xl leading-tight">
             A Unitized Building System thats<br/>
-             <span className="text-[#203f65] font-normal">40% faster</span> to build and <span className="text-[#2d8eab] font-normal">30% more cost effective.</span>
+             <span className="text-[#0a4b7c] font-normal">40% faster</span> to build and <span className="text-[#0a4b7c] font-normal">30% more cost effective.</span>
           </h1>
         </motion.div>
 
@@ -80,7 +80,7 @@ export default function SoleneScrollSequence() {
           <div className="inline-flex items-center gap-3 mb-6">
             <span className="h-[1px] w-8 bg-[#0a4b7c]"></span>
             <p className="tracking-[0.2em] text-xs font-semibold text-[#0a4b7c] uppercase">
-              002 / Fire & Safety
+              003 / Fire & Safety
             </p>
             <span className="h-[1px] w-8 bg-[#0a4b7c]"></span>
           </div>
@@ -104,42 +104,50 @@ export default function SoleneScrollSequence() {
         </motion.div>
 
         {/* Scrolling Certificate Cards */}
-        <motion.div 
-          style={{ y: certCardsY }}
-          className="absolute z-10 w-full h-[150vh] flex items-start justify-center pointer-events-none top-0"
-        >
-          {certs.map((item, i) => {
-            const Icon = item.icon;
-            const positionClass = cardPositions[i % cardPositions.length];
-            return (
-              <div 
-                key={i} 
-                className={`pointer-events-auto absolute ${positionClass}`}
-              >
-                {/* Fixed Size Card with Blue Gradient */}
-                <div className="group relative bg-white/70 bg-gradient-to-br from-[#0a4b7c]/10 via-[#0a4b7c]/5 to-transparent backdrop-blur-3xl border border-white/60 p-6 rounded-[32px] shadow-[0_10px_40px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.12)] transition-all duration-500 hover:-translate-y-2 overflow-hidden w-[280px] h-[200px] md:w-[320px] md:h-[220px] flex flex-col justify-between">
-                  
-                  {/* Hover Shine Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center group-hover:bg-[#0a4b7c] group-hover:text-white transition-colors duration-500 text-[#0a4b7c]">
-                        <Icon size={22} strokeWidth={1.5} />
-                      </div>
-                      <span className="px-3 py-1 bg-white shadow-sm text-[#4B5563] text-[9px] font-bold tracking-widest uppercase rounded-full group-hover:bg-[#0a4b7c]/10 group-hover:text-[#0a4b7c] transition-colors duration-500">
-                        {item.tag}
-                      </span>
-                    </div>
-                    
-                    <h3 className="text-lg md:text-xl font-semibold text-[#111827] mb-2">{item.title}</h3>
-                    <p className="text-xs md:text-sm text-[#6B7280] leading-relaxed font-light line-clamp-3">{item.desc}</p>
-                  </div>
-                </div>
+       <motion.div 
+  style={{ y: certCardsY }}
+  className="absolute z-10 w-full h-[150vh] flex items-start justify-center pointer-events-none top-0"
+>
+  {certs.map((item, i) => {
+    const Icon = item.icon;
+    const positionClass = cardPositions[i % cardPositions.length];
+    
+    return (
+      <div key={i} className={`pointer-events-auto absolute ${positionClass}`}>
+        <div className="group relative w-[280px] h-[200px] md:w-[340px] md:h-[230px] rounded-[24px] border border-white/20 bg-white/40 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-700 hover:-translate-y-2 hover:border-[#0a4b7c]/30">
+          
+          {/* Subtle Inner Gradient Border (High-end UI Detail) */}
+          <div className="absolute inset-0 rounded-[24px] p-[1px] bg-gradient-to-b from-white/80 to-transparent pointer-events-none" />
+          
+          <div className="relative z-10 h-full p-8 flex flex-col justify-between">
+            {/* Header Area */}
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-xl bg-white/60 shadow-sm flex items-center justify-center text-[#0a4b7c] transition-all duration-500 group-hover:bg-[#0a4b7c] group-hover:text-white">
+                <Icon size={24} strokeWidth={1.2} />
               </div>
-            );
-          })}
-        </motion.div>
+              <span className="text-[10px] tracking-[0.2em] font-medium text-[#0a4b7c] uppercase bg-[#0a4b7c]/5 px-3 py-1 rounded-full border border-[#0a4b7c]/10">
+                {item.tag}
+              </span>
+            </div>
+            
+            {/* Body Text */}
+            <div>
+              <h3 className="text-lg md:text-xl font-medium text-[#1A1A1A] mb-2 tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light line-clamp-2">
+                {item.desc}
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Gradient Glow (The "Architectural" feel) */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0a4b7c]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        </div>
+      </div>
+    );
+  })}
+</motion.div>
 
 
         {/* ================= VIDEO LAYER ================= */}

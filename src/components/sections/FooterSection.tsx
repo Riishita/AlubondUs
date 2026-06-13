@@ -113,7 +113,7 @@ const CTASection = () => {
         className="relative z-10 max-w-7xl mx-auto w-full transform-gpu flex flex-col items-start"
       >
         <p className="type-overline text-white/60 mb-6">
-          006 / Let's Build
+          007 / Let's Build
         </p>
 
         <motion.h2
@@ -199,7 +199,7 @@ const Footer = () => {
         {/* Top Text */}
         <div className="mb-10">
           <h4 className="type-body text-white/90 max-w-2xl">
-            Precision-engineered façade solutions designed to bring <span className="text-[#5b98aa]">architectural vision</span> to life.
+            Precision-engineered façade solutions designed to bring <span className="text-white">architectural vision</span> to life.
           </h4>
         </div>
 

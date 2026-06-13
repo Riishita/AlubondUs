@@ -83,7 +83,7 @@ const LandingHero = () => {
                   WORLD'S LARGEST
                 </motion.h2>
 
-                <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-[#59c4ee]">
+                <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-white">
                   ACP BRAND
                 </motion.h2>
 
