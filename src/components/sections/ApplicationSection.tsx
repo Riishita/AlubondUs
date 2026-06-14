@@ -41,7 +41,7 @@ export default function ApplicationSection() {
         >
           <p className="type-overline text-white/50 mb-4">005 / Applications</p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h2 className="text-4xl md:text-6xl font-light tracking-tight text-white leading-[0.95] uppercase">
+            <h2 className="text-4xl md:text-7xl font-light tracking-tight text-white leading-[0.95] uppercase">
               Where Alubond <br />
               <span className="font-medium">Performs</span>
             </h2>

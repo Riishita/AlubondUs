@@ -105,7 +105,7 @@ export default function SmoothTransitionWrapper() {
 
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-[#1A1A1A] leading-[1.1] mb-6 md:mb-8">
                 Alubond <br />
-                <span className="text-[#0a4b7c]">Philosophy</span>
+                <span className="text-[#0a4b7c] font-medium">Philosophy</span>
               </h2>
 
               <p className="text-base md:text-lg text-[#4B5563] leading-relaxed font-light max-w-md">

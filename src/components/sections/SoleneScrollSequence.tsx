@@ -87,7 +87,7 @@ export default function SoleneScrollSequence() {
 
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-tight text-[#1A1A1A] mb-8 leading-[1.1]">
             Fire Standards <br />
-            <span className="text-[#0a4b7c]"> & Certifications</span>
+            <span className="text-[#0a4b7c] font-medium"> & Certifications</span>
           </h2>
           
           <p className="text-sm md:text-lg text-[#4B5563] max-w-xl mx-auto mb-10 leading-relaxed font-light">

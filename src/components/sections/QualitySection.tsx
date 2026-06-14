@@ -87,7 +87,7 @@ export default function QualitySection() {
 
             <div
               className="relative overflow-hidden rounded-[1.75rem] border border-[#0a4b7c]/10 shadow-[0_24px_80px_rgba(10,75,124,0.12)]"
-              style={{ aspectRatio: "16/10" }}
+              style={{ aspectRatio: "18/14" }}
             >
               <video
                 src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1781461538/VN20260614_235146_x26ae7.mp4"

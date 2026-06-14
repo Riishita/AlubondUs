@@ -24,9 +24,9 @@ export default function PremiumGallery() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const cardWidth = isMobile ? 85 : 40;
+  const cardWidth = isMobile ? 80 : 40;
   // Reduced card height on mobile to provide more breathing room for the button
-  const cardHeight = isMobile ? "38vh" : "70vh";
+  const cardHeight = isMobile ? "40vh" : "70vh";
   
   const totalMove = (panels.length - 1) * cardWidth;
 
@@ -78,11 +78,16 @@ export default function PremiumGallery() {
               </p>
 
               <div className="flex justify-between flex-wrap gap-6 mt-5">
-                <h1 className="type-h1 text-white uppercase">
+                {/* <h2 className="type-h2 text-white font-light uppercase">
 
                  
                   TRUSTED BY <br /> ARCHITECTS.
-                </h1>
+                </h2> */}
+                <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] mb-6 md:mb-8">
+                TRUSTED BY <br />
+                <span className="text-white font-medium">ARCHITECTS.</span>
+              </h2>
+                
                  </div>
 
             <div className="w-16 h-[1px] bg-white/20 mt-8" />
@@ -100,7 +105,7 @@ export default function PremiumGallery() {
                 <div key={i} style={{ width: `${cardWidth}vw` }} className="relative h-full flex-shrink-0">
                   <video src={panel.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-                    <p className="type-overline text-white/60">{panel.location}</p>
+                    <p className="type-overline text-white/80">{panel.location}</p>
                     <h3 className="type-h3">{panel.title}</h3>
                   </div>
                 </div>
