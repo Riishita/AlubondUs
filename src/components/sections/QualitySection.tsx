@@ -90,7 +90,7 @@ export default function QualitySection() {
               style={{ aspectRatio: "16/10" }}
             >
               <video
-                src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065525/VN20260424_193642_oykfnh.mp4"
+                src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1781461538/VN20260614_235146_x26ae7.mp4"
                 autoPlay
                 muted
                 loop

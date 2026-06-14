@@ -163,7 +163,7 @@ export default function SoleneScrollSequence() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-80"
           >
-            <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065540/VN20260413_125908_bxq5dm.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1781461544/VN20260614_235234_atfex7.mp4" type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
