@@ -25,6 +25,7 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
 
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [showPoints, setShowPoints] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
   const [countries, setCountries] = useState({ features: [] });
 
@@ -146,8 +147,8 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   useEffect(() => {
     if (!globeRef.current) return;
     const controls = globeRef.current.controls();
-    controls.autoRotate = !selectedPlace && isInView;
-  }, [selectedPlace, isInView]);
+    controls.autoRotate = !selectedPlace && !isHovering && isInView;
+  }, [selectedPlace, isHovering, isInView]);
 
   useEffect(() => {
     const unsubscribe = leftOpacity.on("change", (val) => setShowPoints(val > 0.5));
@@ -255,7 +256,8 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
             <span style="color:white;text-shadow:0px 2px 8px rgba(0,0,0,0.9);font-size:${isTabletOrMobile ? "10px" : "12px"};font-weight:400;margin-top:6px;letter-spacing:0.06em;pointer-events:none;opacity:0.85;white-space:nowrap;">${d.name}</span>
           </div>`;
         el.onclick = () => handleClick(d.name);
-        el.onmouseenter = () => handleHover(d.name);
+        el.onmouseenter = () => setIsHovering(true);
+        el.onmouseleave = () => setIsHovering(false);
         return el;
       }}
       ringsData={
@@ -303,7 +305,8 @@ ringAltitude={(d: any) => d.altitude}
               {["UAE", "India", "Europe"].map((item) => (
                 <button
                   key={item}
-                  onMouseEnter={() => handleHover(item)}
+                  onMouseEnter={() => { setIsHovering(true); handleHover(item); }}
+                  onMouseLeave={() => setIsHovering(false)}
                   onClick={() => handleClick(item)}
                   className={cn(
                     "text-sm px-6 py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 
@@ -327,7 +330,8 @@ ringAltitude={(d: any) => d.altitude}
               {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
                 <button
                   key={item}
-                  onMouseEnter={() => handleHover(item)}
+                  onMouseEnter={() => { setIsHovering(true); handleHover(item); }}
+                  onMouseLeave={() => setIsHovering(false)}
                   onClick={() => handleClick(item)}
                   className={cn(
                     "text-sm px-6 py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 

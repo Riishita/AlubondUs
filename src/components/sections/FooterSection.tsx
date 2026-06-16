@@ -192,6 +192,7 @@ const Footer = () => {
 
   return (
     <footer
+      id="contact"
       {...cursorSectionProps}
       className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 py-16 md:py-24 min-h-[80vh] flex flex-col justify-center ${cursorSectionClassName}`}
     >

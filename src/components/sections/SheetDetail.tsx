@@ -157,6 +157,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
 
  return (
   <section
+    id="sheet-detail"
     ref={sectionRef}
     {...cursorSectionProps}
     className={`relative h-[100vh] md:h-[500vh] ${cursorSectionClassName}`}

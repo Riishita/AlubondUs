@@ -7,12 +7,10 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
 import { useEffect } from "react";
-import { useSmoothScroll } from "./hooks/useSmoothScroll";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  useSmoothScroll();
 
   useEffect(() => {
     // 🔥 disable browser scroll restore

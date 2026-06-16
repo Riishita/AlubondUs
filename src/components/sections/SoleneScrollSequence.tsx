@@ -58,6 +58,8 @@ export default function SoleneScrollSequence() {
 
   return (
     <div ref={containerRef} className="relative h-[400vh] w-full bg-white">
+      {/* Anchor to land exactly where certificates appear (after video) */}
+      <div id="certificates" className="absolute top-[280vh] w-full h-px pointer-events-none" />
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-white">
         
         {/* ================= INITIAL TEXT LAYER ================= */}

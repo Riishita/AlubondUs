@@ -411,7 +411,7 @@ export default function SixthSection() {
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(true);
 
   return (
-    <div className={cn("relative", cursorSectionClassName)} {...cursorSectionProps}>
+    <div id="materials" className={cn("relative", cursorSectionClassName)} {...cursorSectionProps}>
       {/* HERO (sticks) */}
       <HeroSection />
 
