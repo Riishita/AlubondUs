@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 
 const panels = [
-  { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066850/VN20260506_165456_ujqlmd.mp4", title: "Krestovsky Stadium", location: "St. Petersburg, Russia" },
+  { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1781784186/gemini_generated_video_9dff1758_t8e8fi.mp4", title: "W Abu Dhabi ", location: "Yas Island | Hotel on Yas Marina Circuit" },
   { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066849/VN20260506_165518_q1j310.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
   { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066850/VN20260506_165356_drniqf.mp4", title: "Burj Khalifa", location: "Dubai, UAE" },
   { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065542/VN20260414_022640_ideoyr.mp4", title: "Khalifa Stadium", location: "Doha, Qatar" },
