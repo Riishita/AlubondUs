@@ -280,18 +280,20 @@ ringAltitude={(d: any) => d.altitude}
       <div className="relative w-full h-full">
         <div className="gradient-amaterasu min-h-screen px-6 md:px-10 py-24" />
 
-        <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="absolute top-[12%] w-full text-center text-5xl md:text-9xl font-extralight tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
-          Global Impact
-        </motion.h1>
+        {!isTabletOrMobile && (
+          <motion.h1 style={{ opacity: textOpacity, scale: textScale, y: textY }} className="absolute top-[12%] w-full text-center text-5xl md:text-9xl font-extralight tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
+            Global Impact
+          </motion.h1>
+        )}
 
-        <motion.div style={{ scale: globeScale, y: globeY, x: globeX, willChange: "transform" }} className={cn("absolute left-1/2 -translate-x-1/2 transform-gpu", isTabletOrMobile ? "top-[10%]" : "top-1/2")}>
-          <motion.div style={{ opacity: glowOpacity, willChange: "opacity" }} className="absolute w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-[radial-gradient(circle,rgba(59,130,246,0.35),transparent_70%)] blur-[140px] rounded-full -z-10" />
+        <motion.div style={{ scale: isTabletOrMobile ? 1 : globeScale, y: isTabletOrMobile ? 0 : globeY, x: isTabletOrMobile ? "-50%" : globeX, willChange: "transform" }} className={cn("absolute left-1/2 -translate-x-1/2 transform-gpu", isTabletOrMobile ? "top-[10%]" : "top-1/2")}>
+          <motion.div style={{ opacity: isTabletOrMobile ? 1 : glowOpacity, willChange: "opacity" }} className="absolute w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-[radial-gradient(circle,rgba(59,130,246,0.35),transparent_70%)] blur-[140px] rounded-full -z-10" />
           {globe}
         </motion.div>
 
         {/* Centered text and buttons for Tablet/Mobile */}
-        <motion.div style={{ opacity: leftOpacity, y: leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[42%] left-0 w-full px-6 text-center" : "left-[8%] top-1/2 -translate-y-1/2 max-w-xl")}>
-          <h2 className="text-4xl md:text-5xl font-light leading-tight mb-10 text-white">
+        <motion.div style={{ opacity: isTabletOrMobile ? 1 : leftOpacity, y: isTabletOrMobile ? 0 : leftY }} className={cn("absolute text-white transition-all duration-500", isTabletOrMobile ? "top-[50%] left-0 w-full px-6 text-center" : "left-[8%] top-1/2 -translate-y-1/2 max-w-xl")}>
+          <h2 className="text-2xl md:text-5xl font-light leading-tight mb-6 md:mb-10 text-white">
             Our Global Presence <br />
             <span className="text-white font-medium">Powers Local Delivery</span>
           </h2>
@@ -309,7 +311,7 @@ ringAltitude={(d: any) => d.altitude}
                   onMouseLeave={() => setIsHovering(false)}
                   onClick={() => handleClick(item)}
                   className={cn(
-                    "text-sm px-6 py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 
+                    "text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 
                     selectedPlace?.name === item 
                       ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.2)] scale-105" 
                       : "bg-white/5 border-white/10 text-white hover:bg-white/15 hover:border-white/30 hover:-translate-y-0.5"
@@ -334,7 +336,7 @@ ringAltitude={(d: any) => d.altitude}
                   onMouseLeave={() => setIsHovering(false)}
                   onClick={() => handleClick(item)}
                   className={cn(
-                    "text-sm px-6 py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 
+                    "text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-full border backdrop-blur-md transition-all duration-500 ease-out", 
                     selectedPlace?.name === item 
                       ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.2)] scale-105" 
                       : "bg-white/5 border-white/10 text-white hover:bg-white/15 hover:border-white/30 hover:-translate-y-0.5"

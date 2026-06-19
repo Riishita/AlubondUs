@@ -85,7 +85,7 @@ export default function SmoothTransitionWrapper() {
           y: philosophyY,
           pointerEvents: isRevealed ? "auto" : "none",
         }}
-        className="sticky top-0 h-screen z-20 flex items-center justify-center px-6 py-12 md:p-20 text-[#1f2937] overflow-hidden"
+        className="sticky top-0 h-screen z-20 flex items-center justify-center px-4 py-6 md:px-6 md:py-12 md:p-20 text-[#1f2937] overflow-y-auto md:overflow-hidden"
       >
         <motion.div style={{ y: philosophyParallaxY }} className="max-w-[1400px] w-full flex flex-col justify-center relative">
           
@@ -103,12 +103,12 @@ export default function SmoothTransitionWrapper() {
                 </p>
               </div>
 
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-[#1A1A1A] leading-[1.1] mb-6 md:mb-8">
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-light tracking-tight text-[#1A1A1A] leading-[1.1] mb-4 md:mb-8 mt-12 md:mt-0">
                 Alubond <br />
                 <span className="text-[#0a4b7c] font-medium">Philosophy</span>
               </h2>
 
-              <p className="text-base md:text-lg text-[#4B5563] leading-relaxed font-light max-w-md">
+              <p className="text-sm md:text-lg text-[#4B5563] leading-relaxed font-light max-w-md">
                 At Alubond, we believe every façade must do justice to the architect's vision while delivering the precision, consistency, and reliability demanded on site.
               </p>
 
@@ -129,7 +129,7 @@ export default function SmoothTransitionWrapper() {
               </div>
               
               <div className="relative bg-white/70 backdrop-blur-xl border border-white p-8 md:p-14 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_80px_rgba(0,0,0,0.06)] transition-shadow duration-500">
-                <h3 className="text-2xl md:text-4xl text-[#1A1A1A] leading-snug md:leading-normal mb-8 md:mb-10 font-light">
+                <h3 className="text-xl md:text-4xl text-[#1A1A1A] leading-snug md:leading-normal mb-6 md:mb-10 font-light">
                   "Architecture should speak of its time and place, but yearn for timelessness."
                 </h3>
                 

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 import { VARIANTS } from "@/lib/transitions";
 
@@ -20,6 +20,14 @@ const LandingHero = () => {
   const reduceMotion = useReducedMotion();
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -41,12 +49,12 @@ const LandingHero = () => {
       <CursorGridTrail excludeTopPx={NAV_EXCLUDE_TOP_PX} sectionRef={heroSectionRef} />
       <Navbar />
       {/* Container height adjusted to remain functional on smaller screens */}
-      <div ref={heroSectionRef} className="relative h-[120vh] md:h-[150vh] bg-black">
-        <section className="fixed top-0 left-0 h-screen w-full overflow-hidden z-0">
+      <div ref={heroSectionRef} className={isMobile ? "relative h-[100vh] bg-black" : "relative h-[120vh] md:h-[150vh] bg-black"}>
+        <section className={isMobile ? "relative h-[100vh] w-full overflow-hidden z-0" : "fixed top-0 left-0 h-screen w-full overflow-hidden z-0"}>
           
           <motion.div
             className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
-            style={{ scale: reduceMotion ? 1 : videoScale, willChange: "transform" }}
+            style={{ scale: (reduceMotion || isMobile) ? 1 : videoScale, willChange: "transform" }}
           >
             <video
               ref={videoRef}
@@ -63,7 +71,7 @@ const LandingHero = () => {
 
           <motion.div
             className="relative z-10 flex flex-col justify-center h-full w-full px-6 md:px-12 lg:px-24 py-24"
-            style={{ y: contentY, opacity: contentOpacity }}
+            style={{ y: isMobile ? 0 : contentY, opacity: isMobile ? 1 : contentOpacity }}
           >
             <div className="flex flex-col lg:flex-row w-full items-start lg:items-center justify-between gap-12">
               

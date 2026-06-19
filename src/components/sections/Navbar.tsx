@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { label: "About Us", href: "#philosophy" },
@@ -15,7 +15,15 @@ const navLinks = [
 const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -37,7 +45,7 @@ const Navbar = () => {
   return (
     <motion.nav
       variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: -100, opacity: 0 } }}
-      animate={hidden ? "hidden" : "visible"}
+      animate={(hidden && !isMobile && !isOpen) ? "hidden" : "visible"}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       // Changed to top-0 for attachment, removed inset-x-0 for full width container
       className="fixed top-0 left-0 right-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200/50"

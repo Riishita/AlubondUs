@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck2, Building2 } from "lucide-react";
 
 // Certificate Data
@@ -23,6 +23,14 @@ const cardPositions = [
 
 export default function SoleneScrollSequence() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768); // Only target mobile screens
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -55,6 +63,115 @@ export default function SoleneScrollSequence() {
 
   // Certificate cards flow from bottom (100vh) to top (-150vh) between 0.5 and 1.0
   const certCardsY = useTransform(smoothProgress, [0.5, 1], ["100vh", "-150vh"]);
+
+  if (isMobile) {
+    return (
+      <div className="relative w-full bg-white flex flex-col pt-20">
+         <div id="certificates" className="absolute top-0 w-full h-px pointer-events-none" />
+         
+         {/* INITIAL TEXT LAYER */}
+         <div className="flex flex-col items-center justify-center px-6 text-center mb-16 pt-10">
+           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-black mb-8">
+             WORLD'S LARGEST <span className="text-[#0a4b7c]">ACP BRAND</span> 
+           </h1>
+           <div className="w-24 h-[1px] bg-[#0a4b7c]/30 mb-8" />
+           <div className="flex flex-col gap-2 tracking-[0.15em]">
+             <p className="text-xs font-semibold text-[#0a4b7c] uppercase text-center">
+               FR-A1 | FR-A2 | FR-B1 | FR-B2 Fire Rated Panels
+             </p>
+             <p className="text-[10px] font-medium text-black/50 uppercase text-center mt-2">
+               NFPA 285 & EN 13501 Certified | BS 8414 Compliant System
+             </p>
+           </div>
+         </div>
+
+         {/* VIDEO LAYER */}
+         <div className="w-full px-4 mb-20">
+           <div className="w-full rounded-[24px] overflow-hidden bg-black flex flex-col justify-end shadow-2xl relative" style={{ minHeight: '600px' }}>
+             <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-80">
+               <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1781461544/VN20260614_235234_atfex7.mp4" type="video/mp4" />
+             </video>
+             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
+             <div className="relative z-40 flex flex-col gap-8 px-6 pb-10 w-full mt-auto pt-40">
+               <div className="flex flex-col text-white">
+                 <ShieldCheck className="w-8 h-8 mb-3 text-white" />
+                 <h3 className="text-xl font-medium mb-2">Fire Stability</h3>
+                 <p className="text-white/80 font-light text-sm leading-relaxed">
+                   Maintains structural integrity and panel performance even under high-temperature exposure, helping reduce fire-related damage.
+                 </p>
+               </div>
+               <div className="flex flex-col text-white">
+                 <Flame className="w-8 h-8 mb-3 text-white" />
+                 <h3 className="text-xl font-medium mb-2">Fire-Retardant Core</h3>
+                 <p className="text-white/80 font-light text-sm leading-relaxed">
+                   Engineered with advanced fire-retardant technology that helps limit flame spread and enhances overall building safety.
+                 </p>
+               </div>
+               <div className="flex flex-col text-white">
+                 <Building2 className="w-8 h-8 mb-3 text-white" />
+                 <h3 className="text-xl font-medium mb-2">Enhanced Protection</h3>
+                 <p className="text-white/80 font-light text-sm leading-relaxed">
+                   Designed to minimize smoke generation and provide greater protection for occupants, property, and critical infrastructure.
+                 </p>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         {/* CERTIFICATE TEXT */}
+         <div className="flex flex-col items-center justify-center text-center px-6 mb-12">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <span className="h-[1px] w-8 bg-[#0a4b7c]"></span>
+              <p className="tracking-[0.2em] text-xs font-semibold text-[#0a4b7c] uppercase">
+                003 / Fire & Safety
+              </p>
+              <span className="h-[1px] w-8 bg-[#0a4b7c]"></span>
+            </div>
+            <h2 className="text-3xl font-light tracking-tight text-[#1A1A1A] mb-8 leading-[1.1]">
+              Fire Standards <br />
+              <span className="text-[#0a4b7c] font-medium"> & Certifications</span>
+            </h2>
+            <p className="text-sm text-[#4B5563] mb-10 leading-relaxed font-light">
+              Engineered for ultimate safety. From European classifications to American NFPA codes, every panel is independently tested, verified, and globally certified.
+            </p>
+            <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit pointer-events-auto transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <span className="relative z-10 text-sm tracking-wider font-medium uppercase">
+                View all
+              </span>
+              <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <div className="absolute inset-0 bg-[#0a4b7c] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+            </button>
+         </div>
+
+         {/* CERTIFICATE CARDS */}
+         <div className="flex flex-col gap-4 px-4 pb-20">
+           {certs.map((item, i) => {
+             const Icon = item.icon;
+             return (
+               <div key={i} className="w-full rounded-[24px] border border-black/5 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.04)] p-6 flex flex-col justify-between">
+                 <div className="flex items-center justify-between mb-4">
+                   <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center text-[#0a4b7c]">
+                     <Icon size={24} strokeWidth={1.2} />
+                   </div>
+                   <span className="text-[10px] tracking-[0.2em] font-medium text-[#0a4b7c] uppercase bg-[#0a4b7c]/5 px-3 py-1 rounded-full border border-[#0a4b7c]/10">
+                     {item.tag}
+                   </span>
+                 </div>
+                 <div>
+                   <h3 className="text-lg font-medium text-[#1A1A1A] mb-2 tracking-tight">
+                     {item.title}
+                   </h3>
+                   <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light">
+                     {item.desc}
+                   </p>
+                 </div>
+               </div>
+             );
+           })}
+         </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="relative h-[400vh] w-full bg-white">

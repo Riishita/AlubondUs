@@ -177,11 +177,12 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
   transition={{ duration: 0.8 }}
   className="
     absolute
-    inset-0
+    inset-x-0
+    bottom-0
+    top-[45%]
+    md:inset-0
     z-0
     pointer-events-none
-    mt-20
-    md:mt-0
     md:left-[15%]
   "
 >
