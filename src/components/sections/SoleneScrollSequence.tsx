@@ -64,14 +64,31 @@ export default function SoleneScrollSequence() {
         
         {/* ================= INITIAL TEXT LAYER ================= */}
         <motion.div 
-          style={{ opacity: initialTextOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center px-4 md:px-20 text-center z-20 pointer-events-none bg-[#F8F8F8]"
-        >
-          <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-tight font-light text-black max-w-5xl leading-tight">
-            A Unitized Building System thats<br/>
-             <span className="text-[#0a4b7c] font-normal">40% faster</span> to build and <span className="text-[#0a4b7c] font-normal">30% more cost effective.</span>
-          </h1>
-        </motion.div>
+  style={{ opacity: initialTextOpacity }}
+  className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-20 pointer-events-none bg-[#F8F8F8]"
+>
+  <div className="flex flex-col items-center">
+    
+    {/* Main Headline */}
+    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black mb-10">
+      WORLD'S LARGEST ACP BRAND
+    </h1>
+
+    {/* Subtle Divider - reduced width and opacity */}
+    <div className="w-24 h-[1px] bg-black/20 mb-8" />
+
+    {/* Certifications - more spacing and lighter touch */}
+    <div className="flex flex-col gap-1 tracking-[0.2em]">
+      <p className="text-xs md:text-xl font-medium text-black/70 uppercase">
+        FR-A1 | FR-A2 | FR-B1 | FR-B2 Fire Rated Panels
+      </p>
+      <p className="text-[10px] md:text-xl text-black/50 uppercase">
+        NFPA 285 & EN 13501 Certified | BS 8414 Compliant System
+      </p>
+    </div>
+    
+  </div>
+</motion.div>
 
         {/* ================= CERTIFICATE LAYER (BEHIND VIDEO) ================= */}
         {/* Fixed Centered Text */}
