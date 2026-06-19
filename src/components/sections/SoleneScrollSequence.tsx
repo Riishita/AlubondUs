@@ -69,20 +69,20 @@ export default function SoleneScrollSequence() {
 >
   <div className="flex flex-col items-center">
     
-    {/* Main Headline */}
+    {/* Main Headline with subtle blue accent on 'ACP' */}
     <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black mb-10">
-      WORLD'S LARGEST ACP BRAND
+      WORLD'S LARGEST <span className="text-[#0a4b7c]">ACP BRAND</span> 
     </h1>
 
-    {/* Subtle Divider - reduced width and opacity */}
-    <div className="w-24 h-[1px] bg-black/20 mb-8" />
+    {/* Elegant divider */}
+    <div className="w-24 h-[1px] bg-[#0a4b7c]/30 mb-8" />
 
-    {/* Certifications - more spacing and lighter touch */}
-    <div className="flex flex-col gap-1 tracking-[0.2em]">
-      <p className="text-xs md:text-xl font-medium text-black/70 uppercase">
+    {/* Certifications - Refined scale for professional balance */}
+    <div className="flex flex-col gap-2 tracking-[0.15em]">
+      <p className="text-xs md:text-xl font-semibold text-[#0a4b7c] uppercase">
         FR-A1 | FR-A2 | FR-B1 | FR-B2 Fire Rated Panels
       </p>
-      <p className="text-[10px] md:text-xl text-black/50 uppercase">
+      <p className="text-[10px] md:text-xl font-medium text-black/50 uppercase">
         NFPA 285 & EN 13501 Certified | BS 8414 Compliant System
       </p>
     </div>
