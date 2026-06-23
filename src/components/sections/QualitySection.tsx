@@ -62,8 +62,8 @@ export default function QualitySection() {
 
             {/* Heading */}
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#1A1A1A] leading-[1.1] mb-6">
-              Uncompromised <br />
-              <span className="text-[#0a4b7c] font-medium">Water Resistance</span>
+              Weather<br />
+              <span className="text-[#0a4b7c] font-medium"> Resistance</span>
             </h2>
 
             {/* Body */}
@@ -71,8 +71,7 @@ export default function QualitySection() {
               Designed to perform in the harshest environments, Alubond ACP panels resist water penetration, moisture absorption, and surface degradation. Whether exposed to heavy rain, humidity, or continuous moisture, they maintain their structural integrity and flawless finish.
             </p>
 
-            {/* Decorative line */}
-            <div className="w-16 h-[1px] bg-[#0a4b7c]/30 mt-10" />
+           
           </motion.div>
 
           {/* ── RIGHT: Video in a rounded box ── */}

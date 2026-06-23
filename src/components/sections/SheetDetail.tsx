@@ -238,7 +238,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 transition={{ duration: 0.5 }}
               >
                 <p className="type-overline text-white/50 mb-3 md:mb-4">
-                  STEP {steps[index].id}
+                  Layer {steps[index].id}
                 </p>
 
                 <h2 className="type-h2 text-white mb-4 md:mb-6">

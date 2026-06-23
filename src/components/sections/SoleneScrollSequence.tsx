@@ -71,18 +71,11 @@ export default function SoleneScrollSequence() {
          
          {/* INITIAL TEXT LAYER */}
          <div className="flex flex-col items-center justify-center px-6 text-center mb-16 pt-10">
-           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-black mb-8">
-             WORLD'S LARGEST <span className="text-[#0a4b7c]">ACP BRAND</span> 
+           <h1 className="text-4xl md:text-5xl font-semi-bold tracking-tight text-black mb-8">
+             WORLD'S SAFEST <br /> <span className="text-[#0a4b7c] font-bold">ACP BRAND</span> 
            </h1>
            <div className="w-24 h-[1px] bg-[#0a4b7c]/30 mb-8" />
-           <div className="flex flex-col gap-2 tracking-[0.15em]">
-             <p className="text-xs font-semibold text-[#0a4b7c] uppercase text-center">
-               FR-A1 | FR-A2 | FR-B1 | FR-B2 Fire Rated Panels
-             </p>
-             <p className="text-[10px] font-medium text-black/50 uppercase text-center mt-2">
-               NFPA 285 & EN 13501 Certified | BS 8414 Compliant System
-             </p>
-           </div>
+           
          </div>
 
          {/* VIDEO LAYER */}
@@ -95,21 +88,21 @@ export default function SoleneScrollSequence() {
              <div className="relative z-40 flex flex-col gap-8 px-6 pb-10 w-full mt-auto pt-40">
                <div className="flex flex-col text-white">
                  <ShieldCheck className="w-8 h-8 mb-3 text-white" />
-                 <h3 className="text-xl font-medium mb-2">Fire Stability</h3>
+                 <h3 className="text-xl font-medium mb-2">Fire & Smoke Stability</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed">
-                   Maintains structural integrity and panel performance even under high-temperature exposure, helping reduce fire-related damage.
+                   Maintains structural integrity with No Smoke & No Droplets (s1, d0), helping reduce fire-related damage.
                  </p>
                </div>
                <div className="flex flex-col text-white">
                  <Flame className="w-8 h-8 mb-3 text-white" />
-                 <h3 className="text-xl font-medium mb-2">Fire-Retardant Core</h3>
+                 <h3 className="text-xl font-medium mb-2">Fire Retardant Core</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed">
-                   Engineered with advanced fire-retardant technology that helps limit flame spread and enhances overall building safety.
+                   Engineered with a Magnesium-based advanced fire-retardant technology that helps limit flame spread.
                  </p>
                </div>
                <div className="flex flex-col text-white">
                  <Building2 className="w-8 h-8 mb-3 text-white" />
-                 <h3 className="text-xl font-medium mb-2">Enhanced Protection</h3>
+                 <h3 className="text-xl font-medium mb-2">Enhanced Safety Performance</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed">
                    Designed to minimize smoke generation and provide greater protection for occupants, property, and critical infrastructure.
                  </p>
@@ -187,22 +180,14 @@ export default function SoleneScrollSequence() {
   <div className="flex flex-col items-center">
     
     {/* Main Headline with subtle blue accent on 'ACP' */}
-    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black mb-10">
-      WORLD'S LARGEST <span className="text-[#0a4b7c]">ACP BRAND</span> 
-    </h1>
+    <h1 className="text-4xl sm:text-5xl md:text-9xl font-medium tracking-tight text-[#1A1A1A] mb-8 leading-[1.1]">
+           World’s Safest <br />
+            <span className="text-[#0a4b7c] font-bold"> ACP Brand</span>
+          </h1>
 
     {/* Elegant divider */}
-    <div className="w-24 h-[1px] bg-[#0a4b7c]/30 mb-8" />
-
     {/* Certifications - Refined scale for professional balance */}
-    <div className="flex flex-col gap-2 tracking-[0.15em]">
-      <p className="text-xs md:text-xl font-semibold text-[#0a4b7c] uppercase">
-        FR-A1 | FR-A2 | FR-B1 | FR-B2 Fire Rated Panels
-      </p>
-      <p className="text-[10px] md:text-xl font-medium text-black/50 uppercase">
-        NFPA 285 & EN 13501 Certified | BS 8414 Compliant System
-      </p>
-    </div>
+   
     
   </div>
 </motion.div>
@@ -312,29 +297,29 @@ export default function SoleneScrollSequence() {
             <div className="flex flex-col text-white">
   <ShieldCheck className="w-8 h-8 mb-4 text-white" />
   <h3 className="text-xl md:text-2xl font-medium mb-3">
-    Fire Stability
+    Fire & Smoke Stability
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed">
-    Maintains structural integrity and panel performance even under
-    high-temperature exposure, helping reduce fire-related damage.
+    Maintains structural integrity with No Smoke & No Droplets (s1, d0),
+    helping reduce fire-related damage.
   </p>
 </div>
 
 <div className="flex flex-col text-white">
   <Flame className="w-8 h-8 mb-4 text-white" />
   <h3 className="text-xl md:text-2xl font-medium mb-3">
-    Fire-Retardant Core
+    Fire Retardant Core
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed">
-    Engineered with advanced fire-retardant technology that helps limit
-    flame spread and enhances overall building safety.
+    Engineered with a Magnesium-based advanced fire-retardant technology
+    that helps limit flame spread.
   </p>
 </div>
 
 <div className="flex flex-col text-white">
   <Building2 className="w-8 h-8 mb-4 text-white" />
   <h3 className="text-xl md:text-2xl font-medium mb-3">
-    Enhanced Protection
+    Enhanced Safety Performance
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed">
     Designed to minimize smoke generation and provide greater protection

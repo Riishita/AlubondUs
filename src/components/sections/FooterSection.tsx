@@ -20,7 +20,7 @@ const CTASection = () => {
   const reduceMotion = useReducedMotion();
 
   // 👇 ADD YOUR BACKGROUND IMAGE URL HERE 👇
-  const bgImageUrl = "https://i.pinimg.com/1200x/a3/54/dc/a354dcc1a1ffd5785ce71470ae5de78b.jpg";
+  const bgImageUrl = "/footer.webp";
 
   const { cursorSectionProps, cursorSectionClassName } =
     useCustomCursorBindings(false);
@@ -71,7 +71,7 @@ const CTASection = () => {
       {bgImageUrl && (
         <>
           <div 
-            className="absolute inset-0 z-0 opacity-70"
+            className="absolute inset-0 z-0 opacity-80"
             style={{
             backgroundImage: `url(${bgImageUrl})`,
             backgroundSize: "cover",
