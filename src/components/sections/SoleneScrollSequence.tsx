@@ -82,7 +82,7 @@ export default function SoleneScrollSequence() {
          <div className="w-full px-4 mb-20">
            <div className="w-full rounded-[24px] overflow-hidden bg-black flex flex-col justify-end shadow-2xl relative" style={{ minHeight: '600px' }}>
              <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-80">
-               <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1781461544/VN20260614_235234_atfex7.mp4" type="video/mp4" />
+               <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1782483737/fire_twctwh.mp4" type="video/mp4" />
              </video>
              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
              <div className="relative z-40 flex flex-col gap-8 px-6 pb-10 w-full mt-auto pt-40">
@@ -284,7 +284,7 @@ export default function SoleneScrollSequence() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-80"
           >
-            <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1781461544/VN20260614_235234_atfex7.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1782483737/fire_twctwh.mp4" type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />

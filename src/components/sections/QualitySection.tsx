@@ -68,8 +68,9 @@ export default function QualitySection() {
 
             {/* Body */}
             <p className="text-base md:text-lg text-[#4B5563] leading-relaxed font-light max-w-md mb-8">
-              Designed to perform in the harshest environments, Alubond ACP panels resist water penetration, moisture absorption, and surface degradation. Whether exposed to heavy rain, humidity, or continuous moisture, they maintain their structural integrity and flawless finish.
-            </p>
+
+Designed to perform in the harshest environments, our panels meet ASTM and other international quality standards to ensure durability, safety, and consistent performance. Advanced paint systems deliver excellent UV, weather, and corrosion resistance, while rigorous anti-delamination testing ensures long-term structural integrity. Every certification reflects our commitment to globally recognized quality and reliable architectural performance.
+        </p>
 
            
           </motion.div>
@@ -86,10 +87,10 @@ export default function QualitySection() {
 
             <div
               className="relative overflow-hidden rounded-[1.75rem] border border-[#0a4b7c]/10 shadow-[0_24px_80px_rgba(10,75,124,0.12)]"
-              style={{ aspectRatio: "18/14" }}
+              style={{ aspectRatio: "19/12" }}
             >
               <video
-                src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1781461538/VN20260614_235146_x26ae7.mp4"
+                src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1782557792/weather_rgbtqw.mp4"
                 autoPlay
                 muted
                 loop

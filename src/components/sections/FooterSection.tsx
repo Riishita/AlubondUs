@@ -198,14 +198,14 @@ const Footer = () => {
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Top Text */}
-        <div className="mb-10">
+        {/* <div className="mb-10">
           <h4 className="type-body text-white/90 max-w-2xl">
             Precision-engineered façade solutions designed to bring <span className="text-white">architectural vision</span> to life.
           </h4>
-        </div>
+        </div> */}
 
         {/* Separator */}
-        <div className="w-full h-px bg-white/10 mb-20" />
+        {/* <div className="w-full h-px bg-white/10 mb-20" /> */}
 
         {/* Middle Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 type-body-sm mb-16">

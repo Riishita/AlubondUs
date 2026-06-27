@@ -88,7 +88,7 @@ export default function ApplicationSection() {
 /* ── Single card – hover effects are pure CSS via Tailwind group ── */
 function AppCard({ card }: { card: typeof cards[0] }) {
   return (
-    <div className="group relative flex-shrink-0 w-[260px] md:w-[320px] h-[340px] md:h-[400px] rounded-3xl overflow-hidden border border-white/10 cursor-pointer"
+    <div className="group relative flex-shrink-0 w-[400px] md:w-[400px] h-[260px] md:h-[360px] rounded-3xl overflow-hidden border border-white/10 cursor-pointer"
       style={{ willChange: "transform", transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease" }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLElement).style.transform = "translateY(-8px) scale(1.02)";

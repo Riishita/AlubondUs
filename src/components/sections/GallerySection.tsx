@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-
+import { Link } from "react-router-dom";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 
 const panels = [
@@ -14,21 +14,7 @@ const panels = [
 
 export default function PremiumGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const cardWidth = isMobile ? 80 : 40;
-  // Reduced card height on mobile to provide more breathing room for the button
-  const cardHeight = isMobile ? "40vh" : "70vh";
-  
-  const totalMove = (panels.length - 1) * cardWidth;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -36,7 +22,9 @@ export default function PremiumGallery() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 25 });
-  const xTransform = useTransform(smoothProgress, [0, 1], ["0vw", `-${totalMove}vw`]);
+  // Move horizontally by a percentage of the total track width.
+  // We want to move exactly (panels.length - 1) items to the left.
+  const xTransform = useTransform(smoothProgress, [0, 1], ["0%", `-${(panels.length - 1) * 100 / panels.length}%`]);
 
   const buttonOpacity = useTransform(smoothProgress, [0.9, 1], [0, 1]);
   const buttonScale = useTransform(smoothProgress, [0.9, 1], [0.8, 1]);
@@ -47,7 +35,7 @@ export default function PremiumGallery() {
       className={`bg-black relative h-[400vh] text-white ${cursorSectionClassName}`}
       {...cursorSectionProps}
     >
-      <div className="sticky top-0 h-screen w-full flex flex-col lg:grid lg:grid-cols-12 items-center px-6 lg:px-16 gap-8 overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col lg:grid lg:grid-cols-12 items-center px-6 lg:px-16 gap-6 lg:gap-8 overflow-hidden">
         
         {/* Aesthetic Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -71,40 +59,34 @@ export default function PremiumGallery() {
         </div>
 
         {/* Left Text Column */}
-        <div className="lg:col-span-4 flex flex-col justify-center h-full pt-12 lg:pt-0 z-20">
+        <div className="lg:col-span-4 flex flex-col justify-center pt-24 lg:pt-0 z-20 w-full">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-4">
             <p className="type-overline text-white/50">
                 006 / Gallery
               </p>
 
               <div className="flex justify-between flex-wrap gap-6 mt-5">
-                {/* <h2 className="type-h2 text-white font-light uppercase">
-
-                 
-                  TRUSTED BY <br /> ARCHITECTS.
-                </h2> */}
-                <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] mb-6 md:mb-8">
+                <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] mb-2 lg:mb-6">
                 TRUSTED BY <br />
                 <span className="text-white font-medium">ARCHITECTS.</span>
               </h2>
                 
                  </div>
 
-            <div className="w-16 h-[1px] bg-white/20 mt-8" />
+            <div className="w-16 h-[1px] bg-white/20 mt-4 lg:mt-8 hidden lg:block" />
           </motion.div>
         </div>
 
-        {/* Right Gallery Column - Added margin bottom for mobile separation */}
-        <div className="lg:col-span-8 w-full flex items-center justify-center lg:justify-end mb-24 lg:mb-0 z-20">
+        {/* Right Gallery Column */}
+        <div className="lg:col-span-8 w-full flex-1 flex items-center justify-center lg:justify-end pb-24 lg:pb-0 z-20 min-h-0">
           <div 
-            className="relative overflow-hidden rounded-2xl border border-white/10"
-            style={{ width: `${cardWidth}vw`, height: cardHeight }}
+            className="relative overflow-hidden rounded-2xl border border-white/10 w-[85vw] h-[50vh] lg:w-[40vw] lg:h-[70vh]"
           >
             <motion.div style={{ x: xTransform }} className="flex h-full w-max transform-gpu will-change-transform">
               {panels.map((panel, i) => (
-                <div key={i} style={{ width: `${cardWidth}vw` }} className="relative h-full flex-shrink-0">
+                <div key={i} className="relative h-full flex-shrink-0 w-[85vw] lg:w-[40vw]">
                   <video src={panel.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 lg:p-8">
                     <p className="type-overline text-white/80">{panel.location}</p>
                     <h3 className="type-h3">{panel.title}</h3>
                   </div>
@@ -114,14 +96,16 @@ export default function PremiumGallery() {
           </div>
         </div>
 
-        {/* CTA Button - Adjusted bottom spacing */}
+        {/* CTA Button */}
         <motion.div
           style={{ opacity: buttonOpacity, scale: buttonScale }}
           className="absolute bottom-8 lg:bottom-12 left-0 right-0 flex justify-center z-30"
         >
-          <button className="type-btn px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300">
-            View All Projects
-          </button>
+          <Link to="/gallery">
+            <button className="type-btn px-6 lg:px-8 py-3 lg:py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 text-sm lg:text-base">
+              View All Projects
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>

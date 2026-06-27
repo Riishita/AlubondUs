@@ -1,9 +1,10 @@
 "use client";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { label: "About Us", href: "#philosophy" },
+  { label: "About Us", href: "/about" },
    { label: "Safety", href: "#certificates" },
   { label: "Technology", href: "#sheet-detail" },
  
@@ -17,6 +18,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
@@ -26,13 +29,21 @@ const Navbar = () => {
   }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
+    if (location.pathname === "/about" || location.pathname === "/gallery") {
+      setHidden(false);
+      return;
+    }
     const previous = scrollY.getPrevious();
     if (latest > previous && latest > 150) setHidden(true);
     else setHidden(false);
   });
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
+    if (href.startsWith("/")) {
+      e.preventDefault();
+      navigate(href);
+      setIsOpen(false);
+    } else if (href.startsWith("#")) {
       e.preventDefault();
       const target = document.querySelector(href);
       if (target) {
