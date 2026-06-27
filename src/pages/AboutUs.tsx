@@ -26,7 +26,7 @@ const HeroSection = () => {
         </h1>
 
         <p className="font-medium text-black md:text-m max-w-lg leading-relaxed mb-14">
-          Mulk International is a global conglomerate driving innovation across
+          Alubond International is a global conglomerate driving innovation across
           industries, from sustainable building materials to healthcare, sports,
           manufacturing and real estate, creating lasting impact worldwide.
         </p>
