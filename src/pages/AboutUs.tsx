@@ -268,6 +268,7 @@ const MilestoneCard = ({ m, index }) => {
     target: ref,
     offset: ["start end", "center center"]
   });
+  
 
   const scale = useTransform(scrollYProgress, [0, 1], [0.7, 1]);
   const rotate = useTransform(scrollYProgress, [0, 1], [m.align === 'right' ? 5 : -5, 0]);
@@ -281,7 +282,7 @@ const MilestoneCard = ({ m, index }) => {
     >
       <motion.div 
         style={{ scale, rotate, opacity }}
-        className="bg-white/90 backdrop-blur-2xl rounded-[2rem] border border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full md:w-[45%] relative group overflow-hidden cursor-pointer"
+        className="bg-white/90 backdrop-blur-2xl rounded-[2rem] border border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full md:w-[45%] h-[300px] relative group overflow-hidden cursor-pointer flex flex-col justify-center"
       >
         {/* Text Content */}
         <div className="p-10 relative z-10 transition-opacity duration-300 group-hover:opacity-0">
