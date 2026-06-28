@@ -108,7 +108,7 @@ const GalleryCategory = () => {
             <Link
               to="/gallery"
               state={{ activeCategory: activeParent }}
-              className="text-orange-500 hover:text-orange-600 flex items-center gap-1 transition-colors uppercase tracking-widest"
+              className="text-[#0a4b7c] hover:text-[#0a4b9d] flex items-center gap-1 transition-colors uppercase tracking-widest"
             >
               <span className="text-lg leading-none mb-0.5">&lsaquo;</span> ALL CATEGORIES
             </Link>

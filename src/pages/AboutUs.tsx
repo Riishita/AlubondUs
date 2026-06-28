@@ -21,14 +21,15 @@ const HeroSection = () => {
           <span className="font-medium text-black">Innovating for People, </span>
           <span className="font-medium text-[#0a4b7c]">Building </span>
           <br />
-          <span className="font-medium text-[#0a4b7c]">for the Future.</span>
-          <span className="font-normal text-black"> Since 1982 </span>
+          <span className="font-medium text-[#0a4b7c]">for the Future,</span>
+          <span className="font-medium text-black">Since 1982</span>
+
         </h1>
 
         <p className="font-medium text-black md:text-m max-w-lg leading-relaxed mb-14">
-          Alubond International is a global conglomerate driving innovation across
-          industries, from sustainable building materials to healthcare, sports,
-          manufacturing and real estate, creating lasting impact worldwide.
+          ALUBOND is an Aluminum Composite Panels (ACP) and Metal Composite Material (MCM) brand owned by Mulk Holdings International. The company has emerged as the world’s largest ACP and MCM Brand with a 25 Million m2.. of manufacturing and processing capacity from its various facilities in UAE, Oman, Serbia, India and Turkey.
+
+Alubond offers a full range of Fire Rated Metal Panels including Solid Aluminum, FR-A1 Mineral Core, FR-A2 Mineral Core, FR Euroclass B and various other panels like Exotic Metal Panels in a choice of metal skins like Galvanized Steel, Stainless Steel, Copper, Bronze and Titanium.
         </p>
 
         {/* 2. Map through the image array */}
@@ -66,10 +67,10 @@ const AboutSection = () => (
         </h2>
         <p className="font-medium text-gray-600 md:text-m max-w-lg leading-relaxed mb-14">
           <span className="font-bold text-black">Founded in 1982 by Nawab Shaji Ul Mulk</span>
-          {". "} Mulk International is a UAE-based multinational conglomerate with
+          {". "} Alubond is a UAE-based multinational conglomerate with
           operations in building materials, real estate, healthcare, sports,
           manufacturing, fashion and digital currencies. Its leading brands,
-          Alubond U.S.A, Metal Plast, Mulk Properties, UniQube, Mulk Med, and T
+          Alubond U.S.A, Metal Plast, Mulk Properties, UniQube, Alubond Med, and T
           Ten Sports, serve over 90 markets across 11+ countries with a
           workforce of 10,000+.
         </p>
@@ -152,7 +153,7 @@ const vmiCards = [
     id: "impact",
     label: "Impact",
     dark: true,
-    text: "Building Alubond into the world's largest ACP brand, pioneering A1 fire-rated façade panels for global fire safety, creating the T10 Cricket League with over 500 million viewers, launching the $500 million Zim Cyber City smart city project, and expanding into virtual healthcare with Mulk Med.",
+    text: "Building Alubond into the world's largest ACP brand, pioneering A1 fire-rated façade panels for global fire safety, creating the T10 Cricket League with over 500 million viewers, launching the $500 million Zim Cyber City smart city project, and expanding into virtual healthcare with Alubond.",
   },
 ];
 
@@ -185,7 +186,7 @@ const VisionSection = () => {
             <div 
               key={card.id}
               className={`sticky rounded-[2rem] p-10 md:p-14 flex flex-col justify-center h-fit shadow-2xl transition-all ${
-                card.dark ? "bg-black text-white border border-white/10" : "bg-[#eef1f5] text-black border border-black/5"
+                card.dark ? "bg-[#0a4b7c] text-white border border-white/10" : "bg-[#eef1f5] text-black border border-black/5"
               }`}
               style={{ top: `calc(10rem + ${index * 2}rem)` }}
             >
@@ -221,7 +222,7 @@ const milestones7 = [
   {
     year: "2009",
     title: "MRM Business Excellence Award",
-    desc: "Mulk Holdings received the MRM Business Excellence Award for Best Foreign Manufacturer from HH Sheikh Mohammed Bin Rashid Al Maktoum.",
+    desc: "Alubond Holdings received the MRM Business Excellence Award for Best Foreign Manufacturer from HH Sheikh Mohammed Bin Rashid Al Maktoum.",
     img: "AboutImages/1.avif",
     align: "left",
   },
@@ -249,14 +250,14 @@ const milestones7 = [
   {
     year: "2023",
     title: "Zim Cyber City – Zimbabwe",
-    desc: "Mulk International launched the $500M Zim Cyber City smart development in Harare, inaugurated by President Emmerson Mnangagwa.",
+    desc: "Alubond launched the $500M Zim Cyber City smart development in Harare, inaugurated by President Emmerson Mnangagwa.",
     img: "AboutImages/9.avif",
     align: "left",
   },
   {
     year: "2025",
     title: "Pillars of Real Estate Award",
-    desc: "LX by MULK was awarded “UAE’s Best Commercial Project” at the Pillars of Real Estate Awards 2025.",
+    desc: "LX by Alubond was awarded “UAE’s Best Commercial Project” at the Pillars of Real Estate Awards 2025.",
     img: "AboutImages/10.avif",
     align: "right",
   },
