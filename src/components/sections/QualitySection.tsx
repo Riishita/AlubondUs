@@ -102,11 +102,7 @@ Designed to perform in the harshest environments, our panels meet ASTM and other
             </div>
 
             {/* Video caption tag */}
-            <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-[#0a4b7c]/10 shadow-sm">
-              <p className="text-[10px] tracking-[0.18em] uppercase font-semibold text-[#0a4b7c]">
-                ADVANCED WATER RESISTANCE TESTED
-              </p>
-            </div>
+           
           </motion.div>
         </div>
 
