@@ -83,24 +83,24 @@ const LandingHero = () => {
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                <motion.p variants={VARIANTS.framerFadeUp} className="mb-4 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/80">
+                <motion.p  className="mb-4 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-white/80">
                   Alubond U.S.A — Est. 1989
                 </motion.p>
 
-                <motion.h2 variants={VARIANTS.framerFadeUp} className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white uppercase">
+                <motion.h2  className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white uppercase">
                   WORLD'S LARGEST
                 </motion.h2>
 
-                <motion.h2 variants={VARIANTS.framerFadeUp} className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-white">
+                <motion.h2 className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-white">
                   ACP BRAND
                 </motion.h2>
 
-                <motion.p variants={VARIANTS.framerFadeUp} className="mb-8 max-w-md text-sm md:text-base font-medium text-white/90 leading-relaxed">
+                <motion.p className="mb-8 max-w-md text-sm md:text-base font-medium text-white/90 leading-relaxed">
                   High-performance composite panels engineered for safety, designed for the extraordinary.
                 </motion.p>
 
                 <motion.button
-                variants={VARIANTS.framerFadeUp}
+           
                 className="px-8 py-4 md:px-10 text-[14px] md:text-[15px] font-medium rounded bg-white/30 backdrop-blur-lg border border-white/10 text-white hover:bg-white hover:text-black transition-all duration-500 ease-out"
               >
                 Discover Innovation
@@ -109,21 +109,21 @@ const LandingHero = () => {
               </motion.div>
 
               {/* Stats Wrapper - Fixed for mobile overflow */}
-              <motion.div 
-                variants={VARIANTS.framerFadeUp}
-                className="flex flex-row lg:flex-col items-start lg:items-end gap-6 md:gap-10 w-full lg:w-auto border-t border-white/20 pt-8 lg:border-none lg:pt-0"
-              >
-                {stats.map((stat) => (
-                  <div key={stat.label}>
-                    <p className="text-3xl md:text-5xl font-black text-white uppercase">
-                      {stat.value}
-                    </p>
-                    <p className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-white uppercase">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </motion.div>
+              {/* Stats Wrapper - Modified to right-align on desktop */}
+<motion.div 
+  className="flex flex-row lg:flex-col items-start lg:items-end gap-6 md:gap-10 w-full lg:w-auto border-t border-white/20 pt-8 lg:border-none lg:pt-0 text-left lg:text-right"
+>
+  {stats.map((stat) => (
+    <div key={stat.label}>
+      <p className="text-4xl md:text-5xl font-black text-white uppercase">
+        {stat.value}
+      </p>
+      <p className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-white uppercase">
+        {stat.label}
+      </p>
+    </div>
+  ))}
+</motion.div>
             </div>
           </motion.div>
 

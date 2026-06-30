@@ -79,16 +79,72 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
     : useTransform(scrollYProgress, [0.2, 0.45], ["-40%", "-50%"]);
   const glowOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-  const locations = [
-    { name: "India", lat: 20.5937, lng: 78.9629, logo: "alubond-logo.png", description: "Alubond India Plot No. 26, Sector 6 IMT Manesar, Gurugram Haryana 122052, India" },
-    { name: "Europe", lat: 50.1109, lng: 8.6821, logo: "alubond-logo.png", description: "Alubond Europe Industrial Zone Europe" },
-    { name: "UAE", lat: 23.4241, lng: 53.8478, logo: "alubond-logo.png", description: "Alubond UAE Dubai Investment Park" },
-    { name: "USA", lat: 37.0902, lng: -95.7129, logo: "alubond-logo.png", description: "Alubond USA New York" },
-    { name: "Canada", lat: 56.1304, lng: -106.3468, logo: "alubond-logo.png", description: "Alubond Canada Toronto" },
-    { name: "Turkey", lat: 38.9637, lng: 35.2433, logo: "alubond-logo.png", description: "Alubond Turkey Istanbul" },
-    { name: "Vietnam", lat: 14.0583, lng: 108.2772, logo: "alubond-logo.png", description: "Alubond Vietnam Ho Chi Minh City" },
-    { name: "Egypt", lat: 26.8206, lng: 30.8025, logo: "alubond-logo.png", description: "Alubond Egypt Cairo" },
-  ];
+const locations = [
+  {
+    name: "India",
+    lat: 20.5937,
+    lng: 78.9629,
+    logo: "alubond-logo.png",
+    description:
+      "MULK COMPOSITES Pvt Ltd, Building No./Flat No. 7, Pali Village, 16th Road, Near Romp Pictures, Bandra West, Mumbai, Mumbai Suburban, Maharashtra 400050, India",
+  },
+  {
+    name: "Europe",
+    lat: 44.8796,
+    lng: 20.0040,
+    logo: "alubond-logo.png",
+    description:
+      "ALUBOND EUROPE d.o.o., Nemanjina 130, 26320 Banatski Karlovac, Serbia",
+  },
+  {
+    name: "UAE",
+    lat: 25.3463,
+    lng: 55.4209,
+    logo: "alubond-logo.png",
+    description:
+      "MULK HOLDINGS F.Z.C, EUROCON BUILDING INDUSTRIES F.Z.C, P.O. Box 42642, Hamriyah Free Zone, Sharjah, United Arab Emirates",
+  },
+  {
+    name: "USA",
+    lat: 42.1275,
+    lng: -87.8289,
+    logo: "alubond-logo.png",
+    description:
+      "3630 Commercial Ave, Northbrook, IL 60062, USA",
+  },
+  {
+    name: "Canada",
+    lat: 43.6155,
+    lng: -79.6509,
+    logo: "alubond-logo.png",
+    description:
+      "ALUBOND CANADA INC, 3600A Laird Road, Unit #15, Mississauga, ON L5L 0A3, Canada",
+  },
+  {
+    name: "Turkey",
+    lat: 41.0245,
+    lng: 29.0436,
+    logo: "alubond-logo.png",
+    description:
+      "GLOBECLAD TURKEY, Altunizade Mahallesi Kisikli Caddesi, Tekin-Ak Is Merkezi No:3/9, Uskudar, Istanbul, Turkey",
+  },
+  {
+    name: "Vietnam",
+    lat: 14.0583,
+    lng: 108.2772,
+    logo: "alubond-logo.png",
+    description:
+      "Vietnam Office (Address not provided in the supplied data)",
+  },
+  {
+    name: "Egypt",
+    lat: 26.8206,
+    lng: 30.8025,
+    logo: "alubond-logo.png",
+    description:
+      " ... ",
+  },
+];
 
   const resetGlobeView = () => {
     if (!globeRef.current) return;
