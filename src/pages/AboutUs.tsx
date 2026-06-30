@@ -67,12 +67,11 @@ const AboutSection = () => (
         </h2>
         <p className="font-medium text-gray-600 md:text-m max-w-lg leading-relaxed mb-14">
           <span className="font-bold text-black">Founded in 1982 by Nawab Shaji Ul Mulk</span>
-          {". "} Alubond is a UAE-based multinational conglomerate with
-          operations in building materials, real estate, healthcare, sports,
-          manufacturing, fashion and digital currencies. Its leading brands,
-          Alubond U.S.A, Metal Plast, Mulk Properties, UniQube, Alubond Med, and T
-          Ten Sports, serve over 90 markets across 11+ countries with a
-          workforce of 10,000+.
+          {". "} WE ARE THE LARGEST ACP BAND IN THE WORLD, WHY? Technically the most superior Fire Rated Aluminium
+           Composite Panel with World's Highest Rating in Deflection to Heat, Fire Penetration of a Wall Assembly 
+           and Delamination Strength. World's First Green Composite Panel with over 90% Recycled Content making 
+           it eligible for Leeds Certified Buildings. World's First Solar Grade 
+           Composite Metal Mirror replacing Glass at a commercial Level in various Soalr Projects.
         </p>
 
         {/* CTA Buttons */}
@@ -562,7 +561,29 @@ const TeamSection = () => (
 /* ─────────────────────────────────────────
    SECTION 8 — AWARDS
 ───────────────────────────────────────── */
-const awardsList = [1, 2, 3, 4, 5, 6, 7];
+const awardsList = [
+  { id: 1, src: "/Awards/0RqsDx0g.avif"  },
+  { id: 2, src: '/Awards/7Igh96FA.avif' },
+  { id: 3, src: '/Awards/aqqFVTbQ.avif' },
+  { id: 4, src: '/Awards/award1.avif' },
+  { id: 5, src: '/Awards/CmMxSmXQ.avif' },
+  { id: 6, src: '/Awards/E5NMB83A.avif' },
+  { id: 7, src: '/Awards/Fgm0G4TQ.avif' },
+
+    { id: 8, src: "/Awards/fOJY8sPA.avif"  },
+  { id: 9, src: '/Awards/hRs_g-OQ.avif' },
+  { id: 10, src: '/Awards/jTIoEEyX.avif' },
+  { id: 11, src: '/Awards/jxB7GZqQ.avif' },
+  { id: 12, src: '/Awards/k9RlvreQ.avif' },
+  { id: 13, src: '/Awards/kheIhEXg.avif' },
+  { id: 14, src: '/Awards/Kic0PVoR.avif' },
+
+    { id: 15, src: '/Awards/qOB2I-yq.avif' },
+  { id: 16, src: '/Awards/X8NsAgbw.avif' },
+  { id: 17, src: '/Awards/XLG-ZKRA.avif' },
+  { id: 18, src: '/Awards/XUhTVVUQ.avif' },
+  { id: 19, src: '/Awards/ZUr7hD_g.avif' },
+];
 
 const AwardsSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -585,14 +606,16 @@ const AwardsSection = () => {
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 [&::-webkit-scrollbar]:hidden"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {awardsList.map((id) => (
+            {awardsList.map((award) => (
               <div 
-                key={id} 
+                key={award.id} 
                 className="snap-start shrink-0 w-64 md:w-72 aspect-[3/4] bg-[#0a0a0c] rounded-[1.5rem] flex items-center justify-center p-6 relative overflow-hidden border border-white/5"
               >
-                 <div className="absolute inset-0 flex items-center justify-center text-gray-700 text-sm font-medium">
-                   Award Image
-                 </div>
+                 <img 
+                   src={award.src} 
+                   alt={`Award ${award.id}`} 
+                   className="w-full h-full object-contain"
+                 />
               </div>
             ))}
           </div>
@@ -612,6 +635,7 @@ const AwardsSection = () => {
     </section>
   );
 };
+
 
 /* ─────────────────────────────────────────
    SECTION 9 — FUTURE GOALS
