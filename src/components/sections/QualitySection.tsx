@@ -3,6 +3,7 @@
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { FileText } from "lucide-react";
 
 const stats = [
   {
@@ -71,6 +72,9 @@ export default function QualitySection() {
 
 Designed to perform in the harshest environments, our panels meet ASTM and other international quality standards to ensure durability, safety, and consistent performance. Advanced paint systems deliver excellent UV, weather, and corrosion resistance, while rigorous anti-delamination testing ensures long-term structural integrity. Every certification reflects our commitment to globally recognized quality and reliable architectural performance.
         </p>
+        <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white bg-[#0a4b7c] hover:bg-[#0a4b7c]/90 px-6 py-3 rounded-full text-sm font-medium transition-colors w-fit shadow-lg shadow-[#0a4b7c]/20">
+          <FileText size={18} /> View Certificate
+        </a>
 
            
           </motion.div>

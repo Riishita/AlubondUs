@@ -134,7 +134,7 @@ const locations = [
     lng: 108.2772,
     logo: "alubond-logo.png",
     description:
-      "Vietnam Office (Address not provided in the supplied data)",
+      "...",
   },
   {
     name: "Egypt",

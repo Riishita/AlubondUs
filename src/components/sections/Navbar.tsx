@@ -5,11 +5,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "About Us", href: "/about" },
-   { label: "Safety", href: "#certificates" },
+   { label: "Products", href: "#certificates" },
   { label: "Technology", href: "#sheet-detail" },
  
-  { label: "Finishes", href: "#materials" },
-  { label: "Applications", href: "#applications" },
+  { label: "Colours & Finishes", href: "#materials" },
+  { label: "Projects", href: "#applications" },
+  { label: "News", href: "/news" },
+  { label: "Downloads", href: "#applications" },
   { label: "Contact", href: "#contact" },
 ];
 

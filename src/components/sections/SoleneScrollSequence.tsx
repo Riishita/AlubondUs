@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck2, Building2 } from "lucide-react";
+import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck2, Building2, FileText } from "lucide-react";
 
 // Certificate Data
 const certs = [
@@ -95,10 +95,29 @@ export default function SoleneScrollSequence() {
                </div>
                <div className="flex flex-col text-white">
                  <Flame className="w-8 h-8 mb-3 text-white" />
-                 <h3 className="text-xl font-medium mb-2">Fire Retardant Core</h3>
-                 <p className="text-white/80 font-light text-sm leading-relaxed">
-                   Engineered with a Magnesium-based advanced fire-retardant technology that helps limit flame spread.
+                 <h3 className="text-xl font-medium mb-2">Alubond A2</h3>
+                 <p className="text-white/80 font-light text-sm leading-relaxed mb-4">
+                   ALUBOND A2 was the world's first Dubai Civil Defence Approved product
+                    classified as A2-s1, d0 according to EN 13501-1 standards. It has demonstrated exceptional 
+                    fire safety and durability. With a core composed of 90% non-combustible minerals, 
+                    it does not ignite, propagate flames, or promote smoke development.
                  </p>
+                 <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-xs font-medium transition-colors pointer-events-auto">
+                   <FileText size={14} /> View Certificate
+                 </a>
+               </div>
+               <div className="flex flex-col text-white">
+                 <Flame className="w-8 h-8 mb-3 text-white" />
+                 <h3 className="text-xl font-medium mb-2">Alubond FR</h3>
+                 <p className="text-white/80 font-light text-sm leading-relaxed mb-4">
+                   ALUBOND® FR complies with fire class B-s1, d0 requirements 
+                   and has received approval from building authorities.
+
+
+                 </p>
+                 <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-xs font-medium transition-colors pointer-events-auto">
+                   <FileText size={14} /> View Certificate
+                 </a>
                </div>
                <div className="flex flex-col text-white">
                  <Building2 className="w-8 h-8 mb-3 text-white" />
@@ -154,9 +173,12 @@ export default function SoleneScrollSequence() {
                    <h3 className="text-lg font-medium text-[#1A1A1A] mb-2 tracking-tight">
                      {item.title}
                    </h3>
-                   <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light">
+                   <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light mb-4">
                      {item.desc}
                    </p>
+                   <a href="#" target="_blank" className="inline-flex items-center gap-2 text-[#0a4b7c] hover:text-[#1A1A1A] text-xs font-medium transition-colors pointer-events-auto">
+                     <FileText size={14} /> View Certificate
+                   </a>
                  </div>
                </div>
              );
@@ -256,9 +278,12 @@ export default function SoleneScrollSequence() {
               <h3 className="text-lg md:text-xl font-medium text-[#1A1A1A] mb-2 tracking-tight">
                 {item.title}
               </h3>
-              <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light line-clamp-2">
+              <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light line-clamp-2 mb-4">
                 {item.desc}
               </p>
+              <a href="#" target="_blank" className="inline-flex items-center gap-2 text-[#0a4b7c] hover:text-[#1A1A1A] text-xs font-medium transition-colors pointer-events-auto">
+                <FileText size={14} /> View Certificate
+              </a>
             </div>
           </div>
 
@@ -292,7 +317,7 @@ export default function SoleneScrollSequence() {
           {/* Cards over video */}
           <motion.div 
             style={{ opacity: videoCardsOpacity, y: videoCardsY }}
-            className="relative z-40 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 px-8 md:px-20 pb-16 md:pb-24 w-full max-w-7xl mx-auto"
+            className="relative z-40 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-8 px-8 md:px-20 pb-16 md:pb-12 w-full max-w-9xl mx-auto"
           >
             <div className="flex flex-col text-white">
   <ShieldCheck className="w-8 h-8 mb-4 text-white" />
@@ -308,12 +333,30 @@ export default function SoleneScrollSequence() {
 <div className="flex flex-col text-white">
   <Flame className="w-8 h-8 mb-4 text-white" />
   <h3 className="text-xl md:text-2xl font-medium mb-3">
-    Fire Retardant Core
+    Alubond A2
   </h3>
-  <p className="text-white/80 font-light text-sm md:text-base leading-relaxed">
-    Engineered with a Magnesium-based advanced fire-retardant technology
-    that helps limit flame spread.
+  <p className="text-white/80 font-light text-sm md:text-base leading-relaxed mb-4">
+    ALUBOND® A2 was the world's first Dubai Civil Defence Approved product classified as 
+    A2-s1, d0 according to EN 13501-1 standards. It has demonstrated exceptional fire safety 
+    and durability. With a core composed of 90% non-combustible minerals, it does not ignite,
+     propagate flames, or promote smoke development.
   </p>
+  <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
+    <FileText size={16} /> View Certificate
+  </a>
+</div>
+<div className="flex flex-col text-white">
+  <Flame className="w-8 h-8 mb-4 text-white" />
+  <h3 className="text-xl md:text-2xl font-medium mb-3">
+    Alubond FR
+  </h3>
+  <p className="text-white/80 font-light text-sm md:text-base leading-relaxed mb-4">
+    ALUBOND® FR complies with fire class B-s1, d0 requirements and has received 
+    approval from building authorities.
+  </p>
+  <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
+    <FileText size={16} /> View Certificate
+  </a>
 </div>
 
 <div className="flex flex-col text-white">

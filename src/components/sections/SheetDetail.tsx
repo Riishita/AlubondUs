@@ -5,6 +5,7 @@ import { OrbitControls, useTexture } from "@react-three/drei"; // Added useTextu
 import { useEffect, useState, useRef, Suspense } from "react"; // Added Suspense
 import { motion, AnimatePresence, MotionValue, useInView } from "framer-motion";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
+import { FileText } from "lucide-react";
 
 /* ================= 3D MODEL ================= */
 function PanelModel({
@@ -83,28 +84,28 @@ const steps = [
     id: "02",
     title: "PRECISION-GRADE ALUMINIUM ALLOY",
     desc: "0.50mm aluminium alloy 3003-H24/5005-H34 top skin provides the structural face of the panel. Hot-bonded to the core using a proprietary lamination process that ensures zero delamination under thermal cycling and wind-load stress.",
-    details: "EN 485-2 • ASTM B209 • EN 573-3 • ISO 6361 • AAMA 2604",
+    details: "AAMA 2605 • GSB MASTER • QUALICOAT CLASS 3 • ASTM D2244 • ISO 2813",
     right: "Top Metal Skin",
   },
   {
     id: "03",
     title: "FIRE-RETARDANT MINERAL CORE",
     desc: "Engineered mineral-filled core achieving FR-A2 classification -the highest non-combustible rating for metal composite panels. Comprises over 90% inorganic mineral content with zero halogen compounds, ensuring minimal smoke generation and no flaming droplets under fire conditions.",
-    details: "EN 13501-1 • NFPA 285 • ASTM E84 • BS 8414 • DIN 4102-B1 • UL 1040",
+    details: "AAMA 2605 • GSB MASTER • QUALICOAT CLASS 3 • ASTM D2244 • ISO 2813",
     right: "Fire Rated Core",
   },
   {
     id: "04",
     title: "STRUCTURAL BACKING LAYER",
     desc: "0.50mm aluminium alloy rear skin provides dimensional stability, rigidity, and resistance to panel warping under thermal expansion. Acts as a structural diaphragm that distributes wind-load forces evenly across the composite cross-section.",
-    details: "EN 485-2 • ASTM B209 • ISO 7438 • ASTM D1781 • EN 14509",
+    details: "AAMA 2605 • GSB MASTER • QUALICOAT CLASS 3 • ASTM D2244 • ISO 2813",
     right: "Bottom Metal Skin",
   },
   {
     id: "05",
     title: "CORROSION-RESISTANT FOUNDATION",
     desc: "Multi-stage chromate conversion coating followed by epoxy resin primer and protective service coat. This tri-layer treatment provides the corrosion barrier essential for coastal, industrial, and high-humidity environments - protecting the panel substrate from inside out.",
-    details: "AAMA 2605 • ISO 2409 • ASTM D3359 • ASTM B117 • ISO 9227",
+    details: "AAMA 2605 • GSB MASTER • QUALICOAT CLASS 3 • ASTM D2244 • ISO 2813",
     right: "Base Treatment",
   },
 ];
@@ -250,9 +251,12 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                 </p>
 
                 <div className="pt-4 md:pt-6 border-t border-white/10">
-                  <p className="type-body-sm text-white/70 leading-relaxed max-w-sm">
+                  <p className="type-body-sm text-white/70 leading-relaxed max-w-sm mb-4">
                     {steps[index].details}
                   </p>
+                  <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
+                    <FileText size={16} /> View Certificate
+                  </a>
                 </div>
               </motion.div>
             </AnimatePresence>

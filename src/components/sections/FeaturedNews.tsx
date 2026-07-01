@@ -1,28 +1,5 @@
-import React from 'react';
-
-const newsItems = [
-  {
-    date: "16 Jan 2026",
-    title: "ALUBOND HAS SUCCESFULLY PASSED CAN/ULC-S134 TEST",
-    description: "We proudly announce that we have passed CAN/ULC -S134 full-scale wall-assembly test designed to measure the limits of its fire spread, heat flux and burning characteristics of an exterior wall with controlled fire exposure.",
-    image: "/1news.png",
-    highlight: false,
-  },
-  {
-    date: "16 Jan 2026",
-    title: "ALUBOND SECURES TECH TO REDUCE THE SPREAD OF FIRE IN HIGH RISES.",
-    description: "The tech 'breakthrough' has made Alubond A1 the world's safest and highest fire rated composite panels.",
-    image: "/2news.jpg",
-    highlight: true,
-  },
-  {
-    date: "16 Jan 2026",
-    title: "ALUBOND SECURES BREAKTHROUGH BY DEVELOPING AN A1 FIRE-RATED ALUMINUM CORE.",
-    description: "The Fire-Retardant A1 Aluminum Composite Panels are fully non-combustible and [...]",
-    image: "/3news.jpeg",
-    highlight: false,
-  },
-];
+import { Link } from 'react-router-dom';
+import { newsItems } from '@/data/newsData';
 
 export default function FeaturedNews() {
   return (
@@ -79,9 +56,9 @@ export default function FeaturedNews() {
               
               {/* Footer / Read More */}
               <div className="mt-auto pt-4 border-t border-gray-100">
-                <a href="#" className="inline-flex items-center text-sm font-bold text-gray-800 group-hover:text-[#0a4b7c] transition-colors duration-300">
+                <Link to={`/news/${news.id}`} className="inline-flex items-center text-sm font-bold text-gray-800 group-hover:text-[#0a4b7c] transition-colors duration-300">
                   Read Full Article
-                </a>
+                </Link>
               </div>
             </div>
           </div>

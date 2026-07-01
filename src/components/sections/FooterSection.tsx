@@ -197,73 +197,85 @@ const Footer = () => {
       className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 py-16 md:py-24 min-h-[80vh] flex flex-col justify-center ${cursorSectionClassName}`}
     >
       <div className="max-w-7xl mx-auto w-full">
-        {/* Top Text */}
-        {/* <div className="mb-10">
-          <h4 className="type-body text-white/90 max-w-2xl">
-            Precision-engineered façade solutions designed to bring <span className="text-white">architectural vision</span> to life.
-          </h4>
-        </div> */}
-
-        {/* Separator */}
-        {/* <div className="w-full h-px bg-white/10 mb-20" /> */}
-
         {/* Middle Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 type-body-sm mb-16">
-          
-          {/* Col 1: Contact */}
-          <div className="flex flex-col gap-5">
-            <p className={columnHeaderStyle}>CONTACT</p>
-            <p className={linkStyle}>info@alubondusa.com</p>
-            <p className={linkStyle}>+1 (305) 000-0000</p>
+
+          {/* Col 1: About Our Company + Newsletter */}
+          <div className="flex flex-col gap-4">
+            <p className={columnHeaderStyle}>ABOUT OUR COMPANY</p>
+            <img src="/Logo.png" alt="Alubond Logo" className="h-8 w-auto object-contain origin-left mb-2" />
+            <p className="text-white/70 leading-relaxed text-sm">
+              Alubond has emerged as the world's largest MCM &amp; ACP Brand with a 25 Million sq.m production capacity across various production bases. Completely integrated with FR A1/A2/B1 Core &amp; Granules Production, Coil Coating, Fire Rated Bonding Adhesives &amp; Paint Production.
+            </p>
+            {/* Newsletter */}
+            <div className="mt-4">
+              <p className={columnHeaderStyle}>SUBSCRIBE TO OUR NEWSLETTER</p>
+              <div className="flex w-full rounded-lg overflow-hidden border border-white/15 mt-3 bg-white/5">
+                <input
+                  type="email"
+                  placeholder="E-mail Address"
+                  className="flex-1 bg-transparent text-white placeholder-white/40 px-4 py-3 text-sm focus:outline-none min-w-0"
+                />
+                <button className="bg-white/20 hover:bg-white/30 transition-colors text-white font-bold text-xs uppercase tracking-widest px-5 py-3 shrink-0">
+                  Submit
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Col 2: Navigation */}
+          {/* Col 2: Quick Links */}
           <div className="flex flex-col gap-5">
-            <p className={columnHeaderStyle}>EXPLORE</p>
-            {["Home", "Technology", "Projects", "Contact"].map((item) => (
-              <span key={item} className={linkStyle}>{item}</span>
-            ))}
-          </div>
-
-          {/* Col 3: Technical Resources */}
-          <div className="flex flex-col gap-5">
-            <p className={columnHeaderStyle}>RESOURCES</p>
-            {["BIM Families", "Technical Datasheets", "Installation Guidelines", "Certifications", "Brochures", "Request a Sample"].map((item) => (
-              <span key={item} className={linkStyle}>{item}</span>
-            ))}
-          </div>
-
-          {/* Col 4: Socials */}
-          <div className="flex flex-col gap-5">
-             <p className={columnHeaderStyle}>SOCIAL</p>
-            {[
-              { name: "LinkedIn", url: "#" },
-              { name: "Instagram", url: "#" },
-              { name: "Facebook", url: "#" },
-              { name: "YouTube", url: "#" },
-            ].map((social) => (
-              <a key={social.name} href={social.url} className={`group flex items-center justify-between w-full max-w-[200px] ${linkStyle}`}>
-                <div className="flex items-center">
-                  {socialIcons[social.name]}
-                  <span>{social.name}</span>
-                </div>
-                <ArrowRight size={14} className="text-white/30 group-hover:text-white transition-colors" />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Section: Copyright & Legal Links Horizontal */}
-        <div className="flex flex-col sm:flex-row justify-between items-center type-body-sm text-white/40 gap-6 mt-12">
-          <p>© 2026 Alubond U.S.A. All Rights Reserved.</p>
-          
-          <div className="flex gap-8">
-            {["FAQ", "Terms", "Privacy"].map((link) => (
-              <span key={link} className="hover:text-white transition-colors cursor-pointer">
-                {link}
+            <p className={columnHeaderStyle}>QUICK LINKS</p>
+            {["Products", "Downloads", "News", "Colours & Finishes", "Contact Us"].map((item) => (
+              <span key={item} className={`group ${linkStyle}`}>
+                <ArrowRight size={14} className="mr-2 text-white/40 group-hover:text-white transition-colors" />
+                {item}
               </span>
             ))}
           </div>
+
+          {/* Col 3: Global Presence */}
+          <div className="flex flex-col gap-5">
+            <p className={columnHeaderStyle}>GLOBAL PRESENCE</p>
+            {["Alubond Global", "Alubond USA", "Alubond Canada", "Alubond Qatar", "Alubond Turkey", "Alubond Egypt"].map((item) => (
+              <span key={item} className={`group ${linkStyle}`}>
+                <ArrowRight size={14} className="mr-2 text-white/40 group-hover:text-white transition-colors" />
+                {item}
+              </span>
+            ))}
+          </div>
+
+          {/* Col 4: Contact Us */}
+          <div className="flex flex-col gap-5">
+            <p className={columnHeaderStyle}>CONTACT US</p>
+            <p className="text-white/70 leading-relaxed text-sm mb-2">
+              Have questions, comments or just want to say hello:
+            </p>
+            <div className="flex items-center gap-3 text-white/80">
+              <span className="text-[#f97316]">📞</span>
+              <span>+971 (6) 526 2202</span>
+            </div>
+            <div className="flex items-center gap-3 text-white/80">
+              <span className="text-[#f97316]">🖨️</span>
+              <span>+971 (6) 526 2203</span>
+            </div>
+            <div className="flex items-center gap-3 text-white/80">
+              <span className="text-[#f97316]">✉️</span>
+              <span>sales@alubond.com</span>
+            </div>
+            <div className="flex items-start gap-3 text-white/80">
+              <span className="text-[#f97316] mt-0.5">📍</span>
+              <span>Phase 1, Hamriyah Freezone, Sharjah, U.A.E</span>
+            </div>
+          </div>
+        </div>
+
+
+
+        {/* Bottom Section */}
+        <div className="flex flex-col sm:flex-row justify-center items-center type-body-sm text-white/80 gap-6 mt-4">
+          <p>© 2026 Alubond U.S.A. All Rights Reserved.</p>
+          
         </div>
       </div>
     </footer>

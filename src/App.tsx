@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import GalleryCategory from "./pages/GalleryCategory.tsx";
+import News from "./pages/News.tsx";
+import NewsDetail from "./pages/NewsDetail.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
 import { useEffect } from "react";
 
@@ -48,6 +50,8 @@ const App = () => {
               <Route path="/about" element={<AboutUs />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/gallery/:categoryId" element={<GalleryCategory />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:id" element={<NewsDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CustomCursorProvider>
