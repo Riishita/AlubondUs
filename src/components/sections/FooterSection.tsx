@@ -252,19 +252,19 @@ const Footer = () => {
               Have questions, comments or just want to say hello:
             </p>
             <div className="flex items-center gap-3 text-white/80">
-              <span className="text-[#f97316]">📞</span>
+              <span className="text-[#0a4b7c]">📞</span>
               <span>+971 (6) 526 2202</span>
             </div>
             <div className="flex items-center gap-3 text-white/80">
-              <span className="text-[#f97316]">🖨️</span>
+              <span className="text-[#0a4b7c]">🖨️</span>
               <span>+971 (6) 526 2203</span>
             </div>
             <div className="flex items-center gap-3 text-white/80">
-              <span className="text-[#f97316]">✉️</span>
+              <span className="text-[#0a4b7c]">✉️</span>
               <span>sales@alubond.com</span>
             </div>
             <div className="flex items-start gap-3 text-white/80">
-              <span className="text-[#f97316] mt-0.5">📍</span>
+              <span className="text-[#0a4b7c] mt-0.5">📍</span>
               <span>Phase 1, Hamriyah Freezone, Sharjah, U.A.E</span>
             </div>
           </div>

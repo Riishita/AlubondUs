@@ -7,7 +7,6 @@ const navLinks = [
   { label: "About Us", href: "/about" },
    { label: "Products", href: "#certificates" },
   { label: "Technology", href: "#sheet-detail" },
- 
   { label: "Colours & Finishes", href: "#materials" },
   { label: "Projects", href: "#applications" },
   { label: "News", href: "/news" },

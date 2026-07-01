@@ -7,10 +7,10 @@ export default function FeaturedNews() {
       {/* Header */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-end mb-16 px-4">
         <div>
-          <h2 className="text-sm font-light tracking-[0.2em] text-white-200 uppercase mb-4">
+          <h2 className="text-sm font-light tracking-[0.2em] text-gray-500 uppercase mb-4">
             Latest Updates
           </h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-white-900 tracking-tight">
+          <h3 className="text-4xl md:text-5xl font-extrabold text-[#0a4b7c] tracking-tight">
             Featured News
           </h3>
         </div>
@@ -18,7 +18,7 @@ export default function FeaturedNews() {
 
       {/* Grid Layout */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {newsItems.map((news, index) => (
+        {newsItems.filter(news => news.id !== "4").map((news, index) => (
           <div 
             key={index} 
             className="group flex flex-col bg-white rounded-[2rem] overflow-hidden border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2"
