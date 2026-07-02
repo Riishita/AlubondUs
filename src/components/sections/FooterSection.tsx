@@ -201,12 +201,16 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 type-body-sm mb-16">
 
           {/* Col 1: About Our Company + Newsletter */}
-          <div className="flex flex-col gap-4">
-            <p className={columnHeaderStyle}>ABOUT OUR COMPANY</p>
-            <img src="/Logo.png" alt="Alubond Logo" className="h-8 w-auto object-contain origin-left mb-2" />
-            <p className="text-white/70 leading-relaxed text-sm">
-              Alubond has emerged as the world's largest MCM &amp; ACP Brand with a 25 Million sq.m production capacity across various production bases. Completely integrated with FR A1/A2/B1 Core &amp; Granules Production, Coil Coating, Fire Rated Bonding Adhesives &amp; Paint Production.
-            </p>
+          <div className="flex flex-col gap-4 items-start"> {/* Added items-start here */}
+  <p className={columnHeaderStyle}>ABOUT OUR COMPANY</p>
+  <img 
+    src="/Logo1.png" 
+    alt="Alubond Logo" 
+    className="h-24 w-auto object-contain mb-1"
+  />
+  <p className="text-white/70 leading-relaxed text-sm">
+    Alubond has emerged as the world's largest MCM &amp; ACP Brand with a 25 Million sq.m production capacity across various production bases. Completely integrated with FR A1/A2/B1 Core &amp; Granules Production, Coil Coating, Fire Rated Bonding Adhesives &amp; Paint Production.
+  </p>
             {/* Newsletter */}
             <div className="mt-4">
               <p className={columnHeaderStyle}>SUBSCRIBE TO OUR NEWSLETTER</p>
