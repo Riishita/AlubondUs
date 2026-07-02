@@ -61,7 +61,7 @@ const LandingHero = () => {
               className="h-full w-full object-cover brightness-[0.7] contrast-[1]"
               muted playsInline loop autoPlay preload="auto"
             >
-              <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1782762740/Home_gv3eao.mp4" type="video/mp4" />
+              <source src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992213/Hero_Section_cdr2zx.mp4" type="video/mp4" />
             </video>
             <motion.div
               className="absolute inset-0 bg-black/10"
@@ -73,7 +73,7 @@ const LandingHero = () => {
             className="relative z-10 flex flex-col justify-center h-full w-full px-6 md:px-12 lg:px-24 py-24"
             style={{ y: isMobile ? 0 : contentY, opacity: isMobile ? 1 : contentOpacity }}
           >
-            <div className="flex flex-col lg:flex-row w-full items-start lg:items-center justify-between gap-12">
+            <div className="flex flex-col lg:flex-row w-full items-start lg:items-start justify-between gap-12">
               
               {/* Content Wrapper */}
               <motion.div 
@@ -111,7 +111,7 @@ const LandingHero = () => {
               {/* Stats Wrapper - Fixed for mobile overflow */}
               {/* Stats Wrapper - Modified to right-align on desktop */}
 <motion.div 
-  className="flex flex-row lg:flex-col items-start lg:items-end gap-6 md:gap-10 w-full lg:w-auto border-t border-white/20 pt-8 lg:border-none lg:pt-0 text-left lg:text-right"
+  className="flex flex-row lg:flex-col items-start lg:items-end gap-6 md:gap-10 w-full lg:w-auto border-t border-white/20 pt-8 lg:border-none lg:pt-8 text-left lg:text-right"
 >
   {stats.map((stat) => (
     <div key={stat.label}>

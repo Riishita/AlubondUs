@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck2, Building2, FileText } from "lucide-react";
+import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck2, Building2, FileText, BadgeCheck } from "lucide-react";
 
 // Certificate Data
 const certs = [
@@ -82,7 +82,7 @@ export default function SoleneScrollSequence() {
          <div className="w-full px-4 mb-20">
            <div className="w-full rounded-[24px] overflow-hidden bg-black flex flex-col justify-end shadow-2xl relative" style={{ minHeight: '600px' }}>
              <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-80">
-               <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1782673996/fire_xqnuom.mp4" type="video/mp4" />
+               <source src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992016/VN20260629_004036_qpxpiy.mp4" type="video/mp4" />
              </video>
              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
              <div className="relative z-40 flex flex-col gap-8 px-6 pb-10 w-full mt-auto pt-40">
@@ -94,7 +94,7 @@ export default function SoleneScrollSequence() {
                  </p>
                </div>
                <div className="flex flex-col text-white">
-                 <Flame className="w-8 h-8 mb-3 text-white" />
+                 <BadgeCheck className="w-8 h-8 mb-3 text-white" />
                  <h3 className="text-xl font-medium mb-2">Alubond A2</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed mb-4">
                    ALUBOND® A2 is the world's first Dubai Civil Defence Approved A2-s1, d0 panel,
@@ -307,7 +307,7 @@ export default function SoleneScrollSequence() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-80"
           >
-            <source src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1782673996/fire_xqnuom.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992016/VN20260629_004036_qpxpiy.mp4" type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
@@ -329,7 +329,7 @@ export default function SoleneScrollSequence() {
 </div>
 
 <div className="flex flex-col text-white">
-  <Flame className="w-8 h-8 mb-4 text-white" />
+  <BadgeCheck className="w-8 h-8 mb-4 text-white" />
   <h3 className="text-xl md:text-2xl font-medium mb-3">
     Alubond A2
   </h3>

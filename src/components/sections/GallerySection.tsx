@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 
 const panels = [
-  { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1781787249/gemini_generated_video_5e76377d_jttrqd.mp4", title: "Yas Island | Hotel on Yas Marina Circuit ", location: "W Abu Dhabi" },
-  { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066849/VN20260506_165518_q1j310.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
-  { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778066850/VN20260506_165356_drniqf.mp4", title: "Burj Khalifa", location: "Dubai, UAE" },
-  { video: "https://res.cloudinary.com/dnpdmq15v/video/upload/v1778065542/VN20260414_022640_ideoyr.mp4", title: "Khalifa Stadium", location: "Doha, Qatar" },
+  { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992104/video_3_kzkrdu.mp4", title: "Yas Island | Hotel on Yas Marina Circuit ", location: "W Abu Dhabi" },
+  { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782991995/video4_bbuhj3.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
+  { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782991993/video5_zfqnc7.mp4", title: "Burj Khalifa", location: "Dubai, UAE" },
+  { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992068/video6_q5ujxm.mp4", title: "Khalifa Stadium", location: "Doha, Qatar" },
 ];
 
 export default function PremiumGallery() {

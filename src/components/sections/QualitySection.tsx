@@ -72,7 +72,7 @@ export default function QualitySection() {
 
 Designed to perform in the harshest environments, our panels meet ASTM and other international quality standards to ensure durability, safety, and consistent performance. Advanced paint systems deliver excellent UV, weather, and corrosion resistance, while rigorous anti-delamination testing ensures long-term structural integrity. Every certification reflects our commitment to globally recognized quality and reliable architectural performance.
         </p>
-        <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white bg-[#0a4b7c] hover:bg-[#0a4b7c]/90 px-6 py-3 rounded-full text-sm font-medium transition-colors w-fit shadow-lg shadow-[#0a4b7c]/20">
+        <a href="/Weather resistance & Delamination METS 4mm A2.pdf" target="_blank" className="inline-flex items-center gap-2 text-white bg-[#0a4b7c] hover:bg-[#0a4b7c]/90 px-6 py-3 rounded-full text-sm font-medium transition-colors w-fit shadow-lg shadow-[#0a4b7c]/20">
           <FileText size={18} /> View Certificate
         </a>
 
@@ -94,7 +94,7 @@ Designed to perform in the harshest environments, our panels meet ASTM and other
               style={{ aspectRatio: "19/12" }}
             >
               <video
-                src="https://res.cloudinary.com/dnpdmq15v/video/upload/v1782818326/VN20260627_162429_unovtj.mp4"
+                src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992066/weather_video_qhweaf.mp4"
                 autoPlay
                 muted
                 loop

@@ -27,7 +27,6 @@ const categories = [
   "Patina",
   "Concrete",
   "Texture",
-
   "Anodised",
   "Najdi",
   "Prismatic",
@@ -40,117 +39,117 @@ const words = [
 ];
 
 const materials = [
-  { name: "WHITEAHORN", image: "/materials/Wood1.webp", category: "Wood" },
-  { name: "ORIENTAL CANE", image: "/materials/Wood2.webp", category: "Wood" },
-  { name: "NATURAL OAK", image: "/materials/Wood3.webp", category: "Wood" },
-  { name: "WALNUT", image: "/materials/Wood4.webp", category: "Wood" },
-  { name: "ROSEWOOD", image: "/materials/Wood5.webp", category: "Wood" },
-  { name: "ROYAL TEAK", image: "/materials/Wood6.webp", category: "Wood" },
-  { name: "TEAK", image: "/materials/Wood7.webp", category: "Wood" },
-  { name: "DARKTEAK", image: "/materials/Wood8.webp", category: "Wood" },
-  { name: "QUERCUS", image: "/materials/Wood9.webp", category: "Wood" },
-  { name: "WENGE", image: "/materials/Wood10.webp", category: "Wood" },
-  { name: "ROYAL WENGE ", image: "/materials/Wood11.webp", category: "Wood" },
-  { name: "MAHOGANY", image: "/materials/Wood12.webp", category: "Wood" },
+  { id: "", name: "WHITEAHORN", image: "/materials/Wood1.webp", category: "Wood" },
+  { id: "", name: "ORIENTAL CANE", image: "/materials/Wood2.webp", category: "Wood" },
+  { id: "", name: "NATURAL OAK", image: "/materials/Wood3.webp", category: "Wood" },
+  { id: "", name: "WALNUT", image: "/materials/Wood4.webp", category: "Wood" },
+  { id: "", name: "ROSEWOOD", image: "/materials/Wood5.webp", category: "Wood" },
+  { id: "", name: "ROYAL TEAK", image: "/materials/Wood6.webp", category: "Wood" },
+  { id: "", name: "TEAK", image: "/materials/Wood7.webp", category: "Wood" },
+  { id: "", name: "DARKTEAK", image: "/materials/Wood8.webp", category: "Wood" },
+  { id: "", name: "QUERCUS", image: "/materials/Wood9.webp", category: "Wood" },
+  { id: "", name: "WENGE", image: "/materials/Wood10.webp", category: "Wood" },
+  { id: "", name: "ROYAL WENGE ", image: "/materials/Wood11.webp", category: "Wood" },
+  { id: "", name: "MAHOGANY", image: "/materials/Wood12.webp", category: "Wood" },
 
-  { name: "Yellow", image: "/materials/Solid1.webp", category: "Solid" },
-  { name: "Signal Red", image: "/materials/Solid2.webp", category: "Solid" },
-  { name: "Sea Blue", image: "/materials/Solid3.webp", category: "Solid" },
-  { name: "Dark Blue", image: "/materials/Solid4.webp", category: "Solid" },
-  { name: "Rat Grey", image: "/materials/Solid5.webp", category: "Solid" },
-  { name: "White", image: "/materials/Solid6.webp", category: "Solid" },
-  { name: "Appricot white", image: "/materials/Solid7.webp", category: "Solid" },
-  { name: "Ivory White", image: "/materials/Solid8.webp", category: "Solid" },
-  { name: "Pure White", image: "/materials/Solid9.webp", category: "Solid" },
-  { name: "Coal Blue", image: "/materials/Solid10.webp", category: "Solid" },
-  { name: "Burgundy", image: "/materials/Solid11.webp", category: "Solid" },
-  { name: "Bone White", image: "/materials/Solid12.webp", category: "Solid" },
-  { name: "Purple Blue", image: "/materials/Solid13.webp", category: "Solid" },
-  { name: "Orange", image: "/materials/Solid14.webp", category: "Solid" },
-  { name: "Cream White", image: "/materials/Solid15.webp", category: "Solid" },
+  { id: "", name: "Yellow", image: "/materials/Solid1.webp", category: "Solid" },
+  { id: "", name: "Signal Red", image: "/materials/Solid2.webp", category: "Solid" },
+  { id: "", name: "Sea Blue", image: "/materials/Solid3.webp", category: "Solid" },
+  { id: "", name: "Dark Blue", image: "/materials/Solid4.webp", category: "Solid" },
+  { id: "", name: "Rat Grey", image: "/materials/Solid5.webp", category: "Solid" },
+  { id: "", name: "White", image: "/materials/Solid6.webp", category: "Solid" },
+  { id: "", name: "Appricot white", image: "/materials/Solid7.webp", category: "Solid" },
+  { id: "", name: "Ivory White", image: "/materials/Solid8.webp", category: "Solid" },
+  { id: "", name: "Pure White", image: "/materials/Solid9.webp", category: "Solid" },
+  { id: "", name: "Coal Blue", image: "/materials/Solid10.webp", category: "Solid" },
+  { id: "", name: "Burgundy", image: "/materials/Solid11.webp", category: "Solid" },
+  { id: "", name: "Bone White", image: "/materials/Solid12.webp", category: "Solid" },
+  { id: "", name: "Purple Blue", image: "/materials/Solid13.webp", category: "Solid" },
+  { id: "", name: "Orange", image: "/materials/Solid14.webp", category: "Solid" },
+  { id: "", name: "Cream White", image: "/materials/Solid15.webp", category: "Solid" },
 
-  { name: "CHAMPAGNE GOLD", image: "/materials/Metallic1.webp", category: "Metallic" },
-  { name: "BRIGHT CHAMPAGNE SILVER", image: "/materials/Metallic2.webp", category: "Metallic" },
-  { name: "METALLIC BLACK", image: "/materials/Metallic3.webp", category: "Metallic" },
-  { name: "METALLIC BRONZE", image: "/materials/Metallic4.webp", category: "Metallic" },
-  { name: "METALLIC GOLD", image: "/materials/Metallic5.webp", category: "Metallic" },
-  { name: "DESERT ROSE METALLIC", image: "/materials/Metallic6.webp", category: "Metallic" },
-  { name: "BRUSHED SILVER", image: "/materials/Metallic7.webp", category: "Metallic" },
-  { name: "BRIGHT SILVER", image: "/materials/Metallic8.webp", category: "Metallic" },
-  { name: "METALLIC BRASS", image: "/materials/Metallic9.webp", category: "Metallic" },
-  { name: "RAW GREY", image: "/materials/Metallic10.webp", category: "Metallic" },
-  { name: "GRAY METALLIC SILVER ", image: "/materials/Metallic11.webp", category: "Metallic" },
-  { name: "METALLIC JADE", image: "/materials/Metallic12.webp", category: "Metallic" },
-  { name: "SMOKE SILVER", image: "/materials/Metallic13.webp", category: "Metallic" },
-  { name: "ROYAL WENGE ", image: "/materials/Metallic14.webp", category: "Metallic" },
-  { name: "BLUE METALLIC", image: "/materials/Metallic15.webp", category: "Metallic" },
+  { id: "ALM001", name: "Silver Brushed", image: "/materials/Metallic1.webp", category: "Metallic" },
+  { id: "ALM002", name: "Frost Metallic", image: "/materials/Metallic2.webp", category: "Metallic" },
+  { id: "ALM003", name: "Steel Blue", image: "/materials/Metallic3.webp", category: "Metallic" },
+  { id: "ALM004", name: "Champagne Gold", image: "/materials/Metallic4.webp", category: "Metallic" },
+  { id: "ALM005", name: "Rich Gold", image: "/materials/Metallic5.webp", category: "Metallic" },
+  { id: "ALM006", name: "Metallic Slate", image: "/materials/Metallic6.webp", category: "Metallic" },
+  { id: "ALM007", name: "Metallic Silver", image: "/materials/Metallic7.webp", category: "Metallic" },
+  { id: "ALM008", name: "Metallic Green", image: "/materials/Metallic8.webp", category: "Metallic" },
+  { id: "ALM009", name: "Metallic Azure", image: "/materials/Metallic9.webp", category: "Metallic" },
+  { id: "ALM010", name: "Metallic Pink", image: "/materials/Metallic10.webp", category: "Metallic" },
+  { id: "ALM011", name: "Dark Steel", image: "/materials/Metallic11.webp", category: "Metallic" },
+  { id: "ALM012", name: "Soft Silver", image: "/materials/Metallic12.webp", category: "Metallic" },
+  { id: "ALM013", name: "Burnished Bronze", image: "/materials/Metallic13.webp", category: "Metallic" },
+  { id: "ALM014", name: "Copper Glow", image: "/materials/Metallic14.webp", category: "Metallic" },
+  { id: "ALM015", name: "Titanium Grey", image: "/materials/Metallic15.webp", category: "Metallic" },
 
-  { name: "WHITE GRANITE ", image: "/materials/Stone1.webp", category: "Stone & Marbles" },
-  { name: "YELLOW GRANITE ", image: "/materials/Stone2.webp", category: "Stone & Marbles" },
-  { name: "ROSA PORRINHO", image: "/materials/Stone3.webp", category: "Stone & Marbles" },
-  { name: "ROSA GRANITE  ", image: "/materials/Stone4.webp", category: "Stone & Marbles" },
-  { name: "SERPEGIANTE  ", image: "/materials/Stone5.webp", category: "Stone & Marbles" },
-  { name: "GRANITE NERO ", image: "/materials/Stone6.webp", category: "Stone & Marbles" },
-  { name: "WHITE MARBLE ", image: "/materials/Stone7.webp", category: "Stone & Marbles" },
-  { name: "RAVERTINE  ", image: "/materials/Stone8.webp", category: "Stone & Marbles" },
-  { name: "YELLOW MARBLE ", image: "/materials/Stone9.webp", category: "Stone & Marbles" },
-  { name: "CAFEE MARNO  ", image: "/materials/Stone10.webp", category: "Stone & Marbles" },
+  { id: "", name: "WHITE GRANITE ", image: "/materials/Stone1.webp", category: "Stone & Marbles" },
+  { id: "", name: "YELLOW GRANITE ", image: "/materials/Stone2.webp", category: "Stone & Marbles" },
+  { id: "", name: "ROSA PORRINHO", image: "/materials/Stone3.webp", category: "Stone & Marbles" },
+  { id: "", name: "ROSA GRANITE  ", image: "/materials/Stone4.webp", category: "Stone & Marbles" },
+  { id: "", name: "SERPEGIANTE  ", image: "/materials/Stone5.webp", category: "Stone & Marbles" },
+  { id: "", name: "GRANITE NERO ", image: "/materials/Stone6.webp", category: "Stone & Marbles" },
+  { id: "", name: "WHITE MARBLE ", image: "/materials/Stone7.webp", category: "Stone & Marbles" },
+  { id: "", name: "RAVERTINE  ", image: "/materials/Stone8.webp", category: "Stone & Marbles" },
+  { id: "", name: "YELLOW MARBLE ", image: "/materials/Stone9.webp", category: "Stone & Marbles" },
+  { id: "", name: "CAFEE MARNO  ", image: "/materials/Stone10.webp", category: "Stone & Marbles" },
 
-  { name: "AB-SS-003", image: "/materials/Patina1.webp", category: "Patina" },
-  { name: "AB-SS-004", image: "/materials/Patina2.webp", category: "Patina" },
-  { name: "AB-SS-005", image: "/materials/Patina3.webp", category: "Patina" },
-  { name: "AB-SS-006", image: "/materials/Patina4.webp", category: "Patina" },
-  { name: "AB-SS-007", image: "/materials/Patina5.webp", category: "Patina" },
-  { name: "AB-SS-008", image: "/materials/Patina6.webp", category: "Patina" },
+  { id: "ALPAT002", name: "Verdigris Green Oxide", image: "/materials/Patina1.webp", category: "Patina" },
+  { id: "ALPAT001", name: "Aged Copper Patina", image: "/materials/Patina2.webp", category: "Patina" },
+  { id: "ALPAT003", name: "Antique Bronze Wash", image: "/materials/Patina3.webp", category: "Patina" },
+  { id: "ALPAT004", name: "Oxidized Steel Grey", image: "/materials/Patina4.webp", category: "Patina" },
+  { id: "AB|SS|005", name: "Weathered Zinc Finish", image: "/materials/Patina5.webp", category: "Patina" },
+  { id: "ALPAT006", name: "Rustic Iron Patina", image: "/materials/Patina6.webp", category: "Patina" },
 
-  { name: "AB-SS-003", image: "/materials/Concrete1.webp", category: "Concrete" },
-  { name: "AB-SS-004", image: "/materials/Concrete2.webp", category: "Concrete" },
-  { name: "AB-SS-005", image: "/materials/Concrete3.webp", category: "Concrete" },
-  { name: "AB-SS-006", image: "/materials/Concrete4.webp", category: "Concrete" },
+  { id: "ALC001", name: "Raw Concrete Grey", image: "/materials/Concrete1.webp", category: "Concrete" },
+  { id: "ALC002", name: "Smooth Cement Ash", image: "/materials/Concrete2.webp", category: "Concrete" },
+  { id: "ALC003", name: "Urban Cement Light", image: "/materials/Concrete3.webp", category: "Concrete" },
+  { id: "ALC004", name: "Neon Pink", image: "/materials/Concrete4.webp", category: "Concrete" },
 
-  { name: "AB-SS-003", image: "/materials/Texture1.webp", category: "Texture" },
-  { name: "AB-SS-004", image: "/materials/Texture2.webp", category: "Texture" },
-  { name: "AB-SS-005", image: "/materials/Texture3.webp", category: "Texture" },
-  { name: "AB-SS-006", image: "/materials/Texture4.webp", category: "Texture" },
-  { name: "AB-SS-007", image: "/materials/Texture5.webp", category: "Texture" },
-  { name: "AB-SS-008", image: "/materials/Texture6.webp", category: "Texture" },
+  { id: "ALSPL002", name: "Satin lvory Luxe", image: "/materials/Texture1.webp", category: "Texture" },
+  { id: "", name: "AB-SS-004", image: "/materials/Texture2.webp", category: "Texture" },
+  { id: "", name: "AB-SS-005", image: "/materials/Texture3.webp", category: "Texture" },
+  { id: "", name: "AB-SS-006", image: "/materials/Texture4.webp", category: "Texture" },
+  { id: "", name: "AB-SS-007", image: "/materials/Texture5.webp", category: "Texture" },
+  { id: "", name: "AB-SS-008", image: "/materials/Texture6.webp", category: "Texture" },
 
-  { name: "AB-SS-003", image: "/materials/Brush1.webp", category: "Anodised" },
-  { name: "AB-SS-004", image: "/materials/Brush2.webp", category: "Anodised" },
-  { name: "AB-SS-005", image: "/materials/Brush3.webp", category: "Anodised" },
-  { name: "AB-SS-006", image: "/materials/Brush4.webp", category: "Anodised" },
-  { name: "AB-SS-007", image: "/materials/Brush5.webp", category: "Anodised" },
-  { name: "AB-SS-008", image: "/materials/Brush6.webp", category: "Anodised" },
-  { name: "AB-SS-009", image: "/materials/Brush7.webp", category: "Anodised" },
+  { id: "", name: "AB-SS-003", image: "/materials/Brush1.webp", category: "Anodised" },
+  { id: "", name: "AB-SS-004", image: "/materials/Brush2.webp", category: "Anodised" },
+  { id: "", name: "AB-SS-005", image: "/materials/Brush3.webp", category: "Anodised" },
+  { id: "", name: "AB-SS-006", image: "/materials/Brush4.webp", category: "Anodised" },
+  { id: "", name: "AB-SS-007", image: "/materials/Brush5.webp", category: "Anodised" },
+  { id: "", name: "AB-SS-008", image: "/materials/Brush6.webp", category: "Anodised" },
+  { id: "", name: "AB-SS-009", image: "/materials/Brush7.webp", category: "Anodised" },
 
-  { name: "BRONZE", image: "/materials/Anodised1.webp", category: "Anodised" },
-  { name: "BRUSH ", image: "/materials/Anodised2.webp", category: "Anodised" },
-  { name: "GOLD 20", image: "/materials/Anodised3.webp", category: "Anodised" },
-  { name: "BROWN", image: "/materials/Anodised4.webp", category: "Anodised" },
-  { name: "BLACK", image: "/materials/Anodised5.webp", category: "Anodised" },
-  { name: "TI-LOOK ", image: "/materials/Anodised6.webp", category: "Anodised" },
+  { id: "", name: "BRONZE", image: "/materials/Anodised1.webp", category: "Anodised" },
+  { id: "", name: "BRUSH ", image: "/materials/Anodised2.webp", category: "Anodised" },
+  { id: "", name: "GOLD 20", image: "/materials/Anodised3.webp", category: "Anodised" },
+  { id: "", name: "BROWN", image: "/materials/Anodised4.webp", category: "Anodised" },
+  { id: "", name: "BLACK", image: "/materials/Anodised5.webp", category: "Anodised" },
+  { id: "", name: "TI-LOOK ", image: "/materials/Anodised6.webp", category: "Anodised" },
 
-  { name: "AB-SS-003", image: "/materials/Najdi1.webp", category: "Najdi" },
-  { name: "AB-SS-004", image: "/materials/Najdi2.webp", category: "Najdi" },
-  { name: "AB-SS-005", image: "/materials/Najdi3.webp", category: "Najdi" },
-  { name: "AB-SS-006", image: "/materials/Najdi4.webp", category: "Najdi" },
-  { name: "AB-SS-007", image: "/materials/Najdi5.webp", category: "Najdi" },
-  { name: "AB-SS-008", image: "/materials/Najdi6.webp", category: "Najdi" },
-  { name: "AB-SS-009", image: "/materials/Najdi7.webp", category: "Najdi" },
-  { name: "AB-SS-010", image: "/materials/Najdi8.webp", category: "Najdi" },
-  { name: "AB-SS-011", image: "/materials/Najdi9.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-003", image: "/materials/Najdi1.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-004", image: "/materials/Najdi2.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-005", image: "/materials/Najdi3.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-006", image: "/materials/Najdi4.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-007", image: "/materials/Najdi5.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-008", image: "/materials/Najdi6.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-009", image: "/materials/Najdi7.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-010", image: "/materials/Najdi8.webp", category: "Najdi" },
+  { id: "", name: "AB-SS-011", image: "/materials/Najdi9.webp", category: "Najdi" },
 
-  { name: "AB-SS-003", image: "/materials/Prismatic1.webp", category: "Prismatic" },
-  { name: "AB-SS-004 ", image: "/materials/Prismatic02.webp", category: "Prismatic" },
-  { name: "AB-SS-005 ", image: "/materials/Prismatic3.webp", category: "Prismatic" },
-  { name: "AB-SS-006", image: "/materials/Prismatic04.webp", category: "Prismatic" },
-  { name: "AB-SS-007", image: "/materials/Prismatic05.webp", category: "Prismatic" },
-  { name: "AB-SS-008 ", image: "/materials/Prismatic06.webp", category: "Prismatic" },
+  { id: "", name: "AB-SS-003", image: "/materials/Prismatic1.webp", category: "Prismatic" },
+  { id: "", name: "AB-SS-004 ", image: "/materials/Prismatic02.webp", category: "Prismatic" },
+  { id: "", name: "AB-SS-005 ", image: "/materials/Prismatic3.webp", category: "Prismatic" },
+  { id: "", name: "AB-SS-006", image: "/materials/Prismatic04.webp", category: "Prismatic" },
+  { id: "", name: "AB-SS-007", image: "/materials/Prismatic05.webp", category: "Prismatic" },
+  { id: "", name: "AB-SS-008 ", image: "/materials/Prismatic06.webp", category: "Prismatic" },
 
-  { name: "SPARKLING BLACK", image: "/materials/Sparkle1.webp", category: "Sparkle" },
-  { name: "SPARKLING WHITE", image: "/materials/Sparkle2.webp", category: "Sparkle" },
-  { name: "SPARKLING GOLD", image: "/materials/Sparkle3.webp", category: "Sparkle" },
-  { name: "SPARKLING GREY", image: "/materials/Sparkle4.webp", category: "Sparkle" },
+  { id: "", name: "SPARKLING BLACK", image: "/materials/Sparkle1.webp", category: "Sparkle" },
+  { id: "", name: "SPARKLING WHITE", image: "/materials/Sparkle2.webp", category: "Sparkle" },
+  { id: "", name: "SPARKLING GOLD", image: "/materials/Sparkle3.webp", category: "Sparkle" },
+  { id: "", name: "SPARKLING GREY", image: "/materials/Sparkle4.webp", category: "Sparkle" },
 ];
 
 /* ================= HERO ================= */
@@ -360,13 +359,14 @@ const MaterialsSection = () => {
                 <AnimatePresence>
                   {hovered === i && (
                     <motion.div
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-[#1A1A1A] text-white px-4 py-2 rounded-lg text-xs tracking-wider uppercase font-medium whitespace-nowrap z-50 shadow-2xl pointer-events-none"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-[#1A1A1A] text-white px-4 py-2 rounded-lg text-xs tracking-wider uppercase font-medium whitespace-nowrap z-50 shadow-2xl pointer-events-none flex flex-col items-center gap-1"
                       initial={{ opacity: 0, y: -10, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -5, scale: 0.95 }}
                       transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     >
-                      {mat.name}
+                      {mat.id && <span className="text-[10px] text-gray-300 font-bold">{mat.id}</span>}
+                      <span>{mat.name}</span>
                       {/* Triangle Pointer */}
                       <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#1A1A1A] rotate-45" />
                     </motion.div>
@@ -398,6 +398,26 @@ const MaterialsSection = () => {
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white">→</span>
             <div className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
           </button>
+        </motion.div>
+
+        {/* ================= CERTIFICATE BANNER ================= */}
+        <motion.div
+          className="mt-12 flex flex-col md:flex-row items-center gap-8 md:gap-16 pt-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          {/* Left Side: Grey Box */}
+          <div className="bg-gray-200 text-[#1A1A1A] rounded-[24px] p-8 md:p-14 w-full md:flex-1 shadow-lg flex flex-col justify-center transition-all duration-300 hover:shadow-xl hover:bg-gray-200">
+            <h3 className="text-3xl md:text-5xl font-medium tracking-tight mb-4">Beckry®Fluor 630</h3>
+            <p className="text-lg md:text-2xl font-normal text-[#2A2A2A]">AAMA 2605-13 PVDF Test Certificate</p>
+          </div>
+
+          {/* Right Side: Image Placeholder */}
+          <div className="flex flex-col items-center justify-center shrink-0 md:px-8">
+             <img src="/Beckers.avif" alt="Beckers Logo" className="mb-4 w-[220px] object-contain drop-shadow-sm" />
+             <p className="text-sm font-semibold text-[#1A1A1A] tracking-wide text-center">Adding Value Beyond the Surface</p>
+          </div>
         </motion.div>
 
       </div>
