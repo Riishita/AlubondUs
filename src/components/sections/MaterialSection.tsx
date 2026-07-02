@@ -141,11 +141,11 @@ const materials = [
   { name: "AB-SS-011", image: "/materials/Najdi9.webp", category: "Najdi" },
 
   { name: "AB-SS-003", image: "/materials/Prismatic1.webp", category: "Prismatic" },
-  { name: "AB-SS-004 ", image: "/materials/Prismatic2.webp", category: "Prismatic" },
+  { name: "AB-SS-004 ", image: "/materials/Prismatic02.webp", category: "Prismatic" },
   { name: "AB-SS-005 ", image: "/materials/Prismatic3.webp", category: "Prismatic" },
-  { name: "AB-SS-006", image: "/materials/Prismatic4.webp", category: "Prismatic" },
-  { name: "AB-SS-007", image: "/materials/Prismatic5.webp", category: "Prismatic" },
-  { name: "AB-SS-008 ", image: "/materials/Prismatic6.webp", category: "Prismatic" },
+  { name: "AB-SS-006", image: "/materials/Prismatic04.webp", category: "Prismatic" },
+  { name: "AB-SS-007", image: "/materials/Prismatic05.webp", category: "Prismatic" },
+  { name: "AB-SS-008 ", image: "/materials/Prismatic06.webp", category: "Prismatic" },
 
   { name: "SPARKLING BLACK", image: "/materials/Sparkle1.webp", category: "Sparkle" },
   { name: "SPARKLING WHITE", image: "/materials/Sparkle2.webp", category: "Sparkle" },

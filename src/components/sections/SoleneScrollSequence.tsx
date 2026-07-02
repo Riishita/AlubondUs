@@ -97,10 +97,8 @@ export default function SoleneScrollSequence() {
                  <Flame className="w-8 h-8 mb-3 text-white" />
                  <h3 className="text-xl font-medium mb-2">Alubond A2</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed mb-4">
-                   ALUBOND A2 was the world's first Dubai Civil Defence Approved product
-                    classified as A2-s1, d0 according to EN 13501-1 standards. It has demonstrated exceptional 
-                    fire safety and durability. With a core composed of 90% non-combustible minerals, 
-                    it does not ignite, propagate flames, or promote smoke development.
+                   ALUBOND® A2 is the world's first Dubai Civil Defence Approved A2-s1, d0 panel,
+                    featuring a 90% non-combustible mineral core for superior fire safety and durability.
                  </p>
                  <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-xs font-medium transition-colors pointer-events-auto">
                    <FileText size={14} /> View Certificate
@@ -336,10 +334,8 @@ export default function SoleneScrollSequence() {
     Alubond A2
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed mb-4">
-    ALUBOND® A2 was the world's first Dubai Civil Defence Approved product classified as 
-    A2-s1, d0 according to EN 13501-1 standards. It has demonstrated exceptional fire safety 
-    and durability. With a core composed of 90% non-combustible minerals, it does not ignite,
-     propagate flames, or promote smoke development.
+    ALUBOND® A2 is the world's first Dubai Civil Defence Approved A2-s1, d0 panel, 
+    featuring a 90% non-combustible mineral core for superior fire safety and durability.
   </p>
   <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
     <FileText size={16} /> View Certificate

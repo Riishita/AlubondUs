@@ -21,7 +21,7 @@ function PanelModel({
   const layers = [
     { y: 0.5, base: "#ffffff", active: "#29272777" }, // Set to white to show texture clearly
     { y: 0.25, base: "#BFC5CC", active: "#aeaca5" },
-    { y: 0, base: "#E8EAED", active: "#b47125" },
+    { y: 0, base: "#E8EAED", active: "#ffffff" },
     { y: -0.25, base: "#778899", active: "#AAB4BF" },
     { y: -0.5, base: "#BFC5CC", active: "#707070" },
   ];
