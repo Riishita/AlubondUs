@@ -107,19 +107,18 @@ const materials = [
   { id: "ALC003", name: "Urban Cement Light", image: "/materials/Concrete3.webp", category: "Concrete" },
   { id: "ALC004", name: "Neon Pink", image: "/materials/Concrete4.webp", category: "Concrete" },
 
-  { id: "ALSPL002", name: "Satin lvory Luxe", image: "/materials/Texture1.webp", category: "Texture" },
-  { id: "", name: "AB-SS-004", image: "/materials/Texture2.webp", category: "Texture" },
-  { id: "", name: "AB-SS-005", image: "/materials/Texture3.webp", category: "Texture" },
-  { id: "", name: "AB-SS-006", image: "/materials/Texture4.webp", category: "Texture" },
-  { id: "", name: "AB-SS-007", image: "/materials/Texture5.webp", category: "Texture" },
-  { id: "", name: "AB-SS-008", image: "/materials/Texture6.webp", category: "Texture" },
+  { id: "ALT008", name: "Graphite Stone Texture", image: "/materials/Texture1.webp", category: "Texture" },
+  { id: "ALT009", name: "Ash Concrete Texture", image: "/materials/Texture2.webp", category: "Texture" },
+  { id: "ALT010", name: "Sand Dune Texture", image: "/materials/Texture3.webp", category: "Texture" },
+  { id: "ALT011", name: "Rustic Copper Texture", image: "/materials/Texture4.webp", category: "Texture" },
+  { id: "ALT012", name: "Brushed Sand Texture", image: "/materials/Texture5.webp", category: "Texture" },
+  { id: "ALT013", name: "Deep Forest Texture", image: "/materials/Texture6.webp", category: "Texture" },
 
   { id: "", name: "AB-SS-003", image: "/materials/Brush1.webp", category: "Anodised" },
   { id: "", name: "AB-SS-004", image: "/materials/Brush2.webp", category: "Anodised" },
   { id: "", name: "AB-SS-005", image: "/materials/Brush3.webp", category: "Anodised" },
   { id: "", name: "AB-SS-006", image: "/materials/Brush4.webp", category: "Anodised" },
   { id: "", name: "AB-SS-007", image: "/materials/Brush5.webp", category: "Anodised" },
-  { id: "", name: "AB-SS-008", image: "/materials/Brush6.webp", category: "Anodised" },
   { id: "", name: "AB-SS-009", image: "/materials/Brush7.webp", category: "Anodised" },
 
   { id: "", name: "BRONZE", image: "/materials/Anodised1.webp", category: "Anodised" },
@@ -129,27 +128,27 @@ const materials = [
   { id: "", name: "BLACK", image: "/materials/Anodised5.webp", category: "Anodised" },
   { id: "", name: "TI-LOOK ", image: "/materials/Anodised6.webp", category: "Anodised" },
 
-  { id: "", name: "AB-SS-003", image: "/materials/Najdi1.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-004", image: "/materials/Najdi2.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-005", image: "/materials/Najdi3.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-006", image: "/materials/Najdi4.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-007", image: "/materials/Najdi5.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-008", image: "/materials/Najdi6.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-009", image: "/materials/Najdi7.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-010", image: "/materials/Najdi8.webp", category: "Najdi" },
-  { id: "", name: "AB-SS-011", image: "/materials/Najdi9.webp", category: "Najdi" },
+  { id: "ALA008", name: "Desert Sand Dune", image: "/materials/Najdi1.webp", category: "Najdi" },
+  { id: "ALA009", name: "Sahara Gold Dust", image: "/materials/Najdi2.webp", category: "Najdi" },
+  { id: "ALA010", name: "Warm Sandstone Beige", image: "/materials/Najdi3.webp", category: "Najdi" },
+  { id: "ALA011", name: "Arabian Clay Earth", image: "/materials/Najdi4.webp", category: "Najdi" },
+  { id: "ALA012", name: "Najdi Sandstone", image: "/materials/Najdi5.webp", category: "Najdi" },
+  { id: "ALA013", name: "Oasis Beige", image: "/materials/Najdi6.webp", category: "Najdi" },
+  { id: "ALA014", name: "Desert Pearl", image: "/materials/Najdi7.webp", category: "Najdi" },
+  { id: "ALA015", name: "Heritage Sand", image: "/materials/Najdi8.webp", category: "Najdi" },
+  { id: "ALA016", name: "Arido sand", image: "/materials/Najdi9.webp", category: "Najdi" },
 
-  { id: "", name: "AB-SS-003", image: "/materials/Prismatic1.webp", category: "Prismatic" },
-  { id: "", name: "AB-SS-004 ", image: "/materials/Prismatic02.webp", category: "Prismatic" },
-  { id: "", name: "AB-SS-005 ", image: "/materials/Prismatic3.webp", category: "Prismatic" },
-  { id: "", name: "AB-SS-006", image: "/materials/Prismatic04.webp", category: "Prismatic" },
-  { id: "", name: "AB-SS-007", image: "/materials/Prismatic05.webp", category: "Prismatic" },
-  { id: "", name: "AB-SS-008 ", image: "/materials/Prismatic06.webp", category: "Prismatic" },
+  { id: "ALP009", name: "Prism Silver", image: "/materials/Prismatic1.webp", category: "Prismatic" },
+  { id: "ALP010", name: "Aurora White", image: "/materials/Prismatic02.webp", category: "Prismatic" },
+  { id: "ALP011", name: "Spectrum Gold", image: "/materials/Prismatic3.webp", category: "Prismatic" },
+  { id: "ALP012", name: "Prism Gold Deep", image: "/materials/Prismatic04.webp", category: "Prismatic" },
+  { id: "ALP013", name: "Chromatic Bronze", image: "/materials/Prismatic05.webp", category: "Prismatic" },
+  { id: "ALP014", name: "Sunset Prism", image: "/materials/Prismatic06.webp", category: "Prismatic" },
 
-  { id: "", name: "SPARKLING BLACK", image: "/materials/Sparkle1.webp", category: "Sparkle" },
-  { id: "", name: "SPARKLING WHITE", image: "/materials/Sparkle2.webp", category: "Sparkle" },
-  { id: "", name: "SPARKLING GOLD", image: "/materials/Sparkle3.webp", category: "Sparkle" },
-  { id: "", name: "SPARKLING GREY", image: "/materials/Sparkle4.webp", category: "Sparkle" },
+  { id: "ALP001", name: "Prism Silver", image: "/materials/Sparkle1.webp", category: "Sparkle" },
+  { id: "ALP002", name: "Aurora White", image: "/materials/Sparkle2.webp", category: "Sparkle" },
+  { id: "ALP003", name: "Spectrum Gold", image: "/materials/Sparkle3.webp", category: "Sparkle" },
+  { id: "ALP004", name: "Sunset Prism", image: "/materials/Sparkle4.webp", category: "Sparkle" },
 ];
 
 /* ================= HERO ================= */
@@ -393,7 +392,7 @@ const MaterialsSection = () => {
 
           <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
             <span className="relative z-10 text-xs md:text-sm tracking-wider font-bold uppercase group-hover:text-white transition-colors duration-300">
-              Explore Color Studio
+              Explore Color Chart
             </span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white">→</span>
             <div className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
