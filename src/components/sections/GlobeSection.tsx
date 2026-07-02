@@ -134,7 +134,7 @@ const locations = [
     lng: 108.2772,
     logo: "alubond-logo.png",
     description:
-      "...",
+      "12th floor, B tower, Song Da building, Pham Hung street, Tu Liem ward, Hanoi city, Vietnam",
   },
   {
     name: "Egypt",
@@ -142,7 +142,7 @@ const locations = [
     lng: 30.8025,
     logo: "alubond-logo.png",
     description:
-      " ... ",
+      "81 ABO DAWOOD EL ZAHERY OFF MAKRAM EBEID STREET - NASR CITY , CAIRO EGYPT",
   },
 ];
 
