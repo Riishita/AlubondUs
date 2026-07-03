@@ -4,12 +4,12 @@ import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck
 
 // Certificate Data
 const certs = [
-  { title: "EN 13501", desc: "European Fire Classification", tag: "CLASS A2-S1,D0", icon: Flame },
-  { title: "NFPA 285", desc: "Fire Propagation", tag: "FULLY COMPLIANT", icon: ShieldCheck },
-  { title: "BS 8414", desc: "British Standard", tag: "BRE CERTIFIED", icon: Building2 },
-  { title: "ULC-S134", desc: "Canadian Fire Test", tag: "COMPLIANT", icon: Globe2 },
-  { title: "ASTM E-84", desc: "Smoke & Flame Spread", tag: "CLASS A RATING", icon: FileCheck2 },
-  { title: "ISO 9001", desc: "Quality Management", tag: "CERTIFIED FACILITY", icon: Award },
+  { title: "EN 13501", desc: "European Fire Classification", tag: "CLASS A2-S1,D0", icon: Flame, pdfPath: "/En-13501 Fire Classification.pdf" },
+  { title: "NFPA 285", desc: "Fire Propagation", tag: "FULLY COMPLIANT", icon: ShieldCheck, pdfPath: " /ESL-26-12003.pdf" },
+  { title: "BS 8414", desc: "British Standard", tag: "BRE CERTIFIED", icon: Building2, pdfPath: " " },
+  { title: "ULC-S134", desc: "Canadian Fire Test", tag: "COMPLIANT", icon: Globe2, pdfPath: "/ULC S134 FRA2.pdf" },
+  { title: "ASTM E-84", desc: "Smoke & Flame Spread", tag: "CLASS A RATING", icon: FileCheck2, pdfPath: "/ASTM E-84.pdf" },
+  { title: "ISO 9001", desc: "Quality Management", tag: "CERTIFIED FACILITY", icon: Award, pdfPath: "/D 9001 EIAC - Main.pdf" },
 ];
 
 const cardPositions = [
@@ -90,17 +90,18 @@ export default function SoleneScrollSequence() {
                  <ShieldCheck className="w-8 h-8 mb-3 text-white" />
                  <h3 className="text-xl font-medium mb-2">Fire & Smoke Stability</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed">
-                   Maintains structural integrity with No Smoke & No Droplets (s1, d0), helping reduce fire-related damage.
+Engineered to maintain façade integrity during fire incidents by minimizing flame spread,
+ smoke generation, and flaming droplets. Designed to enhance occupant safety while reducing fire-related damage.
                  </p>
                </div>
                <div className="flex flex-col text-white">
                  <BadgeCheck className="w-8 h-8 mb-3 text-white" />
                  <h3 className="text-xl font-medium mb-2">Alubond A2</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed mb-4">
-                   ALUBOND® A2 is the world's first Dubai Civil Defence Approved A2-s1, d0 panel,
-                    featuring a 90% non-combustible mineral core for superior fire safety and durability.
+                  Certified A2-s1,d0 to EN 13501-1, ALUBOND®️ A2 features a non-combustible mineral core,
+                   delivering superior fire safety and long-lasting durability for demanding architectural applications.
                  </p>
-                 <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-xs font-medium transition-colors pointer-events-auto">
+                 <a href="/0206-25-CR-01 Eurocon (EN 13501-1) Classification Report signed.pdf" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-xs font-medium transition-colors pointer-events-auto">
                    <FileText size={14} /> View Certificate
                  </a>
                </div>
@@ -108,12 +109,11 @@ export default function SoleneScrollSequence() {
                  <Flame className="w-8 h-8 mb-3 text-white" />
                  <h3 className="text-xl font-medium mb-2">Alubond FR</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed mb-4">
-                   ALUBOND® FR complies with fire class B-s1, d0 requirements 
-                   and has received approval from building authorities.
-
+                  Certified B-s1,d0 to EN 13501-1, ALUBOND®️ FR features a fire-retardant core,
+                   offering reliable fire safety, strength, and durability for a wide range of architectural applications.
 
                  </p>
-                 <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-xs font-medium transition-colors pointer-events-auto">
+                 <a href="/3150T17-2 R2.pdf" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-xs font-medium transition-colors pointer-events-auto">
                    <FileText size={14} /> View Certificate
                  </a>
                </div>
@@ -121,8 +121,9 @@ export default function SoleneScrollSequence() {
                  <Building2 className="w-8 h-8 mb-3 text-white" />
                  <h3 className="text-xl font-medium mb-2">Enhanced Safety Performance</h3>
                  <p className="text-white/80 font-light text-sm leading-relaxed">
-                   Designed to minimize smoke generation and provide greater protection for occupants, property, and critical infrastructure.
-                 </p>
+ ALUBOND®️ fire-rated panels combine certified fire protection with modern design, 
+ delivering reliable safety, durability, and architectural excellence for every project.           
+       </p>
                </div>
              </div>
            </div>
@@ -174,7 +175,7 @@ export default function SoleneScrollSequence() {
                    <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light mb-4">
                      {item.desc}
                    </p>
-                   <a href="#" target="_blank" className="inline-flex items-center gap-2 text-[#0a4b7c] hover:text-[#1A1A1A] text-xs font-medium transition-colors pointer-events-auto">
+                   <a href={item.pdfPath} target="_blank" className="inline-flex items-center gap-2 text-[#0a4b7c] hover:text-[#1A1A1A] text-xs font-medium transition-colors pointer-events-auto">
                      <FileText size={14} /> View Certificate
                    </a>
                  </div>
@@ -279,7 +280,7 @@ export default function SoleneScrollSequence() {
               <p className="text-[13px] text-[#4B5563]/80 leading-relaxed font-light line-clamp-2 mb-4">
                 {item.desc}
               </p>
-              <a href="#" target="_blank" className="inline-flex items-center gap-2 text-[#0a4b7c] hover:text-[#1A1A1A] text-xs font-medium transition-colors pointer-events-auto">
+              <a href={item.pdfPath} target="_blank" className="inline-flex items-center gap-2 text-[#0a4b7c] hover:text-[#1A1A1A] text-xs font-medium transition-colors pointer-events-auto">
                 <FileText size={14} /> View Certificate
               </a>
             </div>
@@ -323,8 +324,9 @@ export default function SoleneScrollSequence() {
     Fire & Smoke Stability
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed">
-    Maintains structural integrity with No Smoke & No Droplets (s1, d0),
-    helping reduce fire-related damage.
+   Engineered to maintain façade integrity during fire incidents by minimizing flame spread,
+    smoke generation, and flaming droplets. Designed to enhance occupant safety while reducing fire-related damage.
+
   </p>
 </div>
 
@@ -334,10 +336,11 @@ export default function SoleneScrollSequence() {
     Alubond A2
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed mb-4">
-    ALUBOND® A2 is the world's first Dubai Civil Defence Approved A2-s1, d0 panel, 
-    featuring a 90% non-combustible mineral core for superior fire safety and durability.
+   Certified A2-s1,d0 to EN 13501-1, ALUBOND®️ A2 features a non-combustible mineral core, 
+   delivering superior fire safety and long-lasting durability for demanding architectural applications.
+
   </p>
-  <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
+  <a href="/0206-25-CR-01 Eurocon (EN 13501-1) Classification Report signed.pdf" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
     <FileText size={16} /> View Certificate
   </a>
 </div>
@@ -347,10 +350,10 @@ export default function SoleneScrollSequence() {
     Alubond FR
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed mb-4">
-    ALUBOND® FR complies with fire class B-s1, d0 requirements and has received 
-    approval from building authorities.
+   Certified B-s1,d0 to EN 13501-1, ALUBOND®️ FR features a fire-retardant core,
+    offering reliable fire safety, strength, and durability for a wide range of architectural applications.
   </p>
-  <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
+  <a href="/3150T17-2 R2.pdf" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
     <FileText size={16} /> View Certificate
   </a>
 </div>
@@ -361,8 +364,8 @@ export default function SoleneScrollSequence() {
     Enhanced Safety Performance
   </h3>
   <p className="text-white/80 font-light text-sm md:text-base leading-relaxed">
-    Designed to minimize smoke generation and provide greater protection
-    for occupants, property, and critical infrastructure.
+    ALUBOND®️ fire-rated panels combine certified fire protection with modern design, 
+    delivering reliable safety, durability, and architectural excellence for every project.
   </p>
 </div>
           </motion.div>

@@ -183,13 +183,6 @@ const Footer = () => {
   const columnHeaderStyle = "type-overline text-white/40 mb-6";
   const linkStyle = "text-white/80 hover:text-white transition-colors duration-300 cursor-pointer flex items-center";
 
-  const socialIcons: Record<string, any> = {
-    LinkedIn: <Linkedin size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
-    Instagram: <Instagram size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
-    Facebook: <Facebook size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
-    YouTube: <Youtube size={18} strokeWidth={1.5} className="mr-3 text-white/50 group-hover:text-white transition-colors" />,
-  };
-
   return (
     <footer
       id="contact"
@@ -197,30 +190,30 @@ const Footer = () => {
       className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 py-16 md:py-24 min-h-[80vh] flex flex-col justify-center ${cursorSectionClassName}`}
     >
       <div className="max-w-7xl mx-auto w-full">
-        {/* Middle Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 type-body-sm mb-16">
+        {/* Adjusted Grid: Added explicit gap and responsive column span */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 type-body-sm mb-16">
 
-          {/* Col 1: About Our Company + Newsletter */}
-          <div className="flex flex-col gap-4 items-start"> {/* Added items-start here */}
-  <p className={columnHeaderStyle}>ABOUT OUR COMPANY</p>
-  <img 
-    src="/Logo1.png" 
-    alt="Alubond Logo" 
-    className="h-24 w-auto object-contain mb-1"
-  />
-  <p className="text-white/70 leading-relaxed text-sm">
-    Alubond has emerged as the world's largest MCM &amp; ACP Brand with a 25 Million sq.m production capacity across various production bases. Completely integrated with FR A1/A2/B1 Core &amp; Granules Production, Coil Coating, Fire Rated Bonding Adhesives &amp; Paint Production.
-  </p>
-            {/* Newsletter */}
-            <div className="mt-4">
-              <p className={columnHeaderStyle}>SUBSCRIBE TO OUR NEWSLETTER</p>
-              <div className="flex w-full rounded-lg overflow-hidden border border-white/15 mt-3 bg-white/5">
+          {/* Col 1: About + Newsletter */}
+          <div className="flex flex-col items-start lg:col-span-1">
+            <p className={columnHeaderStyle}>ABOUT OUR COMPANY</p>
+            <img 
+              src="/Alubond Logo-1.avif" 
+              alt="Alubond Logo" 
+              className="h-20 w-auto object-contain mb-6"
+            />
+            <p className="text-white/70 leading-relaxed text-sm">
+              Alubond has emerged as the world's largest MCM &amp; ACP Brand with a 25 Million sq.m production capacity. Completely integrated with FR A1/A2/B1 Core &amp; Granules Production, Coil Coating, and Fire Rated Bonding Adhesives.
+            </p>
+            
+            <div className="w-full mt-8">
+              <p className={columnHeaderStyle}>SUBSCRIBE TO NEWSLETTER</p>
+              <div className="flex w-full rounded-lg overflow-hidden border border-white/15 bg-white/5">
                 <input
                   type="email"
                   placeholder="E-mail Address"
-                  className="flex-1 bg-transparent text-white placeholder-white/40 px-4 py-3 text-sm focus:outline-none min-w-0"
+                  className="flex-1 bg-transparent text-white placeholder-white/40 px-4 py-3 text-sm focus:outline-none"
                 />
-                <button className="bg-white/20 hover:bg-white/30 transition-colors text-white font-bold text-xs uppercase tracking-widest px-5 py-3 shrink-0">
+                <button className="bg-white/20 hover:bg-white/30 transition-colors text-white font-bold text-xs uppercase tracking-widest px-5 py-3">
                   Submit
                 </button>
               </div>
@@ -228,58 +221,46 @@ const Footer = () => {
           </div>
 
           {/* Col 2: Quick Links */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col items-start">
             <p className={columnHeaderStyle}>QUICK LINKS</p>
-            {["Products", "Downloads", "News", "Colours & Finishes", "Contact Us"].map((item) => (
-              <span key={item} className={`group ${linkStyle}`}>
-                <ArrowRight size={14} className="mr-2 text-white/40 group-hover:text-white transition-colors" />
-                {item}
-              </span>
-            ))}
+            <div className="flex flex-col gap-4">
+              {["Products", "Downloads", "News", "Colours & Finishes", "Contact Us"].map((item) => (
+                <span key={item} className={`group ${linkStyle}`}>
+                  <ArrowRight size={14} className="mr-2 text-white/40 group-hover:text-white transition-colors" />
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* Col 3: Global Presence */}
-          <div className="flex flex-col gap-5">
-            <p className={columnHeaderStyle}>GLOBAL PRESENCE</p>
-            {["Alubond Global", "Alubond USA", "Alubond Canada", "Alubond Qatar", "Alubond Turkey", "Alubond Egypt"].map((item) => (
-              <span key={item} className={`group ${linkStyle}`}>
-                <ArrowRight size={14} className="mr-2 text-white/40 group-hover:text-white transition-colors" />
-                {item}
-              </span>
-            ))}
-          </div>
-
-          {/* Col 4: Contact Us */}
-          <div className="flex flex-col gap-5">
+          {/* Col 3: Contact Details */}
+          <div className="flex flex-col items-start">
             <p className={columnHeaderStyle}>CONTACT US</p>
-            <p className="text-white/70 leading-relaxed text-sm mb-2">
-              Have questions, comments or just want to say hello:
-            </p>
-            <div className="flex items-center gap-3 text-white/80">
-              <span className="text-[#0a4b7c]">📞</span>
-              <span>+971 (6) 526 2202</span>
-            </div>
-            <div className="flex items-center gap-3 text-white/80">
-              <span className="text-[#0a4b7c]">🖨️</span>
-              <span>+971 (6) 526 2203</span>
-            </div>
-            <div className="flex items-center gap-3 text-white/80">
-              <span className="text-[#0a4b7c]">✉️</span>
-              <span>sales@alubond.com</span>
-            </div>
-            <div className="flex items-start gap-3 text-white/80">
-              <span className="text-[#0a4b7c] mt-0.5">📍</span>
-              <span>Phase 1, Hamriyah Freezone, Sharjah, U.A.E</span>
+            <div className="flex flex-col gap-4 text-white/70">
+              <p className="text-sm mb-2">Have questions or want to say hello?</p>
+              <div className="flex items-center gap-3">
+                <span className="text-[#0a4b7c]">📞</span>
+                <span>+971 (6) 526 2202</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-[#0a4b7c]">🖨️</span>
+                <span>+971 (6) 526 2203</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-[#0a4b7c]">✉️</span>
+                <span>sales@alubond.com</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#0a4b7c] mt-1">📍</span>
+                <span className="leading-relaxed">Phase 1, Hamriyah Freezone, <br />Sharjah, U.A.E</span>
+              </div>
             </div>
           </div>
         </div>
 
-
-
         {/* Bottom Section */}
-        <div className="flex flex-col sm:flex-row justify-center items-center type-body-sm text-white/80 gap-6 mt-4">
+        <div className="border-t border-white/10 pt-8 flex justify-center items-center type-body-sm text-white/50">
           <p>© 2026 Alubond U.S.A. All Rights Reserved.</p>
-          
         </div>
       </div>
     </footer>

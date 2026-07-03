@@ -144,6 +144,20 @@ const locations = [
     description:
       "81 ABO DAWOOD EL ZAHERY OFF MAKRAM EBEID STREET - NASR CITY , CAIRO EGYPT",
   },
+   {
+    name: "KSA",
+    lat: 21.5790,
+    lng: 39.1970,
+    logo: "alubond-logo.png",
+    description: "Ismail bin Birdis Street As Safa District Jeddah - 23453 Kingdom of Saudi Arabia",
+},
+{
+    name: "South Africa",
+    lat: -26.2115,
+    lng: 28.0655,
+    logo: "alubond-logo.png",
+    description: "5 Border Lane, Benrose, Johannesburg",
+},
 ];
 
   const resetGlobeView = () => {
@@ -385,7 +399,7 @@ ringAltitude={(d: any) => d.altitude}
               <p className="text-xs tracking-[0.2em] uppercase text-white/60 font-medium">Offices</p>
             </div>
             <div className={cn("flex flex-wrap gap-3", isTabletOrMobile ? "justify-center" : "justify-start")}>
-              {["USA", "Canada", "Egypt", "Turkey", "Vietnam"].map((item) => (
+              {["USA", "Canada", "Egypt", "Turkey", "Vietnam", "KSA", "South Africa"].map((item) => (
                 <button
                   key={item}
                   onMouseEnter={() => { setIsHovering(true); handleHover(item); }}

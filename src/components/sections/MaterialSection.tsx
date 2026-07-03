@@ -390,34 +390,39 @@ const MaterialsSection = () => {
             </p>
           </div>
 
-          <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          <a 
+            href="/Alubond%20Color%20Chart%20A3.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+          >
             <span className="relative z-10 text-xs md:text-sm tracking-wider font-bold uppercase group-hover:text-white transition-colors duration-300">
               Explore Color Chart
             </span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white">→</span>
             <div className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
-          </button>
+          </a>
         </motion.div>
 
         {/* ================= CERTIFICATE BANNER ================= */}
         <motion.div
-          className="mt-12 flex flex-col md:flex-row items-center gap-8 md:gap-16 pt-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          {/* Left Side: Grey Box */}
-          <div className="bg-gray-200 text-[#1A1A1A] rounded-[24px] p-8 md:p-14 w-full md:flex-1 shadow-lg flex flex-col justify-center transition-all duration-300 hover:shadow-xl hover:bg-gray-200">
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tight mb-4">Beckry®Fluor 630</h3>
-            <p className="text-lg md:text-2xl font-normal text-[#2A2A2A]">AAMA 2605-13 PVDF Test Certificate</p>
-          </div>
+  className="mt-12 flex flex-col md:flex-row items-center gap-6 md:gap-10 pt-10"
+  initial={{ opacity: 0, y: 30 }}
+  animate={isInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.8, delay: 0.5 }}
+>
+  {/* Left Side: Grey Box - Reduced padding */}
+  <div className="bg-gray-200 text-[#1A1A1A] rounded-[20px] p-6 md:p-8 w-full md:flex-1 shadow-lg flex flex-col justify-center transition-all duration-300 hover:shadow-xl">
+    <h3 className="text-lg md:text-xl font-medium tracking-tight mb-1">Beckry®Fluor 630</h3>
+    <p className="text-md md:text-lg font-normal text-[#2A2A2A]">AAMA 2605-13 PVDF Test Certificate</p>
+  </div>
 
-          {/* Right Side: Image Placeholder */}
-          <div className="flex flex-col items-center justify-center shrink-0 md:px-8">
-             <img src="/Beckers.avif" alt="Beckers Logo" className="mb-4 w-[220px] object-contain drop-shadow-sm" />
-             <p className="text-sm font-semibold text-[#1A1A1A] tracking-wide text-center">Adding Value Beyond the Surface</p>
-          </div>
-        </motion.div>
+  {/* Right Side: Image Placeholder - Reduced width and gap */}
+  <div className="flex flex-col items-center justify-center shrink-0 md:px-4">
+    <img src="/Beckers.avif" alt="Beckers Logo" className="mb-2 w-[160px] object-contain drop-shadow-sm" />
+    <p className="text-[11px] font-semibold text-[#1A1A1A] tracking-wide text-center uppercase">Adding Value Beyond the Surface</p>
+  </div>
+</motion.div>
 
       </div>
     </section>
