@@ -391,7 +391,7 @@ const MaterialsSection = () => {
           </div>
 
           <a 
-            href="/Alubond%20Color%20Chart%20A3.pdf" 
+            href="/Alubond Color Chart A3_compressed.pdf" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
