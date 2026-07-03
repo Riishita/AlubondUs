@@ -6,7 +6,7 @@ import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck
 const certs = [
   { title: "EN 13501", desc: "European Fire Classification", tag: "CLASS A2-S1,D0", icon: Flame, pdfPath: "/En-13501 Fire Classification.pdf" },
   { title: "NFPA 285", desc: "Fire Propagation", tag: "FULLY COMPLIANT", icon: ShieldCheck, pdfPath: " /ESL-26-12003.pdf" },
-  { title: "BS 8414", desc: "British Standard", tag: "BRE CERTIFIED", icon: Building2, pdfPath: " " },
+  { title: "BS 8414", desc: "British Standard", tag: "BRE CERTIFIED", icon: Building2, pdfPath: "/DLR2139 Rev.0.pdf " },
   { title: "ULC-S134", desc: "Canadian Fire Test", tag: "COMPLIANT", icon: Globe2, pdfPath: "/ULC S134 FRA2.pdf" },
   { title: "ASTM E-84", desc: "Smoke & Flame Spread", tag: "CLASS A RATING", icon: FileCheck2, pdfPath: "/ASTM E-84.pdf" },
   { title: "ISO 9001", desc: "Quality Management", tag: "CERTIFIED FACILITY", icon: Award, pdfPath: "/D 9001 EIAC - Main.pdf" },

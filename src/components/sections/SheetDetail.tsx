@@ -79,6 +79,7 @@ const steps = [
     desc: "PVDF and FEVE fluoropolymer coatings applied over chromate pre-treatment and epoxy resin primer. Delivers exceptional UV resistance, colour retention, and weatherability for 20+ years.",
     details: "AAMA 2605 • GSB MASTER • QUALICOAT CLASS 3 • ASTM D2244 • ISO 2813",
     right: "Specialised Coating",
+    pdfPath: "/AAMA 2605- BECKER TC 2025.pdf",
   },
   {
     id: "02",
@@ -86,6 +87,7 @@ const steps = [
     desc: "0.50mm aluminium alloy 3003-H24/5005-H34 top skin provides the structural face of the panel. Hot-bonded to the core using a proprietary lamination process that ensures zero delamination under thermal cycling and wind-load stress.",
     details: "EN 485-2 • ASTM B209 • EN 573-3 • ISO 6361 • AAMA 2604",
     right: "Top Metal Skin",
+    pdfPath: "/ESL-26-12003.pdf",
   },
   {
     id: "03",
@@ -93,6 +95,7 @@ const steps = [
     desc: "Engineered mineral-filled core achieving FR-A2 classification -the highest non-combustible rating for metal composite panels. Comprises over 90% inorganic mineral content with zero halogen compounds, ensuring minimal smoke generation and no flaming droplets under fire conditions.",
     details: "EN 13501-1 • NFPA 285 • ASTM E84 • BS 8414 • DIN 4102-B1 • UL 1040",
     right: "Fire Rated Core",
+    pdfPath: "/En-13501 Fire Classification.pdf",
   },
   {
     id: "04",
@@ -100,6 +103,7 @@ const steps = [
     desc: "0.50mm aluminium alloy rear skin provides dimensional stability, rigidity, and resistance to panel warping under thermal expansion. Acts as a structural diaphragm that distributes wind-load forces evenly across the composite cross-section.",
     details: "ΕΝ 485-2 • ASTM B209 • ISO 7438 • ASTM D1781 • EN 14509",
     right: "Bottom Metal Skin",
+    pdfPath: "/3150T17-2 R2.pdf",
   },
   {
     id: "05",
@@ -107,6 +111,7 @@ const steps = [
     desc: "Multi-stage chromate conversion coating followed by epoxy resin primer and protective service coat. This tri-layer treatment provides the corrosion barrier essential for coastal, industrial, and high-humidity environments - protecting the panel substrate from inside out.",
     details: "AAMA 2605 • ISO 2409 • ASTM D3359 • ASTM B117 • ISO 9227",
     right: "Base Treatment",
+    pdfPath: "/Weather resistance & Delamination METS 4mm A2.pdf",
   },
 ];
 
@@ -254,7 +259,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
                   <p className="type-body-sm text-white/70 leading-relaxed max-w-sm mb-4">
                     {steps[index].details}
                   </p>
-                  <a href="#" target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
+                  <a href={steps[index].pdfPath} target="_blank" className="inline-flex items-center gap-2 text-white hover:text-white/80 text-sm font-medium transition-colors pointer-events-auto">
                     <FileText size={16} /> View Certificate
                   </a>
                 </div>

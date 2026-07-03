@@ -58,7 +58,7 @@ const LandingHero = () => {
           >
             <video
               ref={videoRef}
-              className="h-full w-full object-cover brightness-[0.7] contrast-[1]"
+              className="h-full w-full object-cover brightness-100 contrast-[1.05]"
               muted playsInline loop autoPlay preload="auto"
             >
               <source src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992213/Hero_Section_cdr2zx.mp4" type="video/mp4" />
@@ -87,11 +87,11 @@ const LandingHero = () => {
                   Alubond U.S.A — Est. 1989
                 </motion.p>
 
-                <motion.h2  className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white uppercase">
+                <motion.h2  className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight text-white/90 drop-shadow-lg uppercase">
                   WORLD'S LARGEST
                 </motion.h2>
 
-                <motion.h2 className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-white">
+                <motion.h2 className="mb-6 text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tight uppercase text-white/90 drop-shadow-lg">
                   ACP BRAND
                 </motion.h2>
 
