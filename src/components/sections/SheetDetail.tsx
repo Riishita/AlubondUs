@@ -87,7 +87,7 @@ const steps = [
     desc: "0.50mm aluminium alloy 3003-H24/5005-H34 top skin provides the structural face of the panel. Hot-bonded to the core using a proprietary lamination process that ensures zero delamination under thermal cycling and wind-load stress.",
     details: "EN 485-2 • ASTM B209 • EN 573-3 • ISO 6361 • AAMA 2604",
     right: "Top Metal Skin",
-    pdfPath: "/ESL-26-12003.pdf",
+    pdfPath: "/ASTM E-84.pdf",
   },
   {
     id: "03",
@@ -111,7 +111,7 @@ const steps = [
     desc: "Multi-stage chromate conversion coating followed by epoxy resin primer and protective service coat. This tri-layer treatment provides the corrosion barrier essential for coastal, industrial, and high-humidity environments - protecting the panel substrate from inside out.",
     details: "AAMA 2605 • ISO 2409 • ASTM D3359 • ASTM B117 • ISO 9227",
     right: "Base Treatment",
-    pdfPath: "/Weather resistance & Delamination METS 4mm A2.pdf",
+    pdfPath: "/ASTM D-1929 Certificate.pdf",
   },
 ];
 
