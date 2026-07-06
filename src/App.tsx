@@ -10,6 +10,11 @@ import Gallery from "./pages/Gallery.tsx";
 import GalleryCategory from "./pages/GalleryCategory.tsx";
 import News from "./pages/News.tsx";
 import NewsDetail from "./pages/NewsDetail.tsx";
+import Products from "./pages/Products.tsx";
+import ProductDetailA1 from "./pages/ProductDetailA1.tsx";
+import ProductDetailA2 from "./pages/ProductDetailA2.tsx";
+import ProductDetailEuroclassB from "./pages/ProductDetailEuroclassB.tsx";
+import GenericProductDetail from "./pages/GenericProductDetail.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
 import { useEffect } from "react";
 
@@ -52,6 +57,11 @@ const App = () => {
               <Route path="/gallery/:categoryId" element={<GalleryCategory />} />
               <Route path="/news" element={<News />} />
               <Route path="/news/:id" element={<NewsDetail />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/fire-rated-a1" element={<ProductDetailA1 />} />
+              <Route path="/products/fire-rated-a2" element={<ProductDetailA2 />} />
+              <Route path="/products/euroclass-b" element={<ProductDetailEuroclassB />} />
+              <Route path="/products/:categorySlug/:id" element={<GenericProductDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CustomCursorProvider>

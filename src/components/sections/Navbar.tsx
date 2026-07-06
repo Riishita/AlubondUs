@@ -5,8 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "About Us", href: "/about" },
-   { label: "Products", href: "#certificates" },
-  { label: "Technology", href: "#sheet-detail" },
+   { label: "Products", href: "/products" },
   { label: "Colours & Finishes", href: "/Alubond Color Chart A3 .pdf" },
   { label: "Projects", href: "#Gallery" },
   { label: "News", href: "/news" },
