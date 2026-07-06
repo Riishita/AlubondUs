@@ -6,6 +6,14 @@ import FooterSection from "@/components/sections/FooterSection";
    SECTION 1 — HERO
 ───────────────────────────────────────── */
 const HeroSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+  
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+
   // 1. Define your array of image paths
   const images = [
     '/AboutImages/1.avif',
@@ -15,7 +23,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="pt-36 pb-0 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
+    <section ref={ref} className="pt-36 pb-20 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-2lg">
           <span className="font-medium text-black">Innovating for People, </span>
@@ -33,12 +41,12 @@ Alubond offers a full range of Fire Rated Metal Panels including Solid Aluminum,
         </p>
 
         {/* 2. Map through the image array */}
-        <div className="flex gap-3">
+        <motion.div style={{ x }} className="flex gap-4 md:gap-6 w-max">
           {images.map((src, index) => (
             <div
               key={index}
-              className="flex-shrink-0 rounded-2xl overflow-hidden bg-gray-200"
-              style={{ width: "calc(35% - 9px)", aspectRatio: "4/3" }}
+              className="flex-shrink-0 rounded-2xl overflow-hidden bg-gray-200 w-[70vw] md:w-[35vw] lg:w-[400px]"
+              style={{ aspectRatio: "4/3" }}
             >
               <img
                 src={src}
@@ -47,7 +55,7 @@ Alubond offers a full range of Fire Rated Metal Panels including Solid Aluminum,
               />
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -76,15 +84,12 @@ const AboutSection = () => (
 
         {/* CTA Buttons */}
         <div className="flex flex-wrap gap-4">
-          <button className="group flex items-center gap-3 pl-5 pr-2 py-2 rounded-full border border-black text-black text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+          <button 
+            onClick={() => document.getElementById('leadership')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group flex items-center gap-3 pl-5 pr-2 py-2 rounded-full border border-black text-black text-sm font-medium hover:bg-black hover:text-white transition-all duration-300"
+          >
             Our Team
             <span className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-base leading-none group-hover:bg-white group-hover:text-black transition-all duration-300">
-              ›
-            </span>
-          </button>
-          <button className="group flex items-center gap-3 pl-5 pr-2 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-gray-800 transition-all duration-300">
-            Our Divisions
-            <span className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-base leading-none">
               ›
             </span>
           </button>
@@ -391,7 +396,7 @@ const ValuesSection = () => (
    SECTION 6 — LEADERSHIP
 ───────────────────────────────────────── */
 const LeadershipSection = () => (
-  <section className="bg-white py-32 px-8 md:px-16 lg:px-24">
+  <section id="leadership" className="bg-white py-32 px-8 md:px-16 lg:px-24">
     <div className="max-w-7xl mx-auto flex flex-col gap-32">
       
       {/* The Founder */}

@@ -4,6 +4,7 @@ import React, { lazy, Suspense, useRef, useState, useEffect } from "react";
 import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const GlobeHero = lazy(() => import("./GlobeSection"));
 
@@ -121,13 +122,13 @@ export default function SmoothTransitionWrapper() {
                 ))}
               </div>
 
-              <button className="mt-10 md:mt-12 group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:shadow-[#1A1A1A]/20 hover:-translate-y-1">
+              <Link to="/about" className="mt-10 md:mt-12 group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:shadow-[#1A1A1A]/20 hover:-translate-y-1">
                 <span className="relative z-10 text-xs md:text-sm tracking-wider font-medium uppercase">
                   Explore Our Story
                 </span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
                 <div className="absolute inset-0 bg-[#0a4b7c] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-              </button>
+              </Link>
             </div>
 
             {/* Right side: Editorial Quote Card */}
