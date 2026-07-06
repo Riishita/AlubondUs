@@ -3,20 +3,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "@/components/sections/Navbar";
 import FooterSection from "@/components/sections/FooterSection";
+import ProjectModal from "@/components/sections/ProjectModal";
 import {
   MAIN_TABS,
   MainTab,
   getCategoriesForTab,
   FEATURED_PROJECTS,
   GalleryCategory,
+  Project as ProjectType,
 } from "@/data/galleryData";
 
-const Gallery = () => {
+const Project = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<MainTab>(
     location.state?.activeCategory || "Building Type"
   );
+  const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
   // For "Featured" tab we go straight to a flat project view with no subcategory step
   const isFeatured = activeTab === "Featured";
@@ -32,15 +35,13 @@ const Gallery = () => {
     : "Building Types";
 
   const handleTileClick = (cat: GalleryCategory) => {
-    navigate(`/gallery/${encodeURIComponent(cat.id)}`, {
+    navigate(`/project/${encodeURIComponent(cat.id)}`, {
       state: { parentCategory: activeTab, categoryName: cat.name },
     });
   };
 
-  const handleFeaturedClick = () => {
-    navigate(`/gallery/featured`, {
-      state: { parentCategory: "Featured", categoryName: "Featured Projects" },
-    });
+  const handleFeaturedClick = (project: ProjectType) => {
+    setSelectedProject(project);
   };
 
   return (
@@ -119,7 +120,7 @@ const Gallery = () => {
                   <motion.div
                     key={project.id}
                     layout
-                    onClick={handleFeaturedClick}
+                    onClick={() => handleFeaturedClick(project)}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
@@ -135,8 +136,8 @@ const Gallery = () => {
                       transition={{ duration: 0.7, ease: "easeOut" }}
                     />
                     {project.fireRated && (
-                      <div className="absolute top-4 right-4 z-20 px-3 py-1 bg-black/50 backdrop-blur-md rounded-full border border-white/20">
-                        <span className="text-orange-400 text-[10px] font-bold tracking-widest uppercase">FR</span>
+                      <div className="absolute top-4 right-4 z-20 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full border border-white/20">
+                        <span className="text-[#0a4b7c] text-[10px] font-bold tracking-widest uppercase">FR</span>
                       </div>
                     )}
                     <div className="absolute bottom-0 left-0 p-5 z-20 w-full bg-gradient-to-t from-black/80 via-black/30 to-transparent">
@@ -201,8 +202,13 @@ const Gallery = () => {
       </main>
 
       <FooterSection />
+      
+      <ProjectModal 
+        selectedProject={selectedProject} 
+        setSelectedProject={setSelectedProject} 
+      />
     </div>
   );
 };
 
-export default Gallery;
+export default Project;

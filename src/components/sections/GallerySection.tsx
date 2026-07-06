@@ -62,7 +62,7 @@ export default function PremiumGallery() {
         <div className="lg:col-span-4 flex flex-col justify-center pt-24 lg:pt-0 z-20 w-full">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-4">
             <p className="type-overline text-white/50">
-                006 / Gallery
+                006 / Project
               </p>
 
               <div className="flex justify-between flex-wrap gap-6 mt-5">
@@ -101,7 +101,7 @@ export default function PremiumGallery() {
           style={{ opacity: buttonOpacity, scale: buttonScale }}
           className="absolute bottom-8 lg:bottom-12 left-0 right-0 flex justify-center z-30"
         >
-          <Link to="/gallery">
+          <Link to="/project">
             <button className="type-btn px-6 lg:px-8 py-3 lg:py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 text-sm lg:text-base">
               View All Projects
             </button>

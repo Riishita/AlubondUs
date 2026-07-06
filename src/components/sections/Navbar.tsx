@@ -7,10 +7,10 @@ const navLinks = [
   { label: "About Us", href: "/about" },
    { label: "Products", href: "/products" },
   { label: "Colours & Finishes", href: "/Alubond Color Chart A3 .pdf" },
-  { label: "Projects", href: "#Gallery" },
+  { label: "Project", href: "/project" },
   { label: "News", href: "/news" },
   { label: "Downloads", href: "#applications" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
@@ -29,7 +29,7 @@ const Navbar = () => {
   }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (location.pathname === "/about" || location.pathname === "/gallery") {
+    if (location.pathname === "/about" || location.pathname === "/project" || location.pathname === "/contact") {
       setHidden(false);
       return;
     }

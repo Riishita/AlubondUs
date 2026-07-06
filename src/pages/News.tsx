@@ -7,7 +7,7 @@ const News = () => {
     <div className="bg-white min-h-screen">
       <Navbar />
       <div className="pt-24 pb-12">
-        <FeaturedNews />
+        <FeaturedNews darkTheme={false} />
       </div>
       <FooterSection />
     </div>

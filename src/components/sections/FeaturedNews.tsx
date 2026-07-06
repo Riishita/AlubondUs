@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import { newsItems } from '@/data/newsData';
 
-export default function FeaturedNews() {
+export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean }) {
   return (
     <section className="max-w-7xl mx-auto px-6 py-20 my-8">
       {/* Header */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-end mb-16 px-4">
         <div>
-          <h2 className="text-sm font-light tracking-[0.2em] text-gray-100 uppercase mb-4">
+          <h2 className={`text-sm font-light tracking-[0.2em] uppercase mb-4 ${darkTheme ? 'text-gray-100' : 'text-gray-500'}`}>
             Latest Updates
           </h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-White tracking-tight">
+          <h3 className={`text-4xl md:text-5xl font-extrabold tracking-tight ${darkTheme ? 'text-white' : 'text-[#0a4b7c]'}`}>
             Featured News
           </h3>
         </div>

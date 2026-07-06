@@ -6,8 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
-import Gallery from "./pages/Gallery.tsx";
-import GalleryCategory from "./pages/GalleryCategory.tsx";
+import Project from "./pages/Project.tsx";
+import ProjectCategory from "./pages/ProjectCategory.tsx";
 import News from "./pages/News.tsx";
 import NewsDetail from "./pages/NewsDetail.tsx";
 import Products from "./pages/Products.tsx";
@@ -15,6 +15,7 @@ import ProductDetailA1 from "./pages/ProductDetailA1.tsx";
 import ProductDetailA2 from "./pages/ProductDetailA2.tsx";
 import ProductDetailEuroclassB from "./pages/ProductDetailEuroclassB.tsx";
 import GenericProductDetail from "./pages/GenericProductDetail.tsx";
+import ContactUs from "./pages/ContactUs.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
 import { useEffect } from "react";
 
@@ -53,8 +54,8 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<AboutUs />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/gallery/:categoryId" element={<GalleryCategory />} />
+              <Route path="/project" element={<Project />} />
+              <Route path="/project/:categoryId" element={<ProjectCategory />} />
               <Route path="/news" element={<News />} />
               <Route path="/news/:id" element={<NewsDetail />} />
               <Route path="/products" element={<Products />} />
@@ -62,6 +63,7 @@ const App = () => {
               <Route path="/products/fire-rated-a2" element={<ProductDetailA2 />} />
               <Route path="/products/euroclass-b" element={<ProductDetailEuroclassB />} />
               <Route path="/products/:categorySlug/:id" element={<GenericProductDetail />} />
+              <Route path="/contact" element={<ContactUs />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CustomCursorProvider>

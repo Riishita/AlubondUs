@@ -55,6 +55,7 @@ const CTASection = () => {
   return (
     <section
       ref={sectionRef}
+      id="request-specs"
       {...cursorSectionProps}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
