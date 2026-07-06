@@ -214,7 +214,7 @@ const ContactUs = () => {
               <h2 className="text-2xl font-medium mb-2 text-black">Drop us a line!</h2>
               <p className="text-gray-500 mb-8">Fill out the form below and we'll get back to you shortly.</p>
 
-              <form action="mailto:sales@alubond.com" method="POST" encType="text/plain" className="space-y-6">
+              <form action="mailto:rishitakumari206@gmail.com" method="POST" encType="text/plain" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-2">First Name</label>
@@ -222,7 +222,7 @@ const ContactUs = () => {
                       type="text" 
                       name="First Name" 
                       required
-                      className="bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -231,7 +231,7 @@ const ContactUs = () => {
                       type="text" 
                       name="Last Name" 
                       required
-                      className="bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
                     />
                   </div>
                 </div>
@@ -243,7 +243,7 @@ const ContactUs = () => {
                       type="email" 
                       name="Email" 
                       required
-                      className="bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -251,7 +251,7 @@ const ContactUs = () => {
                     <input 
                       type="tel" 
                       name="Contact number" 
-                      className="bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
                     />
                   </div>
                 </div>
@@ -262,7 +262,7 @@ const ContactUs = () => {
                     type="text" 
                     name="Subject" 
                     required
-                    className="bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                    className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
                   />
                 </div>
 
@@ -272,7 +272,7 @@ const ContactUs = () => {
                     name="Message" 
                     rows={5}
                     required
-                    className="bg-white border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all resize-none"
+                    className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all resize-none"
                   ></textarea>
                 </div>
 
