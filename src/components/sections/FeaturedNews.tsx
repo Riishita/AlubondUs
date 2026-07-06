@@ -7,10 +7,10 @@ export default function FeaturedNews() {
       {/* Header */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-end mb-16 px-4">
         <div>
-          <h2 className="text-sm font-light tracking-[0.2em] text-gray-500 uppercase mb-4">
+          <h2 className="text-sm font-light tracking-[0.2em] text-gray-100 uppercase mb-4">
             Latest Updates
           </h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-[#0a4b7c] tracking-tight">
+          <h3 className="text-4xl md:text-5xl font-extrabold text-White tracking-tight">
             Featured News
           </h3>
         </div>
