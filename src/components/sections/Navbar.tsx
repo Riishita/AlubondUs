@@ -29,7 +29,7 @@ const Navbar = () => {
   }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (location.pathname === "/about" || location.pathname === "/project" || location.pathname === "/contact") {
+    if (location.pathname === "/about" || location.pathname === "/project" || location.pathname === "/contact" || location.pathname === "/colours") {
       setHidden(false);
       return;
     }
@@ -82,7 +82,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button className="lg:hidden p-2 z-50" onClick={() => setIsOpen(!isOpen)}>
+        <button className="lg:hidden p-2 relative z-50 flex flex-col items-center justify-center" onClick={() => setIsOpen(!isOpen)}>
           <div className={`w-6 h-0.5 bg-black transition-all ${isOpen ? "rotate-45 translate-y-1.5" : ""}`} />
           <div className={`w-6 h-0.5 bg-black my-1.5 ${isOpen ? "opacity-0" : ""}`} />
           <div className={`w-6 h-0.5 bg-black transition-all ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />

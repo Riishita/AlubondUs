@@ -40,6 +40,7 @@ const LandingHero = () => {
   const { smoothProgress } = useSectionScroll(heroSectionRef, ["start start", "end start"]);
 
   const videoScale = useTransform(smoothProgress, [0, 1], [1, 1.15]);
+  const videoY = useTransform(smoothProgress, [0, 1], ["0%", "-10%"]);
   const contentY = useTransform(smoothProgress, [0, 1], ["0%", "-10%"]); // Reduced vertical travel for better mobile fit
   const contentOpacity = useTransform(smoothProgress, [0, 0.6], [1, 0]);
   const overlayOpacity = useTransform(smoothProgress, [0, 1], [0.5, 0.9]);
@@ -49,12 +50,12 @@ const LandingHero = () => {
       <CursorGridTrail excludeTopPx={NAV_EXCLUDE_TOP_PX} sectionRef={heroSectionRef} />
       <Navbar />
       {/* Container height adjusted to remain functional on smaller screens */}
-      <div ref={heroSectionRef} className={isMobile ? "relative h-[100vh] bg-black" : "relative h-[120vh] md:h-[150vh] bg-black"}>
-        <section className={isMobile ? "relative h-[100vh] w-full overflow-hidden z-0" : "fixed top-0 left-0 h-screen w-full overflow-hidden z-0"}>
+      <div ref={heroSectionRef} className="relative h-[100vh] md:h-[150vh] bg-black">
+        <section className="relative md:fixed md:top-0 md:left-0 h-[100vh] md:h-screen w-full overflow-hidden z-0">
           
           <motion.div
             className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
-            style={{ scale: (reduceMotion || isMobile) ? 1 : videoScale, willChange: "transform" }}
+            style={{ scale: (reduceMotion || isMobile) ? 1 : videoScale, y: (reduceMotion || isMobile) ? "0%" : videoY, willChange: "transform" }}
           >
             <video
               ref={videoRef}

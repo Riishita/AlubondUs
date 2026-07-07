@@ -11,6 +11,7 @@ import { useMemo, useRef } from "react";
 import { ArrowRight, Linkedin, Instagram, Facebook, Youtube, Download } from "lucide-react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
+import { useNavigate } from "react-router-dom";
 
 
 /* ================= CTA SECTION ================= */
@@ -18,6 +19,7 @@ import { useSectionScroll } from "@/hooks/useSectionScroll";
 const CTASection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
+  const navigate = useNavigate();
 
   // 👇 ADD YOUR BACKGROUND IMAGE URL HERE 👇
   const bgImageUrl = "/footer.webp";
@@ -133,6 +135,7 @@ const CTASection = () => {
 
         <div className="flex gap-4 flex-wrap">
           <motion.button
+            onClick={() => navigate('/contact')}
             whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             className="type-btn px-8 py-4 rounded-full bg-white text-[#1E2A5A] flex items-center gap-3 shadow-lg hover:shadow-blue-500/40 transition-all"
@@ -141,6 +144,7 @@ const CTASection = () => {
           </motion.button>
 
           <motion.button
+            onClick={() => navigate('/downloads')}
             whileHover={reduceMotion ? undefined : { scale: 1.03 }}
             className="type-btn px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-all flex items-center gap-3"
           >

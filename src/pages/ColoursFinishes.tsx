@@ -219,7 +219,7 @@ const GridSection = () => {
   return (
     <section
       ref={ref}
-      className="bg-[#FAFAFA] pt-32 pb-20 md:pt-36 md:pb-28 px-6 md:px-16 lg:px-24 relative"
+      className="bg-[#FAFAFA] pt-32 pb-20 md:pt-36 md:pb-28 px-6 md:px-16 lg:px-24 relative overflow-hidden"
     >
       {/* Subtle bg accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0a4b7c]/[0.03] rounded-full blur-[120px] pointer-events-none" />
@@ -359,7 +359,7 @@ const GridSection = () => {
 
 export default function ColoursFinishes() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="bg-[#FAFAFA] min-h-screen overflow-x-hidden">
       <Navbar />
       <GridSection />
       <FooterSection />

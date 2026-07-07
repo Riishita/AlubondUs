@@ -59,34 +59,39 @@ export default function SmoothTransitionWrapper() {
   return (
     <div 
       ref={containerRef} 
-      className={cn("relative z-10 bg-black h-[350vh]", cursorSectionClassName)}
+      className={cn("relative z-10 bg-black", isMobile ? "flex flex-col" : "h-[350vh]", cursorSectionClassName)}
       {...cursorSectionProps}
     >
-      <div className="sticky top-0 h-screen z-0">
+      <div className={isMobile ? "relative h-screen z-0 w-full" : "sticky top-0 h-screen z-0"}>
         <Suspense fallback={<div className="h-screen w-full bg-black" />}>
-          <GlobeHero externalProgress={smoothProgress} />
+          <GlobeHero externalProgress={isMobile ? undefined : smoothProgress} />
         </Suspense>
       </div>
 
       {/* 🎬 STRIP OVERLAY - Responsive strip count */}
-      <div className="sticky top-0 h-screen w-full flex z-10 pointer-events-none">
-        {activeStrips.map((h, i) => (
-          <motion.div
-            key={i}
-            style={{ height: h }}
-            className="flex-1 bg-[#F8F8F8] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
-          />
-        ))}
-      </div>
+      {!isMobile && (
+        <div className="sticky top-0 h-screen w-full flex z-10 pointer-events-none">
+          {activeStrips.map((h, i) => (
+            <motion.div
+              key={i}
+              style={{ height: h }}
+              className="flex-1 bg-[#F8F8F8] border-r border-black/5 last:border-none origin-top shadow-[0_0_40px_rgba(0,0,0,0.01)]"
+            />
+          ))}
+        </div>
+      )}
 
       {/* 🧱 PHILOSOPHY SECTION - Premium Editorial Layout */}
       <motion.div
-        style={{
+        style={isMobile ? { opacity: 1, y: 0, pointerEvents: "auto", background: "#F8F8F8" } : {
           opacity: isRevealed ? philosophyOpacity : 0,
           y: philosophyY,
           pointerEvents: isRevealed ? "auto" : "none",
         }}
-        className="sticky top-0 h-screen z-20 flex items-start md:items-center justify-center px-6 md:px-12 lg:px-16 py-12 md:py-20 text-[#1f2937] overflow-y-auto md:overflow-hidden"
+        className={cn(
+          "flex items-start md:items-center justify-center px-6 md:px-12 lg:px-16 py-12 md:py-20 text-[#1f2937]",
+          isMobile ? "relative min-h-[100vh] w-full z-20" : "sticky top-0 h-screen z-20 overflow-y-auto md:overflow-hidden"
+        )}
       >
         <motion.div style={{ y: philosophyParallaxY }} className="max-w-[1400px] w-full flex flex-col justify-center relative my-auto md:my-0">
           

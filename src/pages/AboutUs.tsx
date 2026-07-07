@@ -25,7 +25,7 @@ const HeroSection = () => {
   return (
     <section ref={ref} className="pt-36 pb-20 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-2lg">
+        <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-2xl">
           <span className="font-medium text-black">Innovating for People, </span>
           <span className="font-medium text-[#0a4b7c]">Building </span>
           <br />
@@ -287,13 +287,13 @@ const MilestoneCard = ({ m, index }) => {
     >
       <motion.div 
         style={{ scale, rotate, opacity }}
-        className="bg-white/90 backdrop-blur-2xl rounded-[2rem] border border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full md:w-[45%] h-[300px] relative group overflow-hidden cursor-pointer flex flex-col justify-center"
+        className="bg-white/90 backdrop-blur-2xl rounded-[2rem] border border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full md:w-[45%] min-h-[300px] relative group overflow-hidden cursor-pointer flex flex-col justify-center"
       >
         {/* Text Content */}
-        <div className="p-10 relative z-10 transition-opacity duration-300 group-hover:opacity-0">
-          <p className="text-black text-3xl font-medium mb-3">{m.year}</p>
-          <h3 className="text-black text-2xl font-bold leading-snug mb-4">{m.title}</h3>
-          <p className="text-gray-900 text-base leading-relaxed font-medium">{m.desc}</p>
+        <div className="p-6 md:p-10 relative z-10 transition-opacity duration-300 group-hover:opacity-0">
+          <p className="text-black text-2xl md:text-3xl font-medium mb-2 md:mb-3">{m.year}</p>
+          <h3 className="text-black text-xl md:text-2xl font-bold leading-snug mb-3 md:mb-4">{m.title}</h3>
+          <p className="text-gray-900 text-sm md:text-base leading-relaxed font-medium">{m.desc}</p>
         </div>
 
         {/* Hover Image */}
@@ -313,8 +313,8 @@ const MilestonesSection = () => {
       
       {/* 1. Sticky Wrapper at the top */}
       {/* Changed h-screen to py-12 and flex-col to stick the heading up top */}
-      <div className="sticky top-0 w-full flex flex-col items-center justify-start pt-32 pb-12 pointer-events-none z-0 bg-white/50 backdrop-blur-sm">
-        <h2 className="text-4xl md:text-5xl lg:text-[6rem] font-semi-bold text-black tracking-tight select-none">
+      <div className="sticky top-0 w-full flex flex-col items-center justify-start pt-24 md:pt-32 pb-6 md:pb-12 pointer-events-none z-0 bg-white/80 backdrop-blur-md">
+        <h2 className="text-4xl md:text-5xl lg:text-[6rem] font-semi-bold text-black tracking-tight select-none text-center">
           Key Milestones
         </h2>
       </div>
@@ -345,9 +345,9 @@ const ValuesSection = () => (
    
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 mt-12 md:mt-0">
         {/* Left Column */}
-        <div className="flex flex-col gap-32 md:gap-48">
+        <div className="flex flex-col gap-16 md:gap-48">
           <div className="max-w-xs">
             <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wide">Innovation</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
@@ -364,7 +364,7 @@ const ValuesSection = () => (
 
         {/* Center Column */}
         <div className="flex flex-col justify-center md:mt-[8.5rem]">
-          <div className="max-w-xs mx-auto md:mx-0">
+          <div className="max-w-xs">
             <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wide">Empowerment</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Enabling individuals, communities, and partners to achieve more.
@@ -373,14 +373,14 @@ const ValuesSection = () => (
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-32 md:gap-48">
-          <div className="max-w-xs ml-auto md:ml-0">
+        <div className="flex flex-col gap-16 md:gap-48">
+          <div className="max-w-xs">
             <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wide">Integrity</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Acting with transparency, trust, and responsibility.
             </p>
           </div>
-          <div className="max-w-xs ml-auto md:ml-0">
+          <div className="max-w-xs">
             <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wide">Sustainability</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Protecting the environment through conscious practices.
