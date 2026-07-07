@@ -1,7 +1,19 @@
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Printer } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Phone, MapPin, Printer, Send, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import Navbar from "@/components/sections/Navbar";
 import FooterSection from "@/components/sections/FooterSection";
+
+// ─────────────────────────────────────────────
+// 🔑  REPLACE these three values with your own
+//     from https://www.emailjs.com/
+// ─────────────────────────────────────────────
+const EMAILJS_SERVICE_ID = "service_9f05zwv";    // your Service ID
+const EMAILJS_TEMPLATE_ID = "template_oew8ho3";   // admin notification template
+const EMAILJS_AUTOREPLY_ID = "template_ofrqfvv"; // ← create a 2nd template for auto-reply
+const EMAILJS_PUBLIC_KEY = "MSwwlRxT6vMC_DVvS";  // your Public Key
+// ─────────────────────────────────────────────
 
 const globalOffices = [
   {
@@ -120,7 +132,73 @@ const globalOffices = [
   },
 ];
 
+// Form field types
+type FormState = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+};
+
+type SubmitStatus = "idle" | "loading" | "success" | "error";
+
 const ContactUs = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [form, setForm] = useState<FormState>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    const adminParams = {
+      from_first_name: form.firstName,
+      from_last_name: form.lastName,
+      from_email: form.email,
+      from_phone: form.phone || "Not provided",
+      subject: form.subject,
+      message: form.message,
+      to_email: "rishitakumari206@gmail.com",
+    };
+
+    const autoReplyParams = {
+      to_name: form.firstName,
+      to_email: form.email,
+      subject: form.subject,
+    };
+
+    try {
+      // Send admin notification + auto-reply simultaneously
+      await Promise.all([
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, adminParams, EMAILJS_PUBLIC_KEY),
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_AUTOREPLY_ID, autoReplyParams, EMAILJS_PUBLIC_KEY),
+      ]);
+      setStatus("success");
+      setForm({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("error");
+    }
+  };
+
+  const inputClass =
+    "bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all disabled:opacity-50 disabled:cursor-not-allowed";
+
+  const isLoading = status === "loading";
+
   return (
     <div className="bg-white min-h-screen font-sans selection:bg-[#0a4b7c] selection:text-white">
       <Navbar />
@@ -155,7 +233,7 @@ const ContactUs = () => {
               className="lg:col-span-5 flex flex-col"
             >
               <h2 className="text-3xl font-medium mb-8 text-black">Headquarters</h2>
-              
+
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-[#0a4b7c]/5 rounded-full flex items-center justify-center shrink-0">
@@ -214,73 +292,150 @@ const ContactUs = () => {
               <h2 className="text-2xl font-medium mb-2 text-black">Drop us a line!</h2>
               <p className="text-gray-500 mb-8">Fill out the form below and we'll get back to you shortly.</p>
 
-              <form action="mailto:sales@alubond.com" method="POST" encType="text/plain" className="space-y-6">
+              {/* ── Success Banner ── */}
+              <AnimatePresence>
+                {status === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.97 }}
+                    transition={{ duration: 0.4 }}
+                    className="mb-6 flex items-center gap-3 bg-green-50 border border-green-200 text-green-800 rounded-2xl px-5 py-4"
+                  >
+                    <CheckCircle size={22} className="shrink-0 text-green-600" />
+                    <div>
+                      <p className="font-semibold text-sm">Message sent successfully!</p>
+                      <p className="text-xs text-green-700 mt-0.5">We'll get back to you as soon as possible.</p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ── Error Banner ── */}
+                {status === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.97 }}
+                    transition={{ duration: 0.4 }}
+                    className="mb-6 flex items-center gap-3 bg-red-50 border border-red-200 text-red-800 rounded-2xl px-5 py-4"
+                  >
+                    <XCircle size={22} className="shrink-0 text-red-500" />
+                    <div>
+                      <p className="font-semibold text-sm">Something went wrong.</p>
+                      <p className="text-xs text-red-700 mt-0.5">Please check your EmailJS credentials or try again later.</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-2">First Name</label>
-                    <input 
-                      type="text" 
-                      name="First Name" 
+                    <label htmlFor="firstName" className="text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-400">*</span></label>
+                    <input
+                      id="firstName"
+                      type="text"
+                      name="firstName"
+                      value={form.firstName}
+                      onChange={handleChange}
                       required
-                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                      disabled={isLoading}
+                      placeholder="John"
+                      className={inputClass}
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                    <input 
-                      type="text" 
-                      name="Last Name" 
+                    <label htmlFor="lastName" className="text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-400">*</span></label>
+                    <input
+                      id="lastName"
+                      type="text"
+                      name="lastName"
+                      value={form.lastName}
+                      onChange={handleChange}
                       required
-                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                      disabled={isLoading}
+                      placeholder="Doe"
+                      className={inputClass}
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input 
-                      type="email" 
-                      name="Email" 
+                    <label htmlFor="email" className="text-sm font-medium text-gray-700 mb-2">Email <span className="text-red-400">*</span></label>
+                    <input
+                      id="email"
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
                       required
-                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                      disabled={isLoading}
+                      placeholder="john@example.com"
+                      className={inputClass}
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-2">Contact Number</label>
-                    <input 
-                      type="tel" 
-                      name="Contact number" 
-                      className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                    <label htmlFor="phone" className="text-sm font-medium text-gray-700 mb-2">Contact Number</label>
+                    <input
+                      id="phone"
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      disabled={isLoading}
+                      placeholder="+1 234 567 8900"
+                      className={inputClass}
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="text-sm font-medium text-gray-700 mb-2">Subject</label>
-                  <input 
-                    type="text" 
-                    name="Subject" 
+                  <label htmlFor="subject" className="text-sm font-medium text-gray-700 mb-2">Subject <span className="text-red-400">*</span></label>
+                  <input
+                    id="subject"
+                    type="text"
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
                     required
-                    className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all"
+                    disabled={isLoading}
+                    placeholder="Product enquiry..."
+                    className={inputClass}
                   />
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="text-sm font-medium text-gray-700 mb-2">Message</label>
-                  <textarea 
-                    name="Message" 
+                  <label htmlFor="message" className="text-sm font-medium text-gray-700 mb-2">Message <span className="text-red-400">*</span></label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
                     rows={5}
                     required
-                    className="bg-white text-black border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0a4b7c]/20 focus:border-[#0a4b7c] transition-all resize-none"
-                  ></textarea>
+                    disabled={isLoading}
+                    placeholder="Tell us about your project..."
+                    className={`${inputClass} resize-none`}
+                  />
                 </div>
 
-                <button 
+                <button
                   type="submit"
-                  className="w-full bg-[#0a4b7c] hover:bg-[#083a61] text-white font-bold text-sm tracking-wider uppercase py-4 rounded-xl transition-colors shadow-lg shadow-[#0a4b7c]/20"
+                  disabled={isLoading}
+                  className="w-full flex items-center justify-center gap-2 bg-[#0a4b7c] hover:bg-[#083a61] disabled:bg-[#0a4b7c]/60 text-white font-bold text-sm tracking-wider uppercase py-4 rounded-xl transition-all shadow-lg shadow-[#0a4b7c]/20 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isLoading ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={16} />
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </motion.div>
@@ -297,7 +452,7 @@ const ContactUs = () => {
             <h2 className="text-3xl md:text-5xl font-light tracking-tight text-black mb-12 text-center">
               Our <span className="font-medium text-[#0a4b7c]">Global Presence</span>
             </h2>
-            
+
             <div className="space-y-16">
               {globalOffices.map((regionData, index) => (
                 <div key={index}>
@@ -317,7 +472,7 @@ const ContactUs = () => {
                             </h4>
                           )}
                         </div>
-                        
+
                         <div className="flex-grow space-y-4">
                           <div className="flex items-start gap-3">
                             <MapPin size={18} className="text-gray-400 mt-0.5 shrink-0" />
@@ -325,21 +480,21 @@ const ContactUs = () => {
                               {office.address}
                             </p>
                           </div>
-                          
+
                           {office.phone && (
                             <div className="flex items-start gap-3">
                               <Phone size={18} className="text-gray-400 mt-0.5 shrink-0" />
                               <p className="text-sm text-gray-600">{office.phone}</p>
                             </div>
                           )}
-                          
+
                           {office.fax && (
                             <div className="flex items-start gap-3">
                               <Printer size={18} className="text-gray-400 mt-0.5 shrink-0" />
                               <p className="text-sm text-gray-600">{office.fax}</p>
                             </div>
                           )}
-                          
+
                           {office.email && (
                             <div className="flex items-start gap-3">
                               <Mail size={18} className="text-gray-400 mt-0.5 shrink-0" />
@@ -348,7 +503,7 @@ const ContactUs = () => {
                               </a>
                             </div>
                           )}
-                          
+
                           {office.web && (
                             <div className="flex items-start gap-3">
                               <div className="w-[18px] flex justify-center mt-0.5 shrink-0">
