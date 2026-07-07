@@ -9,7 +9,7 @@ import FooterSection from "@/components/sections/FooterSection";
 // 🔑  REPLACE these three values with your own
 //     from https://www.emailjs.com/
 // ─────────────────────────────────────────────
-const EMAILJS_SERVICE_ID = "service_9f05zwv";    // your Service ID
+const EMAILJS_SERVICE_ID = "service_3dmjuxy";    // your Service ID
 const EMAILJS_TEMPLATE_ID = "template_oew8ho3";   // admin notification template
 const EMAILJS_AUTOREPLY_ID = "template_ofrqfvv"; // ← create a 2nd template for auto-reply
 const EMAILJS_PUBLIC_KEY = "MSwwlRxT6vMC_DVvS";  // your Public Key
