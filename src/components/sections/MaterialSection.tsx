@@ -390,18 +390,30 @@ const MaterialsSection = () => {
             </p>
           </div>
 
-          <a 
-            href="/Alubond Color Chart A3 .pdf" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-          >
-            <span className="relative z-10 text-xs md:text-sm tracking-wider font-bold uppercase group-hover:text-white transition-colors duration-300">
-              Explore Color Chart
-            </span>
-            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white">→</span>
-            <div className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
-          </a>
+          <div className="flex flex-wrap items-center gap-3">
+            <a 
+              href="/Alubond Color Chart A3 .pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            >
+              <span className="relative z-10 text-[11px] tracking-wider font-bold uppercase group-hover:text-white transition-colors duration-300">
+                Explore Color Chart
+              </span>
+              <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white text-xs">→</span>
+              <div className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
+            </a>
+
+            <button
+              className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1A1A1A] border border-[#1A1A1A] text-white rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            >
+              <span className="relative z-10 text-[11px] tracking-wider font-bold uppercase group-hover:text-[#1A1A1A] transition-colors duration-300">
+                Explore Color Studio
+              </span>
+              <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#1A1A1A] text-xs">→</span>
+              <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
+            </button>
+          </div>
         </motion.div>
 
         {/* ================= CERTIFICATE BANNER ================= */}

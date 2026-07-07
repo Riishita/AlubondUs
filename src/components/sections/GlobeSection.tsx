@@ -9,6 +9,7 @@ import {
   AnimatePresence,
   useInView,
 } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef);
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings();
+  const navigate = useNavigate();
 
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [showPoints, setShowPoints] = useState(false);
@@ -447,9 +449,16 @@ ringAltitude={(d: any) => d.altitude}
 
               <div className="relative z-10">
                 <h3 className="text-2xl font-light mb-2 pr-6 text-white">{selectedPlace.name}</h3>
-                <p className="text-sm font-light text-white/60 leading-relaxed mb-6 min-h-[50px]">{selectedPlace.description}</p>
-                
-                
+                <p className="text-sm font-light text-white/60 leading-relaxed mb-4 min-h-[50px]">{selectedPlace.description}</p>
+
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="group relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold tracking-wider uppercase overflow-hidden transition-all duration-300 hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
+                >
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-black">Contact Us</span>
+                  <span className="relative z-10 transition-all duration-300 group-hover:translate-x-1 group-hover:text-black">→</span>
+                  <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-400 ease-out rounded-full" />
+                </button>
               </div>
             </motion.div>
           )}

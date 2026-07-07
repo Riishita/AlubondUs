@@ -100,11 +100,14 @@ const LandingHero = () => {
                 </motion.p>
 
                 <motion.button
-           
-                className="px-8 py-4 md:px-10 text-[14px] md:text-[15px] font-medium rounded bg-white/30 backdrop-blur-lg border border-white/10 text-white hover:bg-white hover:text-black transition-all duration-500 ease-out"
-              >
-                Discover Innovation
-              </motion.button>
+                  onClick={() => {
+                    const el = document.getElementById('sheet-detail');
+                    if (el) el.scrollIntoView({ behavior: 'instant' });
+                  }}
+                  className="px-8 py-4 md:px-10 text-[14px] md:text-[15px] font-medium rounded bg-white/30 backdrop-blur-lg border border-white/10 text-white hover:bg-white hover:text-black transition-all duration-500 ease-out"
+                >
+                  Discover Innovation
+                </motion.button>
 
               </motion.div>
 
