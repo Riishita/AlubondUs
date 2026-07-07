@@ -168,6 +168,7 @@ const ContactUs = () => {
       from_first_name: form.firstName,
       from_last_name: form.lastName,
       from_email: form.email,
+      email: form.email,            // matches {{email}} in Reply To field
       from_phone: form.phone || "Not provided",
       subject: form.subject,
       message: form.message,
@@ -176,7 +177,7 @@ const ContactUs = () => {
 
     const autoReplyParams = {
       to_name: form.firstName,
-      to_email: form.email,
+      email: form.email,            // matches {{email}} in To Email field of auto-reply template
       subject: form.subject,
     };
 
