@@ -7,6 +7,7 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
@@ -404,7 +405,8 @@ const MaterialsSection = () => {
               <div className="absolute inset-0 bg-[#1A1A1A] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
             </a>
 
-            <button
+            <Link
+              to="/colour-studio"
               className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1A1A1A] border border-[#1A1A1A] text-white rounded-full overflow-hidden w-fit transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               <span className="relative z-10 text-[11px] tracking-wider font-bold uppercase group-hover:text-[#1A1A1A] transition-colors duration-300">
@@ -412,7 +414,7 @@ const MaterialsSection = () => {
               </span>
               <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#1A1A1A] text-xs">→</span>
               <div className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />
-            </button>
+            </Link>
           </div>
         </motion.div>
 

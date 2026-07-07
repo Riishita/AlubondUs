@@ -16,6 +16,9 @@ import ProductDetailA2 from "./pages/ProductDetailA2.tsx";
 import ProductDetailEuroclassB from "./pages/ProductDetailEuroclassB.tsx";
 import GenericProductDetail from "./pages/GenericProductDetail.tsx";
 import ContactUs from "./pages/ContactUs.tsx";
+import Downloads from "./pages/Downloads.tsx";
+import ColoursFinishes from "./pages/ColoursFinishes.tsx";
+import ColourStudio from "./pages/ColourStudio.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
 import { useEffect } from "react";
 
@@ -64,6 +67,9 @@ const App = () => {
               <Route path="/products/euroclass-b" element={<ProductDetailEuroclassB />} />
               <Route path="/products/:categorySlug/:id" element={<GenericProductDetail />} />
               <Route path="/contact" element={<ContactUs />} />
+              <Route path="/downloads" element={<Downloads />} />
+              <Route path="/colours" element={<ColoursFinishes />} />
+              <Route path="/colour-studio" element={<ColourStudio />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CustomCursorProvider>

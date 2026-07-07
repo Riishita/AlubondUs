@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Smile, Brain, Stethoscope, ShieldCheck, Flame, Globe2, Award, FileCheck2, Building2, FileText, BadgeCheck } from "lucide-react";
 
 // Certificate Data
@@ -145,13 +146,13 @@ Engineered to maintain façade integrity during fire incidents by minimizing fla
             <p className="text-sm text-[#4B5563] mb-10 leading-relaxed font-light">
               Engineered for ultimate safety. From European classifications to American NFPA codes, every panel is independently tested, verified, and globally certified.
             </p>
-            <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit pointer-events-auto transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+            <Link to="/downloads" className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit pointer-events-auto transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               <span className="relative z-10 text-sm tracking-wider font-medium uppercase">
                 View all
               </span>
               <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
               <div className="absolute inset-0 bg-[#0a4b7c] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-            </button>
+            </Link>
          </div>
 
          {/* CERTIFICATE CARDS */}
@@ -236,13 +237,13 @@ Engineered to maintain façade integrity during fire incidents by minimizing fla
             Engineered for ultimate safety. From European classifications to American NFPA codes, every panel is independently tested, verified, and globally certified.
           </p>
 
-          <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit pointer-events-auto transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          <Link to="/downloads" className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] text-white rounded-full overflow-hidden w-fit pointer-events-auto transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
             <span className="relative z-10 text-sm tracking-wider font-medium uppercase">
               View all
             </span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
             <div className="absolute inset-0 bg-[#0a4b7c] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-          </button>
+          </Link>
         </motion.div>
 
         {/* Scrolling Certificate Cards */}
