@@ -1,19 +1,42 @@
 import ProductDetailTemplate from "@/components/sections/ProductDetailTemplate";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// IMAGE PATHS – change these to update images for Alubond Euroclass B
+// ─────────────────────────────────────────────────────────────────────────────
+const IMAGES = {
+  mainLeft:      "/products/Product EB 3.webp",  // Main image (product overview tab)
+  featuresImg:   "/products/Products1.webp",      // Image shown in Features & Advantages tab
+
+  // Technical Data – add or remove image paths here as needed
+  technicalData: [
+    "/products/cert1.webp",
+    "/products/cert2.webp",
+    "/products/cert3.webp",
+    // "/products/cert4.webp",
+    "/products/cert5.webp",
+  ],
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
 const featuresText = [
-  <h2 key="h" className="text-xl md:text-2xl font-bold text-gray-500 mb-4">Alubond Euroclass B – Creating A Sustainable Future</h2>,
+  <h2 key="h" className="text-xl md:text-2xl font-semibold text-gray-500 mb-4">
+    Alubond Euroclass B – Creating A Sustainable Future
+  </h2>,
   <p key="p1">
-    Alubond U.S.A is a metal composite panel consisting of two layers of a metallic skin like Aluminum, Stainless Steel, Copper, Zinc, Titanium etc., sandwiching a fire rated core in a continuous co-extrusion process.
+    Alubond U.S.A is a metal composite panel consisting of two layers of a metallic skin like Aluminum,
+    Stainless Steel, Copper, Zinc, Titanium etc., sandwiching a fire rated core in a continuous co-extrusion process.
   </p>,
   <p key="p2">
-    Alubond U.S.A is a registered brand of American Building Technologies located in Rockford Illinois with production bases in Europe, Middle East and India. Alubond U.S.A is committed to a sustainable future and is now available in three fire rated cores and an innovative eco friendly green core.
+    Alubond U.S.A is a registered brand of American Building Technologies located in Rockford Illinois with
+    production bases in Europe, Middle East and India. Alubond U.S.A is committed to a sustainable future and
+    is now available in three fire rated cores and an innovative eco friendly green core.
   </p>,
   <p key="p3">
-    Alubond U.S.A has emerged as The World's Largest ACP Brand with new expansions under progress in Russia, Saudi Arabia and Sri Lanka. The installed production capacity by June 2011 will be over 11,000,000m² with 10 production lines and two coil coating lines.
-  </p>
+    Alubond U.S.A has emerged as The World's Largest ACP Brand with new expansions under progress in Russia,
+    Saudi Arabia and Sri Lanka. The installed production capacity by June 2011 will be over 11,000,000m² with
+    10 production lines and two coil coating lines.
+  </p>,
 ];
-
-const technicalDataImages = Array.from({ length: 5 }).map((_, idx) => `https://picsum.photos/seed/techdataeuro${idx}/500/700`);
 
 const ProductDetailEuroclassB = () => {
   return (
@@ -21,12 +44,12 @@ const ProductDetailEuroclassB = () => {
       productName="Alubond Euroclass B"
       mainTitle="Alubond Euroclass B"
       mainDescriptions={[]}
-      mainImageLeft="/products/FIRE RATED ALUMINIUM COMPOSITE PANELS 3.avif"
+      mainImageLeft={IMAGES.mainLeft}
       featuresTitle="Alubond Euroclass B - Features"
       featuresText={featuresText}
-      featuresImage="https://picsum.photos/seed/euroclassdiagram2/600/400"
+      featuresImage={IMAGES.featuresImg}
       advantagesTabTitle="Alubond Euroclass B - Advantages"
-      technicalDataImages={technicalDataImages}
+      technicalDataImages={IMAGES.technicalData}
     />
   );
 };

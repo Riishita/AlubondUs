@@ -83,7 +83,7 @@ const ProductDetailTemplate = (props: ProductDetailTemplateProps) => {
                   {/* Left Column */}
                   <div className="flex-1 flex flex-col gap-8">
                   <div>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a1a] mb-2 uppercase">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semi-bold tracking-tight text-[#1a1a1a] mb-2 uppercase">
                       {props.mainTitle}
                     </h1>
                     <div className="w-32 h-1 bg-[#0a4b7c]"></div>
@@ -133,7 +133,7 @@ const ProductDetailTemplate = (props: ProductDetailTemplateProps) => {
             {activeTab === "Features" && (
               <div className="flex flex-col gap-12 animate-in fade-in duration-500">
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a1a] mb-2">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-semi-bold tracking-tight text-[#1a1a1a] mb-2">
                     {props.featuresTitle}
                   </h1>
                   <div className="w-32 h-1 bg-[#0a4b7c]"></div>
@@ -159,19 +159,19 @@ const ProductDetailTemplate = (props: ProductDetailTemplateProps) => {
             {activeTab === "Technical Data" && (
               <div className="flex flex-col gap-12 animate-in fade-in duration-500">
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a1a] mb-2">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-semi-bold tracking-tight text-[#1a1a1a] mb-2">
                     Technical Data
                   </h1>
                   <div className="w-32 h-1 bg-[#0a4b7c]"></div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                   {props.technicalDataImages.map((src, idx) => (
-                    <div key={idx} className="w-full aspect-[1/1.4] bg-gray-100 rounded-xl overflow-hidden shadow-sm">
+                    <div key={idx} className="w-full bg-white  overflow-hidden shadow-sm border border-gray-100">
                       <img 
                         src={src}
                         alt={`Technical Data ${idx + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto object-contain"
                       />
                     </div>
                   ))}
@@ -182,7 +182,7 @@ const ProductDetailTemplate = (props: ProductDetailTemplateProps) => {
             {activeTab === "Advantages" && (
               <div className="flex flex-col gap-12 animate-in fade-in duration-500">
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a1a] mb-2">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-semi-bold tracking-tight text-[#1a1a1a] mb-2">
                     {props.advantagesTabTitle}
                   </h1>
                   <div className="w-32 h-1 bg-[#0a4b7c]"></div>
