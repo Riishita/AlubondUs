@@ -19,6 +19,7 @@ import ContactUs from "./pages/ContactUs.tsx";
 import Downloads from "./pages/Downloads.tsx";
 import ColoursFinishes from "./pages/ColoursFinishes.tsx";
 import ColourStudio from "./pages/ColourStudio.tsx";
+import TechnicalData from "./pages/TechnicalData.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
 import { useEffect } from "react";
 
@@ -70,6 +71,7 @@ const App = () => {
               <Route path="/downloads" element={<Downloads />} />
               <Route path="/colours" element={<ColoursFinishes />} />
               <Route path="/colour-studio" element={<ColourStudio />} />
+              <Route path="/technical-data" element={<TechnicalData />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CustomCursorProvider>

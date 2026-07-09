@@ -201,6 +201,8 @@ const GenericProductDetail = () => {
   let featuresImage = "/products/Products1.webp";
   let mainGalleryImages: string[] | undefined = undefined;
   let technicalDataImages: string[] = []; // populated per-card below
+  // true for Exotic Finishes cards 2-8: full-width text + larger centred image
+  let singleColumnLayout = false;
 
   // ── FACADE SYSTEMS ──────────────────────────────────────────────────────────
   if (categorySlug === "facade-systems") {
@@ -235,7 +237,7 @@ const GenericProductDetail = () => {
       mainImageLeft       = "/products/Product2.webp";
       technicalDataImages = IMAGES_CORPORATE_IDENTITY.card1.technicalData;
     } else if (id === "2") {
-      mainImageLeft       = "/products/Product2.webpSo";
+      mainImageLeft       = "/products/Product2.webp";
       technicalDataImages = IMAGES_CORPORATE_IDENTITY.card2.technicalData;
     }
   }
@@ -294,6 +296,7 @@ const GenericProductDetail = () => {
 
     // Card 2 – Alubond Stainless Steel
     else if (id === "2") {
+      singleColumnLayout = true;
       productName    = "Alubond Stainless Steel";
       mainTitle      = "STAINLESS STEEL COMPOSITE PANELS";
       mainImageLeft       = "/products/STAINLESS STEEL.webp";
@@ -328,6 +331,7 @@ Skin Thickness: 0.3 mm and 0.4mm
 
     // Card 3 – Alubond Solar
     else if (id === "3") {
+      singleColumnLayout = true;
       productName    = "Alubond Solar";
       mainTitle      = "ALUBOND SOLAR COLLECTOR MIRROR";
       mainImageLeft       = "/products/Solar Mirror.webp";
@@ -347,6 +351,7 @@ Skin Thickness: 0.3 mm and 0.4mm
 
     // Card 4 – Alubond Anodized Finish
     else if (id === "4") {
+      singleColumnLayout = true;
       productName    = "Alubond Anodized Finish";
       mainTitle      = "ALUBOND ANODIZED FINISH";
       mainImageLeft       = "/products/Solar Mirror.webp";
@@ -360,6 +365,7 @@ Skin Thickness: 0.3 mm and 0.4mm
 
     // Card 5 – Alubond Mirror
     else if (id === "5") {
+      singleColumnLayout = true;
       productName    = "Alubond Mirror";
       mainTitle      = "ALUBOND MIRROR";
       mainImageLeft       = "/products/Solar Mirror.webp";
@@ -374,12 +380,12 @@ Skin Thickness: 0.3 mm and 0.4mm
 
     // Card 6 – Alubond Stone & Wood Finish
     else if (id === "6") {
+      singleColumnLayout = true;
       productName    = "Alubond Stone & Wood Finish";
       mainTitle      = "ALUBOND STONE & WOOD FINISH";
       mainImageLeft       = "/products/Solar Mirror.webp";
       technicalDataImages = IMAGES_EXOTIC_FINISHES.card6.technicalData;
       mainImageRight = undefined;
-      mainGalleryImages = Array.from({ length: 4 }).map((_, idx) => `https://picsum.photos/seed/ssgallery6${idx}/400/400`);
       dimensionText   = undefined;
       toleranceText   = undefined;
       advantagesText  = undefined;
@@ -388,6 +394,7 @@ Skin Thickness: 0.3 mm and 0.4mm
 
     // Card 7 – Alubond Zinc
     else if (id === "7") {
+      singleColumnLayout = true;
       productName    = "Alubond Zinc";
       mainTitle      = "ALUBOND ZINC";
       mainImageLeft       = "/products/AlubondZinc.webp";
@@ -406,6 +413,7 @@ Skin Thickness: 0.3 mm and 0.4mm
 
     // Card 8 – Alubond Prismatic Colours
     else if (id === "8") {
+      singleColumnLayout = true;
       productName    = "Alubond Prismatic Colours";
       mainTitle      = "ALUBOND PRISMATIC COLOURS";
       mainImageLeft       = "/products/Solar Mirror.webp";
@@ -445,6 +453,7 @@ Skin Thickness: 0.3 mm and 0.4mm
       advantagesTabTitle={`${productName} - Advantages`}
       technicalDataImages={technicalDataImages}
       mainGalleryImages={mainGalleryImages}
+      singleColumnLayout={singleColumnLayout}
     />
   );
 };
