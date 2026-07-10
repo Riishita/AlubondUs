@@ -34,15 +34,15 @@ const NewsDetail = () => {
         {/* Main Content (Left Column) */}
         <div className="lg:col-span-2">
           {/* Image with Date Box Overlay */}
-          <div className="relative mb-10 overflow-hidden rounded-3xl shadow-sm">
+          <div className="relative mb-12 overflow-hidden rounded-[2rem] shadow-xl ring-1 ring-black/5">
             {/* Date Box */}
-            <div className="absolute top-0 left-0 bg-[#222222] text-white flex flex-col justify-center items-center w-20 h-24 z-10 shadow-lg rounded-br-2xl">
-              <span className="text-[15px] font-bold tracking-wide">{month}</span>
-              <span className="text-[15px] font-bold mt-1">{year}</span>
+            <div className="absolute top-0 left-0 bg-[#0a4b7c]/95 backdrop-blur-md text-white flex flex-col justify-center items-center w-24 h-24 z-10 shadow-lg rounded-br-[2rem]">
+              <span className="text-sm font-bold tracking-widest uppercase text-white/80">{month}</span>
+              <span className="text-xl font-black mt-0.5">{year}</span>
             </div>
             {/* Image */}
             <div className="w-full aspect-video bg-gray-100">
-              <img src={news.image} alt={news.title} className="w-full h-full object-cover" />
+              <img src={news.image} alt={news.title} className="w-full h-full object-cover object-top" />
             </div>
           </div>
 
@@ -86,8 +86,8 @@ const NewsDetail = () => {
             <div className="flex flex-col gap-6">
               {recentPosts.map((post) => (
                 <div key={post.id} className="flex gap-4 group border-b border-gray-100 pb-6 last:border-0 last:pb-0">
-                  <div className="w-20 h-20 shrink-0 bg-gray-200 overflow-hidden rounded-xl">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="w-24 h-20 shrink-0 bg-gray-200 overflow-hidden rounded-xl">
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="flex flex-col justify-center">
                     <Link to={`/news/${post.id}`} className="text-[13px] font-medium text-gray-800 hover:text-[#0a4b7c] leading-relaxed mb-2 transition-colors">

@@ -52,19 +52,20 @@ const Products = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-36 pb-16 px-8 md:px-16 lg:px-24 bg-[#f8f9fa]">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[#1A1A1A] leading-[1.1] mb-6">
-            Our Products
+      <section className="pt-36 pb-8 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-2xl">
+            <span className="font-medium text-black">Our </span>
+            <span className="font-medium text-[#0a4b7c]">Products</span>
           </h1>
-          <p className="font-medium text-gray-600 md:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="font-medium text-gray-600 md:text-base max-w-lg leading-relaxed mb-4">
             Discover our extensive range of high-quality products designed for innovation, durability, and aesthetics.
           </p>
         </div>
       </section>
 
       {/* Categories Section */}
-      <section className="py-24 px-8 md:px-16 lg:px-24 bg-white">
+      <section className="pb-24 pt-8 px-8 md:px-16 lg:px-24 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col gap-32">
 
           {/* ── FIRE RATED ALUMINIUM COMPOSITE PANELS ─────────────────────── */}

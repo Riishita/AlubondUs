@@ -3,15 +3,16 @@ import { newsItems } from '@/data/newsData';
 
 export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean }) {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-20 my-8">
+    <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
       {/* Header */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-end mb-16 px-4">
         <div>
           <h2 className={`text-sm font-light tracking-[0.2em] uppercase mb-4 ${darkTheme ? 'text-gray-100' : 'text-gray-500'}`}>
             Latest Updates
           </h2>
-          <h3 className={`text-4xl md:text-5xl font-extrabold tracking-tight ${darkTheme ? 'text-white' : 'text-[#0a4b7c]'}`}>
-            Featured News
+          <h3 className={`text-4xl md:text-5xl lg:text-[3.25rem] leading-tight font-medium ${darkTheme ? 'text-white' : 'text-[#0a4b7c]'}`}>
+            <span className={darkTheme ? 'text-white' : 'text-black'}>Featured </span>
+            News
           </h3>
         </div>
       </div>
@@ -24,17 +25,17 @@ export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean
             className="group flex flex-col bg-white rounded-[2rem] overflow-hidden border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2"
           >
             {/* Image Container */}
-            <div className="relative h-60 overflow-hidden">
+            <div className="relative h-64 overflow-hidden">
               <img 
                 src={news.image} 
                 alt={news.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {/* Subtle Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/10 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               {/* Date Badge (Glassmorphism) */}
-              <div className="absolute top-5 right-5 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg">
+              <div className="absolute top-5 right-5 bg-black/40 backdrop-blur-md border border-white/10 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg">
                 {news.date}
               </div>
             </div>
@@ -45,12 +46,12 @@ export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean
               
 
               {/* Title */}
-              <h4 className={`text-lg font-bold uppercase leading-snug mb-3 pr-2 ${news.highlight ? 'text-gray-900' : 'text-gray-900'} group-hover:text-[#0a4b7c] transition-colors duration-300`}>
+              <h4 className={`text-xl font-bold uppercase leading-snug mb-3 pr-2 ${news.highlight ? 'text-gray-900' : 'text-gray-900'} group-hover:text-[#0a4b7c] transition-colors duration-300 line-clamp-2`}>
                 {news.title}
               </h4>
               
               {/* Description */}
-              <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-grow">
+              <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
                 {news.description}
               </p>
               

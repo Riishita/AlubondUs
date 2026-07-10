@@ -1,8 +1,9 @@
 "use client";
 
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 
 const cards = [
   { img: "/images/BUILDINGFACADES.png",   title: "Building Facades",        desc: "Curtain walls, rainscreen cladding, and architectural envelope systems.", id: "01" },
@@ -45,14 +46,40 @@ export default function ApplicationSection() {
               Where Alubond <br />
               <span className="font-medium">Performs</span>
             </h2>
-            <p className="text-sm md:text-base text-white/60 max-w-xs leading-relaxed font-light">
-              Seven industries. One material.<br />Endless architectural possibility.
-            </p>
+            <div className="flex flex-col items-start md:items-end gap-6">
+              <p className="text-sm md:text-base text-white/60 max-w-xs leading-relaxed font-light">
+                Seven industries. One material.<br />Endless architectural possibility.
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>
 
       {/* ── Marquee Track ── */}
+      <style>{`
+        @media (min-width: 768px) {
+          .desktop-marquee {
+            animation: marquee 38s linear infinite;
+            width: max-content;
+          }
+          .desktop-marquee.is-paused {
+            animation-play-state: paused;
+          }
+        }
+        @media (max-width: 767px) {
+          .mobile-scroll {
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-right: 2rem;
+          }
+          .mobile-scroll::-webkit-scrollbar {
+            display: none;
+          }
+        }
+      `}</style>
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
@@ -62,25 +89,29 @@ export default function ApplicationSection() {
         onMouseLeave={() => setPaused(false)}
       >
         {/* Left/Right edge fades */}
-        <div className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10"
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-8 md:w-24 z-10"
           style={{ background: "linear-gradient(to right, rgba(7,26,58,0.95), transparent)" }} />
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10"
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-8 md:w-24 z-10"
           style={{ background: "linear-gradient(to left, rgba(7,26,58,0.95), transparent)" }} />
 
-        {/* Scrolling strip — pure CSS animation, zero JS */}
+        {/* Scrolling strip */}
         <div
-          className="flex gap-5 w-max"
-          style={{
-            animation: "marquee 38s linear infinite",
-            animationPlayState: paused ? "paused" : "running",
-            paddingLeft: "1.25rem",
-          }}
+          className={`flex gap-4 md:gap-5 desktop-marquee mobile-scroll ${paused ? 'is-paused' : ''}`}
+          style={{ paddingLeft: "1.25rem" }}
         >
           {track.map((card, i) => (
             <AppCard key={`${card.id}-${i}`} card={card} />
           ))}
         </div>
       </motion.div>
+
+      {/* Mobile swipe indicator below images */}
+      <div className="md:hidden flex items-center justify-center gap-2 text-white/50 text-xs uppercase tracking-widest font-medium mt-8">
+        <span>Swipe to explore</span>
+        <svg className="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
     </section>
   );
 }
@@ -88,7 +119,7 @@ export default function ApplicationSection() {
 /* ── Single card – hover effects are pure CSS via Tailwind group ── */
 function AppCard({ card }: { card: typeof cards[0] }) {
   return (
-    <div className="group relative flex-shrink-0 w-[400px] md:w-[400px] h-[260px] md:h-[360px] rounded-3xl overflow-hidden border border-white/10 cursor-pointer"
+    <div className="group relative flex-shrink-0 w-[80vw] md:w-[400px] h-[260px] md:h-[360px] rounded-3xl overflow-hidden border border-white/10 cursor-pointer max-md:snap-center"
       style={{ willChange: "transform", transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease" }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLElement).style.transform = "translateY(-8px) scale(1.02)";

@@ -173,12 +173,12 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-[4rem] leading-tight mb-6 max-w-3xl"
+          className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-3xl"
         >
           <span className="font-medium text-black">Technical </span>
           <span className="font-medium text-[#0a4b7c]">Downloads</span>
           <br />
-          <span className="font-light text-black text-3xl md:text-4xl lg:text-5xl">
+          <span className="font-medium text-black">
             & Certifications
           </span>
         </motion.h1>
@@ -187,7 +187,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-base md:text-lg text-[#4B5563] leading-relaxed font-light max-w-2xl"
+          className="font-medium text-gray-600 md:text-base max-w-lg leading-relaxed mb-14"
         >
           Access all Alubond technical documents, fire safety certifications,
           quality standards, and product resources. Every panel is independently

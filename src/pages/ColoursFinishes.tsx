@@ -219,7 +219,7 @@ const GridSection = () => {
   return (
     <section
       ref={ref}
-      className="bg-[#FAFAFA] pt-32 pb-20 md:pt-36 md:pb-28 px-6 md:px-16 lg:px-24 relative overflow-hidden"
+      className="bg-white pt-36 pb-20 px-8 md:px-16 lg:px-24 relative overflow-hidden"
     >
       {/* Subtle bg accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0a4b7c]/[0.03] rounded-full blur-[120px] pointer-events-none" />
@@ -232,12 +232,13 @@ const GridSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-12"
+          className="mb-12 max-w-7xl mx-auto w-full"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#1A1A1A] mb-4 leading-[1.1]">
-            A Palette <span className="text-[#0a4b7c] font-medium">Without Limits</span>
+          <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-2xl">
+            <span className="font-medium text-black">A Palette </span>
+            <span className="font-medium text-[#0a4b7c]">Without Limits</span>
           </h2>
-          <p className="text-base md:text-lg text-[#6B7280] max-w-2xl font-light leading-relaxed">
+          <p className="font-medium text-gray-600 md:text-m max-w-lg leading-relaxed mb-14">
             Explore our complete library of architectural finishes. Hover any swatch to see its collection. Name and code are shown below each tile.
           </p>
         </motion.div>
@@ -359,7 +360,7 @@ const GridSection = () => {
 
 export default function ColoursFinishes() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen overflow-x-hidden">
+    <div className="bg-white min-h-screen overflow-x-hidden">
       <Navbar />
       <GridSection />
       <FooterSection />

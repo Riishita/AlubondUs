@@ -216,10 +216,11 @@ const ContactUs = () => {
             <p className="text-[#0a4b7c] font-bold tracking-[0.2em] uppercase text-sm mb-4">
               Get in Touch
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-black mb-8 leading-[1.1]">
-              LET'S BUILD <span className="font-medium text-[#0a4b7c]">TOGETHER.</span>
+            <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-2xl">
+              <span className="font-medium text-black">Let's Build </span>
+              <span className="font-medium text-[#0a4b7c]">Together.</span>
             </h1>
-            <p className="text-gray-600 text-lg md:text-xl max-w-3xl leading-relaxed">
+            <p className="font-medium text-gray-600 md:text-base max-w-lg leading-relaxed mb-14">
               We are constantly evolving in order to become more flexible in our operations, more creative in our commercial offerings, more sustainable in our use of resources, more innovative in conducting our global business, and more efficient in our customer relation.
             </p>
           </motion.div>
@@ -450,8 +451,8 @@ const ContactUs = () => {
             transition={{ duration: 0.8 }}
             className="mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-light tracking-tight text-black mb-12 text-center">
-              Our <span className="font-medium text-[#0a4b7c]">Global Presence</span>
+            <h2 className="text-3xl md:text-5xl lg:text-[3.25rem] font-medium tracking-tight text-black mb-12 text-center">
+              Our <span className="text-[#0a4b7c]">Global Presence</span>
             </h2>
 
             <div className="space-y-16">

@@ -25,20 +25,21 @@ const HeroSection = () => {
   return (
     <section ref={ref} className="pt-36 pb-20 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-2xl">
-          <span className="font-medium text-black">Innovating for People, </span>
-          <span className="font-medium text-[#0a4b7c]">Building </span>
-          <br />
-          <span className="font-medium text-[#0a4b7c]">for the Future,</span>
-          <span className="font-medium text-black">Since 1982</span>
+        <div className="flex flex-col items-center text-center mb-16 mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-3xl">
+            <span className="font-medium text-black">Innovating for People, </span>
+            <span className="font-medium text-[#0a4b7c]">Building </span>
+            <br className="hidden sm:block" />
+            <span className="font-medium text-[#0a4b7c]">for the Future, </span>
+            <span className="font-medium text-black">Since 1982</span>
+          </h1>
 
-        </h1>
-
-        <p className="font-medium text-black md:text-m max-w-lg leading-relaxed mb-14">
-          ALUBOND is an Aluminum Composite Panels (ACP) and Metal Composite Material (MCM) brand owned by Mulk Holdings International. The company has emerged as the world’s largest ACP and MCM Brand with a 25 Million m2.. of manufacturing and processing capacity from its various facilities in UAE, Oman, Serbia, India and Turkey.
-
-Alubond offers a full range of Fire Rated Metal Panels including Solid Aluminum, FR-A1 Mineral Core, FR-A2 Mineral Core, FR Euroclass B and various other panels like Exotic Metal Panels in a choice of metal skins like Galvanized Steel, Stainless Steel, Copper, Bronze and Titanium.
-        </p>
+          <p className="font-medium text-gray-600 md:text-base max-w-3xl leading-relaxed">
+            ALUBOND is an Aluminum Composite Panels (ACP) and Metal Composite Material (MCM) brand owned by Mulk Holdings International. The company has emerged as the world’s largest ACP and MCM Brand with a 25 Million m2.. of manufacturing and processing capacity from its various facilities in UAE, Oman, Serbia, India and Turkey.
+            <br /><br />
+            Alubond offers a full range of Fire Rated Metal Panels including Solid Aluminum, FR-A1 Mineral Core, FR-A2 Mineral Core, FR Euroclass B and various other panels like Exotic Metal Panels in a choice of metal skins like Galvanized Steel, Stainless Steel, Copper, Bronze and Titanium.
+          </p>
+        </div>
 
         {/* 2. Map through the image array */}
         <motion.div style={{ x }} className="flex gap-4 md:gap-6 w-max">
@@ -316,19 +317,17 @@ const MilestoneCard = ({ m, index }) => {
 
 const MilestonesSection = () => {
   return (
-    <section className="relative bg-white pb-32 overflow-hidden">
+    <section className="relative bg-white pb-32">
       
-      {/* 1. Sticky Wrapper at the top */}
-      {/* Changed h-screen to py-12 and flex-col to stick the heading up top */}
-      <div className="sticky top-0 w-full flex flex-col items-center justify-start pt-24 md:pt-32 pb-6 md:pb-12 pointer-events-none z-0 bg-white/80 backdrop-blur-md">
-        <h2 className="text-4xl md:text-5xl lg:text-[6rem] font-semi-bold text-black tracking-tight select-none text-center">
+      {/* 1. Sticky Background Text */}
+      <div className="sticky top-32 w-full flex justify-center pointer-events-none z-0 h-0 overflow-visible">
+        <h2 className="text-4xl md:text-5xl lg:text-[6rem] font-semibold text-black/20 tracking-tight select-none text-center">
           Key Milestones
         </h2>
       </div>
 
-      {/* 2. Cards Container starting from beneath the heading */}
-      {/* Removed the intense negative margin so cards start running right below */}
-      <div className="relative z-10 max-w-6xl mx-auto px-8 lg:px-12 pt-8">
+      {/* 2. Cards Container scrolling over */}
+      <div className="relative z-10 max-w-6xl mx-auto px-8 lg:px-12 pt-48 md:pt-64">
         {milestones7.map((m, i) => (
           <MilestoneCard key={i} m={m} index={i} />
         ))}

@@ -8,7 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { ArrowRight, Linkedin, Instagram, Facebook, Youtube, Download } from "lucide-react";
+import { ArrowRight, Linkedin, Instagram, Facebook, Youtube, Download, Phone, Printer, Mail, MapPin } from "lucide-react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 import { useNavigate, Link } from "react-router-dom";
@@ -185,95 +185,124 @@ const SectionDivider = () => {
 const Footer = () => {
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
-  const columnHeaderStyle = "type-overline text-white/40 mb-6";
-  const linkStyle = "text-white/80 hover:text-white transition-colors duration-300 cursor-pointer flex items-center";
+  const columnHeaderStyle = "text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-8";
+  const linkStyle = "text-white/60 hover:text-white hover:translate-x-1 transition-all duration-300 cursor-pointer flex items-center text-sm font-medium";
 
   return (
     <footer
       id="contact"
       {...cursorSectionProps}
-      className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 py-16 md:py-24 min-h-[80vh] flex flex-col justify-center ${cursorSectionClassName}`}
+      className={`relative bg-[#0a0a0a] text-white px-6 md:px-16 pt-24 pb-12 flex flex-col justify-center ${cursorSectionClassName}`}
     >
       <div className="max-w-7xl mx-auto w-full">
-        {/* Adjusted Grid: Added explicit gap and responsive column span */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 type-body-sm mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-24">
 
-          {/* Col 1: About + Newsletter */}
-          <div className="flex flex-col items-start lg:col-span-1">
-            <p className={columnHeaderStyle}>ABOUT OUR COMPANY</p>
+          {/* Col 1: About + Newsletter (Span 4) */}
+          <div className="flex flex-col items-start lg:col-span-5 pr-0 lg:pr-12">
             <img 
               src="/Alubond Logo-1.avif" 
               alt="Alubond Logo" 
-              className="h-20 w-auto object-contain mb-6"
+              className="h-12 w-auto object-contain mb-8 opacity-90"
             />
-            <p className="text-white/70 leading-relaxed text-sm">
-              Alubond has emerged as the world's largest MCM &amp; ACP Brand with a 25 Million sq.m production capacity. Completely integrated with FR A1/A2/B1 Core &amp; Granules Production, Coil Coating, and Fire Rated Bonding Adhesives.
+            <p className="text-white/50 leading-relaxed text-sm mb-10 font-light">
+              Alubond has emerged as the world's largest MCM & ACP Brand with a 25 Million sq.m production capacity. Completely integrated with FR A1/A2/B1 Core & Granules Production, Coil Coating, and Fire Rated Bonding Adhesives.
             </p>
             
-            <div className="w-full mt-8">
-              <p className={columnHeaderStyle}>SUBSCRIBE TO NEWSLETTER</p>
-              <div className="flex w-full rounded-lg overflow-hidden border border-white/15 bg-white/5">
+            <div className="w-full">
+              <p className={columnHeaderStyle}>NEWSLETTER</p>
+              <div className="flex w-full border-b border-white/20 focus-within:border-white/60 transition-colors pb-2">
                 <input
                   type="email"
-                  placeholder="E-mail Address"
-                  className="flex-1 bg-transparent text-white placeholder-white/40 px-4 py-3 text-sm focus:outline-none"
+                  placeholder="Enter your email address"
+                  className="flex-1 bg-transparent text-white placeholder-white/30 text-sm focus:outline-none"
                 />
-                <button className="bg-white/20 hover:bg-white/30 transition-colors text-white font-bold text-xs uppercase tracking-widest px-5 py-3">
-                  Submit
+                <button className="text-white font-bold text-xs uppercase tracking-widest hover:text-blue-400 transition-colors flex items-center gap-2">
+                  Subscribe <ArrowRight size={14} />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Col 2: Quick Links */}
-          <div className="flex flex-col items-start">
+          {/* Col 2: Quick Links (Span 3) */}
+          <div className="flex flex-col items-start lg:col-span-3 lg:ml-12">
             <p className={columnHeaderStyle}>QUICK LINKS</p>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
               {[
                 { name: "About Us", path: "/about" },
                 { name: "Products", path: "/products" },
                 { name: "Colours & Finishes", path: "/colours" },
-                { name: "Project", path: "/project" },
-                { name: "News", path: "/news" },
+                { name: "Projects", path: "/project" },
+                { name: "News & Media", path: "/news" },
                 { name: "Downloads", path: "/downloads" },
-                { name: "Contact", path: "/contact" },
+                { name: "Contact Us", path: "/contact" },
               ].map((item) => (
-                <Link key={item.name} to={item.path} className={`group ${linkStyle}`}>
-                  <ArrowRight size={14} className="mr-2 text-white/40 group-hover:text-white transition-colors" />
+                <Link key={item.name} to={item.path} className={linkStyle}>
                   {item.name}
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* Col 3: Contact Details */}
-          <div className="flex flex-col items-start">
+          {/* Col 3: Contact Details (Span 4) */}
+          <div className="flex flex-col items-start lg:col-span-4">
             <p className={columnHeaderStyle}>CONTACT US</p>
-            <div className="flex flex-col gap-4 text-white/70">
-              <p className="text-sm mb-2">Have questions or want to say hello?</p>
-              <div className="flex items-center gap-3">
-                <span className="text-[#0a4b7c]">📞</span>
-                <span>+971 (6) 526 2202</span>
+            <div className="flex flex-col gap-6 w-full">
+              
+              <div className="flex items-start gap-4 group">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors shrink-0">
+                  <MapPin size={16} className="text-white/60 group-hover:text-white transition-colors" />
+                </div>
+                <div className="pt-2">
+                  <span className="text-sm text-white/60 leading-relaxed font-light block">
+                    Phase 1, Hamriyah Freezone,<br />Sharjah, U.A.E
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-[#0a4b7c]">🖨️</span>
-                <span>+971 (6) 526 2203</span>
+
+              <div className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors shrink-0">
+                  <Phone size={16} className="text-white/60 group-hover:text-white transition-colors" />
+                </div>
+                <span className="text-sm text-white/80 font-medium">+971 (6) 526 2202</span>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-[#0a4b7c]">✉️</span>
-                <span>sales@alubond.com</span>
+
+              <div className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors shrink-0">
+                  <Printer size={16} className="text-white/60 group-hover:text-white transition-colors" />
+                </div>
+                <span className="text-sm text-white/80 font-medium">+971 (6) 526 2203</span>
               </div>
-              <div className="flex items-start gap-3">
-                <span className="text-[#0a4b7c] mt-1">📍</span>
-                <span className="leading-relaxed">Phase 1, Hamriyah Freezone, <br />Sharjah, U.A.E</span>
+
+              <div className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors shrink-0">
+                  <Mail size={16} className="text-white/60 group-hover:text-white transition-colors" />
+                </div>
+                <span className="text-sm text-white/80 font-medium">sales@alubond.com</span>
               </div>
+
             </div>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-white/10 pt-8 flex justify-center items-center type-body-sm text-white/50">
-          <p>© 2026 Alubond U.S.A. All Rights Reserved.</p>
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-sm text-white/40 font-light">© 2026 Alubond U.S.A. All Rights Reserved.</p>
+          
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
+              <Linkedin size={16} />
+            </a>
+            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
+              <Instagram size={16} />
+            </a>
+            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
+              <Facebook size={16} />
+            </a>
+            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
+              <Youtube size={16} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
