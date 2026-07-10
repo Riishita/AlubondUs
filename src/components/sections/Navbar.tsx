@@ -35,20 +35,7 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (
-      location.pathname === "/about" ||
-      location.pathname === "/project" ||
-      location.pathname === "/contact" ||
-      location.pathname === "/colours"
-    ) {
-      setHidden(false);
-      return;
-    }
-    const previous = scrollY.getPrevious();
-    if (latest > previous && latest > 150) setHidden(true);
-    else setHidden(false);
-  });
+  // Smart nav behavior removed as per request
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("/")) {
@@ -79,7 +66,7 @@ const Navbar = () => {
   return (
     <motion.nav
       variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: -100, opacity: 0 } }}
-      animate={hidden && !isMobile && !isOpen ? "hidden" : "visible"}
+      animate="visible"
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className="fixed top-0 left-0 right-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200/50"
     >

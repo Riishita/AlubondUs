@@ -11,7 +11,7 @@ import { useMemo, useRef } from "react";
 import { ArrowRight, Linkedin, Instagram, Facebook, Youtube, Download } from "lucide-react";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 /* ================= CTA SECTION ================= */
@@ -229,11 +229,19 @@ const Footer = () => {
           <div className="flex flex-col items-start">
             <p className={columnHeaderStyle}>QUICK LINKS</p>
             <div className="flex flex-col gap-4">
-              {["Products", "Downloads", "News", "Colours & Finishes", "Contact Us"].map((item) => (
-                <span key={item} className={`group ${linkStyle}`}>
+              {[
+                { name: "About Us", path: "/about" },
+                { name: "Products", path: "/products" },
+                { name: "Colours & Finishes", path: "/colours" },
+                { name: "Project", path: "/project" },
+                { name: "News", path: "/news" },
+                { name: "Downloads", path: "/downloads" },
+                { name: "Contact", path: "/contact" },
+              ].map((item) => (
+                <Link key={item.name} to={item.path} className={`group ${linkStyle}`}>
                   <ArrowRight size={14} className="mr-2 text-white/40 group-hover:text-white transition-colors" />
-                  {item}
-                </span>
+                  {item.name}
+                </Link>
               ))}
             </div>
           </div>

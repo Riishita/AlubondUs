@@ -97,9 +97,9 @@ const AboutSection = () => (
       </div>
 
       {/* Right — Awards cluster */}
-      <div className="flex-1 flex items-center justify-center lg:justify-end">
-        {/* Adjusted container size to fit the cluster */}
-        <div className="relative w-[340px] h-[340px]">
+      <div className="w-full flex-1 flex items-center justify-center lg:justify-end">
+        {/* Adjusted container size to fit the cluster without overflowing mobile screens */}
+        <div className="relative w-full max-w-[340px] h-[320px] sm:h-[340px]">
 
           {/* Forbes Top Indian Leaders Card */}
           <div
@@ -289,15 +289,22 @@ const MilestoneCard = ({ m, index }) => {
         style={{ scale, rotate, opacity }}
         className="bg-white/90 backdrop-blur-2xl rounded-[2rem] border border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full md:w-[45%] min-h-[300px] relative group overflow-hidden cursor-pointer flex flex-col justify-center"
       >
+        {/* Mobile Image (Visible only on mobile) */}
+        <div className="w-full h-56 md:hidden p-3 pb-0 pointer-events-none">
+          <div className="w-full h-full rounded-[1.25rem] overflow-hidden">
+            <img src={m.img} alt={m.title} className="w-full h-full object-cover" />
+          </div>
+        </div>
+
         {/* Text Content */}
-        <div className="p-6 md:p-10 relative z-10 transition-opacity duration-300 group-hover:opacity-0">
+        <div className="p-6 md:p-10 relative z-10 transition-opacity duration-300 md:group-hover:opacity-0">
           <p className="text-black text-2xl md:text-3xl font-medium mb-2 md:mb-3">{m.year}</p>
           <h3 className="text-black text-xl md:text-2xl font-bold leading-snug mb-3 md:mb-4">{m.title}</h3>
           <p className="text-gray-900 text-sm md:text-base leading-relaxed font-medium">{m.desc}</p>
         </div>
 
-        {/* Hover Image */}
-        <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 p-3 pointer-events-none">
+        {/* Hover Image (Desktop only) */}
+        <div className="hidden md:block absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 p-3 pointer-events-none">
           <div className="w-full h-full rounded-[1.5rem] overflow-hidden">
             <img src={m.img} alt={m.title} className="w-full h-full object-cover" />
           </div>
@@ -309,7 +316,7 @@ const MilestoneCard = ({ m, index }) => {
 
 const MilestonesSection = () => {
   return (
-    <section className="relative bg-white pb-32">
+    <section className="relative bg-white pb-32 overflow-hidden">
       
       {/* 1. Sticky Wrapper at the top */}
       {/* Changed h-screen to py-12 and flex-col to stick the heading up top */}
