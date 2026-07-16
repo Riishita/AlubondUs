@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, useNavigationType } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,16 +21,64 @@ import ColoursFinishes from "./pages/ColoursFinishes.tsx";
 import ColourStudio from "./pages/ColourStudio.tsx";
 import TechnicalData from "./pages/TechnicalData.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
+import {
+  clearAllSavedScrollPositions,
+  getSavedScrollPosition,
+  restoreScrollPosition,
+  saveScrollPosition,
+  scrollStorageKey,
+} from "./lib/scrollRestoration";
+
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+/**
+ * Saves scroll per route and restores it on browser back/forward (POP).
+ * Fresh link/button navigation (PUSH) always starts at the top.
+ */
+function ScrollManager() {
+  const { pathname, search, hash } = useLocation();
+  const navigationType = useNavigationType();
+  const routeKey = scrollStorageKey(pathname, search, hash);
 
+  // Persist scroll while user is on this route
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    let ticking = false;
+
+    const save = () => saveScrollPosition(routeKey);
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        save();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      save();
+    };
+  }, [routeKey]);
+
+  // Restore on back/forward, reset on forward navigation
+  useEffect(() => {
+    if (navigationType === "POP") {
+      const saved = getSavedScrollPosition(routeKey);
+      if (saved === null) return;
+      return restoreScrollPosition(routeKey, saved);
+    }
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }, [routeKey, navigationType]);
 
   return null;
 }
@@ -38,13 +86,21 @@ function ScrollToTop() {
 const App = () => {
 
   useEffect(() => {
-    // 🔥 disable browser scroll restore
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
 
-    // 🔥 always go to top on refresh
-    window.scrollTo(0, 0);
+    // On hard refresh → clear all saved scroll positions and start from top
+    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    const isReload = navEntry?.type === "reload";
+    if (isReload) {
+      clearAllSavedScrollPositions();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
+    }
   }, []);
 
   return (
@@ -53,7 +109,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ScrollToTop />
+          <ScrollManager />
           <CustomCursorProvider>
             <Routes>
               <Route path="/" element={<Index />} />

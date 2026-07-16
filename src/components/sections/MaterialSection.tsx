@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { cn } from "@/lib/utils";
+import { FileText } from "lucide-react";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 /* ================= DATA CONFIG ================= */
@@ -420,23 +421,27 @@ const MaterialsSection = () => {
 
         {/* ================= CERTIFICATE BANNER ================= */}
         <motion.div
-  className="mt-12 flex flex-col md:flex-row items-center gap-6 md:gap-10 pt-10"
-  initial={{ opacity: 0, y: 30 }}
-  animate={isInView ? { opacity: 1, y: 0 } : {}}
-  transition={{ duration: 0.8, delay: 0.5 }}
->
-  {/* Left Side: Grey Box - Reduced padding */}
-  <div className="bg-gray-200 text-[#1A1A1A] rounded-[20px] p-6 md:p-8 w-full md:flex-1 shadow-lg flex flex-col justify-center transition-all duration-300 hover:shadow-xl">
-    <h3 className="text-lg md:text-xl font-medium tracking-tight mb-1">Beckry®Fluor 630</h3>
-    <p className="text-md md:text-lg font-normal text-[#2A2A2A]">AAMA 2605-13 PVDF Test Certificate</p>
-  </div>
-
-  {/* Right Side: Image Placeholder - Reduced width and gap */}
-  <div className="flex flex-col items-center justify-center shrink-0 md:px-4">
-    <img src="/Beckers.avif" alt="Beckers Logo" className="mb-2 w-[160px] object-contain drop-shadow-sm" />
-    <p className="text-[11px] font-semibold text-[#1A1A1A] tracking-wide text-center uppercase">Adding Value Beyond the Surface</p>
-  </div>
-</motion.div>
+          className="mt-12 pt-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <div className="bg-[#f8f9fa] border border-[#e5e7eb] rounded-[24px] p-6 md:p-8 w-full flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#d1d5db]">
+            <div className="flex flex-col text-center md:text-left">
+              <h3 className="text-lg md:text-xl font-semibold tracking-tight text-[#1A1A1A] mb-1">Beckry®Fluor 630</h3>
+              <p className="text-sm md:text-md font-light text-[#4B5563]">AAMA 2605-13 PVDF Test Certificate</p>
+            </div>
+            
+            <a 
+              href="/AAMA 2605- BECKER TC 2025.pdf" 
+              target="_blank" 
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-[#1A1A1A] text-[#1A1A1A] rounded-full hover:bg-[#1A1A1A] hover:text-white transition-all duration-300 pointer-events-auto shrink-0 w-full md:w-auto"
+            >
+              <FileText size={16} />
+              <span className="text-xs font-semibold tracking-wider uppercase">View Certificate</span>
+            </a>
+          </div>
+        </motion.div>
 
       </div>
     </section>

@@ -252,20 +252,20 @@ const milestones7 = [
     img: "AboutImages/8.avif",
     align: "right",
   },
-  {
-    year: "2023",
-    title: "Zim Cyber City – Zimbabwe",
-    desc: "Alubond launched the $500M Zim Cyber City smart development in Harare, inaugurated by President Emmerson Mnangagwa.",
-    img: "AboutImages/9.avif",
-    align: "left",
-  },
-  {
-    year: "2025",
-    title: "Pillars of Real Estate Award",
-    desc: "LX by Alubond was awarded “UAE’s Best Commercial Project” at the Pillars of Real Estate Awards 2025.",
-    img: "AboutImages/10.avif",
-    align: "right",
-  },
+  // {
+  //   year: "2023",
+  //   title: "Zim Cyber City – Zimbabwe",
+  //   desc: "Alubond launched the $500M Zim Cyber City smart development in Harare, inaugurated by President Emmerson Mnangagwa.",
+  //   img: "AboutImages/9.avif",
+  //   align: "left",
+  // },
+  // {
+  //   year: "2025",
+  //   title: "Pillars of Real Estate Award",
+  //   desc: "LX by Alubond was awarded “UAE’s Best Commercial Project” at the Pillars of Real Estate Awards 2025.",
+  //   img: "AboutImages/10.avif",
+  //   align: "right",
+  // },
 ];
 
 const MilestoneCard = ({ m, index }) => {

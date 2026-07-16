@@ -162,6 +162,9 @@ export const getProjectsForSubcategory = (
   } else if (categoryId === "custom") {
     // Custom PVDF = Custom PVDF OR Custom Finish finishes
     filtered = PROJECTS.filter((p) => p.finish === "Custom PVDF" || p.finish === "Custom Finish");
+  } else if (categoryId === "healthcare") {
+    // Show all projects in Healthcare as requested
+    filtered = PROJECTS;
   } else {
     filtered = PROJECTS.filter((p) => (p as unknown as Record<string, unknown>)[field] === value);
   }

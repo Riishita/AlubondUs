@@ -57,29 +57,29 @@ export default function GlobeHero({ externalProgress }: GlobeHeroProps) {
 
   const scrollYProgress = externalProgress || localProgress;
 
-  const globeScale = useTransform(scrollYProgress, [0, 0.4], [3, 1]);
+  const globeScale = useTransform(scrollYProgress, [0, 0.2], [3, 1]);
 
   const globeY = isTabletOrMobile
-    ? useTransform(scrollYProgress, [0, 0.4], ["100%", "20%"])
-    : useTransform(scrollYProgress, [0, 0.4], ["40%", "-50%"]);
+    ? useTransform(scrollYProgress, [0, 0.2], ["100%", "20%"])
+    : useTransform(scrollYProgress, [0, 0.2], ["40%", "-50%"]);
 
   const globeX = useTransform(
     scrollYProgress,
-    [0, 0.4],
+    [0, 0.2],
     isTabletOrMobile ? ["-50%", "-50%"] : ["-50%", "5%"]
   );
 
-  const textOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
   const textY = isTabletOrMobile
-    ? useTransform(scrollYProgress, [0, 0.15], [0, -100])
-    : useTransform(scrollYProgress, [0, 0.2], [0, -850]);
-  const textScale = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+    ? useTransform(scrollYProgress, [0, 0.08], [0, -100])
+    : useTransform(scrollYProgress, [0, 0.12], [0, -850]);
+  const textScale = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-  const leftOpacity = useTransform(scrollYProgress, [0.2, 0.45], [0, 1]);
+  const leftOpacity = useTransform(scrollYProgress, [0.12, 0.25], [0, 1]);
   const leftY = isTabletOrMobile
-    ? useTransform(scrollYProgress, [0.2, 0.45], [10, 0])
-    : useTransform(scrollYProgress, [0.2, 0.45], ["-40%", "-50%"]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+    ? useTransform(scrollYProgress, [0.12, 0.25], [10, 0])
+    : useTransform(scrollYProgress, [0.12, 0.25], ["-40%", "-50%"]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
 const locations = [
   {
@@ -197,7 +197,7 @@ const locations = [
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (v) => {
       // when user scrolls past zoom focus area → close card
-      if (v > 0.5 && selectedPlace) {
+      if (v > 0.35 && selectedPlace) {
         setSelectedPlace(null);
         resetGlobeView();
       }
@@ -223,7 +223,7 @@ const locations = [
   }, [selectedPlace, isHovering, isInView]);
 
   useEffect(() => {
-    const unsubscribe = leftOpacity.on("change", (val) => setShowPoints(val > 0.5));
+    const unsubscribe = leftOpacity.on("change", (val) => setShowPoints(val > 0.4));
     return () => unsubscribe();
   }, [leftOpacity]);
 
