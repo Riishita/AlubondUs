@@ -39,8 +39,8 @@ export default function SoleneScrollSequence() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 150,
+    damping: 35,
     restDelta: 0.001
   });
 
@@ -60,10 +60,10 @@ export default function SoleneScrollSequence() {
   const videoCardsY = useTransform(smoothProgress, [0.25, 0.35], [50, 0]);
 
   // CERTIFICATE LAYER
-  const certTextOpacity = useTransform(smoothProgress, [0.45, 0.55], [0, 1]);
+  const certTextOpacity = useTransform(smoothProgress, [0.45, 0.6], [0, 1]);
 
-  // Certificate cards flow from bottom (100vh) to top (-150vh) between 0.5 and 1.0
-  const certCardsY = useTransform(smoothProgress, [0.5, 1], ["100vh", "-150vh"]);
+  // Certificate cards flow from bottom (80vh) to top (-60vh) — reduced travel distance
+  const certCardsY = useTransform(smoothProgress, [0.5, 1], ["80vh", "-60vh"]);
 
   if (isMobile) {
     return (
@@ -189,9 +189,9 @@ Engineered to maintain façade integrity during fire incidents by minimizing fla
   }
 
   return (
-    <div ref={containerRef} className="relative h-[400vh] w-full bg-white">
+    <div ref={containerRef} className="relative h-[250vh] w-full bg-white">
       {/* Anchor to land exactly where certificates appear (after video) */}
-      <div id="certificates" className="absolute top-[280vh] w-full h-px pointer-events-none" />
+      <div id="certificates" className="absolute top-[150vh] w-full h-px pointer-events-none" />
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-white">
         
         {/* ================= INITIAL TEXT LAYER ================= */}
