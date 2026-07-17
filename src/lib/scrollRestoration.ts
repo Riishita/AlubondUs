@@ -42,10 +42,27 @@ export function clearAllScrolls() {
 export function holdScroll(target: number): () => void {
   const HOLD_MS = 500; // how long the height must be stable before we stop
 
+  // Temporarily force the page to be tall enough to accept the target scroll.
+  // This prevents the browser from clamping the scroll position to the top
+  // while lazy-loaded components or images are still rendering, which causes flashes.
+  const spacer = document.createElement("div");
+  spacer.style.position = "absolute";
+  spacer.style.top = "0";
+  spacer.style.left = "0";
+  spacer.style.width = "1px";
+  spacer.style.height = (target + window.innerHeight + 100) + "px";
+  spacer.style.pointerEvents = "none";
+  spacer.style.zIndex = "-9999";
+  spacer.style.visibility = "hidden";
+  document.body.appendChild(spacer);
+
+  // Synchronously apply scroll before the first paint to prevent flashes
+  applyScroll(target);
+
   let done = false;
   let rafId = 0;
-  let lastHeight = -1;
-  let stableSince = 0; // timestamp when current height was first seen
+  let lastHeight = document.documentElement.scrollHeight;
+  let stableSince = performance.now();
 
   const step = (now: number) => {
     if (done) return;
@@ -53,12 +70,10 @@ export function holdScroll(target: number): () => void {
     const h = document.documentElement.scrollHeight;
 
     if (h !== lastHeight) {
-      // Height changed — re-apply target and reset the stability timer.
       lastHeight = h;
       stableSince = now;
       applyScroll(target);
     } else if (now - stableSince >= HOLD_MS) {
-      // Height stable for HOLD_MS ms — do one final jump and stop.
       applyScroll(target);
       cancel();
       return;
@@ -76,9 +91,13 @@ export function holdScroll(target: number): () => void {
   }, 5000);
 
   function cancel() {
+    if (done) return;
     done = true;
     cancelAnimationFrame(rafId);
     clearTimeout(timer);
+    if (spacer.parentNode) {
+      spacer.parentNode.removeChild(spacer);
+    }
   }
 
   return cancel;

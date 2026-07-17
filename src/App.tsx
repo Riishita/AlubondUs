@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation, useNavigationType } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -69,7 +69,7 @@ function ScrollManager() {
   }, [pathname]);
 
   // ── 2. Restore or reset scroll when the route changes ──────────────────
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Cancel any previous restoration loop still running.
     cancelRestore.current?.();
     cancelRestore.current = null;
