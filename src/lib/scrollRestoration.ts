@@ -1,83 +1,97 @@
-const SCROLL_PREFIX = "scroll:";
+/**
+ * SCROLL RESTORATION — clean rewrite
+ *
+ * One rule: when the user presses browser Back, the page opens at the
+ * exact pixel (window.scrollY) they were at before navigating away.
+ * No offset, no header adjustment, no smooth animation.
+ */
 
-export function scrollStorageKey(pathname: string, search = "", hash = "") {
-  return `${pathname}${search}${hash}`;
+const KEY = (path: string) => `__scroll__${path}`;
+
+/** Save current scroll position for this pathname. */
+export function saveScroll(path: string) {
+  sessionStorage.setItem(KEY(path), String(window.scrollY));
 }
 
-export function saveScrollPosition(routeKey: string) {
-  sessionStorage.setItem(`${SCROLL_PREFIX}${routeKey}`, String(window.scrollY));
-}
-
-export function getSavedScrollPosition(routeKey: string) {
-  const raw = sessionStorage.getItem(`${SCROLL_PREFIX}${routeKey}`);
+/** Get saved scroll position, or null. */
+export function readScroll(path: string): number | null {
+  const raw = sessionStorage.getItem(KEY(path));
   if (raw === null) return null;
-  const value = parseInt(raw, 10);
-  return Number.isFinite(value) ? value : null;
+  const n = parseInt(raw, 10);
+  return isFinite(n) ? n : null;
 }
 
-export function clearAllSavedScrollPositions() {
-  Object.keys(sessionStorage).forEach((key) => {
-    if (key.startsWith(SCROLL_PREFIX)) sessionStorage.removeItem(key);
-  });
-}
-
-/** Jump instantly — used while lazy sections are still mounting. */
-export function jumpToScroll(target: number) {
-  const html = document.documentElement;
-  const previous = html.style.scrollBehavior;
-  // Temporarily disable any CSS smooth scrolling
-  html.style.scrollBehavior = "auto";
-  
-  // Use behavior: 'instant' for explicit instant jump
-  window.scrollTo({
-    top: target,
-    left: 0,
-    behavior: "instant",
-  });
-  
-  // Revert back the scroll behavior after jump
-  html.style.scrollBehavior = previous;
+/** Clear all saved positions (called on hard reload). */
+export function clearAllScrolls() {
+  Object.keys(sessionStorage)
+    .filter((k) => k.startsWith("__scroll__"))
+    .forEach((k) => sessionStorage.removeItem(k));
 }
 
 /**
- * Restore scroll and keep re-applying while page height grows
- * (lazy sections, images, etc.) until we land on the target.
+ * Apply scroll position immediately and keep re-applying it on every
+ * animation frame until the page height has been stable for HOLD_MS ms.
+ *
+ * This handles React.lazy / Suspense pages where lazy sections mount one
+ * by one, changing scrollHeight each time.  We simply jump back to the
+ * target on every frame where the height changed, and stop once it has
+ * been the same height for HOLD_MS consecutive milliseconds.
+ *
+ * Returns a cancel function (used by React useEffect cleanup).
  */
-export function restoreScrollPosition(
-  routeKey: string,
-  target: number
-): () => void {
-  let settled = false;
+export function holdScroll(target: number): () => void {
+  const HOLD_MS = 500; // how long the height must be stable before we stop
 
-  const tryJump = () => {
-    if (settled) return;
-    jumpToScroll(target);
-    requestAnimationFrame(() => {
-      if (Math.abs(window.scrollY - target) <= 4) {
-        settled = true;
-        observer.disconnect();
-      }
-    });
+  let done = false;
+  let rafId = 0;
+  let lastHeight = -1;
+  let stableSince = 0; // timestamp when current height was first seen
+
+  const step = (now: number) => {
+    if (done) return;
+
+    const h = document.documentElement.scrollHeight;
+
+    if (h !== lastHeight) {
+      // Height changed — re-apply target and reset the stability timer.
+      lastHeight = h;
+      stableSince = now;
+      applyScroll(target);
+    } else if (now - stableSince >= HOLD_MS) {
+      // Height stable for HOLD_MS ms — do one final jump and stop.
+      applyScroll(target);
+      cancel();
+      return;
+    }
+
+    rafId = requestAnimationFrame(step);
   };
 
-  tryJump();
+  rafId = requestAnimationFrame(step);
 
-  const observer = new ResizeObserver(() => {
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (maxScroll >= target) tryJump();
+  // Hard cap: stop after 5 s no matter what.
+  const timer = window.setTimeout(() => {
+    applyScroll(target);
+    cancel();
+  }, 5000);
+
+  function cancel() {
+    done = true;
+    cancelAnimationFrame(rafId);
+    clearTimeout(timer);
+  }
+
+  return cancel;
+}
+
+/** Instant scroll — overrides any CSS scroll-behavior: smooth. */
+function applyScroll(y: number) {
+  document.documentElement.style.scrollBehavior = "auto";
+  document.body.style.scrollBehavior = "auto";
+  window.scrollTo(0, y);
+  // Restore after a tick so we don't permanently break smooth anchors.
+  requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = "";
+    document.body.style.scrollBehavior = "";
   });
-
-  observer.observe(document.documentElement);
-  observer.observe(document.body);
-
-  const timeout = window.setTimeout(() => {
-    settled = true;
-    observer.disconnect();
-  }, 4000);
-
-  return () => {
-    settled = true;
-    observer.disconnect();
-    window.clearTimeout(timeout);
-  };
 }

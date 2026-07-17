@@ -1,10 +1,12 @@
+import { useEffect, useRef } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation, useNavigationType } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
+
 import NotFound from "./pages/NotFound.tsx";
+import Index from "./pages/Index.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import Project from "./pages/Project.tsx";
 import ProjectCategory from "./pages/ProjectCategory.tsx";
@@ -21,85 +23,84 @@ import ColoursFinishes from "./pages/ColoursFinishes.tsx";
 import ColourStudio from "./pages/ColourStudio.tsx";
 import TechnicalData from "./pages/TechnicalData.tsx";
 import { CustomCursorProvider } from "@/components/CustomCursor/CustomCursorProvider";
-import {
-  clearAllSavedScrollPositions,
-  getSavedScrollPosition,
-  restoreScrollPosition,
-  saveScrollPosition,
-  scrollStorageKey,
-} from "./lib/scrollRestoration";
-
-import { useEffect } from "react";
+import { saveScroll, readScroll, clearAllScrolls, holdScroll } from "./lib/scrollRestoration";
 
 const queryClient = new QueryClient();
 
 /**
- * Saves scroll per route and restores it on browser back/forward (POP).
- * Fresh link/button navigation (PUSH) always starts at the top.
+ * ScrollManager — mounted once inside BrowserRouter.
+ *
+ * ON EVERY SCROLL:   save window.scrollY for the current pathname.
+ * ON PUSH navigate:  scroll to top (user clicked a link to a new page).
+ * ON POP  navigate:  restore the exact saved scrollY for that pathname.
  */
 function ScrollManager() {
-  const { pathname, search, hash } = useLocation();
-  const navigationType = useNavigationType();
-  const routeKey = scrollStorageKey(pathname, search, hash);
+  const { pathname } = useLocation();
+  const navType = useNavigationType();
+  const cancelRestore = useRef<(() => void) | null>(null);
+  const prevPath = useRef(pathname);
 
-  // Persist scroll while user is on this route
+  // Save the scroll position before the DOM mutates for the new route
+  if (pathname !== prevPath.current) {
+    saveScroll(prevPath.current);
+    prevPath.current = pathname;
+  }
+
+  // ── 1. Save scroll while the user scrolls on the current page ──────────
   useEffect(() => {
-    let ticking = false;
-
-    const save = () => saveScrollPosition(routeKey);
-
+    // We only rely on scroll events to save the position if the user reloads or navigates externally
+    // But saving during render handles React Router transitions perfectly.
+    let debounce: any;
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        save();
-        ticking = false;
-      });
+      clearTimeout(debounce);
+      debounce = setTimeout(() => {
+        if (prevPath.current === pathname) {
+          saveScroll(pathname);
+        }
+      }, 50);
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
-
     return () => {
       window.removeEventListener("scroll", onScroll);
-      save();
+      clearTimeout(debounce);
+      cancelRestore.current?.();
+      cancelRestore.current = null;
     };
-  }, [routeKey]);
+  }, [pathname]);
 
-  // Restore on back/forward, reset on forward navigation
+  // ── 2. Restore or reset scroll when the route changes ──────────────────
   useEffect(() => {
-    if (navigationType === "POP") {
-      const saved = getSavedScrollPosition(routeKey);
-      if (saved === null) return;
-      return restoreScrollPosition(routeKey, saved);
-    }
+    // Cancel any previous restoration loop still running.
+    cancelRestore.current?.();
+    cancelRestore.current = null;
 
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
-  }, [routeKey, navigationType]);
+    if (navType === "POP") {
+      // Browser Back / Forward — restore the exact saved position.
+      const saved = readScroll(pathname);
+      if (saved !== null) {
+        cancelRestore.current = holdScroll(saved);
+      }
+    } else {
+      // PUSH or REPLACE — user clicked a link; start from the top.
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, navType]);
 
   return null;
 }
 
 const App = () => {
-
   useEffect(() => {
+    // Tell the browser not to auto-restore scroll — we handle it ourselves.
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
 
-    // On hard refresh → clear all saved scroll positions and start from top
-    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
-    const isReload = navEntry?.type === "reload";
-    if (isReload) {
-      clearAllSavedScrollPositions();
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant",
-      });
+    // Hard refresh → clear saved positions and start from top.
+    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    if (nav?.type === "reload") {
+      clearAllScrolls();
+      window.scrollTo(0, 0);
     }
   }, []);
 

@@ -17,16 +17,17 @@ const Index = () => {
       <main>
         <LandingSection />
         <div className="relative z-10 bg-black w-full">
-          <Suspense fallback={<div className="min-h-screen" />}><HomeContent /></Suspense>
+          {/* Fallback heights match the real section heights to keep page height
+              stable and scroll restoration accurate while lazy sections load. */}
+          <Suspense fallback={<div style={{ height: "350vh" }} />}><HomeContent /></Suspense>
 
           <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
-          <Suspense fallback={<div className="min-h-screen" />}><SoleneScrollSequence /></Suspense>
+          <Suspense fallback={<div style={{ height: "400vh" }} />}><SoleneScrollSequence /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><SheetDetail /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
-    <Suspense fallback={<div className="min-h-screen" />}><Featurednews /></Suspense>
-              <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
-        
+          <Suspense fallback={<div className="min-h-screen" />}><Featurednews /></Suspense>
+          <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><FooterSection /></Suspense>
         </div>
       </main>

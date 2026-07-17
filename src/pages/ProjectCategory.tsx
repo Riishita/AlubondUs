@@ -105,13 +105,12 @@ const ProjectCategory = () => {
 
           {/* Breadcrumb */}
           <div className="mb-10 text-[13px] font-medium flex items-center gap-2">
-            <Link
-              to="/project"
-              state={{ activeCategory: activeParent }}
+            <button
+              onClick={() => navigate(-1)}
               className="text-[#0a4b7c] hover:text-[#0a4b9d] flex items-center gap-1 transition-colors uppercase tracking-widest"
             >
-              <span className="text-lg leading-none mb-0.5">&lsaquo;</span> ALL CATEGORIES
-            </Link>
+              <span className="text-lg leading-none mb-0.5">&lsaquo;</span> BACK
+            </button>
             <span className="text-gray-300">/</span>
             <span className="text-gray-900">{categoryName}</span>
           </div>

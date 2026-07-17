@@ -1,7 +1,7 @@
 import { useEffect, useState, ReactNode } from "react";
 import Navbar from "@/components/sections/Navbar";
 import FooterSection from "@/components/sections/FooterSection";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export interface ProductDetailTemplateProps {
   productName: string;
@@ -26,6 +26,7 @@ export interface ProductDetailTemplateProps {
 const ProductDetailTemplate = (props: ProductDetailTemplateProps) => {
   const tabs = [props.productName, "Features", "Technical Data", "Advantages"];
   const [activeTab, setActiveTab] = useState(props.productName);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,9 +41,9 @@ const ProductDetailTemplate = (props: ProductDetailTemplateProps) => {
           
           {/* Breadcrumb / Back Link */}
           <div className="mb-8">
-            <Link to="/products" className="text-gray-500 hover:text-black transition-colors text-sm font-medium flex items-center gap-2 w-fit">
-              <span>←</span> Back to Products
-            </Link>
+            <button onClick={() => navigate(-1)} className="text-gray-500 hover:text-black transition-colors text-sm font-medium flex items-center gap-2 w-fit">
+              <span>←</span> Back
+            </button>
           </div>
 
           {/* Tabs */}

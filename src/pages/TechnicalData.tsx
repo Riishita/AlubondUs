@@ -733,10 +733,10 @@ const TechnicalData = () => {
           {/* Back link */}
           <div className="mb-8">
             <button
-              onClick={() => navigate("/products")}
+              onClick={() => navigate(-1)}
               className="text-gray-500 hover:text-black transition-colors text-sm font-medium flex items-center gap-2"
             >
-              <span>←</span> Back to Products
+              <span>←</span> Back
             </button>
           </div>
 
