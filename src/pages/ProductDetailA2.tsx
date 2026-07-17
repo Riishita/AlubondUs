@@ -1,14 +1,12 @@
 import ProductDetailTemplate from "@/components/sections/ProductDetailTemplate";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// IMAGE PATHS – change these to update images for Alubond A2
-// ─────────────────────────────────────────────────────────────────────────────
-const IMAGES = {
-  mainLeft:      "/products/Product2.webp",      // Left diagram image (product overview tab)
-  mainRight:     "/products/Products1.webp",      // Right image (product overview tab)
-  featuresImg:   "/products/Products1.webp",      // Image shown in Features & Advantages tab
 
-  // Technical Data – add or remove image paths here as needed
+const IMAGES = {
+  mainLeft:      "/products/Product2.webp",      
+  mainRight:     "/products/Products1.webp",     
+  featuresImg:   "/products/Products1.webp",      
+
+  
   technicalData: [
     "/products/cert1.webp",
     "/products/cert2.webp",
@@ -17,7 +15,6 @@ const IMAGES = {
     "/products/cert5.webp",
   ],
 };
-// ─────────────────────────────────────────────────────────────────────────────
 
 const featuresText = [
   <h2 key="h" className="text-xl md:text-2xl font-semibold text-gray-500 mb-4">

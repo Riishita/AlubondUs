@@ -23,11 +23,12 @@ const Index = () => {
 
           <Suspense fallback={<div className="min-h-screen" />}><QualitySection /></Suspense>
           <Suspense fallback={<div style={{ height: "400vh" }} />}><SoleneScrollSequence /></Suspense>
+           <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><SheetDetail /></Suspense>
+         
           <Suspense fallback={<div className="min-h-screen" />}><MaterialSection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><ApplicationSection /></Suspense>
           <Suspense fallback={<div className="min-h-screen" />}><Featurednews /></Suspense>
-          <Suspense fallback={<div className="min-h-screen" />}><GallerySection /></Suspense>
           <Suspense fallback={<div className="min-h-[50vh]" />}><FooterSection /></Suspense>
         </div>
       </main>

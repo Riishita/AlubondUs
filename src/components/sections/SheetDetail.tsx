@@ -166,7 +166,7 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
     id="sheet-detail"
     ref={sectionRef}
     {...cursorSectionProps}
-    className={`relative h-[100vh] md:h-[500vh] ${cursorSectionClassName}`}
+    className={`relative h-[100vh] md:h-[200vh] ${cursorSectionClassName}`}
   >
     <div className="sticky top-0 h-screen overflow-hidden">
       <div className="h-full w-full overflow-hidden text-white gradient-amaterasu px-6 md:px-10 py-12 md:py-24 relative">

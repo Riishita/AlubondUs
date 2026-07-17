@@ -1,13 +1,10 @@
 import ProductDetailTemplate from "@/components/sections/ProductDetailTemplate";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// IMAGE PATHS – change these to update images for Alubond Euroclass B
-// ─────────────────────────────────────────────────────────────────────────────
-const IMAGES = {
-  mainLeft:      "/products/Product EB 3.webp",  // Main image (product overview tab)
-  featuresImg:   "/products/Products1.webp",      // Image shown in Features & Advantages tab
 
-  // Technical Data – add or remove image paths here as needed
+const IMAGES = {
+  mainLeft:      "/products/Product EB 3.webp",  
+  featuresImg:   "/products/Products1.webp",      
+
   technicalData: [
     "/products/cert1.webp",
     "/products/cert2.webp",

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
+import { ArrowRight } from "lucide-react";
 
 const panels = [
   { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992104/video_3_kzkrdu.mp4", title: "Yas Island | Hotel on Yas Marina Circuit ", location: "W Abu Dhabi" },
@@ -17,7 +18,6 @@ export default function PremiumGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    // Make sure we have the correct length of refs
     videoRefs.current = videoRefs.current.slice(0, panels.length);
   }, []);
 
@@ -40,9 +40,9 @@ export default function PremiumGallery() {
   };
 
   return (
-    <section 
-      ref={containerRef} 
-      className={`bg-black relative h-screen w-full flex flex-col lg:grid lg:grid-cols-12 items-center px-6 lg:px-16 gap-6 lg:gap-8 overflow-hidden text-white ${cursorSectionClassName}`}
+    <section
+      ref={containerRef}
+      className={`bg-black relative min-h-screen w-full flex flex-col lg:grid lg:grid-cols-12 items-center px-6 lg:px-16 gap-6 lg:gap-8 overflow-hidden text-white ${cursorSectionClassName}`}
       {...cursorSectionProps}
     >
       {/* Aesthetic Background */}
@@ -56,42 +56,76 @@ export default function PremiumGallery() {
 
       {/* Left Text Column */}
       <div className="lg:col-span-4 flex flex-col justify-center pt-24 lg:pt-0 z-20 w-full">
-        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-4">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="space-y-4"
+        >
           <p className="type-overline text-white/50">
-              006 / Project
-            </p>
+            006 / Project
+          </p>
 
-            <div className="flex justify-between flex-wrap gap-6 mt-5">
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] mb-2 lg:mb-6">
+          <div className="flex justify-between flex-wrap gap-6 mt-5">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] mb-2 lg:mb-6">
               TRUSTED BY <br />
               <span className="text-white font-medium">ARCHITECTS.</span>
             </h2>
-              
-               </div>
+          </div>
+
+          <p className="text-sm md:text-base text-white/50 font-light leading-relaxed max-w-xs hidden lg:block">
+            Iconic skylines. Landmark projects. Alubond panels trusted by the world's leading architectural firms.
+          </p>
 
           <div className="w-16 h-[1px] bg-white/20 mt-4 lg:mt-8 hidden lg:block" />
+
+          {/* Dot indicators */}
+          <div className="hidden lg:flex items-center gap-2 mt-6">
+            {panels.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`transition-all duration-300 rounded-full ${
+                  i === activeIndex
+                    ? "w-6 h-2 bg-white"
+                    : "w-2 h-2 bg-white/30 hover:bg-white/60"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden lg:flex mt-10">
+            <Link to="/project">
+              <button
+                id="gallery-view-all-btn"
+                className="group flex items-center gap-3 px-8 py-4 rounded-full border border-white/25 text-white text-sm uppercase tracking-widest font-medium backdrop-blur-sm bg-white/5 hover:bg-white hover:text-black hover:border-white transition-all duration-300 ease-out"
+              >
+                <span>View All Projects</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </Link>
+          </div>
         </motion.div>
       </div>
 
       {/* Right Gallery Column */}
-      <div className="lg:col-span-8 w-full flex-1 flex items-center justify-center lg:justify-end pb-24 lg:pb-0 z-20 min-h-0">
-        <div 
-          className="relative overflow-hidden rounded-2xl border border-white/10 w-[85vw] h-[50vh] lg:w-[40vw] lg:h-[70vh]"
-        >
-          <motion.div 
+      <div className="lg:col-span-8 w-full flex-1 flex items-center justify-center lg:justify-end pb-28 lg:pb-0 z-20 min-h-0">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 w-[85vw] h-[50vh] lg:w-[40vw] lg:h-[70vh]">
+          <motion.div
             animate={{ x: `-${activeIndex * 100}%` }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="flex h-full w-full transform-gpu will-change-transform"
           >
             {panels.map((panel, i) => (
               <div key={i} className="relative h-full flex-shrink-0 w-full">
-                <video 
+                <video
                   ref={(el) => { videoRefs.current[i] = el; }}
-                  src={panel.video} 
-                  muted 
-                  playsInline 
+                  src={panel.video}
+                  muted
+                  playsInline
                   onEnded={() => handleVideoEnded(i)}
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 lg:p-8">
                   <p className="type-overline text-white/80">{panel.location}</p>
@@ -103,11 +137,28 @@ export default function PremiumGallery() {
         </div>
       </div>
 
-      {/* CTA Button */}
-      <div className="absolute bottom-8 lg:bottom-12 left-0 right-0 flex justify-center z-30">
+      {/* Mobile CTA + dots */}
+      <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-4 z-30 lg:hidden">
+        <div className="flex items-center gap-2">
+          {panels.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`transition-all duration-300 rounded-full ${
+                i === activeIndex
+                  ? "w-6 h-2 bg-white"
+                  : "w-2 h-2 bg-white/30 hover:bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
         <Link to="/project">
-          <button className="type-btn px-6 lg:px-8 py-3 lg:py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 text-sm lg:text-base">
-            View All Projects
+          <button
+            id="gallery-view-all-mobile-btn"
+            className="group flex items-center gap-3 px-8 py-4 rounded-full border border-white/25 text-white text-sm uppercase tracking-widest font-medium backdrop-blur-sm bg-white/5 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+          >
+            <span>View All Projects</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </Link>
       </div>

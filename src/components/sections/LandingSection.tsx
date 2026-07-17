@@ -112,8 +112,7 @@ const LandingHero = () => {
 
               </motion.div>
 
-              {/* Stats Wrapper - Fixed for mobile overflow */}
-              {/* Stats Wrapper - Modified to right-align on desktop */}
+            
 <motion.div 
   className="flex flex-row lg:flex-col items-start lg:items-end gap-6 md:gap-10 w-full lg:w-auto border-t border-white/20 pt-8 lg:border-none lg:pt-8 text-left lg:text-right"
 >

@@ -1,7 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { newsItems } from '@/data/newsData';
+import { ArrowRight } from 'lucide-react';
 
-export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean }) {
+interface FeaturedNewsProps {
+  darkTheme?: boolean;
+  showAll?: boolean;          // true → show all 4 news (News page)
+  showViewAllButton?: boolean; // false → hide the View All buttons (News page)
+}
+
+export default function FeaturedNews({
+  darkTheme = true,
+  showAll = false,
+  showViewAllButton = true,
+}: FeaturedNewsProps) {
+  const navigate = useNavigate();
+
+  const displayed = showAll ? newsItems : newsItems.filter(news => news.id !== "4");
+
   return (
     <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
       {/* Header */}
@@ -15,11 +30,12 @@ export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean
             News
           </h3>
         </div>
+
       </div>
 
       {/* Grid Layout */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {newsItems.filter(news => news.id !== "4").map((news, index) => (
+        {displayed.map((news, index) => (
           <div 
             key={index} 
             className="group flex flex-col bg-white rounded-[2rem] overflow-hidden border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2"
@@ -42,9 +58,6 @@ export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean
 
             {/* Content */}
             <div className="p-6 flex flex-col flex-grow relative">
-              {/* Floating Action Button */}
-              
-
               {/* Title */}
               <h4 className={`text-xl font-bold uppercase leading-snug mb-3 pr-2 ${news.highlight ? 'text-gray-900' : 'text-gray-900'} group-hover:text-[#0a4b7c] transition-colors duration-300 line-clamp-2`}>
                 {news.title}
@@ -65,6 +78,24 @@ export default function FeaturedNews({ darkTheme = true }: { darkTheme?: boolean
           </div>
         ))}
       </div>
+
+      {/* Bottom View All CTA (home page only) */}
+      {showViewAllButton && (
+        <div className="flex justify-center mt-12">
+          <button
+            id="news-view-all-bottom-btn"
+            onClick={() => navigate('/news')}
+            className={`group flex items-center gap-2 px-8 py-4 rounded-full border text-sm uppercase tracking-widest font-medium transition-all duration-300
+              ${darkTheme
+                ? 'border-white/25 text-white bg-white/5 backdrop-blur-sm hover:bg-white hover:text-black hover:border-white'
+                : 'border-[#0a4b7c]/30 text-[#0a4b7c] hover:bg-[#0a4b7c] hover:text-white'
+              }`}
+          >
+            <span>View All News</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </button>
+        </div>
+      )}
       
     </section>
   );

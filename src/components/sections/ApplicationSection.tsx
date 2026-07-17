@@ -3,7 +3,8 @@
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const cards = [
   { img: "/images/BUILDINGFACADES.png",   title: "Building Facades",        desc: "Curtain walls, rainscreen cladding, and architectural envelope systems.", id: "01" },
@@ -15,13 +16,13 @@ const cards = [
   { img: "/images/bullet train.png",       title: "Trains & Coaches",        desc: "Fire-rated lightweight panels.",                                        id: "07" },
 ];
 
-// Duplicate once for seamless loop
 const track = [...cards, ...cards];
 
 export default function ApplicationSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const [paused, setPaused] = useState(false);
+  const navigate = useNavigate();
 
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
 
@@ -112,6 +113,23 @@ export default function ApplicationSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </div>
+
+      {/* ── View All Applications CTA ── */}
+      <motion.div
+        className="flex justify-center mt-14"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <button
+          id="applications-view-all-btn"
+          onClick={() => navigate("/applications")}
+          className="group flex items-center gap-3 px-8 py-4 rounded-full border border-white/25 text-white text-sm uppercase tracking-widest font-medium backdrop-blur-sm bg-white/5 hover:bg-white hover:text-black hover:border-white transition-all duration-400 ease-out"
+        >
+          <span>View All Applications</span>
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </button>
+      </motion.div>
     </section>
   );
 }

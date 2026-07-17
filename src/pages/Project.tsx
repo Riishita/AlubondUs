@@ -21,7 +21,6 @@ const Project = () => {
   );
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
-  // For "Featured" tab we go straight to a flat project view with no subcategory step
   const isFeatured = activeTab === "Featured";
   const subcategories: GalleryCategory[] = isFeatured ? [] : getCategoriesForTab(activeTab);
 
