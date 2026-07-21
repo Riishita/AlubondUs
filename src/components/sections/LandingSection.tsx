@@ -62,7 +62,7 @@ const LandingHero = () => {
               className="h-full w-full object-cover brightness-100 contrast-[1.05]"
               muted playsInline loop autoPlay preload="auto"
             >
-              <source src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1783353077/Hero_wsmbhv.mp4" type="video/mp4" />
+              <source src="https://pixabay.com/videos/download/video-365255_source.mp4" type="video/mp4" />
             </video>
             <motion.div
               className="absolute inset-0 bg-black/10"
