@@ -83,7 +83,7 @@ export default function SoleneScrollSequence() {
          <div className="w-full px-4 mb-20">
            <div className="w-full rounded-[24px] overflow-hidden bg-black flex flex-col justify-end shadow-2xl relative" style={{ minHeight: '600px' }}>
              <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-80">
-               <source src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992016/VN20260629_004036_qpxpiy.mp4" type="video/mp4" />
+               <source src="https://pixabay.com/videos/download/video-365287_source.mp4" type="video/mp4" />
              </video>
              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
              <div className="relative z-40 flex flex-col gap-8 px-6 pb-10 w-full mt-auto pt-40">
@@ -304,7 +304,7 @@ Engineered to maintain façade integrity during fire incidents by minimizing fla
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-80"
           >
-            <source src="https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992016/VN20260629_004036_qpxpiy.mp4" type="video/mp4" />
+            <source src="https://pixabay.com/videos/download/video-365287_source.mp4" type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />

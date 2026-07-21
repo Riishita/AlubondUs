@@ -5,9 +5,9 @@ import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorP
 import { ArrowRight } from "lucide-react";
 
 const panels = [
-  { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992104/video_3_kzkrdu.mp4", title: "Yas Island | Hotel on Yas Marina Circuit ", location: "W Abu Dhabi" },
-  { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782991995/video4_bbuhj3.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
-  { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782991993/video5_zfqnc7.mp4", title: "Burj Khalifa", location: "Dubai, UAE" },
+  { video: "https://pixabay.com/videos/download/video-365294_source.mp4", title: "Yas Island | Hotel on Yas Marina Circuit ", location: "W Abu Dhabi" },
+  { video: "https://pixabay.com/videos/download/video-365293_source.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
+  { video: "https://pixabay.com/videos/download/video-365295_source.mp4", title: "Burj Khalifa", location: "Dubai, UAE" },
   { video: "https://res.cloudinary.com/dh4jcgcpw/video/upload/v1782992068/video6_q5ujxm.mp4", title: "Khalifa Stadium", location: "Doha, Qatar" },
 ];
 
