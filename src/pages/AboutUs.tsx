@@ -25,8 +25,8 @@ const HeroSection = () => {
   return (
     <section ref={ref} className="pt-36 pb-20 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col items-center text-center mb-16 mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6 max-w-3xl">
+        <div className="flex flex-col items-start text-left mb-16 max-w-4xl">
+          <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] leading-tight mb-6">
             <span className="font-medium text-black">Innovating for People, </span>
             <span className="font-medium text-[#0a4b7c]">Building </span>
             <br className="hidden sm:block" />
@@ -34,7 +34,7 @@ const HeroSection = () => {
             <span className="font-medium text-black">Since 1982</span>
           </h1>
 
-          <p className="font-medium text-gray-600 md:text-base max-w-3xl leading-relaxed">
+          <p className="font-medium text-gray-600 md:text-base leading-relaxed">
             ALUBOND is an Aluminum Composite Panels (ACP) and Metal Composite Material (MCM) brand owned by Mulk Holdings International. The company has emerged as the world’s largest ACP and MCM Brand with a 25 Million m2.. of manufacturing and processing capacity from its various facilities in UAE, Oman, Serbia, India and Turkey.
             <br /><br />
             Alubond offers a full range of Fire Rated Metal Panels including Solid Aluminum, FR-A1 Mineral Core, FR-A2 Mineral Core, FR Euroclass B and various other panels like Exotic Metal Panels in a choice of metal skins like Galvanized Steel, Stainless Steel, Copper, Bronze and Titanium.
