@@ -40,6 +40,7 @@ function ScrollManager() {
   const navType = useNavigationType();
   const cancelRestore = useRef<(() => void) | null>(null);
   const prevPath = useRef(pathname);
+  const isFirstRender = useRef(true);
 
   // Save the scroll position before the DOM mutates for the new route
   if (pathname !== prevPath.current) {
@@ -75,7 +76,13 @@ function ScrollManager() {
     cancelRestore.current?.();
     cancelRestore.current = null;
 
-    if (navType === "POP") {
+    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    const isReload = isFirstRender.current && nav?.type === "reload";
+    isFirstRender.current = false;
+
+    if (isReload) {
+      cancelRestore.current = holdScroll(0);
+    } else if (navType === "POP") {
       // Browser Back / Forward — restore the exact saved position.
       const saved = readScroll(pathname);
       if (saved !== null) {
@@ -83,7 +90,7 @@ function ScrollManager() {
       }
     } else {
       // PUSH or REPLACE — user clicked a link; start from the top.
-      window.scrollTo(0, 0);
+      cancelRestore.current = holdScroll(0);
     }
   }, [pathname, navType]);
 
@@ -97,12 +104,21 @@ const App = () => {
       history.scrollRestoration = "manual";
     }
 
+    // Force scroll to top before the page unloads/refreshes.
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+
     // Hard refresh → clear saved positions and start from top.
     const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
     if (nav?.type === "reload") {
       clearAllScrolls();
       window.scrollTo(0, 0);
     }
+    
+    return () => {
+      window.onbeforeunload = null;
+    };
   }, []);
 
   return (
