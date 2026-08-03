@@ -63,7 +63,7 @@ export default function PremiumGallery() {
           className="space-y-4"
         >
           <p className="type-overline text-white/50">
-            006 / Project
+            004 / Project
           </p>
 
           <div className="flex justify-between flex-wrap gap-6 mt-5">

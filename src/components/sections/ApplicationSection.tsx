@@ -41,7 +41,7 @@ export default function ApplicationSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="type-overline text-white/50 mb-4">005 / Applications</p>
+          <p className="type-overline text-white/50 mb-4">006 / Applications</p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <h2 className="text-4xl md:text-7xl font-light tracking-tight text-white leading-[0.95] uppercase">
               Where Alubond <br />

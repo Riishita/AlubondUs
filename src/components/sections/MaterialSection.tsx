@@ -17,7 +17,7 @@ import { useSectionScroll } from "@/hooks/useSectionScroll";
 
 const heroData = {
   image: "/images/Hero-palatte.jpeg",
-  label: "004 / Color & Finishes",
+  label: "005 / Color & Finishes",
   title: ["A Palette", "Without Limits"],
 };
 
