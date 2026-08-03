@@ -290,17 +290,14 @@ const Footer = () => {
           
           {/* Social Links */}
           <div className="flex items-center gap-4">
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
+            <a href="https://www.linkedin.com/company/alubond-acp/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
               <Linkedin size={16} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
+            <a href="https://www.instagram.com/alubondacp/?hl=en" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
               <Instagram size={16} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
+            <a href="https://www.facebook.com/alubondusaacp" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
               <Facebook size={16} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white/5 hover:text-white transition-all">
-              <Youtube size={16} />
             </a>
           </div>
         </div>
