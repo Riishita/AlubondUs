@@ -5,10 +5,10 @@ import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorP
 import { ArrowRight } from "lucide-react";
 
 const panels = [
-  { video: "https://pixabay.com/videos/download/video-365294_source.mp4", title: "Yas Island | Hotel on Yas Marina Circuit ", location: "W Abu Dhabi" },
-  { video: "https://pixabay.com/videos/download/video-365293_source.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
-  { video: "https://pixabay.com/videos/download/video-365295_source.mp4", title: "Burj Khalifa", location: "Dubai, UAE" },
-  { video: "https://pixabay.com/videos/download/video-365296_source.mp4", title: "Khalifa Stadium", location: "Doha, Qatar" },
+  { video: "https://res.cloudinary.com/dxppgyuwt/video/upload/v1785904013/Yas_Island_wvt151.mp4", title: "Yas Island | Hotel on Yas Marina Circuit ", location: "W Abu Dhabi" },
+  { video: "https://res.cloudinary.com/dxppgyuwt/video/upload/v1785904029/The_AD_wp4ngy.mp4", title: "The Address Downtown", location: "Dubai, UAE" },
+  { video: "https://res.cloudinary.com/dxppgyuwt/video/upload/v1785904016/Burj_Khalifa_aznxkw.mp4", title: "Burj Khalifa", location: "Dubai, UAE" },
+  { video: "https://res.cloudinary.com/dxppgyuwt/video/upload/v1785904037/Khalifa_Stadium_jbrxx5.mp4", title: "Khalifa Stadium", location: "Doha, Qatar" },
 ];
 
 const DRAG_THRESHOLD = 50; // px needed to trigger a slide change

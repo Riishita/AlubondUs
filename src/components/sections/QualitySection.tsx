@@ -94,7 +94,7 @@ Designed to perform in the harshest environments, our panels meet ASTM and other
               style={{ aspectRatio: "19/12" }}
             >
               <video
-                src="https://pixabay.com/videos/download/video-365290_source.mp4"
+                src="https://res.cloudinary.com/dxppgyuwt/video/upload/v1785903955/Weather_pwqo8p.mp4"
                 autoPlay
                 muted
                 loop
