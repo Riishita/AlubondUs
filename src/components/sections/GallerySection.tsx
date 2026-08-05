@@ -11,11 +11,19 @@ const panels = [
   { video: "https://pixabay.com/videos/download/video-365296_source.mp4", title: "Khalifa Stadium", location: "Doha, Qatar" },
 ];
 
+const DRAG_THRESHOLD = 50; // px needed to trigger a slide change
+
 export default function PremiumGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const { cursorSectionProps, cursorSectionClassName } = useCustomCursorBindings(false);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // Drag / swipe state
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const [dragOffset, setDragOffset] = useState(0);
 
   useEffect(() => {
     videoRefs.current = videoRefs.current.slice(0, panels.length);
@@ -37,6 +45,33 @@ export default function PremiumGallery() {
     if (index === activeIndex) {
       setActiveIndex((prev) => (prev + 1) % panels.length);
     }
+  };
+
+  // ─── Drag / Swipe handlers ────────────────────────────────────────────────
+  const getClientX = (e: React.MouseEvent | React.TouchEvent) =>
+    "touches" in e ? e.touches[0].clientX : e.clientX;
+
+  const onDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    isDragging.current = true;
+    dragStartX.current = getClientX(e);
+    setDragOffset(0);
+  };
+
+  const onDragMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDragging.current) return;
+    const delta = getClientX(e) - dragStartX.current;
+    setDragOffset(delta);
+  };
+
+  const onDragEnd = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    if (dragOffset < -DRAG_THRESHOLD && activeIndex < panels.length - 1) {
+      setActiveIndex((prev) => prev + 1);
+    } else if (dragOffset > DRAG_THRESHOLD && activeIndex > 0) {
+      setActiveIndex((prev) => prev - 1);
+    }
+    setDragOffset(0);
   };
 
   return (
@@ -111,10 +146,20 @@ export default function PremiumGallery() {
 
       {/* Right Gallery Column */}
       <div className="lg:col-span-8 w-full flex-1 flex items-center justify-center lg:justify-end pb-28 lg:pb-0 z-20 min-h-0">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 w-[85vw] h-[50vh] lg:w-[40vw] lg:h-[70vh]">
+        <div
+          ref={sliderRef}
+          className="relative overflow-hidden rounded-2xl border border-white/10 w-[85vw] h-[50vh] lg:w-[40vw] lg:h-[70vh] cursor-grab active:cursor-grabbing select-none"
+          onMouseDown={onDragStart}
+          onMouseMove={onDragMove}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
+          onTouchStart={onDragStart}
+          onTouchMove={onDragMove}
+          onTouchEnd={onDragEnd}
+        >
           <motion.div
-            animate={{ x: `-${activeIndex * 100}%` }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            animate={{ x: `calc(-${activeIndex * 100}% + ${dragOffset}px)` }}
+            transition={isDragging.current ? { duration: 0 } : { duration: 0.8, ease: "easeInOut" }}
             className="flex h-full w-full transform-gpu will-change-transform"
           >
             {panels.map((panel, i) => (
@@ -125,9 +170,9 @@ export default function PremiumGallery() {
                   muted
                   playsInline
                   onEnded={() => handleVideoEnded(i)}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 lg:p-8">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 lg:p-8 pointer-events-none">
                   <p className="type-overline text-white/80">{panel.location}</p>
                   <h3 className="type-h3">{panel.title}</h3>
                 </div>

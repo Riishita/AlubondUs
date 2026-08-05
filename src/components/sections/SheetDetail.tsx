@@ -180,19 +180,23 @@ export default function HeroSection({ progress }: { progress?: MotionValue<numbe
 
         {/* 🔵 3D CANVAS */}
         <motion.div
-  transition={{ duration: 0.8 }}
-  className="
-    absolute
-    inset-x-0
-    bottom-0
-    top-[45%]
-    md:inset-0
-    z-0
-    pointer-events-none
-    md:left-[15%]
-  "
->
-          <Canvas camera={{ position: [3, 3, 5], fov: 45 }} frameloop={isInView ? "always" : "demand"}>
+          transition={{ duration: 0.8 }}
+          className="
+            absolute
+            inset-x-0
+            bottom-0
+            top-[45%]
+            md:inset-0
+            z-0
+            pointer-events-none
+            md:left-[15%]
+          "
+        >
+          <Canvas
+            camera={{ position: [3, 3, 5], fov: 45 }}
+            frameloop={isInView ? "always" : "demand"}
+            style={{ pointerEvents: isMobile ? "none" : "auto" }}
+          >
             <Suspense fallback={null}>
               <ambientLight intensity={0.5} />
               <directionalLight
