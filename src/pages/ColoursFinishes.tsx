@@ -7,7 +7,6 @@ import Navbar from "@/components/sections/Navbar";
 import FooterSection from "@/components/sections/FooterSection";
 import { Link } from "react-router-dom";
 
-/* ─── DATA (mirrored from MaterialSection) ──────────────────── */
 
 const categories = [
   "All",

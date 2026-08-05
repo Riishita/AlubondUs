@@ -15,17 +15,16 @@ const getColor = (x: number, y: number) => {
   const midX = window.innerWidth / 2;
   const midY = window.innerHeight / 2;
 
-  // 🎨 Change colors here
-  if (x > midX && y < midY) return "rgba(96, 154, 229, 0.17)"; // top-right
-  if (x > midX && y > midY) return "rgba(26, 61, 100, 0.17)"; // bottom-right
-  if (x < midX && y < midY) return "rgba(19, 107, 194, 0.13)"; // top-left
-  return "rgba(32, 96, 180, 0.2)"; // bottom-left
+
+  if (x > midX && y < midY) return "rgba(96, 154, 229, 0.17)";
+  if (x > midX && y > midY) return "rgba(26, 61, 100, 0.17)"; 
+  if (x < midX && y < midY) return "rgba(19, 107, 194, 0.13)"; 
+  return "rgba(32, 96, 180, 0.2)"; 
 };
 
 type CursorGridTrailProps = {
-  /** Skip drawing the trail when the cursor is in this top strip (e.g. fixed navbar height). */
   excludeTopPx?: number;
-  /** Restrict trail to this section's visible bounds. */
+
   sectionRef?: RefObject<HTMLElement>;
 };
 

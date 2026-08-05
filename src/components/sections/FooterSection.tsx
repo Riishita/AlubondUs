@@ -21,7 +21,7 @@ const CTASection = () => {
   const reduceMotion = useReducedMotion();
   const navigate = useNavigate();
 
-  // 👇 ADD YOUR BACKGROUND IMAGE URL HERE 👇
+
   const bgImageUrl = "/footer.webp";
 
   const { cursorSectionProps, cursorSectionClassName } =

@@ -1,8 +1,8 @@
 "use client";
 import { useCustomCursorBindings } from "@/components/CustomCursor/CustomCursorProvider";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useTexture } from "@react-three/drei"; // Added useTexture
-import { useEffect, useState, useRef, Suspense } from "react"; // Added Suspense
+import { OrbitControls, useTexture } from "@react-three/drei"; 
+import { useEffect, useState, useRef, Suspense } from "react"; 
 import { motion, AnimatePresence, MotionValue, useInView } from "framer-motion";
 import { useSectionScroll } from "@/hooks/useSectionScroll";
 import { FileText } from "lucide-react";
@@ -15,11 +15,10 @@ function PanelModel({
   activeLayer: number;
   split: boolean;
 }) {
-  // Load the texture - replace with your actual file name in /public
   const texture = useTexture("/texture.png"); 
 
   const layers = [
-    { y: 0.5, base: "#ffffff", active: "#29272777" }, // Set to white to show texture clearly
+    { y: 0.5, base: "#ffffff", active: "#29272777" }, 
     { y: 0.25, base: "#BFC5CC", active: "#aeaca5" },
     { y: 0, base: "#E8EAED", active: "#ffffff" },
     { y: -0.25, base: "#778899", active: "#AAB4BF" },

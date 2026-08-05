@@ -661,67 +661,6 @@ const AwardsSection = () => {
 
 
 /* ─────────────────────────────────────────
-   SECTION 9 — FUTURE GOALS
-───────────────────────────────────────── */
-
-
-// // 1. Define your data with paths
-// const goalCards = [
-//   { id: 1, img: "/AboutImages/20.avif"  },
-//   { id: 2, img: "/AboutImages/21.avif"  },
-//   { id: 3, img: "/AboutImages/22.avif"  },
- 
-// ];
-
-// const FutureGoalsSection = () => {
-//   return (
-//     <section className="bg-black py-16 pb-40 overflow-hidden relative">
-      
-//       {/* Moving Background Cards */}
-//       <div className="absolute inset-0 flex items-center pointer-events-none">
-//         <motion.div 
-//           className="flex gap-4 md:gap-8 w-max"
-//           animate={{ x: ["0%", "-50%"] }}
-//           transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
-//         >
-//           {/* 2. Map through the data */}
-//           {[...goalCards, ...goalCards].map((item, index) => (
-//             <div 
-//               key={index} 
-//               className="w-[75vw] md:w-[45vw] lg:w-[65vw] h-[60vh] lg:h-[70vh] rounded-[2rem] bg-[#0f0f11] shrink-0 relative overflow-hidden shadow-xl border border-white/5"
-//             >
-//               {/* 3. Added Image tag */}
-//               <img 
-//                 src={item.img} 
-//                 alt={`Goal ${item.id}`} 
-//                 className="w-full h-full object-cover opacity-60" 
-//               />
-//               {/* Optional: Dark overlay to ensure text stays readable */}
-//               <div className="absolute inset-0 bg-black/40"></div>
-//             </div>
-//           ))}
-//         </motion.div>
-//       </div>
-
-//       {/* Static Center Overlay (Gradient + Text) */}
-//       <div className="w-full h-[60vh] lg:h-[70vh] flex flex-col items-center justify-center relative z-10 pointer-events-none">
-//         <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/20 to-black/20"></div>
-        
-//         <div className="relative z-20 flex flex-col items-center justify-center text-center px-8 md:px-16 lg:px-24">
-//           <h2 className="text-4xl md:text-5xl lg:text-6xl font-semi-bold text-white mb-8 tracking-tight">Future Goals</h2>
-//           <p className="text-gray-300 text-[15px] md:text-base lg:text-[1.1rem] leading-[1.8] md:leading-[2] max-w-4xl font-medium">
-//             Our future goals focus on global impact and sustainable growth. We aim to deliver smart city 
-//             developments in emerging markets, lead the industry in sustainable and fire-safe building 
-//             technologies, scale our virtual healthcare platforms across MENA, Africa, and Asia, and expand 
-//             the T10 Cricket format into one of the world's premier sports leagues.
-//           </p>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-/* ─────────────────────────────────────────
    PAGE ROOT
 ───────────────────────────────────────── */
 const AboutUs = () => (

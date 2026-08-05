@@ -4,8 +4,8 @@ import { ArrowRight } from 'lucide-react';
 
 interface FeaturedNewsProps {
   darkTheme?: boolean;
-  showAll?: boolean;          // true → show all 4 news (News page)
-  showViewAllButton?: boolean; // false → hide the View All buttons (News page)
+  showAll?: boolean;          
+  showViewAllButton?: boolean; 
 }
 
 export default function FeaturedNews({

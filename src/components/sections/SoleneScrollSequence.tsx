@@ -27,8 +27,7 @@ export default function SoleneScrollSequence() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768); // Only target mobile screens
-    check();
+    const check = () => setIsMobile(window.innerWidth < 768); 
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
@@ -47,9 +46,6 @@ export default function SoleneScrollSequence() {
   // INITIAL TEXT LAYER
   const initialTextOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
 
-  // VIDEO LAYER
-  // 0 -> 0.25: Video slides in from right
-  // 0.45 -> 0.65: Video slides out to left
   const videoX = useTransform(
     smoothProgress,
     [0, 0.25, 0.45, 0.65],
